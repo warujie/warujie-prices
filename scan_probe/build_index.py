@@ -200,7 +200,7 @@ def cmd_select(args):
         if not e.get("ja_alt"):
             return None
         q = by_id.get((e["ja_alt"], e["face"]))
-        return q if q and q["status"] == "highres_scan" else None
+        return q if q and q["status"] in ("highres_scan", "lowres") else None
 
     take("ja_same_art", [e for e in en_entries if e.get("ja_alt") and e["layout"] not in TEXT_IN_REGION], 450, ja_of)
     take("ja_only_art", [e for e in entries if e["kind"] == "ja_only" and e["status"] == "highres_scan"], 150)

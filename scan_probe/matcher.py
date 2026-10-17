@@ -10,8 +10,15 @@ import cv2
 from common import CARD_W, warp_region, region_features, hamming, colour_dist, model_input, jitter_corners
 
 
+USE_MODELS = ("mnv3s",)   # round 1: the large model was no better and is 3x the size
+
 # shifts and scales tried around a found card (fractions of its size)
 FOUND_SHIFTS, FOUND_SCALES = (-0.015, 0.0, 0.015), (0.96, 1.0, 1.04, 1.08)
+# round 2: smaller steps, tried around each of a few outlines
+NEAR_SHIFTS, NEAR_SCALES = (-0.012, 0.0, 0.012), (0.97, 1.0, 1.03)
+# a card's black border, as a share of the width / height inside it: when the
+# table is dark the border's inner edge is the one found
+BORDER_X, BORDER_Y = 0.0365, 0.0252
 # around the guide alone, when no card outline was found
 GUIDE_SHIFTS, GUIDE_SCALES = (-0.06, -0.03, 0.0, 0.03, 0.06), (0.88, 0.94, 1.0, 1.06)
 
@@ -60,6 +67,8 @@ class Index:
         opts.intra_op_num_threads = threads
         opts.inter_op_num_threads = 1
         for name in self.emb:
+            if name not in USE_MODELS:
+                continue
             p = os.path.join(self.out_dir, "models", name + ".onnx")
             if os.path.exists(p):
                 self.sessions[name] = ort.InferenceSession(p, opts, providers=["CPUExecutionProvider"])
@@ -120,20 +129,14 @@ class Index:
 
     @staticmethod
     def scorings(d):
-        """The ways of scoring compared: each alone, and hash + colour / model blends,
-        every part divided by its median so they mix on one scale."""
+        """The ways of scoring compared: the hash, the small image model, and
+        the two added (each divided by its median so they mix on one scale)."""
         med = {k: float(np.median(v)) or 1.0 for k, v in d.items()}
         n = {k: v / med[k] for k, v in d.items()}
-        s = {k: v for k, v in d.items()}
-        s["h256+col"] = n["h256"] + 0.5 * n["col"]
-        for name in ("mnv3s", "mnv3l"):
-            k = f"{name}_p256"
-            if k in n:
-                s[f"h256+{name}"] = n["h256"] + n[k]
-                s[f"h256+col+{name}"] = n["h256"] + 0.5 * n["col"] + n[k]
-            kb = f"{name}_b256"
-            if kb in n:
-                s[f"h256+{name}b"] = n["h256"] + n[kb]
+        s = {k: d[k] for k in ("h256", "mnv3s_p256", "mnv3s_b256") if k in d}
+        if "mnv3s_p256" in n:
+            s["h256+mnv3s"] = n["h256"] + n["mnv3s_p256"]
+            s["h256+mnv3sb"] = n["h256"] + n["mnv3s_b256"]
         return s
 
     def rank(self, scores, true_oracle=None, top=5):
@@ -157,6 +160,31 @@ class Index:
 
 def found_variants(corners):
     return jitter_corners(corners, FOUND_SHIFTS, FOUND_SCALES)
+
+
+def expand_border(corners):
+    """The outline one black border further out, in the card's own perspective."""
+    src = np.float32([[0, 0], [1, 0], [1, 1], [0, 1]])
+    m = cv2.getPerspectiveTransform(src, np.float32(corners))
+    pts = np.float32([[-BORDER_X, -BORDER_Y], [1 + BORDER_X, -BORDER_Y], [1 + BORDER_X, 1 + BORDER_Y], [-BORDER_X, 1 + BORDER_Y]])
+    return cv2.perspectiveTransform(pts[None], m)[0]
+
+
+def outline_hypotheses(quads):
+    """What matching tries: the best outline, it one border further out, and
+    the second-best outline."""
+    if not quads:
+        return []
+    hyp = [quads[0], expand_border(quads[0])]
+    hyp += quads[1:2]
+    return hyp
+
+
+def near_variants(hyps):
+    out = []
+    for q in hyps:
+        out += jitter_corners(q, NEAR_SHIFTS, NEAR_SCALES)
+    return out
 
 
 def guide_variants(guide):

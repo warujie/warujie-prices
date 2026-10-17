@@ -22,13 +22,14 @@ import cv2
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from matcher import (Index, found_variants, guide_variants, centre_and_cross,  # noqa: E402
-                     FOUND_SHIFTS, FOUND_SCALES, GUIDE_SHIFTS, GUIDE_SCALES)
+                     outline_hypotheses, near_variants,
+                     FOUND_SHIFTS, FOUND_SCALES, GUIDE_SHIFTS, GUIDE_SCALES, NEAR_SHIFTS, NEAR_SCALES)
 from synth import make_photo, GUIDE  # noqa: E402
-from detect import detect_card  # noqa: E402
+from detect import detect_cards  # noqa: E402
 from build_index import picture_path, read_rgb  # noqa: E402
 
 LEVELS = ("easy", "normal", "hard")
-METHODS = ("truth", "detect", "guide")
+METHODS = ("truth", "detect", "detect3")
 TARGETS = (0.002, 0.005, 0.01)   # wrong-page rates allowed among confident answers
 
 IDX = None
@@ -36,6 +37,7 @@ TESTS = None
 CACHE = None
 FOUND_EMB = centre_and_cross(list(FOUND_SHIFTS), list(FOUND_SCALES))
 GUIDE_EMB = centre_and_cross(list(GUIDE_SHIFTS), list(GUIDE_SCALES))
+NEAR_EMB = centre_and_cross(list(NEAR_SHIFTS), list(NEAR_SCALES))
 
 
 def init_worker():
@@ -57,7 +59,8 @@ def run_test(i):
     for lv in LEVELS:
         rng = np.random.default_rng([20261017, i, LEVELS.index(lv)])
         photo, corners = make_photo(img, lv, rng)
-        found = detect_card(photo, GUIDE, rng)
+        quads = detect_cards(photo, GUIDE, rng, k=2)
+        found = quads[0] if quads else None
         card_w = np.linalg.norm(corners[1] - corners[0])
         for m in METHODS:
             t0 = time.time()
@@ -68,15 +71,23 @@ def run_test(i):
                 var, emb = found_variants(found), FOUND_EMB
                 rec["det"] = 1
                 rec["cerr"] = round(float(np.linalg.norm(found - corners, axis=1).mean() / card_w), 4)
+            elif m == "detect3" and found is not None:
+                hyps = outline_hypotheses(quads)
+                var = near_variants(hyps)
+                # the image model looks at the centre of each outline tried
+                n1 = len(NEAR_SHIFTS) ** 2 * len(NEAR_SCALES)
+                emb = [h * n1 + NEAR_EMB[0] for h in range(len(hyps))]
+                rec["det"] = 1
+                rec["cerr"] = round(float(min(np.linalg.norm(q - corners, axis=1).mean() for q in hyps) / card_w), 4)
             else:
                 var, emb = guide_variants(GUIDE), GUIDE_EMB
-                if m == "detect":
-                    rec["det"] = 0
+                rec["det"] = 0
             d = IDX.distances(photo, var, emb)
             res = {}
             for name, sc in Index.scorings(d).items():
                 r = IDX.rank(sc, true, top=5)
-                res[name] = [r.get("true_rank", 99), round(r["s"][0], 4), round(r["s"][1], 4), int(r["top"][0] == true)]
+                res[name] = [r.get("true_rank", 99), round(r["s"][0], 4), round(r["s"][1], 4), int(r["top"][0] == true),
+                             IDX.oracle_names[r["top"][0]]]
             rec["res"] = res
             rec["sec"] = round(time.time() - t0, 3)
             out.append(rec)
@@ -94,7 +105,7 @@ def calibrate(recs, scoring, target, rng):
     half = set(cards[: len(cards) // 2])
 
     def arrays(rs):
-        v = np.array([r["res"][scoring] for r in rs], dtype=np.float64).reshape(-1, 4)
+        v = np.array([r["res"][scoring][:4] for r in rs], dtype=np.float64).reshape(-1, 4)
         s1, s2, ok = v[:, 1], v[:, 2], v[:, 3] > 0
         ratio = np.where(s2 > 0, s1 / np.maximum(s2, 1e-9), 1.0)
         return ratio, s1, ok
@@ -136,12 +147,12 @@ def summarise(recs, out_dir, meta):
     for m in METHODS:
         rs = [r for r in recs if r["m"] == m]
         for sc in scorings:
-            v = np.array([r["res"][sc] for r in rs])
+            v = np.array([r["res"][sc][:4] for r in rs])
             row = {"top1": float((v[:, 0] == 0).mean()), "top5": float((v[:, 0] < 5).mean())}
             for tg in TARGETS:
                 row[f"sure@{tg}"] = calibrate(rs, sc, tg, rng)
             for lv in LEVELS:
-                vv = np.array([r["res"][sc] for r in rs if r["lv"] == lv])
+                vv = np.array([r["res"][sc][:4] for r in rs if r["lv"] == lv])
                 if len(vv):
                     row[f"top1_{lv}"] = float((vv[:, 0] == 0).mean())
             table[f"{m}/{sc}"] = row
@@ -155,7 +166,7 @@ def summarise(recs, out_dir, meta):
     for m, sc in best.items():
         for cat in sorted({r["cat"] for r in recs}):
             for lv in LEVELS:
-                v = np.array([r["res"][sc] for r in recs if r["m"] == m and r["cat"] == cat and r["lv"] == lv])
+                v = np.array([r["res"][sc][:4] for r in recs if r["m"] == m and r["cat"] == cat and r["lv"] == lv])
                 if len(v):
                     by_cat.setdefault(m, {}).setdefault(cat, {})[lv] = {
                         "n": len(v), "top1": float((v[:, 0] == 0).mean()), "top5": float((v[:, 0] < 5).mean())}
@@ -166,6 +177,8 @@ def summarise(recs, out_dir, meta):
                          "corner_err_median": float(np.median([r["cerr"] for r in det_ok if r["lv"] == lv]))
                          if any(r["lv"] == lv for r in det_ok) else None} for lv in LEVELS}
     detect_stats["corner_err_over_3pct"] = float((cerr > 0.03).mean()) if cerr.size else None
+    d3 = [r["cerr"] for r in recs if r["m"] == "detect3" and r.get("det")]
+    detect_stats["best_of_tried_over_3pct"] = float((np.array(d3) > 0.03).mean()) if d3 else None
     secs = {m: float(np.mean([r["sec"] for r in recs if r["m"] == m])) for m in METHODS if any(r["m"] == m for r in recs)}
     summary = {"meta": meta, "table": table, "best": best, "by_category": by_cat, "detect": detect_stats,
                "seconds_per_match": secs}
@@ -202,7 +215,9 @@ def summarise(recs, out_dir, meta):
     for lv in LEVELS:
         s = detect_stats[lv]
         L.append(f"| {lv} | {pct(s['found'])} | {pct(s['corner_err_median'])} |")
-    L += ["", f"Found outlines more than 3% off: {pct(detect_stats['corner_err_over_3pct'])}.",
+    L += ["", f"Found outlines more than 3% off: {pct(detect_stats['corner_err_over_3pct'])}; "
+          f"with the border-expanded and second outlines, the best tried is more than 3% off for "
+          f"{pct(detect_stats['best_of_tried_over_3pct'])}.",
           "", f"Seconds per match on the runner (Python, one core): {json.dumps(secs)}"]
     with open(os.path.join(out_dir, "results.md"), "w", encoding="utf-8") as f:
         f.write("\n".join(L) + "\n")
