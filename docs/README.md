@@ -3,7 +3,9 @@
 This repository builds the price, listing, combo and role-tag data that
 [warujie.jp](https://warujie.jp) reads, and publishes it on GitHub Pages at
 `https://warujie.github.io/warujie-prices/`. The site itself is in
-[warujie/Warujie](https://github.com/warujie/Warujie) (its `docs/` folder explains the site).
+[warujie/Warujie](https://github.com/warujie/Warujie) (a private repository; its `docs/` folder
+explains the site). This repository stays public: GitHub Pages and unlimited Actions minutes
+are free only for public repositories on the free plan.
 
 - The owner's rules (which outside data may be used, no secrets in the repo) are in
   [`../CLAUDE.md`](../CLAUDE.md) and in the site repository's `CLAUDE.md`.
@@ -156,4 +158,7 @@ source updates this folder in the same commit (`data-formats.md` for file shapes
 the rest). Run `python3 dev/check_docs.py` before pushing: it fails when a name the docs mention
 no longer exists in the code. GitHub runs it too on pushes to `main` and on pull requests
 (`.github/workflows/check-docs.yml`, check "Docs match the code"); it only reads files and never
-publishes data.
+publishes data. The site repository is private, so that check usually can't read it and runs
+with `--partial`: names that only the site has are listed as not checked instead of failing.
+The site's own check runs this repository's check in full on every push to its `staging` and
+`main`, so a doc here that names a removed site function turns the site's check red.

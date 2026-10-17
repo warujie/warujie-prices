@@ -1,8 +1,10 @@
 # warujie-prices — working notes
 
 The data behind warujie.jp's prices, listings, price movers, Commander combos and role search.
-The site is in `warujie/Warujie`; its `CLAUDE.md` has the owner's full rules. This repository
-is public, so it holds no private details.
+The site is in `warujie/Warujie` (private); its `CLAUDE.md` has the owner's full rules. This
+repository is public, so it holds no private details. Keep it public: on GitHub's free plan,
+Pages (which the site reads every file from) and unlimited Actions minutes need a public
+repository, and the price history lives only in the published Pages files.
 
 **Start with [`docs/README.md`](docs/README.md)** (how the builders and the daily workflow work)
 and [`docs/data-formats.md`](docs/data-formats.md) (every published file).
@@ -35,4 +37,6 @@ and [`docs/data-formats.md`](docs/data-formats.md) (every published file).
 - Name code by function or constant, never by line number.
 - Before pushing, run `python3 dev/check_docs.py` (with the site repository cloned next to this
   one): it fails when a name the docs mention no longer exists in the code. GitHub runs it on
-  pushes to `main` and on pull requests (`.github/workflows/check-docs.yml`).
+  pushes to `main` and on pull requests (`.github/workflows/check-docs.yml`); the site repo is
+  private, so there it skips names only the site has (`--partial`), and the site's own check
+  runs this one in full.
