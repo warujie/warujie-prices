@@ -1,0 +1,9 @@
++ python scan_probe/build_index.py select --out scan_probe/out
+site cards: 33821
+bulk: https://data.scryfall.io/all-cards/all-cards-20261017091839.jsonl.gz
+  read 400,000, kept 112,222
+read 546,286 printings, kept 153,239 en/ja faces with a picture
+illustration ids borrowed from English: 5
+groups: 68,588; index entries: 68,672
+entry kinds: {'en': 64935, 'ja_only': 3653, 'ja_text': 84}
+test sample: 2116

@@ -1,0 +1,12 @@
+{
+ "printings_read": 546286,
+ "faces_kept": 153239,
+ "groups": 68588,
+ "entries": 68672,
+ "kinds": {
+  "en": 64935,
+  "ja_only": 3653,
+  "ja_text": 84
+ },
+ "tests": 2116
+}
