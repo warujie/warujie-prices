@@ -1,6 +1,7 @@
 # Published files
 
-Everything is published under `https://warujie.github.io/warujie-prices/`. Money is in
+Everything is published to the private R2 bucket `warujie-price-data` (read by the site at
+`warujie.jp/data/`) and, during the move, under `https://warujie.github.io/warujie-prices/`. Money is in
 **cents** (integers) everywhere; a missing value is `null` (or left off the end of an array).
 "Shard" files split data by the first two hex characters of an id, so a card page downloads
 one small file instead of everything.
