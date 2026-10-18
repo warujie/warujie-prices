@@ -2,11 +2,12 @@
  "printings_read": 546286,
  "faces_kept": 153239,
  "groups": 68588,
- "entries": 68672,
+ "entries": 68752,
  "kinds": {
   "en": 64935,
   "ja_only": 3653,
-  "ja_text": 84
+  "ja_text": 84,
+  "other_only": 80
  },
- "tests": 2500
+ "tests": 2550
 }
