@@ -1,8 +1,9 @@
 # warujie-prices developer guide
 
 This repository builds the price, listing, combo and role-tag data that
-[warujie.jp](https://warujie.jp) reads, and publishes it on GitHub Pages at
-`https://warujie.github.io/warujie-prices/`. The site itself is in
+[warujie.jp](https://warujie.jp) reads, and publishes it to the private Cloudflare R2 bucket
+`warujie-price-data` (the site reads it through its Worker at `warujie.jp/data/`) and, during the
+move to R2, also on GitHub Pages at `https://warujie.github.io/warujie-prices/`. The site itself is in
 [warujie/Warujie](https://github.com/warujie/Warujie) (a private repository; its `docs/` folder
 explains the site). This repository stays public: GitHub Pages and unlimited Actions minutes
 are free only for public repositories on the free plan.
@@ -19,11 +20,14 @@ are free only for public repositories on the free plan.
 | [`shop_enndal.py`](../shop_enndal.py) | ENNDAL GAMES' in-stock singles in yen (Japan), read once a night; also matches them to printings for `build_prices.py` | `enndal.json.gz` (an artifact, not published) | ENNDAL GAMES' shop pages, with the shop's permission |
 | [`build_combos.py`](../build_combos.py) | Commander combos per card | `site/c/` | Commander Spellbook's bulk file |
 | [`build_tags.py`](../build_tags.py) | Role tags (removal, draw, ramp…) and EDHREC rank per card | `site/t/tags.json.gz` | Scryfall Tagger oracle tags, via Scryfall's search API |
-| [`.github/workflows/update-prices.yml`](../.github/workflows/update-prices.yml) | Runs the three builders and publishes `site/` to GitHub Pages | | |
+| [`.github/workflows/update-prices.yml`](../.github/workflows/update-prices.yml) | Runs the three builders and publishes `site/` to R2 and GitHub Pages | | |
 | [`.github/workflows/enndal-nightly.yml`](../.github/workflows/enndal-nightly.yml) | Runs `shop_enndal.py` at 2am Japan time and keeps the result as the "enndal" artifact | | |
 
-**Nothing is committed by the workflow.** Each run reads yesterday's published data from the
-Pages address (`--previous`), adds today, and publishes the result. The repository never grows,
+**Nothing is committed by the workflow.** Each run reads yesterday's published data
+(`--previous`: a copy of the R2 bucket in `prev/`, or the Pages address while R2 has no
+complete copy), adds today, and publishes the result, to R2 first. R2 needs the
+`CLOUDFLARE_R2_TOKEN` secret, a Cloudflare API token that may only edit R2; the S3-style key
+pair `aws s3 sync` uses is made from it in the workflow. The repository never grows,
 and the published site *is* the history: if a run publishes a broken history, the next run
 builds on it. That's why `build_prices.py` stops without publishing when the old history can't
 be read or Scryfall's export looks incomplete (`--min-cards`, default 20,000 priced printings).

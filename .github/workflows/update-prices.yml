@@ -8,9 +8,10 @@
 # Every day it reads today's prices from Scryfall (TCGplayer in dollars,
 # Cardmarket in euros) and the day's prices at several shops from MTGJSON
 # (TCGplayer, Card Kingdom, Cardsphere, Cardmarket), adds them to the history
-# that is already published, and publishes the result with GitHub Pages at
-#     https://<your-user-name>.github.io/warujie-prices/
-# The site reads the data from there. Nothing is committed to the repository,
+# that is already published, and publishes the result to the private Cloudflare R2
+# bucket warujie-price-data (which warujie.jp reads through its Worker at /data/) and
+# with GitHub Pages at
+#     https://<your-user-name>.github.io/warujie-prices/ Nothing is committed to the repository,
 # so it never grows.
 #
 # While the history is shorter than 60 days (or has no euro prices yet), the
@@ -87,6 +88,34 @@ jobs:
             echo "No ENNDAL GAMES data from last night; the published ENNDAL offers are kept."
           fi
 
+      # The same files also live in a private Cloudflare R2 bucket (warujie-price-data), which
+      # warujie.jp reads through its Worker at /data/. CLOUDFLARE_R2_TOKEN is a Cloudflare API
+      # token that may only edit R2 (Settings -> Secrets and variables -> Actions); R2's S3-style
+      # key pair comes from it (key id = the token's id, secret = SHA-256 of the token). The
+      # previous data is read from R2; while R2 is empty, or if reading it fails, it comes from
+      # GitHub Pages instead. Without the secret R2 is skipped.
+      - name: Read the published data from R2
+        id: r2
+        env:
+          CF_TOKEN: ${{ secrets.CLOUDFLARE_R2_TOKEN }}
+        run: |
+          if [ -z "$CF_TOKEN" ]; then echo "::warning::No CLOUDFLARE_R2_TOKEN secret: R2 is skipped."; exit 0; fi
+          key=$(curl -fsS -H "Authorization: Bearer $CF_TOKEN" https://api.cloudflare.com/client/v4/user/tokens/verify | jq -r '.result.id // empty')
+          acct=$(curl -fsS -H "Authorization: Bearer $CF_TOKEN" https://api.cloudflare.com/client/v4/accounts | jq -r '.result[0].id // empty')
+          if [ -z "$key" ] || [ -z "$acct" ]; then echo "::error::The CLOUDFLARE_R2_TOKEN token is not accepted by Cloudflare."; exit 1; fi
+          secret=$(printf %s "$CF_TOKEN" | sha256sum | cut -d' ' -f1)
+          echo "::add-mask::$secret"
+          { echo "AWS_ACCESS_KEY_ID=$key"; echo "AWS_SECRET_ACCESS_KEY=$secret"; echo "AWS_DEFAULT_REGION=auto"; echo "AWS_REQUEST_CHECKSUM_CALCULATION=when_required"; echo "AWS_RESPONSE_CHECKSUM_VALIDATION=when_required"
+            echo "R2_ENDPOINT=https://$acct.r2.cloudflarestorage.com"; echo "R2_BUCKET=s3://warujie-price-data"; } >> "$GITHUB_ENV"
+          echo "ok=1" >> "$GITHUB_OUTPUT"
+          if aws s3 sync "s3://warujie-price-data" prev --endpoint-url "https://$acct.r2.cloudflarestorage.com" --only-show-errors && [ -f prev/index.json ]; then
+            echo "previous=prev" >> "$GITHUB_OUTPUT"
+            echo "Previous data: R2 ($(find prev -type f | wc -l) files)"
+          else
+            echo "R2 has no complete copy yet: the previous data comes from GitHub Pages this time."
+            rm -rf prev
+          fi
+
       # Stops (without publishing) if the old history can't be read or
       # Scryfall's export looks incomplete, so the history is never lost.
       # (If MTGJSON can't be reached, the day's update still goes ahead.)
@@ -96,20 +125,26 @@ jobs:
       - name: Build the price history
         env:
           CARDTRADER_TOKEN: ${{ secrets.CARDTRADER_TOKEN }}
-        run: python3 build_prices.py --out site --previous "${{ steps.pages.outputs.url }}" ${{ steps.pages.outputs.fresh }} ${{ steps.enndal.outputs.arg }}
+        run: python3 build_prices.py --out site --previous "${{ steps.r2.outputs.previous || steps.pages.outputs.url }}" ${{ steps.pages.outputs.fresh }} ${{ steps.enndal.outputs.arg }}
 
       # Commander combos for the card pages, from Commander Spellbook's bulk
       # file: rebuilt once a week, copied over from the published data on
       # the other days. Never stops the price update.
       - name: Build the Commander combos
-        run: python3 build_combos.py --out site/c --previous "${{ steps.pages.outputs.url }}"
+        run: python3 build_combos.py --out site/c --previous "${{ steps.r2.outputs.previous || steps.pages.outputs.url }}"
 
       # What each card does (removal, card draw, ramp...) for the site's role
       # search and similar cards, from Scryfall Tagger's oracle tags: rebuilt
       # once a week, copied over from the published data on the other days.
       # Never stops the price update.
       - name: Build the role tags
-        run: python3 build_tags.py --out site/t --previous "${{ steps.pages.outputs.url }}"
+        run: python3 build_tags.py --out site/t --previous "${{ steps.r2.outputs.previous || steps.pages.outputs.url }}"
+
+      # Published to R2 first: if that fails the run stops, so R2 and GitHub Pages never
+      # disagree about which days the history has. Files are only added or replaced.
+      - name: Publish to R2
+        if: steps.r2.outputs.ok == '1'
+        run: aws s3 sync site "$R2_BUCKET" --endpoint-url "$R2_ENDPOINT" --only-show-errors
 
       - uses: actions/upload-pages-artifact@v4
         with:

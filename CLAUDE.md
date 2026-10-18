@@ -3,8 +3,9 @@
 The data behind warujie.jp's prices, listings, price movers, Commander combos and role search.
 The site is in `warujie/Warujie` (private); its `CLAUDE.md` has the owner's full rules. This
 repository is public, so it holds no private details. Keep it public: on GitHub's free plan,
-Pages (which the site reads every file from) and unlimited Actions minutes need a public
-repository, and the price history lives only in the published Pages files.
+unlimited Actions minutes need a public repository. The price files are published to a
+private Cloudflare R2 bucket (warujie-price-data), which the site reads through its Worker, and
+for now also to GitHub Pages; the price history lives only in those published files.
 
 **Start with [`docs/README.md`](docs/README.md)** (how the builders and the daily workflow work)
 and [`docs/data-formats.md`](docs/data-formats.md) (every published file).
@@ -12,7 +13,7 @@ and [`docs/data-formats.md`](docs/data-formats.md) (every published file).
 ## Rules (the owner's, keep them)
 
 1. **`main` is live.** A push that changes a builder or the workflow on `main` runs the workflow
-   and publishes to GitHub Pages at once, which warujie.jp reads immediately. Work on a branch,
+   and publishes to R2 and GitHub Pages at once, which warujie.jp reads immediately. Work on a branch,
    test locally (and with the site's `dev/tests/e2e.py`), and merge to `main` only when the owner
    says "publish", as for the site.
 2. **Permitted sources only:** Scryfall (bulk files and API, with a real User-Agent and pauses),
