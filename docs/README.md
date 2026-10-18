@@ -150,6 +150,7 @@ The site reads these files directly, so a format change is a change in two repos
 | Role search falls back to text | `t/tags.json.gz` missing or broken; check the "Build the role tags" step |
 | Combos missing on the preview page | `c/index.json`; check the "Build the Commander combos" step |
 | The workflow fails at "Check this is the warujie-prices repository" | The workflow must live in a repository named exactly `warujie-prices` |
+| "Docs match the code" fails with only site names (`loadPriceIndex()`…) missing | The site checkout failed (the site repository is private) but left an empty `Warujie` folder; `dev/check_docs.py` only counts a folder with a `docs/` folder as the other repository |
 
 ## Keeping these docs true
 

@@ -21,8 +21,10 @@ import sys
 
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PARENT = os.path.dirname(REPO)
+# a folder without docs/ doesn't count: a checkout that failed (the site repository is private)
+# leaves an empty one behind
 SIBLINGS = [os.path.join(PARENT, n) for n in ("Warujie", "warujie-prices")
-            if os.path.isdir(os.path.join(PARENT, n)) and os.path.realpath(os.path.join(PARENT, n)) != os.path.realpath(REPO)]
+            if os.path.isdir(os.path.join(PARENT, n, "docs")) and os.path.realpath(os.path.join(PARENT, n)) != os.path.realpath(REPO)]
 ROOTS = [REPO] + SIBLINGS
 CODE_EXT = (".html", ".js", ".mjs", ".py", ".yml", ".yaml", ".jsonc", ".webmanifest")
 SKIP_DIRS = {".git", "node_modules", "docs", "fixtures", "__pycache__"}
