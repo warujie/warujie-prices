@@ -111,6 +111,8 @@ jobs:
           echo "::add-mask::$secret"
           { echo "AWS_ACCESS_KEY_ID=$key"; echo "AWS_SECRET_ACCESS_KEY=$secret"; echo "AWS_DEFAULT_REGION=auto"; echo "AWS_REQUEST_CHECKSUM_CALCULATION=when_required"; echo "AWS_RESPONSE_CHECKSUM_VALIDATION=when_required"
             echo "R2_ENDPOINT=https://$acct.r2.cloudflarestorage.com"; echo "R2_BUCKET=s3://warujie-price-data"; } >> "$GITHUB_ENV"
+          # GITHUB_ENV only reaches the later steps, so this step needs the keys too
+          export AWS_ACCESS_KEY_ID="$key" AWS_SECRET_ACCESS_KEY="$secret" AWS_DEFAULT_REGION=auto AWS_REQUEST_CHECKSUM_CALCULATION=when_required AWS_RESPONSE_CHECKSUM_VALIDATION=when_required
           if aws s3 sync "s3://warujie-price-data" prev --endpoint-url "https://$acct.r2.cloudflarestorage.com" --only-show-errors && [ -f prev/index.json ]; then
             echo "Previous data: R2 ($(find prev -type f | wc -l) files)"
           else
