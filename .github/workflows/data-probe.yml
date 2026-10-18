@@ -1,4 +1,4 @@
-# One-off: checks the test site's /data/ route from outside. Removed afterwards.
+# One-off: checks the test site's /data/ route from outside (run 2). Removed afterwards.
 name: Data route probe (one-off)
 on:
   push:
@@ -10,7 +10,7 @@ jobs:
     steps:
       - run: |
           B=https://staging-warujie.warujie-mtg.workers.dev
-          sleep 60
+          sleep 150
           for t in 1 2 3; do
             echo "own page:   $(curl -s -o /tmp/i.json -w '%{http_code}' -H 'Sec-Fetch-Site: same-origin' $B/data/index.json) $(head -c 120 /tmp/i.json)"
             echo "shard gz:   $(curl -s -o /tmp/q -w '%{http_code} %{content_type} %{size_download}' -H 'Sec-Fetch-Site: same-origin' $B/data/movers.json)"
