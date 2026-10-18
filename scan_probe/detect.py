@@ -13,15 +13,21 @@ CARD_RATIO = 63 / 88
 WORK_W = 540            # the photo is searched at this width
 STRONG = 0.45           # a line along at least this share of a side is a real edge
 BAND_OUT, BAND_IN = 0.10, 0.15   # how far outside / inside each guide side an edge is looked for
+SIGMA = 1.2             # smoothing before the edges are measured (round 4's finder uses SMOOTH)
+SMOOTH = 2.0            # round 4: more smoothing keeps carpet and cloth from making edges
+CONTRAST_D = 0.025      # texture check: colours compared this far (share of the guide's width) either side of a line
+TEXTURE_KEEP = 0.8      # a line whose colour change is under this share of the side's largest counts less
 
 
-def edge_points(mag, axis, lo, hi, positions, outward, peaks=3, rel=0.15, floor=12.0):
+def edge_points(mag, axis, lo, hi, positions, outward, peaks=3, rel=0.15, floor=12.0, strongest=0):
     """For each position along a side, the `peaks` outermost strong edge
     locations across the band [lo, hi). axis=0: horizontal side (scan down
     columns). outward: +1 when the outside of the card is at higher
     coordinates (bottom, right), -1 when lower (top, left). Taking the
     outermost edges, not the strongest, matters: rules text and frame lines
-    inside the card are often stronger than the card's own edge."""
+    inside the card are often stronger than the card's own edge. On carpet or
+    cloth the outermost edges are all the texture's, so `strongest` adds that
+    many of the strongest edges too."""
     pts = []
     for p in positions:
         prof = mag[lo:hi, p] if axis == 0 else mag[p, lo:hi]
@@ -32,7 +38,10 @@ def edge_points(mag, axis, lo, hi, positions, outward, peaks=3, rel=0.15, floor=
         if cand.size == 0:
             continue
         cand = cand[::-1] if outward > 0 else cand
-        for b in cand[:peaks]:
+        chosen = list(cand[:peaks])
+        if strongest:
+            chosen += [b for b in cand[np.argsort(-prof[cand])][:strongest] if b not in chosen]
+        for b in chosen:
             pts.append((p, lo + b, prof[b]))
     return np.array(pts, dtype=np.float64).reshape(-1, 3)
 
@@ -80,6 +89,33 @@ def intersect(h, v):
     return np.array([x, y])
 
 
+def discount_texture(sides, small, cols, rows, d):
+    """Each line's support scaled down when the colours a distance d inside
+    and outside it differ less than TEXTURE_KEEP of the most any line on that
+    side shows: a row of carpet loops is a line, but carpet lies on both sides
+    of it. sides: {name: [(a, b, support)]} as fit_lines gives them."""
+    H, W = small.shape[:2]
+    blur = cv2.GaussianBlur(small.astype(np.float32), (0, 0), d / 2)
+    inside = {"top": 1, "bottom": -1, "left": 1, "right": -1}
+
+    def colour(x, y):
+        return blur[np.clip(np.round(y).astype(int), 0, H - 1), np.clip(np.round(x).astype(int), 0, W - 1)]
+
+    out = {}
+    for name, lines in sides.items():
+        us = (cols if name in ("top", "bottom") else rows).astype(np.float64)
+        diffs = []
+        for a, b, _ in lines:
+            v, n = a * us + b, np.hypot(1, a)
+            # points on the line and the unit step towards the card's inside
+            (px, py), (nx, ny) = ((us, v), (-a / n, 1 / n)) if name in ("top", "bottom") else ((v, us), (1 / n, -a / n))
+            s = inside[name] * d
+            diffs.append(float(np.median(np.linalg.norm(colour(px + s * nx, py + s * ny) - colour(px - s * nx, py - s * ny), axis=1))))
+        top = max(diffs, default=0) or 1.0
+        out[name] = [(a, b, sup * min(1.0, c / (TEXTURE_KEEP * top))) for (a, b, sup), c in zip(lines, diffs)]
+    return out
+
+
 def detect_card(photo, guide, rng=None):
     """The most card-shaped outline near the guide (4x2 corners tl, tr, br,
     bl in the photo), or None."""
@@ -87,16 +123,19 @@ def detect_card(photo, guide, rng=None):
     return found[0] if found else None
 
 
-def detect_cards(photo, guide, rng=None, k=3):
+def detect_cards(photo, guide, rng=None, k=3, sigma=SIGMA, texture=False):
     """Up to k different card-shaped outlines near the guide, best first.
     photo: RGB uint8; guide: (x0, y0, x1, y1) in the photo. Matching tries
     each, so a wrong guess about one edge (the black border's inner edge, the
-    text box) costs little: the right outline matches far better."""
+    text box) costs little: the right outline matches far better.
+    texture=True is for carpet and cloth (round 4): more edge points per
+    position, more lines per side, and a line counts less when the colours
+    either side of it are alike (texture, not the card's edge)."""
     rng = rng or np.random.default_rng(0)
     h0, w0 = photo.shape[:2]
     f = WORK_W / w0
     small = cv2.resize(photo, (WORK_W, int(round(h0 * f))), interpolation=cv2.INTER_AREA)
-    g = cv2.GaussianBlur(cv2.cvtColor(small, cv2.COLOR_RGB2GRAY).astype(np.float32), (0, 0), 1.2)
+    g = cv2.GaussianBlur(cv2.cvtColor(small, cv2.COLOR_RGB2GRAY).astype(np.float32), (0, 0), sigma)
     gx = cv2.Sobel(g, cv2.CV_32F, 1, 0, ksize=3)
     gy = cv2.Sobel(g, cv2.CV_32F, 0, 1, ksize=3)
     ax, ay = np.abs(gx), np.abs(gy)
@@ -107,6 +146,7 @@ def detect_cards(photo, guide, rng=None, k=3):
     rows = np.arange(int(y0 + 0.18 * gh), int(y1 - 0.18 * gh), 3)
     clamp = lambda v, hi: int(max(0, min(hi, v)))  # noqa: E731
     slope = np.tan(np.deg2rad(14))
+    more, want = (dict(peaks=4, strongest=3), 6) if texture else ({}, 4)
     sides = {}
     # top and bottom: y as a function of x
     # each side's band reaches further into the card than out of it: the
@@ -115,14 +155,16 @@ def detect_cards(photo, guide, rng=None, k=3):
     for name, centre in (("top", y0), ("bottom", y1)):
         o = 1 if name == "bottom" else -1
         lo, hi = sorted((centre + o * BAND_OUT * gh, centre - o * BAND_IN * gh))
-        pts = edge_points(ay, 0, clamp(lo, H), clamp(hi, H), cols, o)
-        sides[name] = fit_lines(pts, slope, 2.0, rng, n_pos=len(cols))
+        pts = edge_points(ay, 0, clamp(lo, H), clamp(hi, H), cols, o, **more)
+        sides[name] = fit_lines(pts, slope, 2.0, rng, want=want, n_pos=len(cols))
     for name, centre in (("left", x0), ("right", x1)):
         o = 1 if name == "right" else -1
         lo, hi = sorted((centre + o * BAND_OUT * gw, centre - o * BAND_IN * gw))
-        pts = edge_points(ax, 1, clamp(lo, W), clamp(hi, W), rows, o)
+        pts = edge_points(ax, 1, clamp(lo, W), clamp(hi, W), rows, o, **more)
         # (u, v) = (y, x): x as a function of y
-        sides[name] = fit_lines(pts, slope, 2.0, rng, n_pos=len(rows))
+        sides[name] = fit_lines(pts, slope, 2.0, rng, want=want, n_pos=len(rows))
+    if texture:
+        sides = discount_texture(sides, small, cols, rows, CONTRAST_D * gw)
     missing = [k for k in sides if not sides[k]]
     if len(missing) > 1:
         return []
@@ -185,3 +227,65 @@ def detect_cards(photo, guide, rng=None, k=3):
         if len(out) == k:
             break
     return [(c / f).astype(np.float32) for c in out]
+
+
+# ---- finding a card anywhere in the photo ------------------------------------------------
+
+COARSE_W = 360          # the whole photo is searched at this width
+
+
+def order_corners(pts):
+    """Four points as top-left, top-right, bottom-right, bottom-left."""
+    pts = np.float32(pts).reshape(4, 2)
+    s, d = pts.sum(axis=1), pts[:, 1] - pts[:, 0]
+    return np.float32([pts[np.argmin(s)], pts[np.argmin(d)], pts[np.argmax(s)], pts[np.argmax(d)]])
+
+
+def find_cards_anywhere(photo, k=3):
+    """Card-shaped outlines anywhere in the photo, best first, for when the
+    card isn't held inside the guide (small, off to one side). Looks for
+    closed card-shaped edges after smoothing the photo a few ways: a median
+    filter flattens carpet and playmat texture while keeping a card's edge."""
+    h0, w0 = photo.shape[:2]
+    f = COARSE_W / w0
+    small = cv2.resize(photo, (COARSE_W, int(round(h0 * f))), interpolation=cv2.INTER_AREA)
+    g = cv2.cvtColor(small, cv2.COLOR_RGB2GRAY)
+    H, W = g.shape
+    smoothed = [cv2.GaussianBlur(g, (0, 0), 1.5), cv2.GaussianBlur(g, (0, 0), 3.0),
+                cv2.medianBlur(g, 7), cv2.medianBlur(g, 11)]
+    cands = []
+    for b in smoothed:
+        for lo, hi in ((20, 60), (40, 120)):
+            e = cv2.morphologyEx(cv2.Canny(b, lo, hi), cv2.MORPH_CLOSE, np.ones((3, 3), np.uint8))
+            contours, _ = cv2.findContours(e, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
+            for c in contours:
+                hull = cv2.convexHull(c)
+                area = cv2.contourArea(hull)
+                if not 0.03 * W * H < area < 0.92 * W * H:
+                    continue
+                (_, _), (rw, rh), _ = cv2.minAreaRect(hull)
+                short, long_ = sorted((rw, rh))
+                aspect = short / long_
+                fill = area / (rw * rh)
+                x, y, bw, bh = cv2.boundingRect(hull)
+                if not 0.62 < aspect < 0.82 or fill < 0.88 or bw > bh * 1.05:   # portrait cards only
+                    continue
+                peri = cv2.arcLength(hull, True)
+                quad = None
+                for eps in (0.02, 0.04):
+                    a = cv2.approxPolyDP(hull, eps * peri, True)
+                    if len(a) == 4:
+                        quad = a
+                        break
+                if quad is None:
+                    quad = cv2.boxPoints(cv2.minAreaRect(hull))
+                score = fill - 3 * abs(np.log(aspect / CARD_RATIO)) + 0.3 * np.sqrt(area / (W * H))
+                cands.append((score, order_corners(quad)))
+    cands.sort(key=lambda t: -t[0])
+    out = []
+    for _, q in cands:
+        if all(np.abs(q - o).max() > 0.03 * W for o in out):
+            out.append(q)
+        if len(out) == k:
+            break
+    return [(q / f).astype(np.float32) for q in out]

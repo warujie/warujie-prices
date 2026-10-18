@@ -8,6 +8,7 @@ import numpy as np
 import cv2
 
 from common import CARD_W, warp_region, region_features, model_input, jitter_corners
+from detect import detect_cards, SMOOTH
 
 
 USE_MODELS = ("mnv3s",)   # round 1: the large model was no better and is 3x the size
@@ -201,6 +202,23 @@ def outline_hypotheses(quads):
     hyp = [quads[0], expand_border(quads[0])]
     hyp += quads[1:2]
     return hyp
+
+
+def guide_outlines(photo, guide):
+    """Round 4's outlines to try ("detect4"): round 3's three, found after more
+    smoothing, plus the best outline of the texture-aware search (carpet,
+    cloth), leaving out any within 1.5% of the card's width of another."""
+    plain = detect_cards(photo, guide, np.random.default_rng(0), k=2, sigma=SMOOTH)
+    tex = detect_cards(photo, guide, np.random.default_rng(0), k=1, sigma=SMOOTH, texture=True)
+    if not plain and not tex:
+        return []
+    first = (plain or tex)[0]
+    out = []
+    for q in [first, expand_border(first)] + tex[:1] + plain[1:2]:
+        w = np.linalg.norm(q[1] - q[0])
+        if all(np.abs(q - o).max() > 0.015 * w for o in out):
+            out.append(np.float32(q))
+    return out
 
 
 def near_variants(hyps):

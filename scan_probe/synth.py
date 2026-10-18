@@ -1,6 +1,6 @@
 """Card-scan probe: turns a flat card picture into a believable phone photo:
 the card held roughly inside the on-screen guide, tilted and turned a little,
-on a table or playmat, under room light, with glare, shadow, a sleeve's haze,
+on a table, playmat, carpet or cloth, under room light, with glare, shadow, a sleeve's haze,
 blur, noise and JPEG compression. Three levels: easy, normal, hard.
 """
 import numpy as np
@@ -27,8 +27,28 @@ LEVELS = {
 
 def background(rng):
     h, w = FRAME_H, FRAME_W
-    kind = rng.choice(["mat", "wood", "white", "dark", "busy"])
+    kind = rng.choice(["mat", "wood", "white", "dark", "busy", "carpet", "fabric"])
     low = cv2.resize(rng.normal(0, 1, (6, 8, 3)).astype(np.float32), (w, h), interpolation=cv2.INTER_CUBIC)
+    if kind in ("carpet", "fabric"):
+        # fine texture that makes many short edges: carpet loops in rows, a woven cloth
+        ang = rng.uniform(0, np.pi)
+        y, x = np.mgrid[0:h, 0:w].astype(np.float32)
+        u = x * np.cos(ang) + y * np.sin(ang)
+        v = -x * np.sin(ang) + y * np.cos(ang)
+        base = rng.uniform(20, 120) * (1 + rng.uniform(-0.25, 0.25, 3))
+        if kind == "carpet":
+            s = rng.uniform(3, 8)
+            loops = cv2.resize(rng.random((int(h / s) + 1, int(w / s) + 1)).astype(np.float32), (w, h),
+                               interpolation=cv2.INTER_CUBIC)
+            rows = 0.5 + 0.5 * np.sin(2 * np.pi * v / (s * rng.uniform(1.5, 3)))
+            tex = (loops * rows - 0.25) * rng.uniform(60, 140)
+        else:
+            p = rng.uniform(3, 9)
+            tex = np.sin(2 * np.pi * u / p) * np.sin(2 * np.pi * v / p) * rng.uniform(15, 45)
+            tex += cv2.resize(rng.normal(0, 1, (h // 4, w // 4)).astype(np.float32), (w, h)) * 8
+        img = base[None, None, :] + tex[..., None] + low * 10
+        img = img.astype(np.float32) + rng.normal(0, 3, img.shape).astype(np.float32)
+        return np.clip(img, 0, 255)
     if kind == "mat":
         base = rng.uniform(20, 200, 3) * np.ones((h, w, 3))
         img = base + low * 18

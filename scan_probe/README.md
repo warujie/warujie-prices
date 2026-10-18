@@ -14,10 +14,18 @@ phone photo of a card can be matched to the right card by its artwork.
   brightness differences), equalised and CLAHE versions of the DCT hash, a 144-bit one, and a
   mask of each picture's reliable DCT bits (`h256r`).
 - `real_photos.py` runs the owner's own photos locally against the committed fingerprints; the
-  photos never go into the repository.
-- `synth.py` makes believable phone photos (angle, light, glare, sleeve, blur, JPEG);
-  `detect.py` finds the card's edges near the on-screen guide.
-- `evaluate.py` matches every test photo and writes `out/results.md`.
+  photos never go into the repository. Three modes: the photo as taken, the card's given
+  corners, and "framed" (the photo moved and scaled so the card sits in the guide, as a visitor
+  following the guide would hold it).
+- `synth.py` makes believable phone photos (angle, light, glare, sleeve, blur, JPEG; round 4
+  adds carpet and cloth, where the owner's photos showed the finder failing);
+  `detect.py` finds the card's edges near the on-screen guide, and anywhere in a photo
+  (`find_cards_anywhere`). Round 4's finder (`guide_outlines` in `matcher.py`, "detect4") smooths
+  more and adds a texture-aware outline: lines whose two sides look alike (a row of carpet
+  loops) count less (`discount_texture`).
+- `evaluate.py` matches every test photo and writes `out/results.md`. Its "sure" rules are also
+  calibrated with every photo standing in for a card that isn't in the index (a token): the
+  scores with the true card left out must not be sure.
 
 Workflow: `.github/workflows/scan-probe.yml`, on push to this branch. Nothing here is used by
 the site or the daily price workflow, and this branch is never merged as it is.
