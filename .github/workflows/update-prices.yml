@@ -9,10 +9,9 @@
 # Cardmarket in euros) and the day's prices at several shops from MTGJSON
 # (TCGplayer, Card Kingdom, Cardsphere, Cardmarket), adds them to the history
 # that is already published, and publishes the result to the private Cloudflare R2
-# bucket warujie-price-data (which warujie.jp reads through its Worker at /data/) and
-# with GitHub Pages at
-#     https://<your-user-name>.github.io/warujie-prices/ Nothing is committed to the repository,
-# so it never grows.
+# bucket warujie-price-data, which warujie.jp reads through its Worker at /data/.
+# GitHub Pages only shows a notice (the data used to be public there). Nothing is
+# committed to the repository, so it never grows.
 #
 # While the history is shorter than 60 days (or has no euro prices yet), the
 # run also fills in the last 90 days of US (TCGplayer) and European
@@ -36,7 +35,7 @@ permissions:
   contents: read
   deployments: read          # to tell whether this is the very first run
   actions: read              # to fetch last night's ENNDAL GAMES data (enndal-nightly.yml)
-  pages: write               # to publish the data
+  pages: write               # to publish the notice on GitHub Pages
   id-token: write            # required by GitHub Pages publishing
 
 concurrency:
@@ -48,8 +47,8 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 90
     steps:
-      # The site reads the prices from https://<your-user-name>.github.io/warujie-prices/,
-      # so this only works in a repository with exactly that name.
+      # Kept from when the site read the prices from <user>.github.io/warujie-prices/:
+      # this only runs in a repository with exactly that name.
       - name: Check this is the warujie-prices repository
         run: |
           if [ "${GITHUB_REPOSITORY#*/}" != "warujie-prices" ]; then
@@ -80,26 +79,31 @@ jobs:
         id: enndal
         env:
           GH_TOKEN: ${{ github.token }}
+          ENNDAL_KEY: ${{ secrets.CLOUDFLARE_R2_TOKEN }}
         run: |
           id=$(gh api "repos/${GITHUB_REPOSITORY}/actions/artifacts?name=enndal&per_page=1" --jq '.artifacts[] | select(.expired | not) | .id' 2>/dev/null || true)
-          if [ -n "$id" ] && gh api "repos/${GITHUB_REPOSITORY}/actions/artifacts/${id}/zip" > enndal.zip && unzip -o -q enndal.zip -d enndal && [ -f enndal/enndal.json.gz ]; then
+          if [ -n "$id" ] && gh api "repos/${GITHUB_REPOSITORY}/actions/artifacts/${id}/zip" > enndal.zip && unzip -o -q enndal.zip -d enndal; then
+            # encrypted by enndal-nightly.yml (older artifacts were not)
+            if [ -f enndal/enndal.json.gz.enc ]; then openssl enc -d -aes-256-cbc -pbkdf2 -pass env:ENNDAL_KEY -in enndal/enndal.json.gz.enc -out enndal/enndal.json.gz || rm -f enndal/enndal.json.gz; fi
+          fi
+          if [ -f enndal/enndal.json.gz ]; then
             echo "arg=--enndal enndal/enndal.json.gz" >> "$GITHUB_OUTPUT"
           else
             echo "No ENNDAL GAMES data from last night; the published ENNDAL offers are kept."
           fi
 
-      # The same files also live in a private Cloudflare R2 bucket (warujie-price-data), which
+      # The data lives in a private Cloudflare R2 bucket (warujie-price-data), which
       # warujie.jp reads through its Worker at /data/. CLOUDFLARE_R2_TOKEN is a Cloudflare API
       # token that may only edit R2 (Settings -> Secrets and variables -> Actions); R2's S3-style
       # key pair comes from it (key id = the token's id, secret = SHA-256 of the token). The
-      # previous data is read from R2; while R2 is empty, or if reading it fails, it comes from
-      # GitHub Pages instead. Without the secret R2 is skipped.
+      # previous data is read from R2. Without the secret, or if R2 can't be read, the run
+      # stops before building, so nothing is lost.
       - name: Read the published data from R2
         id: r2
         env:
           CF_TOKEN: ${{ secrets.CLOUDFLARE_R2_TOKEN }}
         run: |
-          if [ -z "$CF_TOKEN" ]; then echo "::warning::No CLOUDFLARE_R2_TOKEN secret: R2 is skipped."; exit 0; fi
+          if [ -z "$CF_TOKEN" ]; then echo "::error::No CLOUDFLARE_R2_TOKEN secret: the data can't be read or published."; exit 1; fi
           key=$(curl -fsS -H "Authorization: Bearer $CF_TOKEN" https://api.cloudflare.com/client/v4/user/tokens/verify | jq -r '.result.id // empty')
           acct=$(curl -fsS -H "Authorization: Bearer $CF_TOKEN" https://api.cloudflare.com/client/v4/accounts | jq -r '.result[0].id // empty')
           if [ -z "$key" ] || [ -z "$acct" ]; then echo "::error::The CLOUDFLARE_R2_TOKEN token is not accepted by Cloudflare."; exit 1; fi
@@ -107,13 +111,10 @@ jobs:
           echo "::add-mask::$secret"
           { echo "AWS_ACCESS_KEY_ID=$key"; echo "AWS_SECRET_ACCESS_KEY=$secret"; echo "AWS_DEFAULT_REGION=auto"; echo "AWS_REQUEST_CHECKSUM_CALCULATION=when_required"; echo "AWS_RESPONSE_CHECKSUM_VALIDATION=when_required"
             echo "R2_ENDPOINT=https://$acct.r2.cloudflarestorage.com"; echo "R2_BUCKET=s3://warujie-price-data"; } >> "$GITHUB_ENV"
-          echo "ok=1" >> "$GITHUB_OUTPUT"
           if aws s3 sync "s3://warujie-price-data" prev --endpoint-url "https://$acct.r2.cloudflarestorage.com" --only-show-errors && [ -f prev/index.json ]; then
-            echo "previous=prev" >> "$GITHUB_OUTPUT"
             echo "Previous data: R2 ($(find prev -type f | wc -l) files)"
           else
-            echo "R2 has no complete copy yet: the previous data comes from GitHub Pages this time."
-            rm -rf prev
+            echo "::error::R2 could not be read (or has no index.json): stopping so the history is kept."; exit 1
           fi
 
       # Stops (without publishing) if the old history can't be read or
@@ -125,30 +126,36 @@ jobs:
       - name: Build the price history
         env:
           CARDTRADER_TOKEN: ${{ secrets.CARDTRADER_TOKEN }}
-        run: python3 build_prices.py --out site --previous "${{ steps.r2.outputs.previous || steps.pages.outputs.url }}" ${{ steps.pages.outputs.fresh }} ${{ steps.enndal.outputs.arg }}
+        run: python3 build_prices.py --out site --previous prev ${{ steps.pages.outputs.fresh }} ${{ steps.enndal.outputs.arg }}
 
       # Commander combos for the card pages, from Commander Spellbook's bulk
       # file: rebuilt once a week, copied over from the published data on
       # the other days. Never stops the price update.
       - name: Build the Commander combos
-        run: python3 build_combos.py --out site/c --previous "${{ steps.r2.outputs.previous || steps.pages.outputs.url }}"
+        run: python3 build_combos.py --out site/c --previous prev
 
       # What each card does (removal, card draw, ramp...) for the site's role
       # search and similar cards, from Scryfall Tagger's oracle tags: rebuilt
       # once a week, copied over from the published data on the other days.
       # Never stops the price update.
       - name: Build the role tags
-        run: python3 build_tags.py --out site/t --previous "${{ steps.r2.outputs.previous || steps.pages.outputs.url }}"
+        run: python3 build_tags.py --out site/t --previous prev
 
-      # Published to R2 first: if that fails the run stops, so R2 and GitHub Pages never
-      # disagree about which days the history has. Files are only added or replaced.
+      # Files are only added or replaced, never deleted.
       - name: Publish to R2
-        if: steps.r2.outputs.ok == '1'
         run: aws s3 sync site "$R2_BUCKET" --endpoint-url "$R2_ENDPOINT" --only-show-errors
+
+      # GitHub Pages no longer has the data (anyone could download it there): only a
+      # notice, which also replaces the files published there before.
+      - name: Leave only a notice on GitHub Pages
+        run: |
+          mkdir -p notice
+          printf '%s\n' '<!doctype html><meta charset="utf-8"><title>warujie-prices</title>' \
+            '<p>The price data for <a href="https://warujie.jp/">warujie.jp</a> is no longer published here.</p>' > notice/index.html
 
       - uses: actions/upload-pages-artifact@v4
         with:
-          path: site
+          path: notice
 
   deploy:
     needs: build

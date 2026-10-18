@@ -5,7 +5,10 @@
 # time, 4 seconds apart, with a User-Agent naming warujie.jp and our contact
 # address (shop_enndal.py). Keep it that way, and stop at once if they ask.
 #
-# The result is this run's "enndal" artifact (enndal.json.gz). The next
+# The result is this run's "enndal" artifact (enndal.json.gz.enc: enndal.json.gz
+# encrypted with the CLOUDFLARE_R2_TOKEN secret, because anyone signed in to GitHub
+# can download a public repository's artifacts). Older "enndal" artifacts are
+# deleted, so only the encrypted one is left. The next
 # "Update price history" run (update-prices.yml) matches it to Scryfall's
 # printings and publishes the offers; the next night starts from it, reading
 # the sets read longest ago first. Nothing is committed.
@@ -19,7 +22,7 @@ on:
 
 permissions:
   contents: read
-  actions: read              # to fetch the previous night's artifact
+  actions: write             # to fetch the previous night's artifact and delete older ones
 
 concurrency:
   group: enndal-nightly
@@ -35,10 +38,15 @@ jobs:
       - name: Fetch the previous night's data
         env:
           GH_TOKEN: ${{ github.token }}
+          ENNDAL_KEY: ${{ secrets.CLOUDFLARE_R2_TOKEN }}
         run: |
+          if [ -z "$ENNDAL_KEY" ]; then echo "::error::No CLOUDFLARE_R2_TOKEN secret: the ENNDAL data can't be kept private."; exit 1; fi
           id=$(gh api "repos/${GITHUB_REPOSITORY}/actions/artifacts?name=enndal&per_page=1" --jq '.artifacts[] | select(.expired | not) | .id' 2>/dev/null || true)
           if [ -n "$id" ] && gh api "repos/${GITHUB_REPOSITORY}/actions/artifacts/${id}/zip" > last.zip; then
             unzip -o -q last.zip -d last || true
+            if [ -f last/enndal.json.gz.enc ]; then
+              openssl enc -d -aes-256-cbc -pbkdf2 -pass env:ENNDAL_KEY -in last/enndal.json.gz.enc -out last/enndal.json.gz || rm -f last/enndal.json.gz
+            fi
           fi
           ls -l last 2>/dev/null || echo "No previous night: starting afresh."
 
@@ -46,10 +54,25 @@ jobs:
       - name: Read ENNDAL GAMES
         run: python3 shop_enndal.py --previous last/enndal.json.gz --out out/enndal.json.gz --until 20:45
 
+      - name: Encrypt the result
+        env:
+          ENNDAL_KEY: ${{ secrets.CLOUDFLARE_R2_TOKEN }}
+        run: openssl enc -aes-256-cbc -pbkdf2 -salt -pass env:ENNDAL_KEY -in out/enndal.json.gz -out out/enndal.json.gz.enc && rm out/enndal.json.gz
+
       - uses: actions/upload-artifact@v4
+        id: upload
         with:
           name: enndal
-          path: out/enndal.json.gz
+          path: out/enndal.json.gz.enc
           retention-days: 14
           compression-level: 0
           if-no-files-found: error
+
+      - name: Delete older ENNDAL artifacts
+        env:
+          GH_TOKEN: ${{ github.token }}
+          KEEP: ${{ steps.upload.outputs.artifact-id }}
+        run: |
+          for id in $(gh api --paginate "repos/${GITHUB_REPOSITORY}/actions/artifacts?name=enndal&per_page=100" --jq '.artifacts[].id'); do
+            if [ "$id" != "$KEEP" ]; then gh api -X DELETE "repos/${GITHUB_REPOSITORY}/actions/artifacts/$id" && echo "Deleted artifact $id"; fi
+          done
