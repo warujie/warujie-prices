@@ -1,7 +1,7 @@
 # Published files
 
 Everything is published to the private R2 bucket `warujie-price-data` (read by the site at
-`warujie.jp/data/`) and, during the move, under `https://warujie.github.io/warujie-prices/`. Money is in
+`warujie.jp/data/`). Money is in
 **cents** (integers) everywhere; a missing value is `null` (or left off the end of an array).
 "Shard" files split data by the first two hex characters of an id, so a card page downloads
 one small file instead of everything.
@@ -77,8 +77,11 @@ printings; the site maps a Japanese printing to its English twin first.
 
 ## `enndal.json.gz` (not published): one night of ENNDAL GAMES
 
-Written by `shop_enndal.py` (`nightly()`, `save()`) as the "enndal" artifact of the
-ENNDAL GAMES nightly workflow, and read by `build_prices.py --enndal`. Products in stock only;
+Written by `shop_enndal.py` (`nightly()`, `save()`) and kept as the "enndal" artifact of the
+ENNDAL GAMES nightly workflow, encrypted (`enndal.json.gz.enc`, AES-256 with the
+`CLOUDFLARE_R2_TOKEN` secret as the password) because a public repository's artifacts can be
+downloaded by anyone signed in to GitHub; older "enndal" artifacts are deleted. Decrypted and
+read by `build_prices.py --enndal`. Products in stock only;
 nothing of the shop's pages is kept besides these values.
 
 ```json

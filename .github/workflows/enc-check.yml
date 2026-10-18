@@ -1,0 +1,27 @@
+# One-off: checks the ENNDAL artifact encryption round trip. Uploads nothing. Removed afterwards.
+name: ENNDAL encryption check (one-off)
+on:
+  push:
+    branches: [claude/project-thread-2174h4]
+    paths: [.github/workflows/enc-check.yml]
+permissions:
+  contents: read
+  actions: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - env:
+          GH_TOKEN: ${{ github.token }}
+          ENNDAL_KEY: ${{ secrets.CLOUDFLARE_R2_TOKEN }}
+        run: |
+          [ -n "$ENNDAL_KEY" ] && echo "secret present"
+          id=$(gh api "repos/${GITHUB_REPOSITORY}/actions/artifacts?name=enndal&per_page=1" --jq '.artifacts[] | select(.expired | not) | .id')
+          echo "artifacts named enndal: $(gh api "repos/${GITHUB_REPOSITORY}/actions/artifacts?name=enndal&per_page=100" --jq '.total_count')"
+          gh api "repos/${GITHUB_REPOSITORY}/actions/artifacts/${id}/zip" > e.zip && unzip -o -q e.zip -d e && ls -l e
+          openssl enc -aes-256-cbc -pbkdf2 -salt -pass env:ENNDAL_KEY -in e/enndal.json.gz -out x.enc
+          openssl enc -d -aes-256-cbc -pbkdf2 -pass env:ENNDAL_KEY -in x.enc -out y.json.gz
+          cmp e/enndal.json.gz y.json.gz && echo "round trip identical"
+          gzip -t y.json.gz && echo "gzip ok"
+          if gzip -t x.enc 2>/dev/null; then echo "ENCRYPTED FILE IS READABLE"; else echo "encrypted file is not readable as gzip"; fi
+          ENNDAL_KEY=wrong openssl enc -d -aes-256-cbc -pbkdf2 -pass env:ENNDAL_KEY -in x.enc -out z 2>/dev/null && gzip -t z 2>/dev/null && echo "WRONG KEY WORKED" || echo "wrong key fails"

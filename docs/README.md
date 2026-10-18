@@ -2,11 +2,11 @@
 
 This repository builds the price, listing, combo and role-tag data that
 [warujie.jp](https://warujie.jp) reads, and publishes it to the private Cloudflare R2 bucket
-`warujie-price-data` (the site reads it through its Worker at `warujie.jp/data/`) and, during the
-move to R2, also on GitHub Pages at `https://warujie.github.io/warujie-prices/`. The site itself is in
+`warujie-price-data` (the site reads it through its Worker at `warujie.jp/data/`). GitHub Pages
+(`https://warujie.github.io/warujie-prices/`) only shows a notice now. The site itself is in
 [warujie/Warujie](https://github.com/warujie/Warujie) (a private repository; its `docs/` folder
-explains the site). This repository stays public: GitHub Pages and unlimited Actions minutes
-are free only for public repositories on the free plan.
+explains the site). This repository stays public: unlimited Actions minutes are free only for
+public repositories on the free plan.
 
 - The owner's rules (which outside data may be used, no secrets in the repo) are in
   [`../CLAUDE.md`](../CLAUDE.md) and in the site repository's `CLAUDE.md`.
@@ -17,15 +17,15 @@ are free only for public repositories on the free plan.
 | File | What it builds | Into | Source |
 |---|---|---|---|
 | [`build_prices.py`](../build_prices.py) | Price history, today's shop prices, lowest listings, offers with stock, price movers | `site/index.json`, `site/h/`, `site/q/`, `site/movers.json`, `site/cheap.json.gz`, `site/ids.json.gz` | Scryfall `default_cards` bulk file (TCGplayer USD, Cardmarket EUR), MTGJSON (history backfill, shop prices), TCGCSV and Cardmarket's price guide (lowest listings), Card Kingdom's and Mana Pool's public price lists, CardTrader's API, last night's ENNDAL GAMES data |
-| [`shop_enndal.py`](../shop_enndal.py) | ENNDAL GAMES' in-stock singles in yen (Japan), read once a night; also matches them to printings for `build_prices.py` | `enndal.json.gz` (an artifact, not published) | ENNDAL GAMES' shop pages, with the shop's permission |
+| [`shop_enndal.py`](../shop_enndal.py) | ENNDAL GAMES' in-stock singles in yen (Japan), read once a night; also matches them to printings for `build_prices.py` | `enndal.json.gz` (kept encrypted as an artifact, not published) | ENNDAL GAMES' shop pages, with the shop's permission |
 | [`build_combos.py`](../build_combos.py) | Commander combos per card | `site/c/` | Commander Spellbook's bulk file |
 | [`build_tags.py`](../build_tags.py) | Role tags (removal, draw, ramp…) and EDHREC rank per card | `site/t/tags.json.gz` | Scryfall Tagger oracle tags, via Scryfall's search API |
-| [`.github/workflows/update-prices.yml`](../.github/workflows/update-prices.yml) | Runs the three builders and publishes `site/` to R2 and GitHub Pages | | |
-| [`.github/workflows/enndal-nightly.yml`](../.github/workflows/enndal-nightly.yml) | Runs `shop_enndal.py` at 2am Japan time and keeps the result as the "enndal" artifact | | |
+| [`.github/workflows/update-prices.yml`](../.github/workflows/update-prices.yml) | Runs the three builders and publishes `site/` to R2 (GitHub Pages gets only a notice) | | |
+| [`.github/workflows/enndal-nightly.yml`](../.github/workflows/enndal-nightly.yml) | Runs `shop_enndal.py` at 2am Japan time and keeps the result, encrypted, as the "enndal" artifact (older ones are deleted) | | |
 
 **Nothing is committed by the workflow.** Each run reads yesterday's published data
-(`--previous`: a copy of the R2 bucket in `prev/`, or the Pages address while R2 has no
-complete copy), adds today, and publishes the result, to R2 first. R2 needs the
+(`--previous`: a copy of the R2 bucket in `prev/`; if R2 can't be read the run stops), adds
+today, and publishes the result to R2. R2 needs the
 `CLOUDFLARE_R2_TOKEN` secret, a Cloudflare API token that may only edit R2; the S3-style key
 pair `aws s3 sync` uses is made from it in the workflow. The repository never grows,
 and the published site *is* the history: if a run publishes a broken history, the next run
