@@ -28,5 +28,13 @@ phone photo of a card can be matched to the right card by its artwork.
   calibrated with every photo standing in for a card that isn't in the index (a token): the
   scores with the true card left out must not be sure.
 
+- `site_files.py` writes the two files the site's scanner reads (`scan_index.bin`: every
+  fingerprint and its card number; `scan_cards.json`: oracle ids, the printing behind each
+  fingerprint, and the "sure" rule), from the fingerprints in `out/`. `--rule BEST_MAX,RATIO`
+  sets the rule by hand (one checked on the owner's photos) instead of the calibrated one.
+  `site/` holds the current pair: the test site reads them from this branch until they are
+  published with the daily data. The format is in the site's `docs/card-scan.md`.
+
 Workflow: `.github/workflows/scan-probe.yml`, on push to this branch. Nothing here is used by
-the site or the daily price workflow, and this branch is never merged as it is.
+the live site or the daily price workflow (the test site reads `site/`), and this branch is never
+merged as it is.
