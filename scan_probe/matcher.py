@@ -242,3 +242,18 @@ def centre_and_cross(shifts, scales):
     base = scales.index(1.0) * n * n
     at = lambda i, j: base + i * n + j  # noqa: E731
     return [at(mid, mid), at(mid - 1, mid), at(mid + 1, mid), at(mid, mid - 1), at(mid, mid + 1)]
+
+
+NEAR_N = len(NEAR_SHIFTS) ** 2 * len(NEAR_SCALES)
+NEAR_EMB = centre_and_cross(list(NEAR_SHIFTS), list(NEAR_SCALES))
+GUIDE_EMB = centre_and_cross(list(GUIDE_SHIFTS), list(GUIDE_SCALES))
+
+
+def detect4_variants(hyps, guide):
+    """Round 4: every outline with small shifts, and always the guide itself
+    with its wider search too (on the owner's photos of black-bordered cards
+    in sleeves on dark carpet no outline was right, but the guide was near).
+    Returns the corner sets and the indexes the image model looks at."""
+    var = near_variants(hyps) + guide_variants(guide)
+    emb = [h * NEAR_N + NEAR_EMB[0] for h in range(len(hyps))] + [len(hyps) * NEAR_N + e for e in GUIDE_EMB]
+    return var, emb

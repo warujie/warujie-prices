@@ -31,8 +31,8 @@ import cv2
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from common import warp_region  # noqa: E402
 from matcher import (Index, found_variants, guide_variants, near_variants, outline_hypotheses,  # noqa: E402
-                     guide_outlines, expand_border, centre_and_cross, FOUND_SHIFTS, FOUND_SCALES, GUIDE_SHIFTS,
-                     GUIDE_SCALES, NEAR_SHIFTS, NEAR_SCALES, BORDER_X, BORDER_Y)
+                     guide_outlines, detect4_variants, expand_border, centre_and_cross, FOUND_SHIFTS,
+                     FOUND_SCALES, GUIDE_SHIFTS, GUIDE_SCALES, NEAR_SHIFTS, NEAR_SCALES, BORDER_X, BORDER_Y)
 from detect import detect_cards, find_cards_anywhere, CARD_RATIO  # noqa: E402
 from synth import FRAME_W, FRAME_H, GUIDE, GUIDE_W  # noqa: E402
 
@@ -198,10 +198,12 @@ def main():
                 else:
                     pic, hyps = photo, outlines_taken(photo, args.finder)
                 how = f"{args.mode} ({len(hyps)} outlines)" if hyps else "guide only"
-                if hyps:
+                g = GUIDE if args.mode == "framed" else guides_for(pic)[0]
+                if args.finder == 4:
+                    var, emb = detect4_variants(hyps, g)
+                elif hyps:
                     var, emb = near_variants(hyps), [h * n1 + NEAR_EMB[0] for h in range(len(hyps))]
                 else:
-                    g = GUIDE if args.mode == "framed" else guides_for(pic)[0]
                     var, emb = guide_variants(g), GUIDE_EMB
             d = idx.distances(pic, var, emb)
             if args.save_found:

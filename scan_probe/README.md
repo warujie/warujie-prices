@@ -22,7 +22,8 @@ phone photo of a card can be matched to the right card by its artwork.
   `detect.py` finds the card's edges near the on-screen guide, and anywhere in a photo
   (`find_cards_anywhere`). Round 4's finder (`guide_outlines` in `matcher.py`, "detect4") smooths
   more and adds a texture-aware outline: lines whose two sides look alike (a row of carpet
-  loops) count less (`discount_texture`).
+  loops) count less (`discount_texture`); matching then also always tries the guide's wider
+  search (`detect4_variants`), which rescued the photos where no outline was right.
 - `evaluate.py` matches every test photo and writes `out/results.md`. Its "sure" rules are also
   calibrated with every photo standing in for a card that isn't in the index (a token): the
   scores with the true card left out must not be sure.

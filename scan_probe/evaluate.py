@@ -9,7 +9,8 @@ Ways of locating the card compared on every photo:
   detect3 - round 2's outlines near the guide (best, it one border further
             out, second best), else the guide itself
   detect4 - round 4's: the same found after more smoothing, plus the best
-            outline of the texture-aware search (carpet, cloth)
+            outline of the texture-aware search (carpet, cloth), and always
+            the guide's wider search too
 "Sure" rules are calibrated twice: on the test photos alone, and with each
 photo also standing in for a card that isn't in the index (a token, an art
 card): its scores with the true card left out, which must never be sure.
@@ -27,7 +28,7 @@ import cv2
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from matcher import (Index, found_variants, guide_variants, centre_and_cross,  # noqa: E402
-                     outline_hypotheses, guide_outlines, near_variants,
+                     outline_hypotheses, guide_outlines, detect4_variants, near_variants,
                      FOUND_SHIFTS, FOUND_SCALES, GUIDE_SHIFTS, GUIDE_SCALES, NEAR_SHIFTS, NEAR_SCALES)
 from synth import make_photo, GUIDE  # noqa: E402
 from detect import detect_cards  # noqa: E402
@@ -77,8 +78,14 @@ def run_test(i):
                 var, emb = found_variants(found), FOUND_EMB
                 rec["det"] = 1
                 rec["cerr"] = round(float(np.linalg.norm(found - corners, axis=1).mean() / card_w), 4)
-            elif (m == "detect3" and found is not None) or (m == "detect4" and hyps4):
-                hyps = outline_hypotheses(quads) if m == "detect3" else hyps4
+            elif m == "detect4":
+                hyps = hyps4
+                var, emb = detect4_variants(hyps, GUIDE)
+                rec["det"] = int(bool(hyps))
+                if hyps:
+                    rec["cerr"] = round(float(min(np.linalg.norm(q - corners, axis=1).mean() for q in hyps) / card_w), 4)
+            elif m == "detect3" and found is not None:
+                hyps = outline_hypotheses(quads)
                 var = near_variants(hyps)
                 # the image model looks at the centre of each outline tried
                 n1 = len(NEAR_SHIFTS) ** 2 * len(NEAR_SCALES)
