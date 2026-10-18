@@ -118,7 +118,7 @@ def cmd_select(args):
     seen = 0
     for c in iter_cards(args.bulk or ""):
         seen += 1
-        if c.get("lang") not in ("en", "ja") or excluded(c):
+        if excluded(c):
             continue
         oid = oracle_id_of(c)
         if oid not in site:
@@ -129,6 +129,8 @@ def cmd_select(args):
         for fi, uris, ill in faces_with_pictures(c):
             if not uris.get("small") or not uris.get("normal"):
                 continue
+            if c["lang"] not in ("en", "ja") and not ill:
+                continue        # other languages count only for an art of their own
             recs.append({
                 "id": c["id"], "face": fi, "oracle": oid, "name": c.get("name"), "lang": c["lang"],
                 "set": c.get("set"), "cn": c.get("collector_number"), "layout": c.get("layout"),
@@ -140,7 +142,9 @@ def cmd_select(args):
             })
         if seen % 100000 == 0:
             log(f"  read {seen:,}, kept {len(recs):,}")
-    log(f"read {seen:,} printings, kept {len(recs):,} en/ja faces with a picture")
+    others = [r for r in recs if r["lang"] not in ("en", "ja")]
+    recs = [r for r in recs if r["lang"] in ("en", "ja")]
+    log(f"read {seen:,} printings, kept {len(recs):,} en/ja faces with a picture and {len(others):,} in other languages")
 
     # Japanese printings without an illustration id borrow the English one of the same set and number
     en_ill = {(r["set"], r["cn"], r["face"]): r["ill"] for r in recs if r["lang"] == "en" and r["ill"]}
@@ -171,6 +175,18 @@ def cmd_select(args):
                 entries.append(dict(ja[0], **base, kind="ja_text"))
         elif ja:
             entries.append(dict(ja[0], **base, kind="ja_only"))
+    # an art printed only in another language (Phyrexian, a Chinese-only promo...) gets an entry
+    # too, after the others so the English and Japanese entries keep their order
+    known = {(r["ill"], r["face"]) for r in recs}
+    other_groups = {}
+    for r in others:
+        if (r["ill"], r["face"]) not in known:
+            key = (r["ill"], r["frame"], r["border"], r["full_art"], tuple(r["effects"]), r["textless"], r["layout"], r["face"])
+            other_groups.setdefault(key, []).append(r)
+    for key, rs in other_groups.items():
+        rs.sort(key=picture_rank, reverse=True)
+        entries.append(dict(rs[0], group=len(entries), oracles=sorted({r["oracle"] for r in rs}),
+                            printings=len(rs), kind="other_only"))
     log(f"groups: {len(groups):,}; index entries: {len(entries):,}")
     kinds = {}
     for e in entries:
@@ -209,8 +225,9 @@ def cmd_select(args):
                            or set(e["effects"]) & {"showcase", "extendedart", "etched", "inverted"}], 200)
     take("back_face", [e for e in en_entries if e["face"] == 1], 100)
     take("basic_land", [e for e in en_entries if e["basic"]], 100)
-    take("odd_shape", [e for e in entries if e["layout"] in TEXT_IN_REGION | {"adventure", "prototype", "leveler", "mutate"}], 100)
+    take("odd_shape", [e for e in entries if e["kind"] != "other_only" and e["layout"] in TEXT_IN_REGION | {"adventure", "prototype", "leveler", "mutate"}], 100)
     take("random", en_entries, 1200)
+    take("other_only_art", [e for e in entries if e["kind"] == "other_only" and e["status"] == "highres_scan"], 50)
     log("test sample:", len(tests))
 
     os.makedirs(args.out, exist_ok=True)
@@ -346,9 +363,7 @@ def pca_space(e, have, dims=256):
 def cmd_fingerprint(args):
     entries = json.load(gzip.open(os.path.join(args.out, "index_entries.json.gz")))
     n = len(entries)
-    h256 = np.zeros((n, 32), np.uint8)
-    h64 = np.zeros((n, 8), np.uint8)
-    col = np.zeros((n, 32), np.uint8)
+    hashes = {}         # every fingerprint region_features gives, by name: (n, bytes) uint8
     have = np.zeros(n, bool)
     sessions = load_models(os.path.join(args.out, "models"))
     emb = {k: [None] * n for k in sessions}
@@ -371,8 +386,10 @@ def cmd_fingerprint(args):
         if img is None:
             continue
         reg = warp_region(img, flat_corners(img))
-        f = region_features(reg)
-        h256[i], h64[i], col[i] = f["h256"], f["h64"], f["col"]
+        for k, v in region_features(reg).items():
+            if k not in hashes:
+                hashes[k] = np.zeros((n, v.size), np.uint8)
+            hashes[k][i] = v
         have[i] = True
         if sessions:
             batch.append(model_input(reg))
@@ -382,7 +399,7 @@ def cmd_fingerprint(args):
         if i % 10000 == 0:
             log(f"  fingerprinted {i:,}/{n:,} ({time.time() - t0:,.0f} s)")
     flush()
-    out = {"h256": h256, "h64": h64, "col": col, "have": have}
+    out = dict(hashes, have=have)
     for k in sessions:
         dim = next((v.shape[0] for v in emb[k] if v is not None), 0)
         e = np.stack([v if v is not None else np.zeros(dim, np.float32) for v in emb[k]]).astype(np.float32)
@@ -390,7 +407,8 @@ def cmd_fingerprint(args):
         out[f"pca_{k}_mean"], out[f"pca_{k}_vt"] = mean, vt
         out[f"pca_{k}_p256"] = np.clip(np.round(p * 127), -127, 127).astype(np.int8)
     np.savez_compressed(os.path.join(args.out, "index_features.npz"), **out)
-    log(f"fingerprinted {int(have.sum()):,} of {n:,} entries in {time.time() - t0:,.0f} s; models: {list(sessions)}")
+    log(f"fingerprinted {int(have.sum()):,} of {n:,} entries in {time.time() - t0:,.0f} s; "
+        f"fingerprints: {sorted(hashes)}; models: {list(sessions)}")
 
 
 def main():

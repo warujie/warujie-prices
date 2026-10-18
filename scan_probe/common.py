@@ -70,13 +70,30 @@ def to_gray(rgb):
     return rgb[..., 0] * 0.299 + rgb[..., 1] * 0.587 + rgb[..., 2] * 0.114
 
 
-def phash_bits(gray, n, k):
+def dct_block(gray, n, k):
     small = cv2.resize(gray, (n, n), interpolation=cv2.INTER_AREA).astype(np.float64)
     d = D64 if n == 64 else D32
-    c = d @ small @ d.T
-    block = c[:k, :k].flatten()
+    return (d @ small @ d.T)[:k, :k].flatten()
+
+
+def phash_bits(gray, n, k):
+    block = dct_block(gray, n, k)
     med = np.median(block[1:])
     return np.packbits(block > med)
+
+
+def dhash_bits(gray, axis):
+    """Signs of neighbour differences on a 16 x 16 grid (256 bits): a tone
+    curve (the phone's own processing, dim light) keeps their order."""
+    if axis == 1:
+        s = cv2.resize(gray, (17, 16), interpolation=cv2.INTER_AREA)
+        return np.packbits((s[:, 1:] > s[:, :-1]).flatten())
+    s = cv2.resize(gray, (16, 17), interpolation=cv2.INTER_AREA)
+    return np.packbits((s[1:, :] > s[:-1, :]).flatten())
+
+
+CLAHE = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(4, 4))
+RELIABLE = 160   # h256m marks the 160 of 256 hash bits furthest from the median
 
 
 def colour_sig(rgb):
@@ -91,10 +108,23 @@ def colour_sig(rgb):
 
 def region_features(region_rgb):
     g = to_gray(region_rgb)
+    g8 = np.clip(g + 0.5, 0, 255).astype(np.uint8)
+    block = dct_block(g, 64, 16)
+    med = np.median(block[1:])
+    dev = np.abs(block - med)
+    dev[0] = 0
+    b12 = dct_block(g, 64, 12)
     return {
-        "h256": phash_bits(g, 64, 16),    # 32 bytes
-        "h64": phash_bits(g, 32, 8),      # 8 bytes
-        "col": colour_sig(region_rgb),    # 32 bytes
+        "h256": np.packbits(block > med),                     # 32 bytes
+        "h64": phash_bits(g, 32, 8),                          # 8 bytes
+        "col": colour_sig(region_rgb),                        # 32 bytes
+        # round 3 candidates, compared on the owner's real photos
+        "h256m": np.packbits(dev >= np.sort(dev)[-RELIABLE]),  # which h256 bits are reliable
+        "h144": np.packbits(b12 > np.median(b12[1:])),        # lower frequencies only, 18 bytes
+        "h256eq": phash_bits(cv2.equalizeHist(g8).astype(np.float32), 64, 16),
+        "h256cl": phash_bits(CLAHE.apply(g8).astype(np.float32), 64, 16),
+        "dh256": dhash_bits(g, 1),
+        "dv256": dhash_bits(g, 0),
     }
 
 

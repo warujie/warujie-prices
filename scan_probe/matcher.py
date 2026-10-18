@@ -7,10 +7,12 @@ import os
 import numpy as np
 import cv2
 
-from common import CARD_W, warp_region, region_features, hamming, colour_dist, model_input, jitter_corners
+from common import CARD_W, warp_region, region_features, model_input, jitter_corners
 
 
 USE_MODELS = ("mnv3s",)   # round 1: the large model was no better and is 3x the size
+# the bit fingerprints compared (round 3 adds variants, see common.region_features)
+HASHES = ("h256", "h144", "h256eq", "h256cl", "dh256", "dv256")
 
 # shifts and scales tried around a found card (fractions of its size)
 FOUND_SHIFTS, FOUND_SCALES = (-0.015, 0.0, 0.015), (0.96, 1.0, 1.04, 1.08)
@@ -29,9 +31,18 @@ class Index:
         z = np.load(os.path.join(out_dir, "index_features.npz"))
         keep = z["have"]
         self.rows = np.nonzero(keep)[0]
-        self.h256 = z["h256"][keep].view(np.uint64)          # (N, 4)
-        self.h64 = z["h64"][keep].view(np.uint64)            # (N, 1)
-        self.col = z["col"][keep]
+        # every bit fingerprint in the file, as 64-bit words (zero-padded to whole words)
+        self.hashes = {}
+        for k in HASHES + ("h256m",):
+            if k in z.files:
+                a = z[k][keep]
+                pad = -a.shape[1] % 8
+                if pad:
+                    a = np.hstack([a, np.zeros((len(a), pad), np.uint8)])
+                self.hashes[k] = np.ascontiguousarray(a).view(np.uint64)
+        self.h256 = self.hashes["h256"]
+        if "h256m" in self.hashes:
+            self.reliable = np.bitwise_count(self.hashes["h256m"]).sum(axis=1).astype(np.float32)
         oracles = [self.entries[i]["oracle"] for i in self.rows]
         self.oracle_names = sorted(set(oracles))
         oid = {o: k for k, o in enumerate(self.oracle_names)}
@@ -96,20 +107,27 @@ class Index:
             photo = cv2.resize(photo, (int(round(photo.shape[1] * f)), int(round(photo.shape[0] * f))),
                                interpolation=cv2.INTER_AREA)
             variants = [np.float32(v) * f for v in variants]
-        h256 = np.full(len(self.rows), 10 ** 6, np.int64)
-        h64 = h256.copy()
-        col = h256.copy()
+        best = {k: np.full(len(self.rows), 10 ** 6, np.float32) for k in self.hashes if k != "h256m"}
+        if "h256m" in self.hashes:
+            best["h256r"] = np.full(len(self.rows), 10 ** 6, np.float32)
         regions = []
         for c in variants:
             reg = warp_region(photo, c)
             regions.append(reg)
             f = region_features(reg)
-            q256 = f["h256"].view(np.uint64)
-            q64 = f["h64"].view(np.uint64)
-            np.minimum(h256, np.bitwise_count(self.h256 ^ q256[None, :]).sum(axis=1, dtype=np.int64), out=h256)
-            np.minimum(h64, np.bitwise_count(self.h64 ^ q64[None, :]).sum(axis=1, dtype=np.int64), out=h64)
-            np.minimum(col, colour_dist(f["col"], self.col), out=col)
-        d = {"h64": h64.astype(np.float32), "h256": h256.astype(np.float32), "col": col.astype(np.float32)}
+            for k, idx in self.hashes.items():
+                if k == "h256m":
+                    continue
+                q = f[k]
+                pad = -q.size % 8
+                q = np.concatenate([q, np.zeros(pad, np.uint8)]).view(np.uint64) if pad else q.view(np.uint64)
+                x = idx ^ q[None, :]
+                np.minimum(best[k], np.bitwise_count(x).sum(axis=1, dtype=np.int64), out=best[k], casting="unsafe")
+                if k == "h256" and "h256r" in best:
+                    # only the bits the index picture holds firmly, scaled back to 256
+                    r = np.bitwise_count(x & self.hashes["h256m"]).sum(axis=1, dtype=np.int64) * 256 / self.reliable
+                    np.minimum(best["h256r"], r, out=best["h256r"], casting="unsafe")
+        d = best
         if self.sessions and emb_variants:
             embs = self.embed([regions[i] for i in emb_variants])
             for name, q in embs.items():
@@ -129,14 +147,19 @@ class Index:
 
     @staticmethod
     def scorings(d):
-        """The ways of scoring compared: the hash, the small image model, and
-        the two added (each divided by its median so they mix on one scale)."""
+        """The ways of scoring compared: each bit fingerprint, the small image
+        model's bits, and some added together (each divided by its median so
+        they mix on one scale)."""
         med = {k: float(np.median(v)) or 1.0 for k, v in d.items()}
         n = {k: v / med[k] for k, v in d.items()}
-        s = {k: d[k] for k in ("h256", "mnv3s_p256", "mnv3s_b256") if k in d}
-        if "mnv3s_p256" in n:
-            s["h256+mnv3s"] = n["h256"] + n["mnv3s_p256"]
+        s = {k: d[k] for k in HASHES + ("h256r", "mnv3s_b256") if k in d}
+        if "dh256" in d and "dv256" in d:
+            s["dhv"] = d["dh256"] + d["dv256"]
+            s["h256+dhv"] = n["h256"] + (n["dh256"] + n["dv256"]) / 2
+        if "mnv3s_b256" in d:
             s["h256+mnv3sb"] = n["h256"] + n["mnv3s_b256"]
+            if "dh256" in d:
+                s["dhv+mnv3sb"] = (n["dh256"] + n["dv256"]) / 2 + n["mnv3s_b256"]
         return s
 
     def rank(self, scores, true_oracle=None, top=5):

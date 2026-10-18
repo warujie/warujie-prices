@@ -29,7 +29,7 @@ from detect import detect_cards  # noqa: E402
 from build_index import picture_path, read_rgb  # noqa: E402
 
 LEVELS = ("easy", "normal", "hard")
-METHODS = ("truth", "detect", "detect3")
+METHODS = ("truth", "detect3")   # round 3: "detect" (one outline) dropped, detect3 beat it
 TARGETS = (0.002, 0.005, 0.01)   # wrong-page rates allowed among confident answers
 
 IDX = None
@@ -170,7 +170,7 @@ def summarise(recs, out_dir, meta):
                 if len(v):
                     by_cat.setdefault(m, {}).setdefault(cat, {})[lv] = {
                         "n": len(v), "top1": float((v[:, 0] == 0).mean()), "top5": float((v[:, 0] < 5).mean())}
-    det = [r for r in recs if r["m"] == "detect"]
+    det = [r for r in recs if r["m"] == "detect3"]
     det_ok = [r for r in det if r.get("det")]
     cerr = np.array([r["cerr"] for r in det_ok]) if det_ok else np.array([])
     detect_stats = {lv: {"found": float(np.mean([r.get("det", 0) for r in det if r["lv"] == lv])) if det else None,
@@ -187,7 +187,7 @@ def summarise(recs, out_dir, meta):
 
     L = ["# Card scan probe: results", "",
          f"Index: {meta.get('index_entries')} entries ({meta.get('index_oracles')} cards). "
-         f"Test photos: {meta.get('tests_done')} cards × 3 levels × 3 ways of finding the card. "
+         f"Test photos: {meta.get('tests_done')} cards × 3 levels × {len(METHODS)} ways of finding the card. "
          f"Run took {meta.get('minutes')} min.", "",
          "## Best scoring per way of finding the card", "",
          "| Finding | Scoring | Right card first | In top 5 | Sure (≤0.2% wrong) | Sure (≤0.5% wrong) | Sure (≤1% wrong) | Easy | Normal | Hard |",

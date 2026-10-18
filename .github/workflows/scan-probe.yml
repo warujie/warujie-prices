@@ -55,12 +55,18 @@ jobs:
         run: |
           ( set -x; python scan_probe/build_index.py fingerprint --out $OUT --cache $CACHE ) > $OUT/log_fingerprint.txt 2>&1 || true
           tail -5 $OUT/log_fingerprint.txt
+      - name: Commit the fingerprints (the real-photo check reads them before the test photos finish)
+        run: |
+          git config user.name "scan probe"; git config user.email "scan-probe@users.noreply.github.com"
+          git add $OUT
+          git commit -m "Card scan probe fingerprints [skip ci]" || exit 0
+          for i in 1 2 3; do git pull --rebase -q && git push && break; sleep 10; done
       - name: Test photos and matching
         run: |
           missing=$(python -c "import json; print(json.load(open('$OUT/download_summary.json'))['missing'])" 2>/dev/null || echo 999999)
           echo "pictures still missing: $missing"
           if [ "$missing" -lt 500 ]; then
-            ( set -x; python scan_probe/evaluate.py --out $OUT --cache $CACHE --budget-min 100 --workers 4 ) > $OUT/log_evaluate.txt 2>&1 || true
+            ( set -x; python scan_probe/evaluate.py --out $OUT --cache $CACHE --budget-min 110 --workers 4 ) > $OUT/log_evaluate.txt 2>&1 || true
             tail -60 $OUT/log_evaluate.txt
           else
             echo "download not finished; push again to continue" > $OUT/log_evaluate.txt

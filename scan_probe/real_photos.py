@@ -29,7 +29,7 @@ from detect import detect_cards, CARD_RATIO  # noqa: E402
 FOUND_EMB = centre_and_cross(list(FOUND_SHIFTS), list(FOUND_SCALES))
 GUIDE_EMB = centre_and_cross(list(GUIDE_SHIFTS), list(GUIDE_SCALES))
 NEAR_EMB = centre_and_cross(list(NEAR_SHIFTS), list(NEAR_SCALES))
-SHOWN = ("h256", "h256+mnv3sb")
+SHOWN = ("h256", "dhv", "h256+dhv", "dhv+mnv3sb")
 MAX_OUTLINES = 6
 
 
