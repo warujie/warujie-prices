@@ -1,3 +1,3 @@
 + python scan_probe/build_index.py download --out scan_probe/out --cache scan_cache --budget-min 200 --rate 10
-pictures: 71,302, already cached: 71,172, to fetch: 130
-fetched 130 (6 MB) in 13 s; failed 0; still missing 0
+pictures: 71,302, already cached: 71,302, to fetch: 0
+fetched 0 (0 MB) in 0 s; failed 0; still missing 0

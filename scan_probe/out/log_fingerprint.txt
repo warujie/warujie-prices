@@ -1,10 +1,10 @@
 + python scan_probe/build_index.py fingerprint --out scan_probe/out --cache scan_cache
-[0;93m2026-10-18 01:47:53.077585234 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
+[0;93m2026-10-18 03:52:16.023870052 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
   fingerprinted 0/68,752 (0 s)
-  fingerprinted 10,000/68,752 (132 s)
-  fingerprinted 20,000/68,752 (259 s)
-  fingerprinted 30,000/68,752 (380 s)
-  fingerprinted 40,000/68,752 (509 s)
-  fingerprinted 50,000/68,752 (634 s)
-  fingerprinted 60,000/68,752 (762 s)
-fingerprinted 68,752 of 68,752 entries in 885 s; fingerprints: ['col', 'dh256', 'dv256', 'h144', 'h256', 'h256cl', 'h256eq', 'h256m', 'h64']; models: ['mnv3s', 'mnv3l']
+  fingerprinted 10,000/68,752 (59 s)
+  fingerprinted 20,000/68,752 (118 s)
+  fingerprinted 30,000/68,752 (179 s)
+  fingerprinted 40,000/68,752 (239 s)
+  fingerprinted 50,000/68,752 (299 s)
+  fingerprinted 60,000/68,752 (357 s)
+fingerprinted 68,752 of 68,752 entries in 413 s; fingerprints: ['col', 'dh256', 'dv256', 'h144', 'h256', 'h256cl', 'h256eq', 'h256m', 'h64']; models: ['mnv3s', 'mnv3l']
