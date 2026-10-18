@@ -1,10 +1,10 @@
 + python scan_probe/build_index.py fingerprint --out scan_probe/out --cache scan_cache
-[0;93m2026-10-17 20:10:23.921934448 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
+[0;93m2026-10-17 22:13:10.254457653 [W:onnxruntime:Default, device_discovery.cc:95 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
   fingerprinted 0/68,672 (0 s)
   fingerprinted 10,000/68,672 (86 s)
   fingerprinted 20,000/68,672 (172 s)
-  fingerprinted 30,000/68,672 (259 s)
-  fingerprinted 40,000/68,672 (346 s)
-  fingerprinted 50,000/68,672 (432 s)
-  fingerprinted 60,000/68,672 (518 s)
-fingerprinted 68,672 of 68,672 entries in 600 s; models: ['mnv3s', 'mnv3l']
+  fingerprinted 30,000/68,672 (258 s)
+  fingerprinted 40,000/68,672 (343 s)
+  fingerprinted 50,000/68,672 (429 s)
+  fingerprinted 60,000/68,672 (515 s)
+fingerprinted 68,672 of 68,672 entries in 596 s; models: ['mnv3s', 'mnv3l']
