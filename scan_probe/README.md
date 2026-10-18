@@ -32,9 +32,10 @@ phone photo of a card can be matched to the right card by its artwork.
   fingerprint and its card number; `scan_cards.json`: oracle ids, the printing behind each
   fingerprint, and the "sure" rule), from the fingerprints in `out/`. `--rule BEST_MAX,RATIO`
   sets the rule by hand (one checked on the owner's photos) instead of the calibrated one.
-  `site/` holds the current pair: the test site reads them from this branch until they are
-  published with the daily data. The format is in the site's `docs/card-scan.md`.
+  `site/` holds the current pair; the site keeps its own copy in its `scan/` folder
+  (`--dest ../Warujie/scan`), which is what warujie.jp reads. The format is in the site's
+  `docs/card-scan.md`.
 
-Workflow: `.github/workflows/scan-probe.yml`, on push to this branch. Nothing here is used by
-the live site or the daily price workflow (the test site reads `site/`), and this branch is never
-merged as it is.
+Workflow: `.github/workflows/scan-probe.yml`, on push to this branch. Nothing here is read by
+the live site or the daily price workflow (the site serves its own copy of the files), and this
+branch is never merged as it is.
