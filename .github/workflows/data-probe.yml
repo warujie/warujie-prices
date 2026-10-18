@@ -1,0 +1,22 @@
+# One-off: checks the live site's /data/ route from outside. Removed afterwards.
+name: Data route probe (one-off)
+on:
+  push:
+    branches: [claude/project-thread-2174h4]
+    paths: [.github/workflows/data-probe.yml]
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          for B in https://warujie.warujie-mtg.workers.dev https://warujie.jp; do
+            echo "== $B"
+            echo "own page:   $(curl -s -o /tmp/i.json -w '%{http_code}' -H 'Sec-Fetch-Site: same-origin' $B/data/index.json) $(head -c 120 /tmp/i.json)"
+            echo "movers:     $(curl -s -o /dev/null -w '%{http_code} %{content_type} %{size_download}' -H 'Sec-Fetch-Site: same-origin' $B/data/movers.json)"
+            echo "cheap gz:   $(curl -s -o /dev/null -w '%{http_code} %{content_type} %{size_download}' -H 'Sec-Fetch-Site: same-origin' $B/data/cheap.json.gz)"
+            echo "no headers: $(curl -s -o /dev/null -w '%{http_code}' $B/data/index.json)"
+            echo "cross-site: $(curl -s -o /dev/null -w '%{http_code}' -H 'Sec-Fetch-Site: cross-site' $B/data/index.json)"
+            echo "robots:     $(curl -s $B/robots.txt | tr '\n' ' ')"
+            echo "footer:     $(curl -s --compressed $B/ | grep -c 'footer.data')"
+            echo "data url:   $(curl -s --compressed $B/ | grep -o "PRICE_DATA_URL = [^;]*" | head -1)"
+          done
