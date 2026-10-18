@@ -1,0 +1,21 @@
+# One-off: checks the test site's /data/ route from outside. Removed afterwards.
+name: Data route probe (one-off)
+on:
+  push:
+    branches: [claude/project-thread-2174h4]
+    paths: [.github/workflows/data-probe.yml]
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          B=https://staging-warujie.warujie-mtg.workers.dev
+          sleep 60
+          for t in 1 2 3; do
+            echo "own page:   $(curl -s -o /tmp/i.json -w '%{http_code}' -H 'Sec-Fetch-Site: same-origin' $B/data/index.json) $(head -c 120 /tmp/i.json)"
+            echo "shard gz:   $(curl -s -o /tmp/q -w '%{http_code} %{content_type} %{size_download}' -H 'Sec-Fetch-Site: same-origin' $B/data/movers.json)"
+            echo "no headers: $(curl -s -o /dev/null -w '%{http_code}' $B/data/index.json)"
+            echo "robots:     $(curl -s $B/robots.txt | tr '\n' ' ')"
+            echo "footer:     $(curl -s --compressed $B/ | grep -c 'footer.data')"
+            sleep 30
+          done
