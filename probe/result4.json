@@ -1,0 +1,111 @@
+{
+ "robots_amenity.txt": {
+  "url": "https://amenitydream.co.jp/robots.txt",
+  "error": "URLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1010)'))"
+ },
+ "robots_amenity_insecure.txt": {
+  "url": "https://amenitydream.co.jp/robots.txt",
+  "status": 200,
+  "len": 35,
+  "final": "https://amenitydream.co.jp/robots.txt",
+  "ctype": "text/plain; charset=utf-8"
+ },
+ "robots_hareruya.txt": {
+  "url": "https://www.hareruyamtg.com/robots.txt",
+  "status": 200,
+  "len": 3906,
+  "final": "https://www.hareruyamtg.com/robots.txt",
+  "ctype": "text/plain; charset=UTF-8"
+ },
+ "robots_yellowsub.txt": {
+  "url": "https://yellowsubmarine.co.jp/robots.txt",
+  "status": 200,
+  "len": 177,
+  "final": "https://yellowsubmarine.co.jp/robots.txt",
+  "ctype": "text/plain; charset=utf-8"
+ },
+ "robots_locator.txt": {
+  "url": "https://locator.wizards.com/robots.txt",
+  "status": 200,
+  "len": 106,
+  "final": "https://locator.wizards.com/robots.txt",
+  "ctype": "text/plain; charset=utf-8"
+ },
+ "robots_facebook.txt": {
+  "url": "https://www.facebook.com/robots.txt",
+  "status": 200,
+  "len": 42222,
+  "final": "https://www.facebook.com/robots.txt",
+  "ctype": "text/plain; charset=utf-8"
+ },
+ "amenity_matches.html": {
+  "url": "https://amenitydream.co.jp/matches/?type=2&shop=12&date=",
+  "error": "URLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1010)'))"
+ },
+ "amenity_matches_insecure.html": {
+  "url": "https://amenitydream.co.jp/matches/?type=2&shop=12&date=",
+  "status": 200,
+  "len": 16588,
+  "final": "https://amenitydream.co.jp/matches/?type=2&shop=12&date=",
+  "ctype": "text/html; charset=UTF-8"
+ },
+ "amenity_home_insecure.html": {
+  "url": "https://amenitydream.co.jp/",
+  "status": 200,
+  "len": 38322,
+  "final": "https://amenitydream.co.jp/",
+  "ctype": "text/html; charset=UTF-8"
+ },
+ "amenity_tls": "depth=0 CN = amenitydream.co.jp\nverify error:num=20:unable to get local issuer certificate\nverify return:1\ndepth=0 CN = amenitydream.co.jp\nverify error:num=21:unable to verify the first certificate\nverify return:1\ndepth=0 CN = amenitydream.co.jp\nverify return:1\nCONNECTED(00000003)\n---\nCertificate chain\n 0 s:CN = amenitydream.co.jp\n   i:C = US, O = Let's Encrypt, CN = YE2\n   a:PKEY: id-ecPublicKey, 256 (bit); sigalg: ecdsa-with-SHA384\n   v:NotBefore: Oct 16 18:54:31 2026 GMT; NotAfter: Jan 14 18:54:30 2027 GMT\n 1 s:C = US, O = Let's Encrypt, CN = R3\n   i:C = US, O = Internet Security Research Group, CN = ISRG Root X1\n   a:PKEY: rsaEncryption, 2048 (bit); sigalg: RSA-SHA256\n   v:NotBefore: Sep  4 00:00:00 2020 GMT; NotAfter: Sep 15 16:00:00 2025 GMT\n---\nServer certificate\n-----BEGIN CERTIFICATE-----\nMIIDlDCCAxmgAwIBAgISBZ5WWzEmXvYI4Mr/sCajwBy3MAoGCCqGSM49BAMDMDMx\nCzAJBgNVBAYTAlVTMRYwFAYDVQQKEw1MZXQncyBFbmNyeXB0MQwwCgYDVQQDEwNZ\nRTIwHhcNMjYxMDE2MTg1NDMxWhcNMjcwMTE0MTg1NDMwWjAdMRswGQYDVQQDExJh\nbWVuaXR5ZHJlYW0uY28uanAwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAAQmmkhL\nUEFC1tRetNOjqDIGJEOAZtpOhEUW2CWAheVHeJKOhw6mvGOUGnHF487oeaLKzEGV\nkm2nboi6/ZQQDM1Co4ICITCCAh0wDgYDVR0PAQH/BAQDAgeAMBMGA1UdJQQMMAoG\nCCsGAQUFBwMBMAwGA1UdEwEB/wQCMAAwHQYDVR0OBBYEFJ+W2Lzgdo+JmDsy/XRu\n3fRZIRQzMB8GA1UdIwQYMBaAFLlZ8o7PIvCG0zdI/3YUGLqC2FWHMDMGCCsGAQUF\n",
+ "hareruya_cal_en.html": {
+  "url": "https://www.hareruyamtg.com/en/events/?shop=30",
+  "status": 200,
+  "len": 309534,
+  "final": "https://www.hareruyamtg.com/en/events/?shop=30",
+  "ctype": "text/html; charset=UTF-8"
+ },
+ "hareruya_cal_ja.html": {
+  "url": "https://www.hareruyamtg.com/ja/events/?shop=1",
+  "status": 200,
+  "len": 520207,
+  "final": "https://www.hareruyamtg.com/ja/events/?shop=1",
+  "ctype": "text/html; charset=UTF-8"
+ },
+ "hareruya_list.html": {
+  "url": "https://www.hareruyamtg.com/ja/events/list?formats%5B%5D=2&venues%5B%5D=1&isWeekday=true&isHoliday=true",
+  "status": 200,
+  "len": 59154,
+  "final": "https://www.hareruyamtg.com/ja/events/list?formats%5B%5D=2&venues%5B%5D=1&isWeekday=true&isHoliday=true",
+  "ctype": "text/html; charset=UTF-8"
+ },
+ "locator.html": {
+  "url": "https://locator.wizards.com/",
+  "status": 200,
+  "len": 47657,
+  "final": "https://locator.wizards.com/",
+  "ctype": "text/html; charset=utf-8"
+ },
+ "locator_js_0.js": {
+  "url": "https://global.ketchcdn.com/web/v3/config/hasbro/gatherer/boot.js",
+  "status": 204,
+  "len": 0,
+  "final": "https://global.ketchcdn.com/web/v3/config/hasbro/gatherer/boot.js",
+  "ctype": null
+ },
+ "locator_js_0_apis": [],
+ "wpn_terms.html": {
+  "url": "https://wpn.wizards.com/en/terms-of-use",
+  "error": "<HTTPError 404: 'Not Found'>"
+ },
+ "locator_terms.html": {
+  "url": "https://locator.wizards.com/terms",
+  "error": "<HTTPError 404: 'Not Found'>"
+ },
+ "facebook_photo.html": {
+  "url": "https://www.facebook.com/photo?fbid=1608392257968123&set=a.459572686183425",
+  "status": 200,
+  "len": 427386,
+  "final": "https://www.facebook.com/login/?next=https%3A%2F%2Fwww.facebook.com%2Fphoto%3Ffbid%3D1608392257968123%26set%3Da.459572686183425",
+  "ctype": "text/html; charset=\"utf-8\""
+ }
+}
