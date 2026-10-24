@@ -1,0 +1,210 @@
+{
+ "hareruya_labels": {
+  "eventSearch-fm-1": "スタンダード",
+  "eventSearch-fm-20": "パイオニア",
+  "eventSearch-fm-2": "モダン",
+  "eventSearch-fm-3": "レガシー",
+  "eventSearch-fm-13": "ブロック",
+  "eventSearch-fm-19": "オースブレイカー",
+  "eventSearch-fm-18": "ヒストリック",
+  "eventSearch-fm-17": "プレインチェイス",
+  "eventSearch-fm-16": "定休日",
+  "eventSearch-fm-15": "旧スタンダード",
+  "eventSearch-fm-14": "エクステンデッド",
+  "eventSearch-fm-12": "ブロール",
+  "eventSearch-fm-11": "SP",
+  "eventSearch-fm-10": "マジックリーグ",
+  "eventSearch-fm-9": "フロンティア",
+  "eventSearch-fm-8": "パウパー",
+  "eventSearch-fm-7": "統率者",
+  "eventSearch-fm-6": "シールド",
+  "eventSearch-fm-5": "ドラフト",
+  "eventSearch-fm-4": "ヴィンテージ",
+  "eventSearch-fm-24": "プレモダン",
+  "eventSearch-fm-23": "ミドルスクール",
+  "eventSearch-fm-21": "統率者Variants",
+  "eventSearch-fm-22": "その他",
+  "eventSearch-pl-1": "TC 東京",
+  "eventSearch-pl-2": "成田店",
+  "eventSearch-pl-3": "福岡店",
+  "eventSearch-pl-4": "札幌店",
+  "eventSearch-pl-5": "TC 大阪",
+  "eventSearch-pl-6": "名古屋店",
+  "eventSearch-pl-7": "静岡店",
+  "eventSearch-pl-8": "秋葉原店",
+  "eventSearch-pl-9": "仙台店",
+  "eventSearch-pl-10": "外部会場",
+  "eventSearch-pl-11": "横浜店",
+  "eventSearch-pl-12": "高松店",
+  "eventSearch-pl-13": "TCG BAR 飲める屋",
+  "eventSearch-pl-14": "大宮店",
+  "eventSearch-pl-15": "宇都宮店",
+  "eventSearch-pl-16": "広島店",
+  "eventSearch-pl-17": "郡山店",
+  "eventSearch-pl-18": "吉祥寺店",
+  "eventSearch-pl-19": "大須店",
+  "eventSearch-pl-20": "三宮店",
+  "eventSearch-pl-21": "甲府店",
+  "eventSearch-pl-22": "川崎店",
+  "eventSearch-pl-23": "水戸店",
+  "eventSearch-pl-24": "日本橋店",
+  "eventSearch-pl-25": "新潟店",
+  "eventSearch-pl-26": "金沢店",
+  "eventSearch-pl-27": "千葉店",
+  "eventSearch-pl-28": "渋谷店",
+  "eventSearch-pl-29": "高崎店",
+  "eventSearch-pl-30": "京都店",
+  "eventSearch-pl-31": "町田店",
+  "eventSearch-pl-32": "長野店",
+  "eventSearch-pl-33": "岡山店",
+  "eventSearch-pl-34": "四日市店",
+  "eventSearch-dt-daily": "平日のイベントを表示する",
+  "eventSearch-dt-holiday": "休日のイベントを表示する",
+  "eventSearch-dt-past": "過去のイベントを表示する"
+ },
+ "hareruya_list_test": {
+  "status": "200 https://www.hareruyamtg.com/ja/events/list?term=&from=&to=&formats%5B%5D=2&venues%5B%5D=8&isWeekday=true&isHoliday=true",
+  "event_links": 25,
+  "err": ""
+ },
+ "ys_magic_rows": {
+  "sapporo_gs": {
+   "status": "200 https://yellowsubmarine.co.jp/tmt_list/sapporo_gs/",
+   "マジック": 0,
+   "MTG": 0
+  },
+  "shinjuku": {
+   "status": "200 https://yellowsubmarine.co.jp/tmt_list/shinjuku/",
+   "マジック": 0,
+   "MTG": 0
+  },
+  "ikebukuro_gs": {
+   "status": "200 https://yellowsubmarine.co.jp/tmt_list/ikebukuro_gs/",
+   "マジック": 0,
+   "MTG": 0
+  },
+  "machida": {
+   "status": "200 https://yellowsubmarine.co.jp/tmt_list/machida/",
+   "マジック": 0,
+   "MTG": 0
+  },
+  "akihabara_rpg": {
+   "status": "200 https://yellowsubmarine.co.jp/tmt_list/akihabara_rpg/",
+   "マジック": 0,
+   "MTG": 0
+  },
+  "akihabara_mnt": {
+   "status": "200 https://yellowsubmarine.co.jp/tmt_list/akihabara_mnt/",
+   "マジック": 0,
+   "MTG": 0
+  },
+  "tachikawa": {
+   "status": "200 https://yellowsubmarine.co.jp/tmt_list/tachikawa/",
+   "マジック": 0,
+   "MTG": 0
+  },
+  "yokohama": {
+   "status": "200 https://yellowsubmarine.co.jp/tmt_list/yokohama/",
+   "マジック": 0,
+   "MTG": 0
+  },
+  "mizo": {
+   "status": "200 https://yellowsubmarine.co.jp/tmt_list/mizo/",
+   "マジック": 0,
+   "MTG": 0
+  },
+  "kawasaki": {
+   "status": "200 https://yellowsubmarine.co.jp/tmt_list/kawasaki/",
+   "マジック": 0,
+   "MTG": 0
+  },
+  "yokohama_m": {
+   "status": "200 https://yellowsubmarine.co.jp/tmt_list/yokohama_m/",
+   "マジック": 0,
+   "MTG": 0
+  },
+  "kashiwa_m": {
+   "status": "200 https://yellowsubmarine.co.jp/tmt_list/kashiwa_m/",
+   "マジック": 0,
+   "MTG": 0
+  },
+  "chiba_gs": {
+   "status": "200 https://yellowsubmarine.co.jp/tmt_list/chiba_gs/",
+   "マジック": 0,
+   "MTG": 9
+  },
+  "omiya_ps": {
+   "status": "200 https://yellowsubmarine.co.jp/tmt_list/omiya_ps/",
+   "マジック": 0,
+   "MTG": 0
+  },
+  "kawagoe_cs": {
+   "status": "200 https://yellowsubmarine.co.jp/tmt_list/kawagoe_cs/",
+   "マジック": 0,
+   "MTG": 0
+  },
+  "utsunomiya": {
+   "status": "200 https://yellowsubmarine.co.jp/tmt_list/utsunomiya/",
+   "マジック": 0,
+   "MTG": 0
+  },
+  "nagoya_gs": {
+   "status": "200 https://yellowsubmarine.co.jp/tmt_list/nagoya_gs/",
+   "マジック": 0,
+   "MTG": 0
+  },
+  "nanba_s": {
+   "status": "200 https://yellowsubmarine.co.jp/tmt_list/nanba_s/",
+   "マジック": 0,
+   "MTG": 0
+  },
+  "nanba_3": {
+   "status": "200 https://yellowsubmarine.co.jp/tmt_list/nanba_3/",
+   "マジック": 0,
+   "MTG": 0
+  },
+  "kyoto": {
+   "status": "200 https://yellowsubmarine.co.jp/tmt_list/kyoto/",
+   "マジック": 0,
+   "MTG": 0
+  },
+  "sannomiya": {
+   "status": "200 https://yellowsubmarine.co.jp/tmt_list/sannomiya/",
+   "マジック": 0,
+   "MTG": 0
+  },
+  "himeji": {
+   "status": "200 https://yellowsubmarine.co.jp/tmt_list/himeji/",
+   "マジック": 0,
+   "MTG": 4
+  },
+  "hiroshima": {
+   "status": "200 https://yellowsubmarine.co.jp/tmt_list/hiroshima/",
+   "マジック": 0,
+   "MTG": 0
+  },
+  "fukuoka_mc": {
+   "status": "200 https://yellowsubmarine.co.jp/tmt_list/fukuoka_mc/",
+   "マジック": 0,
+   "MTG": 28
+  }
+ },
+ "http://amenitydream.co.jp/matches/": {
+  "robots_status": "301 https://amenitydream.co.jp/robots.txt",
+  "robots": "",
+  "allowed": true,
+  "status": "301 https://amenitydream.co.jp/matches/",
+  "err": "curl: (60) SSL certificate problem: unable to get local issuer certificate\nMore details here: https://curl.se/docs/sslcerts.html\n\ncurl failed to verify the legitimacy of the server and therefore could not\nestablish a secure connection to it. To learn more about this situation and\nhow to fix it, plea",
+  "links": [],
+  "マジック": 0
+ },
+ "https://amenitydream.co.jp/matches/": {
+  "robots_status": "000 https://amenitydream.co.jp/robots.txt",
+  "robots": "",
+  "allowed": true,
+  "status": "000 https://amenitydream.co.jp/matches/",
+  "err": "curl: (60) SSL certificate problem: unable to get local issuer certificate\nMore details here: https://curl.se/docs/sslcerts.html\n\ncurl failed to verify the legitimacy of the server and therefore could not\nestablish a secure connection to it. To learn more about this situation and\nhow to fix it, plea",
+  "links": [],
+  "マジック": 0
+ }
+}
