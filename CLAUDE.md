@@ -21,7 +21,10 @@ and [`docs/data-formats.md`](docs/data-formats.md) (every published file).
    CardTrader's API (with the token), Commander Spellbook's bulk file, Scryfall Tagger tags, and
    ENNDAL GAMES (permission 2026-10-15: once a night 2-6am Japan time, one page every 4 s; see
    `shop_enndal.py`). Any new source, above all Japanese shops, needs the owner's permission
-   first; never scrape.
+   first; never scrape. Exception, the owner's decision of 2026-10-24: the tournament calendar
+   (`build_events.py`) reads Hareruya's, Amenity Dream's and Yellow Submarine's event pages once
+   a night, only where their robots.txt allows, 4 s apart, linking every event back; stop a shop
+   at once if it asks. Wizards' Event Locator and Facebook are never read (robots.txt forbids).
 3. **No secrets in the repo or in chat.** The CardTrader token is the GitHub secret
    `CARDTRADER_TOKEN`; never print it, and never ask the owner to paste a token.
 4. **The published data is the history.** Nothing is committed; each run builds on yesterday's

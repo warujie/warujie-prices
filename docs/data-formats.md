@@ -16,6 +16,7 @@ one small file instead of everything.
 | `ids.json.gz` | `build_prices.py` | nobody (the builder's own cache: MTGJSON ids → Scryfall ids, kept a week) |
 | `c/index.json`, `c/<xx>.json.gz` | `build_combos.py` | `loadComboIndex()`, `loadComboShard()` |
 | `t/tags.json.gz` | `build_tags.py` | `loadTags()` |
+| `events.json` | `build_events.py` | `loadEventCalendar()` (the 大会 calendar) |
 
 ## `index.json`
 
@@ -164,3 +165,22 @@ card has in all (the site links to Commander Spellbook for the rest).
 
 Each card row: shortened oracle id, EDHREC rank (or `null`), then the positions of its tags in
 `tags`. The site's `ROLE_LIST` names roles by these tag names.
+
+## `events.json`: local tournaments
+
+```
+{ "updated": "2026-10-24T18:30:00Z",
+  "sources": { "hareruya": 10678, "amenity": 16, "yellowsub": 240 },
+  "events": [ { "d": "2026-10-25", "t": "13:00", "p": 13, "c": "千代田区",
+                "shop": "hareruya", "store": "秋葉原店", "name": "モダン神挑戦者決定戦トライアル",
+                "url": "https://www.hareruyamtg.com/ja/events/620342/detail", "f": ["modern"] } ] }
+```
+
+One entry per event from today (Japan time) to 35 days ahead, sorted by day and start time.
+`t` is "" when the shop gives no time; `p` is the prefecture's JIS number (1–47), `c` the city
+or Tokyo ward; `shop` is `hareruya`, `amenity` or `yellowsub` (the site's `EVENT_SHOPS`); `url`
+is the event's own page (Hareruya) or the store's schedule (the others); `f` lists the formats
+(`standard`, `pioneer`, `modern`, `legacy`, `vintage`, `pauper`, `commander`, `premodern`,
+`limited`), left out when none is known. About 11,000 events, 2.6 MB (much smaller compressed
+in transit).
+

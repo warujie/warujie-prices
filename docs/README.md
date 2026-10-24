@@ -20,8 +20,10 @@ public repositories on the free plan.
 | [`shop_enndal.py`](../shop_enndal.py) | ENNDAL GAMES' in-stock singles in yen (Japan), read once a night; also matches them to printings for `build_prices.py` | `enndal.json.gz` (kept encrypted as an artifact, not published) | ENNDAL GAMES' shop pages, with the shop's permission |
 | [`build_combos.py`](../build_combos.py) | Commander combos per card | `site/c/` | Commander Spellbook's bulk file |
 | [`build_tags.py`](../build_tags.py) | Role tags (removal, draw, ramp…) and EDHREC rank per card | `site/t/tags.json.gz` | Scryfall Tagger oracle tags, via Scryfall's search API |
+| [`build_events.py`](../build_events.py) | Local tournaments for the site's 大会 calendar, the next 35 days | `site/events.json` | Hareruya's, Amenity Dream's and Yellow Submarine's own event pages (the owner's decision, 2026-10-24) |
 | [`.github/workflows/update-prices.yml`](../.github/workflows/update-prices.yml) | Runs the three builders and publishes `site/` to R2 (GitHub Pages gets only a notice) | | |
 | [`.github/workflows/enndal-nightly.yml`](../.github/workflows/enndal-nightly.yml) | Runs `shop_enndal.py` at 2am Japan time and keeps the result, encrypted, as the "enndal" artifact (older ones are deleted) | | |
+| [`.github/workflows/events-nightly.yml`](../.github/workflows/events-nightly.yml) | Runs `build_events.py` at 3:30am Japan time and publishes `events.json` alone to R2 | | |
 
 **Nothing is committed by the workflow.** Each run reads yesterday's published data
 (`--previous`: a copy of the R2 bucket in `prev/`; if R2 can't be read the run stops), adds
@@ -44,6 +46,10 @@ be read or Scryfall's export looks incomplete (`--min-cards`, default 20,000 pri
 (5:45 in Japan): that is what we told ENNDAL GAMES. `shop_enndal.py` refuses to start outside
 that window, so a run by hand in the daytime does nothing. The evening price update then uses
 that night's data, so ENNDAL's stock on the site is from the night before.
+
+`events-nightly.yml` runs every day at **18:30 UTC** (3:30 in Japan), when `build_events.py` or
+the workflow changes on `main`, and by hand. It takes about 10 minutes (about 80 pages, 4
+seconds apart) and publishes `events.json` only, so it can never touch the price history.
 
 `build_combos.py` and `build_tags.py` rebuild only when the published data is older than 7 days;
 on other days they copy the published files over. Neither can stop the price update: on any
@@ -98,6 +104,33 @@ sets read longest ago first, for at most `NIGHT_MINUTES`. A set not read tonight
 products for up to `KEEP_DAYS`. `parse_list()` reads each product's code
 (`SET-<rarity><colour>-<number>-<lang>-<condition>-<finish>`) and its price table.
 
+### `build_events.py`
+
+The owner decided on 2026-10-24 that the calendar shows the shops' own event lists without
+asking them first, each event linking back to the shop's page. We read only what the shops'
+`robots.txt` allows, one page at a time, `PAGE_GAP` (4) seconds apart (`fetch()`), with a
+User-Agent naming warujie.jp and our contact address. **If a shop asks us to stop, take it out
+at once.** Never added: Wizards' Store & Event Locator (its `robots.txt` disallows `/api/`, where
+its events come from, and its terms forbid scraping) and Facebook (its `robots.txt` forbids
+automated collection without written permission, and pages need a login).
+
+- **Hareruya** (`read_hareruya()`): each store's month calendar, `/ja/events/?shop=<n>&date=<YYYYMM>`,
+  this month and next (66 pages). `parse_hareruya()` takes each day's events: time, name, the
+  event's own page and its format icons (`HARERUYA_ICONS`; Dr/Se → limited). Hareruya's standing
+  daily league (names with `[毎日開催]`) is left out (`keep()`). The stores, their prefecture and
+  city are kept by hand in `HARERUYA` (calendar shop numbers, not the search's venue numbers).
+- **Amenity Dream** (`read_amenity()`): one page lists every store's MTG events,
+  `/matches/?type=2` (type 2 = ＭＴＧ). Its server sends an out-of-date certificate chain, so
+  `amenity_context()` fetches the missing intermediate from the certificate's own AIA link and
+  verifies normally. Stores: `AMENITY`.
+- **Yellow Submarine** (`read_yellowsub()`): each store's schedule, `/tmt_list/<store>/`
+  (Shift_JIS), rows whose game is マジック. Its names are generic (フライデーナイトマジック), so the
+  format from the notes column is added to the name. The store's name comes from the page title;
+  prefecture and city from `YELLOWSUB`.
+- Formats from words come from `formats_in()` (`FORMAT_WORDS`, the same words as the site's
+  `EVENT_FORMAT_WORDS`). Dates without a year get one from `year_for()`.
+- If every source fails, nothing is written and the run fails, so yesterday's file stays.
+
 ### `build_combos.py`
 
 Downloads Commander Spellbook's `variants.json.gz` (they ask sites to download the bulk file on
@@ -151,6 +184,7 @@ The site reads these files directly, so a format change is a change in two repos
 | Data is a day old | Normal until 12:17 UTC plus the run time (the run can take over an hour with CardTrader) |
 | ENNDAL GAMES prices missing on the Japan tab | Actions → "ENNDAL GAMES nightly": a red run (the shop refused, or it started too late) keeps the earlier data for up to a week. Its notice line says how many sets were read |
 | CardTrader listings missing | Token missing or expired (the run log says so); the 40-minute budget may also have ended before a set was reached |
+| The 大会 calendar says the list is coming, or a shop's events are missing | Actions → "Tournament calendar nightly": the log says how many events each shop gave (`hareruya: 0 events` means its page changed; fix its parser in `build_events.py`) |
 | Role search falls back to text | `t/tags.json.gz` missing or broken; check the "Build the role tags" step |
 | Combos missing on the preview page | `c/index.json`; check the "Build the Commander combos" step |
 | The workflow fails at "Check this is the warujie-prices repository" | The workflow must live in a repository named exactly `warujie-prices` |
