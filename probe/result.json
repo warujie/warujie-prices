@@ -1,0 +1,2691 @@
+{
+ "https://www.hareruyamtg.com/ja/events/search": {
+  "status": 200,
+  "final_url": "https://www.hareruyamtg.com/ja/events/search",
+  "forms": [
+   {
+    "action": "https://www.hareruyamtg.com/ja/events/list",
+    "method": "GET",
+    "id": null
+   }
+  ],
+  "inputs": [
+   {
+    "type": "text",
+    "name": "term",
+    "value": null,
+    "id": null
+   },
+   {
+    "type": "text",
+    "name": "from",
+    "value": null,
+    "id": "datepicker"
+   },
+   {
+    "type": "text",
+    "name": "to",
+    "value": null,
+    "id": "datepicker_2"
+   },
+   {
+    "type": "checkbox",
+    "name": "formats[]",
+    "value": "1",
+    "id": "eventSearch-fm-1"
+   },
+   {
+    "type": "checkbox",
+    "name": "formats[]",
+    "value": "20",
+    "id": "eventSearch-fm-20"
+   },
+   {
+    "type": "checkbox",
+    "name": "formats[]",
+    "value": "2",
+    "id": "eventSearch-fm-2"
+   },
+   {
+    "type": "checkbox",
+    "name": "formats[]",
+    "value": "3",
+    "id": "eventSearch-fm-3"
+   },
+   {
+    "type": "checkbox",
+    "name": "formats[]",
+    "value": "13",
+    "id": "eventSearch-fm-13"
+   },
+   {
+    "type": "checkbox",
+    "name": "formats[]",
+    "value": "19",
+    "id": "eventSearch-fm-19"
+   },
+   {
+    "type": "checkbox",
+    "name": "formats[]",
+    "value": "18",
+    "id": "eventSearch-fm-18"
+   },
+   {
+    "type": "checkbox",
+    "name": "formats[]",
+    "value": "17",
+    "id": "eventSearch-fm-17"
+   },
+   {
+    "type": "checkbox",
+    "name": "formats[]",
+    "value": "16",
+    "id": "eventSearch-fm-16"
+   },
+   {
+    "type": "checkbox",
+    "name": "formats[]",
+    "value": "15",
+    "id": "eventSearch-fm-15"
+   },
+   {
+    "type": "checkbox",
+    "name": "formats[]",
+    "value": "14",
+    "id": "eventSearch-fm-14"
+   },
+   {
+    "type": "checkbox",
+    "name": "formats[]",
+    "value": "12",
+    "id": "eventSearch-fm-12"
+   },
+   {
+    "type": "checkbox",
+    "name": "formats[]",
+    "value": "11",
+    "id": "eventSearch-fm-11"
+   },
+   {
+    "type": "checkbox",
+    "name": "formats[]",
+    "value": "10",
+    "id": "eventSearch-fm-10"
+   },
+   {
+    "type": "checkbox",
+    "name": "formats[]",
+    "value": "9",
+    "id": "eventSearch-fm-9"
+   },
+   {
+    "type": "checkbox",
+    "name": "formats[]",
+    "value": "8",
+    "id": "eventSearch-fm-8"
+   },
+   {
+    "type": "checkbox",
+    "name": "formats[]",
+    "value": "7",
+    "id": "eventSearch-fm-7"
+   },
+   {
+    "type": "checkbox",
+    "name": "formats[]",
+    "value": "6",
+    "id": "eventSearch-fm-6"
+   },
+   {
+    "type": "checkbox",
+    "name": "formats[]",
+    "value": "5",
+    "id": "eventSearch-fm-5"
+   },
+   {
+    "type": "checkbox",
+    "name": "formats[]",
+    "value": "4",
+    "id": "eventSearch-fm-4"
+   },
+   {
+    "type": "checkbox",
+    "name": "formats[]",
+    "value": "24",
+    "id": "eventSearch-fm-24"
+   },
+   {
+    "type": "checkbox",
+    "name": "formats[]",
+    "value": "23",
+    "id": "eventSearch-fm-23"
+   },
+   {
+    "type": "checkbox",
+    "name": "formats[]",
+    "value": "21",
+    "id": "eventSearch-fm-21"
+   },
+   {
+    "type": "checkbox",
+    "name": "formats[]",
+    "value": "22",
+    "id": "eventSearch-fm-22"
+   },
+   {
+    "type": "checkbox",
+    "name": "venues[]",
+    "value": "1",
+    "id": "eventSearch-pl-1"
+   },
+   {
+    "type": "checkbox",
+    "name": "venues[]",
+    "value": "2",
+    "id": "eventSearch-pl-2"
+   },
+   {
+    "type": "checkbox",
+    "name": "venues[]",
+    "value": "3",
+    "id": "eventSearch-pl-3"
+   },
+   {
+    "type": "checkbox",
+    "name": "venues[]",
+    "value": "4",
+    "id": "eventSearch-pl-4"
+   },
+   {
+    "type": "checkbox",
+    "name": "venues[]",
+    "value": "5",
+    "id": "eventSearch-pl-5"
+   },
+   {
+    "type": "checkbox",
+    "name": "venues[]",
+    "value": "6",
+    "id": "eventSearch-pl-6"
+   },
+   {
+    "type": "checkbox",
+    "name": "venues[]",
+    "value": "7",
+    "id": "eventSearch-pl-7"
+   },
+   {
+    "type": "checkbox",
+    "name": "venues[]",
+    "value": "8",
+    "id": "eventSearch-pl-8"
+   },
+   {
+    "type": "checkbox",
+    "name": "venues[]",
+    "value": "9",
+    "id": "eventSearch-pl-9"
+   },
+   {
+    "type": "checkbox",
+    "name": "venues[]",
+    "value": "10",
+    "id": "eventSearch-pl-10"
+   },
+   {
+    "type": "checkbox",
+    "name": "venues[]",
+    "value": "11",
+    "id": "eventSearch-pl-11"
+   },
+   {
+    "type": "checkbox",
+    "name": "venues[]",
+    "value": "12",
+    "id": "eventSearch-pl-12"
+   },
+   {
+    "type": "checkbox",
+    "name": "venues[]",
+    "value": "13",
+    "id": "eventSearch-pl-13"
+   },
+   {
+    "type": "checkbox",
+    "name": "venues[]",
+    "value": "14",
+    "id": "eventSearch-pl-14"
+   },
+   {
+    "type": "checkbox",
+    "name": "venues[]",
+    "value": "15",
+    "id": "eventSearch-pl-15"
+   },
+   {
+    "type": "checkbox",
+    "name": "venues[]",
+    "value": "16",
+    "id": "eventSearch-pl-16"
+   },
+   {
+    "type": "checkbox",
+    "name": "venues[]",
+    "value": "17",
+    "id": "eventSearch-pl-17"
+   },
+   {
+    "type": "checkbox",
+    "name": "venues[]",
+    "value": "18",
+    "id": "eventSearch-pl-18"
+   },
+   {
+    "type": "checkbox",
+    "name": "venues[]",
+    "value": "19",
+    "id": "eventSearch-pl-19"
+   },
+   {
+    "type": "checkbox",
+    "name": "venues[]",
+    "value": "20",
+    "id": "eventSearch-pl-20"
+   },
+   {
+    "type": "checkbox",
+    "name": "venues[]",
+    "value": "21",
+    "id": "eventSearch-pl-21"
+   },
+   {
+    "type": "checkbox",
+    "name": "venues[]",
+    "value": "22",
+    "id": "eventSearch-pl-22"
+   },
+   {
+    "type": "checkbox",
+    "name": "venues[]",
+    "value": "23",
+    "id": "eventSearch-pl-23"
+   },
+   {
+    "type": "checkbox",
+    "name": "venues[]",
+    "value": "24",
+    "id": "eventSearch-pl-24"
+   },
+   {
+    "type": "checkbox",
+    "name": "venues[]",
+    "value": "25",
+    "id": "eventSearch-pl-25"
+   },
+   {
+    "type": "checkbox",
+    "name": "venues[]",
+    "value": "26",
+    "id": "eventSearch-pl-26"
+   },
+   {
+    "type": "checkbox",
+    "name": "venues[]",
+    "value": "27",
+    "id": "eventSearch-pl-27"
+   },
+   {
+    "type": "checkbox",
+    "name": "venues[]",
+    "value": "28",
+    "id": "eventSearch-pl-28"
+   },
+   {
+    "type": "checkbox",
+    "name": "venues[]",
+    "value": "29",
+    "id": "eventSearch-pl-29"
+   },
+   {
+    "type": "checkbox",
+    "name": "venues[]",
+    "value": "30",
+    "id": "eventSearch-pl-30"
+   },
+   {
+    "type": "checkbox",
+    "name": "venues[]",
+    "value": "31",
+    "id": "eventSearch-pl-31"
+   },
+   {
+    "type": "checkbox",
+    "name": "venues[]",
+    "value": "32",
+    "id": "eventSearch-pl-32"
+   },
+   {
+    "type": "checkbox",
+    "name": "venues[]",
+    "value": "33",
+    "id": "eventSearch-pl-33"
+   },
+   {
+    "type": "checkbox",
+    "name": "venues[]",
+    "value": "34",
+    "id": "eventSearch-pl-34"
+   },
+   {
+    "type": "checkbox",
+    "name": "isWeekday",
+    "value": "true",
+    "id": "eventSearch-dt-daily"
+   },
+   {
+    "type": "checkbox",
+    "name": "isHoliday",
+    "value": "true",
+    "id": "eventSearch-dt-holiday"
+   },
+   {
+    "type": "checkbox",
+    "name": "isPast",
+    "value": "true",
+    "id": "eventSearch-dt-past"
+   },
+   {
+    "type": "checkbox",
+    "name": null,
+    "value": null,
+    "id": "footer-nav-toggle-sitemap"
+   },
+   {
+    "type": "checkbox",
+    "name": null,
+    "value": null,
+    "id": "footer-nav-toggle-overview"
+   },
+   {
+    "type": "checkbox",
+    "name": null,
+    "value": null,
+    "id": "footer-nav-toggle-snslink"
+   }
+  ],
+  "links": [
+   {
+    "href": "/ja/user_data/store_menu",
+    "text": "店舗一覧"
+   },
+   {
+    "href": "/ja/events/",
+    "text": "イベント"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/",
+    "text": "イベント・大会"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/search",
+    "text": "大会詳細検索ページへ"
+   },
+   {
+    "href": "/en/events/search",
+    "text": "EN"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/",
+    "text": "イベント・大会"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/search",
+    "text": "詳細検索ページへ"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/",
+    "text": "戻る"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/",
+    "text": "イベント・大会"
+   },
+   {
+    "href": "/ja/user_data/store_menu",
+    "text": "店舗のご案内"
+   }
+  ]
+ },
+ "https://www.hareruyamtg.com/ja/events/": {
+  "status": 200,
+  "final_url": "https://www.hareruyamtg.com/ja/events/",
+  "forms": [],
+  "inputs": [
+   {
+    "select": null,
+    "value": "1",
+    "text": "トーナメントセンター 東京"
+   },
+   {
+    "select": null,
+    "value": "5",
+    "text": "トーナメントセンター 大阪"
+   },
+   {
+    "select": null,
+    "value": "4",
+    "text": "札幌"
+   },
+   {
+    "select": null,
+    "value": "9",
+    "text": "仙台"
+   },
+   {
+    "select": null,
+    "value": "16",
+    "text": "郡山"
+   },
+   {
+    "select": null,
+    "value": "14",
+    "text": "宇都宮"
+   },
+   {
+    "select": null,
+    "value": "22",
+    "text": "水戸"
+   },
+   {
+    "select": null,
+    "value": "28",
+    "text": "高崎"
+   },
+   {
+    "select": null,
+    "value": "26",
+    "text": "千葉"
+   },
+   {
+    "select": null,
+    "value": "2",
+    "text": "成田"
+   },
+   {
+    "select": null,
+    "value": "13",
+    "text": "大宮"
+   },
+   {
+    "select": null,
+    "value": "27",
+    "text": "渋谷"
+   },
+   {
+    "select": null,
+    "value": "8",
+    "text": "秋葉原"
+   },
+   {
+    "select": null,
+    "value": "17",
+    "text": "吉祥寺"
+   },
+   {
+    "select": null,
+    "value": "30",
+    "text": "町田"
+   },
+   {
+    "select": null,
+    "value": "21",
+    "text": "川崎"
+   },
+   {
+    "select": null,
+    "value": "10",
+    "text": "横浜"
+   },
+   {
+    "select": null,
+    "value": "24",
+    "text": "新潟"
+   },
+   {
+    "select": null,
+    "value": "25",
+    "text": "金沢"
+   },
+   {
+    "select": null,
+    "value": "20",
+    "text": "甲府"
+   },
+   {
+    "select": null,
+    "value": "31",
+    "text": "長野"
+   },
+   {
+    "select": null,
+    "value": "7",
+    "text": "静岡"
+   },
+   {
+    "select": null,
+    "value": "6",
+    "text": "名古屋"
+   },
+   {
+    "select": null,
+    "value": "18",
+    "text": "大須"
+   },
+   {
+    "select": null,
+    "value": "33",
+    "text": "四日市"
+   },
+   {
+    "select": null,
+    "value": "29",
+    "text": "京都"
+   },
+   {
+    "select": null,
+    "value": "23",
+    "text": "日本橋"
+   },
+   {
+    "select": null,
+    "value": "19",
+    "text": "三宮"
+   },
+   {
+    "select": null,
+    "value": "32",
+    "text": "岡山"
+   },
+   {
+    "select": null,
+    "value": "15",
+    "text": "広島"
+   },
+   {
+    "select": null,
+    "value": "11",
+    "text": "高松"
+   },
+   {
+    "select": null,
+    "value": "3",
+    "text": "福岡"
+   },
+   {
+    "select": null,
+    "value": "12",
+    "text": "飲める屋"
+   },
+   {
+    "select": null,
+    "value": "1",
+    "text": "トーナメントセンター 東京"
+   },
+   {
+    "select": null,
+    "value": "5",
+    "text": "トーナメントセンター 大阪"
+   },
+   {
+    "select": null,
+    "value": "4",
+    "text": "札幌"
+   },
+   {
+    "select": null,
+    "value": "9",
+    "text": "仙台"
+   },
+   {
+    "select": null,
+    "value": "16",
+    "text": "郡山"
+   },
+   {
+    "select": null,
+    "value": "14",
+    "text": "宇都宮"
+   },
+   {
+    "select": null,
+    "value": "22",
+    "text": "水戸"
+   },
+   {
+    "select": null,
+    "value": "28",
+    "text": "高崎"
+   },
+   {
+    "select": null,
+    "value": "26",
+    "text": "千葉"
+   },
+   {
+    "select": null,
+    "value": "2",
+    "text": "成田"
+   },
+   {
+    "select": null,
+    "value": "13",
+    "text": "大宮"
+   },
+   {
+    "select": null,
+    "value": "27",
+    "text": "渋谷"
+   },
+   {
+    "select": null,
+    "value": "8",
+    "text": "秋葉原"
+   },
+   {
+    "select": null,
+    "value": "17",
+    "text": "吉祥寺"
+   },
+   {
+    "select": null,
+    "value": "30",
+    "text": "町田"
+   },
+   {
+    "select": null,
+    "value": "21",
+    "text": "川崎"
+   },
+   {
+    "select": null,
+    "value": "10",
+    "text": "横浜"
+   },
+   {
+    "select": null,
+    "value": "24",
+    "text": "新潟"
+   },
+   {
+    "select": null,
+    "value": "25",
+    "text": "金沢"
+   },
+   {
+    "select": null,
+    "value": "20",
+    "text": "甲府"
+   },
+   {
+    "select": null,
+    "value": "31",
+    "text": "長野"
+   },
+   {
+    "select": null,
+    "value": "7",
+    "text": "静岡"
+   },
+   {
+    "select": null,
+    "value": "6",
+    "text": "名古屋"
+   },
+   {
+    "select": null,
+    "value": "18",
+    "text": "大須"
+   },
+   {
+    "select": null,
+    "value": "33",
+    "text": "四日市"
+   },
+   {
+    "select": null,
+    "value": "29",
+    "text": "京都"
+   },
+   {
+    "select": null,
+    "value": "23",
+    "text": "日本橋"
+   },
+   {
+    "select": null,
+    "value": "19",
+    "text": "三宮"
+   },
+   {
+    "select": null,
+    "value": "32",
+    "text": "岡山"
+   },
+   {
+    "select": null,
+    "value": "15",
+    "text": "広島"
+   },
+   {
+    "select": null,
+    "value": "11",
+    "text": "高松"
+   },
+   {
+    "select": null,
+    "value": "3",
+    "text": "福岡"
+   },
+   {
+    "select": null,
+    "value": "12",
+    "text": "飲める屋"
+   },
+   {
+    "type": "checkbox",
+    "name": null,
+    "value": null,
+    "id": "footer-nav-toggle-sitemap"
+   },
+   {
+    "type": "checkbox",
+    "name": null,
+    "value": null,
+    "id": "footer-nav-toggle-overview"
+   },
+   {
+    "type": "checkbox",
+    "name": null,
+    "value": null,
+    "id": "footer-nav-toggle-snslink"
+   }
+  ],
+  "links": [
+   {
+    "href": "/ja/user_data/store_menu",
+    "text": "店舗一覧"
+   },
+   {
+    "href": "/ja/events/",
+    "text": "イベント"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/",
+    "text": "イベント・大会"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/search",
+    "text": "大会詳細検索ページへ"
+   },
+   {
+    "href": "/en/events/",
+    "text": "EN"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/52522/all/",
+    "text": ""
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/23369/all/",
+    "text": ""
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/46592/all/",
+    "text": ""
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/15845/all/",
+    "text": ""
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/50392/all/",
+    "text": ""
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/15052/all/",
+    "text": ""
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/52334/all/",
+    "text": ""
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/list?term=%E3%82%AB%E3%82%B8%E3%83%A5%E3%82%A2%E3%83%AB%E3%83%9E%E3%82%B8%E3%83%83%E3%82%AF%EF%BC%81&from=&to=&isWeekday=true&isHoliday=true",
+    "text": ""
+   },
+   {
+    "href": "/ja/events/search",
+    "text": "詳細検索"
+   },
+   {
+    "href": "/ja/shoppage/tc",
+    "text": "店舗ページ"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/?shop=1&date=202609",
+    "text": "2026年9月"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/?shop=1&date=202609",
+    "text": ""
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/?shop=1&date=202611",
+    "text": ""
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/?shop=1&date=202611",
+    "text": "2026年11月"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/628672/detail",
+    "text": "09:00[毎日開催]マジックリーグ"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/619618/detail",
+    "text": "11:00構築各種平日朝の無料イベント[3回戦][無料]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/619557/detail",
+    "text": "14:00[常設]構築各種フォーマット[3回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/619579/detail",
+    "text": "17:00[常設]構築各種フォーマット[3回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/627793/detail",
+    "text": "17:00平日ミドルスクール [3回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/619640/detail",
+    "text": "18:30Magic Academy：マジックの遊び方【初心者体験会】"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/619671/detail",
+    "text": "18:30マジック・アカデミー：デッキ構築【初心者体験会】"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/619704/detail",
+    "text": "19:00『盛り上げハッピー！』コマンダー集会[2回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/638874/detail",
+    "text": "19:00コマンダー交流会：甘口(ブラケット2基準)19時の部"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/622379/detail",
+    "text": "19:30英語でコマンダー交流会"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/619601/detail",
+    "text": "20:00[常設]構築各種フォーマット[3回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/627804/detail",
+    "text": "20:00平日ミドルスクール [3回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/628673/detail",
+    "text": "09:00[毎日開催]マジックリーグ"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/641963/detail",
+    "text": "10:00チャンピオンズカップ ラストチャンストライアルシーズン5 ラウンド1"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/619548/detail",
+    "text": "11:00平日パウパー朝の無料イベント[3回戦][無料]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/619619/detail",
+    "text": "11:00構築各種平日朝の無料イベント[3回戦][無料]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/619512/detail",
+    "text": "14:00平日パウパー[3回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/619558/detail",
+    "text": "14:00[常設]構築各種フォーマット[3回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/619535/detail",
+    "text": "17:00平日パウパー[3回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/619580/detail",
+    "text": "17:00[常設]構築各種フォーマット[3回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/619672/detail",
+    "text": "18:30マジック・アカデミー：デッキ構築【初心者体験会】"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/645396/detail",
+    "text": "18:30Magic Academy：マジックの遊び方【初心者体験会】"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/619705/detail",
+    "text": "19:00『盛り上げハッピー！』コマンダー集会[2回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/622363/detail",
+    "text": "19:00FNMドラフト[3回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/638875/detail",
+    "text": "19:00コマンダー交流会：甘口(ブラケット2基準)19時の部"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/638946/detail",
+    "text": "19:00コマンダー交流会：辛口(ブラケット4推奨)19時の部"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/622357/detail",
+    "text": "20:00FNM 構築各種フライデーナイトマジック[3回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/628887/detail",
+    "text": "20:00スタンダード・ショーダウン『リアリティ・フラクチャー』[3回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/632604/detail",
+    "text": "20:00FNM パウパー[3回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/628674/detail",
+    "text": "09:00[毎日開催]マジックリーグ"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/622325/detail",
+    "text": "10:30ホリデーモーニングクイックイベント[2回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/638856/detail",
+    "text": "11:30コマンダー交流会：甘口(ブラケット2基準)お昼の部"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/638933/detail",
+    "text": "11:30コマンダー交流会：辛口(ブラケット4推奨)お昼の部"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/620337/detail",
+    "text": "12:00スタンダード神挑戦者決定戦トライアル[スイス+決勝SE]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/620342/detail",
+    "text": "12:00モダン神挑戦者決定戦トライアル[スイス+決勝SE]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/639378/detail",
+    "text": "12:00【《稲妻》配布】プレイヤーズコンベンション開催記念ミドルスクール[5回戦][ランダム賞あり]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/639380/detail",
+    "text": "12:00【《巨怪の怒り》配布】プレイヤーズコンベンション開催記念パイオニア[5回戦][ランダム賞あり]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/639381/detail",
+    "text": "12:00【《巨怪の怒り》配布】プレイヤーズコンベンション開催記念レガシー[5回戦][ランダム賞あり]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/639382/detail",
+    "text": "12:00【《巨怪の怒り》配布】プレイヤーズコンベンション開催記念パウパー[5回戦][ランダム賞あり]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/642391/detail",
+    "text": "13:30【ビギナー向け】スタンダード練習会[2回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/623749/detail",
+    "text": "14:00『リアリティ・フラクチャー』休日シールド[3回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/623771/detail",
+    "text": "14:00『リアリティ・フラクチャー』休日ドラフト[3回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/623789/detail",
+    "text": "14:00『リアリティ・フラクチャー』ピック2・ドラフト[2回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/619461/detail",
+    "text": "15:00ガチコマ！情け無用コマンダー 15時の部[2回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/638900/detail",
+    "text": "15:00コマンダー交流会：甘口(ブラケット2基準)15時の部"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/638953/detail",
+    "text": "15:00コマンダー交流会：辛口(ブラケット4推奨)15時の部"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/638969/detail",
+    "text": "15:00ブラケット3コマンダー15時の部[2回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/642695/detail",
+    "text": "15:30カジュアルマジック！【スタンダード交流会】"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/643943/detail",
+    "text": "16:30夕方ミドルスクール [3回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/627809/detail",
+    "text": "17:00[常設]構築各種フォーマット[3回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/627848/detail",
+    "text": "17:00休日パウパー[3回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/619467/detail",
+    "text": "18:00ガチコマ！情け無用コマンダー 18時の部[2回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/638916/detail",
+    "text": "18:00コマンダー交流会：甘口(ブラケット2基準)18時の部"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/638983/detail",
+    "text": "18:00ブラケット3コマンダー18時の部[2回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/619673/detail",
+    "text": "18:30マジック・アカデミー：デッキ構築【初心者体験会】"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/645397/detail",
+    "text": "18:30Magic Academy：マジックの遊び方【初心者体験会】"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/627831/detail",
+    "text": "20:00[常設]構築各種フォーマット[3回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/627858/detail",
+    "text": "20:00休日パウパー[3回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/619726/detail",
+    "text": "20:30『盛り上げハッピー！』コマンダー集会[2回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/628675/detail",
+    "text": "09:00[毎日開催]マジックリーグ"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/622326/detail",
+    "text": "10:30ホリデーモーニングクイックイベント[2回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/638857/detail",
+    "text": "11:30コマンダー交流会：甘口(ブラケット2基準)お昼の部"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/638934/detail",
+    "text": "11:30コマンダー交流会：辛口(ブラケット4推奨)お昼の部"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/620343/detail",
+    "text": "12:00モダン神挑戦者決定戦トライアル[スイス+決勝SE]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/639345/detail",
+    "text": "12:00【《洪水の大口へ》配布】プレイヤーズコンベンション開催記念スタンダード[5回戦][ランダム賞あり]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/639346/detail",
+    "text": "12:00【《洪水の大口へ》配布】プレイヤーズコンベンション開催記念パイオニア[5回戦][ランダム賞あり]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/639347/detail",
+    "text": "12:00【《洪水の大口へ》配布】プレイヤーズコンベンション開催記念パウパー[5回戦][ランダム賞あり]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/639379/detail",
+    "text": "12:00【《稲妻》配布】プレイヤーズコンベンション開催記念プレモダン[5回戦][ランダム賞あり]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/645387/detail",
+    "text": "12:00【《洪水の大口へ》配布】プレイヤーズコンベンション開催記念レガシー[5回戦][ランダム賞あり]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/623750/detail",
+    "text": "14:00『リアリティ・フラクチャー』休日シールド[3回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/623772/detail",
+    "text": "14:00『リアリティ・フラクチャー』休日ドラフト[3回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/623790/detail",
+    "text": "14:00『リアリティ・フラクチャー』ピック2・ドラフト[2回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/642705/detail",
+    "text": "14:00プレインズウォーカー・シリーズ：カジュアル [3回戦][じゃんけん大会][フレンドリーイベント][予約可]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/619493/detail",
+    "text": "15:00ブラケット3コマンダー15時の部[2回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/638901/detail",
+    "text": "15:00コマンダー交流会：甘口(ブラケット2基準)15時の部"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/638954/detail",
+    "text": "15:00コマンダー交流会：辛口(ブラケット4推奨)15時の部"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/646016/detail",
+    "text": "15:30カジュアルマジック！【スタンダード交流会】"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/643948/detail",
+    "text": "16:30夕方プレモダン [3回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/627810/detail",
+    "text": "17:00[常設]構築各種フォーマット[3回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/627849/detail",
+    "text": "17:00休日パウパー[3回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/638917/detail",
+    "text": "18:00コマンダー交流会：甘口(ブラケット2基準)18時の部"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/638984/detail",
+    "text": "18:00ブラケット3コマンダー18時の部[2回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/619674/detail",
+    "text": "18:30マジック・アカデミー：デッキ構築【初心者体験会】"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/645398/detail",
+    "text": "18:30Magic Academy：マジックの遊び方【初心者体験会】"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/627832/detail",
+    "text": "20:00[常設]構築各種フォーマット[3回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/627859/detail",
+    "text": "20:00休日パウパー[3回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/619727/detail",
+    "text": "20:30『盛り上げハッピー！』コマンダー集会[2回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/628676/detail",
+    "text": "09:00[毎日開催]マジックリーグ"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/619620/detail",
+    "text": "11:00構築各種平日朝の無料イベント[3回戦][無料]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/619559/detail",
+    "text": "14:00[常設]構築各種フォーマット[3回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/619581/detail",
+    "text": "17:00[常設]構築各種フォーマット[3回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/619675/detail",
+    "text": "18:30マジック・アカデミー：デッキ構築【初心者体験会】"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/645399/detail",
+    "text": "18:30Magic Academy：マジックの遊び方【初心者体験会】"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/619706/detail",
+    "text": "19:00『盛り上げハッピー！』コマンダー集会[2回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/638876/detail",
+    "text": "19:00コマンダー交流会：甘口(ブラケット2基準)19時の部"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/619602/detail",
+    "text": "20:00[常設]構築各種フォーマット[3回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/628677/detail",
+    "text": "09:00[毎日開催]マジックリーグ"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/619549/detail",
+    "text": "11:00平日パウパー朝の無料イベント[3回戦][無料]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/619621/detail",
+    "text": "11:00構築各種平日朝の無料イベント[3回戦][無料]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/619513/detail",
+    "text": "14:00平日パウパー[3回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/619560/detail",
+    "text": "14:00[常設]構築各種フォーマット[3回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/619536/detail",
+    "text": "17:00平日パウパー[3回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/619582/detail",
+    "text": "17:00[常設]構築各種フォーマット[3回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/619676/detail",
+    "text": "18:30マジック・アカデミー：デッキ構築【初心者体験会】"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/645400/detail",
+    "text": "18:30Magic Academy：マジックの遊び方【初心者体験会】"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/619707/detail",
+    "text": "19:00『盛り上げハッピー！』コマンダー集会[2回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/638877/detail",
+    "text": "19:00コマンダー交流会：甘口(ブラケット2基準)19時の部"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/619544/detail",
+    "text": "20:00平日パウパー[3回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/619603/detail",
+    "text": "20:00[常設]構築各種フォーマット[3回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/628678/detail",
+    "text": "09:00[毎日開催]マジックリーグ"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/619622/detail",
+    "text": "11:00構築各種平日朝の無料イベント[3回戦][無料]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/619561/detail",
+    "text": "14:00[常設]構築各種フォーマット[3回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/619583/detail",
+    "text": "17:00[常設]構築各種フォーマット[3回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/623314/detail",
+    "text": "17:00平日プレモダン[3回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/619677/detail",
+    "text": "18:30マジック・アカデミー：デッキ構築【初心者体験会】"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/645401/detail",
+    "text": "18:30Magic Academy：マジックの遊び方【初心者体験会】"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/619708/detail",
+    "text": "19:00『盛り上げハッピー！』コマンダー集会[2回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/638878/detail",
+    "text": "19:00コマンダー交流会：甘口(ブラケット2基準)19時の部"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/619604/detail",
+    "text": "20:00[常設]構築各種フォーマット[3回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/623318/detail",
+    "text": "20:00平日プレモダン[3回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/628679/detail",
+    "text": "09:00[毎日開催]マジックリーグ"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/619623/detail",
+    "text": "11:00構築各種平日朝の無料イベント[3回戦][無料]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/619562/detail",
+    "text": "14:00[常設]構築各種フォーマット[3回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/619584/detail",
+    "text": "17:00[常設]構築各種フォーマット[3回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/627794/detail",
+    "text": "17:00平日ミドルスクール [3回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/619678/detail",
+    "text": "18:30マジック・アカデミー：デッキ構築【初心者体験会】"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/645402/detail",
+    "text": "18:30Magic Academy：マジックの遊び方【初心者体験会】"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/619709/detail",
+    "text": "19:00『盛り上げハッピー！』コマンダー集会[2回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/638879/detail",
+    "text": "19:00コマンダー交流会：甘口(ブラケット2基準)19時の部"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/645383/detail",
+    "text": "19:30英語でコマンダー交流会"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/619605/detail",
+    "text": "20:00[常設]構築各種フォーマット[3回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/627805/detail",
+    "text": "20:00平日ミドルスクール [3回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/628680/detail",
+    "text": "09:00[毎日開催]マジックリーグ"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/619550/detail",
+    "text": "11:00平日パウパー朝の無料イベント[3回戦][無料]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/619624/detail",
+    "text": "11:00構築各種平日朝の無料イベント[3回戦][無料]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/619514/detail",
+    "text": "14:00平日パウパー[3回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/619563/detail",
+    "text": "14:00[常設]構築各種フォーマット[3回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/619537/detail",
+    "text": "17:00平日パウパー[3回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/619585/detail",
+    "text": "17:00[常設]構築各種フォーマット[3回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/619679/detail",
+    "text": "18:30マジック・アカデミー：デッキ構築【初心者体験会】"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/645403/detail",
+    "text": "18:30Magic Academy：マジックの遊び方【初心者体験会】"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/622364/detail",
+    "text": "19:00FNMドラフト[3回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/645380/detail",
+    "text": "19:00『リアリティ・フラクチャー』コマンダー・パーティー[WPNプレミアムストア限定仕様][2回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/622358/detail",
+    "text": "20:00FNM 構築各種フライデーナイトマジック[3回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/628888/detail",
+    "text": "20:00スタンダード・ショーダウン『リアリティ・フラクチャー』[3回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/632605/detail",
+    "text": "20:00FNM パウパー[3回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/628681/detail",
+    "text": "09:00[毎日開催]マジックリーグ"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/618511/detail",
+    "text": "10:00第35期モダン神挑戦者決定戦[競技] [決勝SE][配信][予約可]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/622327/detail",
+    "text": "10:30ホリデーモーニングクイックイベント[2回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/638858/detail",
+    "text": "11:30コマンダー交流会：甘口(ブラケット2基準)お昼の部"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/638935/detail",
+    "text": "11:30コマンダー交流会：辛口(ブラケット4推奨)お昼の部"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/620338/detail",
+    "text": "12:00スタンダード神挑戦者決定戦トライアル[スイス+決勝SE]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/639643/detail",
+    "text": "12:00Let's 5 パイオニア[5回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/639656/detail",
+    "text": "12:00Let's 5 レガシー[5回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/639663/detail",
+    "text": "12:00Let's 5 パウパー[5回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/639672/detail",
+    "text": "12:00Let's 5 ミドルスクール [5回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/646357/detail",
+    "text": "12:30ウェアウルフコマンダー[ブラケット3推奨][1回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/642392/detail",
+    "text": "13:30【ビギナー向け】スタンダード練習会[2回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/623751/detail",
+    "text": "14:00『リアリティ・フラクチャー』休日シールド[3回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/623773/detail",
+    "text": "14:00『リアリティ・フラクチャー』休日ドラフト[3回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/623791/detail",
+    "text": "14:00『リアリティ・フラクチャー』ピック2・ドラフト[2回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/619462/detail",
+    "text": "15:00ガチコマ！情け無用コマンダー 15時の部[2回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/638902/detail",
+    "text": "15:00コマンダー交流会：甘口(ブラケット2基準)15時の部"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/638955/detail",
+    "text": "15:00コマンダー交流会：辛口(ブラケット4推奨)15時の部"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/638970/detail",
+    "text": "15:00ブラケット3コマンダー15時の部[2回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/646017/detail",
+    "text": "15:30カジュアルマジック！【スタンダード交流会】"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/643944/detail",
+    "text": "16:30夕方ミドルスクール [3回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/627811/detail",
+    "text": "17:00[常設]構築各種フォーマット[3回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/627850/detail",
+    "text": "17:00休日パウパー[3回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/619468/detail",
+    "text": "18:00ガチコマ！情け無用コマンダー 18時の部[2回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/638918/detail",
+    "text": "18:00コマンダー交流会：甘口(ブラケット2基準)18時の部"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/638985/detail",
+    "text": "18:00ブラケット3コマンダー18時の部[2回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/619680/detail",
+    "text": "18:30マジック・アカデミー：デッキ構築【初心者体験会】"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/645404/detail",
+    "text": "18:30Magic Academy：マジックの遊び方【初心者体験会】"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/627833/detail",
+    "text": "20:00[常設]構築各種フォーマット[3回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/627860/detail",
+    "text": "20:00休日パウパー[3回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/619728/detail",
+    "text": "20:30『盛り上げハッピー！』コマンダー集会[2回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/628682/detail",
+    "text": "09:00[毎日開催]マジックリーグ"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/618518/detail",
+    "text": "10:00第29期リミテッド神挑戦者決定戦[競技][予約可]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/622328/detail",
+    "text": "10:30ホリデーモーニングクイックイベント[2回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/645381/detail",
+    "text": "11:30『リアリティ・フラクチャー』コマンダー・パーティー[WPNプレミアムストア限定仕様][2回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/620378/detail",
+    "text": "12:00パウパー神挑戦者決定戦トライアル[スイス+決勝SE]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/639639/detail",
+    "text": "12:00Let's 5 スタンダード[5回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/639644/detail",
+    "text": "12:00Let's 5 パイオニア[5回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/639649/detail",
+    "text": "12:00Let's 5 モダン[5回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/639657/detail",
+    "text": "12:00Let's 5 レガシー[5回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/639676/detail",
+    "text": "12:00Let's 5 プレモダン [5回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/646359/detail",
+    "text": "12:30【特殊ゲームを遊ぼう】ヒュージリーダーズ【パワーレベル：フレンドリー】[2回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/623752/detail",
+    "text": "14:00『リアリティ・フラクチャー』休日シールド[3回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/623774/detail",
+    "text": "14:00『リアリティ・フラクチャー』休日ドラフト[3回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/623792/detail",
+    "text": "14:00『リアリティ・フラクチャー』ピック2・ドラフト[2回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/642706/detail",
+    "text": "14:00プレインズウォーカー・シリーズ：カジュアル [3回戦][じゃんけん大会][フレンドリーイベント][予約可]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/619494/detail",
+    "text": "15:00ブラケット3コマンダー15時の部[2回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/638903/detail",
+    "text": "15:00コマンダー交流会：甘口(ブラケット2基準)15時の部"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/638956/detail",
+    "text": "15:00コマンダー交流会：辛口(ブラケット4推奨)15時の部"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/646018/detail",
+    "text": "15:30カジュアルマジック！【スタンダード交流会】"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/643949/detail",
+    "text": "16:30夕方プレモダン [3回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/627812/detail",
+    "text": "17:00[常設]構築各種フォーマット[3回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/627851/detail",
+    "text": "17:00休日パウパー[3回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/638919/detail",
+    "text": "18:00コマンダー交流会：甘口(ブラケット2基準)18時の部"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/638986/detail",
+    "text": "18:00ブラケット3コマンダー18時の部[2回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/619681/detail",
+    "text": "18:30マジック・アカデミー：デッキ構築【初心者体験会】"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/645405/detail",
+    "text": "18:30Magic Academy：マジックの遊び方【初心者体験会】"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/618512/detail",
+    "text": "19:00第35期モダン神決定戦[配信]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/627834/detail",
+    "text": "20:00[常設]構築各種フォーマット[3回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/627861/detail",
+    "text": "20:00休日パウパー[3回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/619729/detail",
+    "text": "20:30『盛り上げハッピー！』コマンダー集会[2回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/628683/detail",
+    "text": "09:00[毎日開催]マジックリーグ"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/622334/detail",
+    "text": "10:30ホリデーモーニングクイックイベント[2回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/638865/detail",
+    "text": "11:30コマンダー交流会：甘口(ブラケット2基準)お昼の部"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/638944/detail",
+    "text": "11:30コマンダー交流会：辛口(ブラケット4推奨)お昼の部"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/620339/detail",
+    "text": "12:00パイオニア神挑戦者決定戦トライアル[スイス+決勝SE]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/626248/detail",
+    "text": "12:00チャンピオンズカッププレミアム予選 シーズン5 ラウンド2 inTC 東京"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/639655/detail",
+    "text": "12:00Let's 5 モダン[5回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/639658/detail",
+    "text": "12:00Let's 5 レガシー[5回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/639664/detail",
+    "text": "12:00Let's 5 パウパー[5回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/646363/detail",
+    "text": "12:30一色に染め上げろ！単色王【ブラケット3】"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/623758/detail",
+    "text": "14:00『リアリティ・フラクチャー』休日シールド[3回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/623780/detail",
+    "text": "14:00『リアリティ・フラクチャー』休日ドラフト[3回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/623798/detail",
+    "text": "14:00『リアリティ・フラクチャー』ピック2・ドラフト[2回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/619466/detail",
+    "text": "15:00ガチコマ！情け無用コマンダー 15時の部[2回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/638911/detail",
+    "text": "15:00コマンダー交流会：甘口(ブラケット2基準)15時の部"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/638964/detail",
+    "text": "15:00コマンダー交流会：辛口(ブラケット4推奨)15時の部"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/639030/detail",
+    "text": "15:00ブラケット3コマンダー15時の部[2回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/618519/detail",
+    "text": "17:00第29期リミテッド神決定戦[配信]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/619586/detail",
+    "text": "17:00[常設]構築各種フォーマット[3回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/619472/detail",
+    "text": "18:00ガチコマ！情け無用コマンダー 18時の部[2回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/638927/detail",
+    "text": "18:00コマンダー交流会：甘口(ブラケット2基準)18時の部"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/639029/detail",
+    "text": "18:00ブラケット3コマンダー18時の部[2回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/619682/detail",
+    "text": "18:30マジック・アカデミー：デッキ構築【初心者体験会】"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/645406/detail",
+    "text": "18:30Magic Academy：マジックの遊び方【初心者体験会】"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/619606/detail",
+    "text": "20:00[常設]構築各種フォーマット[3回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/619711/detail",
+    "text": "20:30『盛り上げハッピー！』コマンダー集会[2回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/628684/detail",
+    "text": "09:00[毎日開催]マジックリーグ"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/619551/detail",
+    "text": "11:00平日パウパー朝の無料イベント[3回戦][無料]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/619626/detail",
+    "text": "11:00構築各種平日朝の無料イベント[3回戦][無料]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/619515/detail",
+    "text": "14:00平日パウパー[3回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/619565/detail",
+    "text": "14:00[常設]構築各種フォーマット[3回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/619538/detail",
+    "text": "17:00平日パウパー[3回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/619587/detail",
+    "text": "17:00[常設]構築各種フォーマット[3回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/619683/detail",
+    "text": "18:30マジック・アカデミー：デッキ構築【初心者体験会】"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/645407/detail",
+    "text": "18:30Magic Academy：マジックの遊び方【初心者体験会】"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/619712/detail",
+    "text": "19:00『盛り上げハッピー！』コマンダー集会[2回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/638882/detail",
+    "text": "19:00コマンダー交流会：甘口(ブラケット2基準)19時の部"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/619545/detail",
+    "text": "20:00平日パウパー[3回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/619607/detail",
+    "text": "20:00[常設]構築各種フォーマット[3回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/628685/detail",
+    "text": "09:00[毎日開催]マジックリーグ"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/619627/detail",
+    "text": "11:00構築各種平日朝の無料イベント[3回戦][無料]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/619566/detail",
+    "text": "14:00[常設]構築各種フォーマット[3回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/619588/detail",
+    "text": "17:00[常設]構築各種フォーマット[3回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/623315/detail",
+    "text": "17:00平日プレモダン[3回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/619684/detail",
+    "text": "18:30マジック・アカデミー：デッキ構築【初心者体験会】"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/645408/detail",
+    "text": "18:30Magic Academy：マジックの遊び方【初心者体験会】"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/619713/detail",
+    "text": "19:00『盛り上げハッピー！』コマンダー集会[2回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/638883/detail",
+    "text": "19:00コマンダー交流会：甘口(ブラケット2基準)19時の部"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/619608/detail",
+    "text": "20:00[常設]構築各種フォーマット[3回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/623319/detail",
+    "text": "20:00平日プレモダン[3回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/628686/detail",
+    "text": "09:00[毎日開催]マジックリーグ"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/619628/detail",
+    "text": "11:00構築各種平日朝の無料イベント[3回戦][無料]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/619567/detail",
+    "text": "14:00[常設]構築各種フォーマット[3回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/619589/detail",
+    "text": "17:00[常設]構築各種フォーマット[3回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/627795/detail",
+    "text": "17:00平日ミドルスクール [3回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/619685/detail",
+    "text": "18:30マジック・アカデミー：デッキ構築【初心者体験会】"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/645409/detail",
+    "text": "18:30Magic Academy：マジックの遊び方【初心者体験会】"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/619714/detail",
+    "text": "19:00『盛り上げハッピー！』コマンダー集会[2回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/638884/detail",
+    "text": "19:00コマンダー交流会：甘口(ブラケット2基準)19時の部"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/645384/detail",
+    "text": "19:30英語でコマンダー交流会"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/619609/detail",
+    "text": "20:00[常設]構築各種フォーマット[3回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/627806/detail",
+    "text": "20:00平日ミドルスクール [3回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/628687/detail",
+    "text": "09:00[毎日開催]マジックリーグ"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/619552/detail",
+    "text": "11:00平日パウパー朝の無料イベント[3回戦][無料]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/619629/detail",
+    "text": "11:00構築各種平日朝の無料イベント[3回戦][無料]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/619516/detail",
+    "text": "14:00平日パウパー[3回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/619568/detail",
+    "text": "14:00[常設]構築各種フォーマット[3回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/619539/detail",
+    "text": "17:00平日パウパー[3回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/619590/detail",
+    "text": "17:00[常設]構築各種フォーマット[3回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/619686/detail",
+    "text": "18:30マジック・アカデミー：デッキ構築【初心者体験会】"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/645410/detail",
+    "text": "18:30Magic Academy：マジックの遊び方【初心者体験会】"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/619715/detail",
+    "text": "19:00『盛り上げハッピー！』コマンダー集会[2回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/622365/detail",
+    "text": "19:00FNMドラフト[3回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/638885/detail",
+    "text": "19:00コマンダー交流会：甘口(ブラケット2基準)19時の部"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/638948/detail",
+    "text": "19:00コマンダー交流会：辛口(ブラケット4推奨)19時の部"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/622359/detail",
+    "text": "20:00FNM 構築各種フライデーナイトマジック[3回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/628889/detail",
+    "text": "20:00スタンダード・ショーダウン『リアリティ・フラクチャー』[3回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/632606/detail",
+    "text": "20:00FNM パウパー[3回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/628688/detail",
+    "text": "09:00[毎日開催]マジックリーグ"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/635472/detail",
+    "text": "10:00【外部会場開催】COMMANDER'S SAGA 第２章 ：和歌山 【Bird】"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/635474/detail",
+    "text": "10:00【外部会場開催】COMMANDER'S SAGA 第２章 ：和歌山 【Butterfly】"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/622329/detail",
+    "text": "10:30ホリデーモーニングクイックイベント[2回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/638860/detail",
+    "text": "11:30コマンダー交流会：甘口(ブラケット2基準)お昼の部"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/638937/detail",
+    "text": "11:30コマンダー交流会：辛口(ブラケット4推奨)お昼の部"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/620340/detail",
+    "text": "12:00パイオニア神挑戦者決定戦トライアル[スイス+決勝SE]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/620379/detail",
+    "text": "12:00パウパー神挑戦者決定戦トライアル[スイス+決勝SE]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/639650/detail",
+    "text": "12:00Let's 5 モダン[5回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/639659/detail",
+    "text": "12:00Let's 5 レガシー[5回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/639673/detail",
+    "text": "12:00Let's 5 ミドルスクール [5回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/639679/detail",
+    "text": "12:00Let's 5 ヴィンテージ [5回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/642723/detail",
+    "text": "12:00プレインズウォーカー・シリーズ：競技 [SEあり][予約可]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/646361/detail",
+    "text": "12:30すーぱー・えきしびしょん・こまんだー「ブラケット1で遊ぼー！」"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/642393/detail",
+    "text": "13:30【ビギナー向け】スタンダード練習会[2回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/623753/detail",
+    "text": "14:00『リアリティ・フラクチャー』休日シールド[3回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/623775/detail",
+    "text": "14:00『リアリティ・フラクチャー』休日ドラフト[3回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/623793/detail",
+    "text": "14:00『リアリティ・フラクチャー』ピック2・ドラフト[2回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/644770/detail",
+    "text": "14:00マジック・プレゼンツ：こだまする現実[ピック2・ドラフト][2回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/619463/detail",
+    "text": "15:00ガチコマ！情け無用コマンダー 15時の部[2回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/638904/detail",
+    "text": "15:00コマンダー交流会：甘口(ブラケット2基準)15時の部"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/638957/detail",
+    "text": "15:00コマンダー交流会：辛口(ブラケット4推奨)15時の部"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/638971/detail",
+    "text": "15:00ブラケット3コマンダー15時の部[2回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/646019/detail",
+    "text": "15:30カジュアルマジック！【スタンダード交流会】"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/643945/detail",
+    "text": "16:30夕方ミドルスクール [3回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/643952/detail",
+    "text": "16:30夕方ヴィンテージ[3回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/627813/detail",
+    "text": "17:00[常設]構築各種フォーマット[3回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/627852/detail",
+    "text": "17:00休日パウパー[3回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/619469/detail",
+    "text": "18:00ガチコマ！情け無用コマンダー 18時の部[2回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/638920/detail",
+    "text": "18:00コマンダー交流会：甘口(ブラケット2基準)18時の部"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/638987/detail",
+    "text": "18:00ブラケット3コマンダー18時の部[2回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/619687/detail",
+    "text": "18:30マジック・アカデミー：デッキ構築【初心者体験会】"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/645411/detail",
+    "text": "18:30Magic Academy：マジックの遊び方【初心者体験会】"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/627835/detail",
+    "text": "20:00[常設]構築各種フォーマット[3回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/627862/detail",
+    "text": "20:00休日パウパー[3回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/619730/detail",
+    "text": "20:30『盛り上げハッピー！』コマンダー集会[2回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/628689/detail",
+    "text": "09:00[毎日開催]マジックリーグ"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/622330/detail",
+    "text": "10:30ホリデーモーニングクイックイベント[2回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/638861/detail",
+    "text": "11:30コマンダー交流会：甘口(ブラケット2基準)お昼の部"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/638938/detail",
+    "text": "11:30コマンダー交流会：辛口(ブラケット4推奨)お昼の部"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/620347/detail",
+    "text": "12:00レガシー神挑戦者決定戦トライアル[スイス+決勝SE]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/623743/detail",
+    "text": "12:00THE LAST SUN 2026スタンダード予選 in TC 東京[予約可]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/639645/detail",
+    "text": "12:00Let's 5 パイオニア[5回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/639651/detail",
+    "text": "12:00Let's 5 モダン[5回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/639665/detail",
+    "text": "12:00Let's 5 パウパー[5回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/639677/detail",
+    "text": "12:00Let's 5 プレモダン [5回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/623754/detail",
+    "text": "14:00『リアリティ・フラクチャー』休日シールド[3回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/623776/detail",
+    "text": "14:00『リアリティ・フラクチャー』休日ドラフト[3回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/623794/detail",
+    "text": "14:00『リアリティ・フラクチャー』ピック2・ドラフト[2回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/642707/detail",
+    "text": "14:00プレインズウォーカー・シリーズ：カジュアル [3回戦][じゃんけん大会][フレンドリーイベント][予約可]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/644771/detail",
+    "text": "14:00マジック・プレゼンツ：こだまする現実[ピック2・ドラフト][2回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/619495/detail",
+    "text": "15:00ブラケット3コマンダー15時の部[2回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/638905/detail",
+    "text": "15:00コマンダー交流会：甘口(ブラケット2基準)15時の部"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/638958/detail",
+    "text": "15:00コマンダー交流会：辛口(ブラケット4推奨)15時の部"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/646020/detail",
+    "text": "15:30カジュアルマジック！【スタンダード交流会】"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/643950/detail",
+    "text": "16:30夕方プレモダン [3回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/627814/detail",
+    "text": "17:00[常設]構築各種フォーマット[3回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/627853/detail",
+    "text": "17:00休日パウパー[3回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/638921/detail",
+    "text": "18:00コマンダー交流会：甘口(ブラケット2基準)18時の部"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/638988/detail",
+    "text": "18:00ブラケット3コマンダー18時の部[2回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/619688/detail",
+    "text": "18:30マジック・アカデミー：デッキ構築【初心者体験会】"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/645412/detail",
+    "text": "18:30Magic Academy：マジックの遊び方【初心者体験会】"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/627836/detail",
+    "text": "20:00[常設]構築各種フォーマット[3回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/627863/detail",
+    "text": "20:00休日パウパー[3回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/619731/detail",
+    "text": "20:30『盛り上げハッピー！』コマンダー集会[2回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/628690/detail",
+    "text": "09:00[毎日開催]マジックリーグ"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/619630/detail",
+    "text": "11:00構築各種平日朝の無料イベント[3回戦][無料]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/619569/detail",
+    "text": "14:00[常設]構築各種フォーマット[3回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/619591/detail",
+    "text": "17:00[常設]構築各種フォーマット[3回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/645413/detail",
+    "text": "18:30Magic Academy：マジックの遊び方【初心者体験会】"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/619716/detail",
+    "text": "19:00『盛り上げハッピー！』コマンダー集会[2回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/638886/detail",
+    "text": "19:00コマンダー交流会：甘口(ブラケット2基準)19時の部"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/619610/detail",
+    "text": "20:00[常設]構築各種フォーマット[3回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/628691/detail",
+    "text": "09:00[毎日開催]マジックリーグ"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/619553/detail",
+    "text": "11:00平日パウパー朝の無料イベント[3回戦][無料]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/619631/detail",
+    "text": "11:00構築各種平日朝の無料イベント[3回戦][無料]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/619517/detail",
+    "text": "14:00平日パウパー[3回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/619570/detail",
+    "text": "14:00[常設]構築各種フォーマット[3回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/619540/detail",
+    "text": "17:00平日パウパー[3回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/619592/detail",
+    "text": "17:00[常設]構築各種フォーマット[3回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/645414/detail",
+    "text": "18:30Magic Academy：マジックの遊び方【初心者体験会】"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/619717/detail",
+    "text": "19:00『盛り上げハッピー！』コマンダー集会[2回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/638887/detail",
+    "text": "19:00コマンダー交流会：甘口(ブラケット2基準)19時の部"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/619546/detail",
+    "text": "20:00平日パウパー[3回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/619611/detail",
+    "text": "20:00[常設]構築各種フォーマット[3回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/628692/detail",
+    "text": "09:00[毎日開催]マジックリーグ"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/619632/detail",
+    "text": "11:00構築各種平日朝の無料イベント[3回戦][無料]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/619571/detail",
+    "text": "14:00[常設]構築各種フォーマット[3回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/619593/detail",
+    "text": "17:00[常設]構築各種フォーマット[3回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/623316/detail",
+    "text": "17:00平日プレモダン[3回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/645415/detail",
+    "text": "18:30Magic Academy：マジックの遊び方【初心者体験会】"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/619718/detail",
+    "text": "19:00『盛り上げハッピー！』コマンダー集会[2回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/638888/detail",
+    "text": "19:00コマンダー交流会：甘口(ブラケット2基準)19時の部"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/619612/detail",
+    "text": "20:00[常設]構築各種フォーマット[3回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/623320/detail",
+    "text": "20:00平日プレモダン[3回戦]"
+   },
+   {
+    "href": "https://www.hareruyamtg.com/ja/events/628693/detail",
+    "text": "09:00[毎日開催]マジックリーグ"
+   }
+  ]
+ },
+ "https://www.hareruyamtg.com/ja/store/": {
+  "error": "<HTTPError 500: 'Internal Server Error'>"
+ },
+ "https://yellowsubmarine.co.jp/tournament/": {
+  "status": 200,
+  "final_url": "https://yellowsubmarine.co.jp/tournament/",
+  "forms": [],
+  "inputs": [],
+  "links": [
+   {
+    "href": "http://shop.yellowsubmarine.co.jp/",
+    "text": "ONLINE FLAGSHOP"
+   },
+   {
+    "href": "https://yellowsubmarine.co.jp/#store",
+    "text": "店舗情報"
+   },
+   {
+    "href": "https://yellowsubmarine.co.jp/tmt_list/sapporo_gs/",
+    "text": "札幌GAME SHOP"
+   },
+   {
+    "href": "tel:https://yellowsubmarine.co.jp/tmt_list/sapporo_gs/",
+    "text": "011-213-6003"
+   },
+   {
+    "href": "https://yellowsubmarine.co.jp/tmt_list/shinjuku/",
+    "text": "新宿店"
+   },
+   {
+    "href": "tel:https://yellowsubmarine.co.jp/tmt_list/shinjuku/",
+    "text": "03-3346-3839"
+   },
+   {
+    "href": "https://yellowsubmarine.co.jp/tmt_list/ikebukuro_gs/",
+    "text": "池袋ゲームショップ"
+   },
+   {
+    "href": "tel:https://yellowsubmarine.co.jp/tmt_list/ikebukuro_gs/",
+    "text": "03-5953-5808"
+   },
+   {
+    "href": "https://yellowsubmarine.co.jp/tmt_list/machida/",
+    "text": "町田GAME SHOP"
+   },
+   {
+    "href": "tel:https://yellowsubmarine.co.jp/tmt_list/machida/",
+    "text": "042-739-6966"
+   },
+   {
+    "href": "https://yellowsubmarine.co.jp/tmt_list/akihabara_rpg/",
+    "text": "秋葉原RPGショップ"
+   },
+   {
+    "href": "tel:https://yellowsubmarine.co.jp/tmt_list/akihabara_rpg/",
+    "text": "03-5297-5402"
+   },
+   {
+    "href": "https://yellowsubmarine.co.jp/tmt_list/akihabara_mnt/",
+    "text": "秋葉原本店★ミント"
+   },
+   {
+    "href": "tel:https://yellowsubmarine.co.jp/tmt_list/akihabara_mnt/",
+    "text": "03-9526-3828"
+   },
+   {
+    "href": "https://yellowsubmarine.co.jp/tmt_list/tachikawa/",
+    "text": "立川店"
+   },
+   {
+    "href": "tel:https://yellowsubmarine.co.jp/tmt_list/tachikawa/",
+    "text": "042-548-1706"
+   },
+   {
+    "href": "https://yellowsubmarine.co.jp/tmt_list/yokohama/",
+    "text": "横浜店"
+   },
+   {
+    "href": "tel:https://yellowsubmarine.co.jp/tmt_list/yokohama/",
+    "text": "045-311-2847"
+   },
+   {
+    "href": "https://yellowsubmarine.co.jp/tmt_list/mizo/",
+    "text": "溝口店"
+   },
+   {
+    "href": "tel:https://yellowsubmarine.co.jp/tmt_list/mizo/",
+    "text": ""
+   },
+   {
+    "href": "https://yellowsubmarine.co.jp/tmt_list/kawasaki/",
+    "text": "川崎店"
+   },
+   {
+    "href": "tel:https://yellowsubmarine.co.jp/tmt_list/kawasaki/",
+    "text": "044-276-6156"
+   },
+   {
+    "href": "https://yellowsubmarine.co.jp/tmt_list/yokohama_m/",
+    "text": "横浜ムービル店"
+   },
+   {
+    "href": "tel:https://yellowsubmarine.co.jp/tmt_list/yokohama_m/",
+    "text": "045-317-9690"
+   },
+   {
+    "href": "https://yellowsubmarine.co.jp/tmt_list/kashiwa_m/",
+    "text": "柏店"
+   },
+   {
+    "href": "tel:https://yellowsubmarine.co.jp/tmt_list/kashiwa_m/",
+    "text": "04-7136-7934"
+   },
+   {
+    "href": "https://yellowsubmarine.co.jp/tmt_list/chiba_gs/",
+    "text": "千葉ゲームショップ"
+   },
+   {
+    "href": "tel:https://yellowsubmarine.co.jp/tmt_list/chiba_gs/",
+    "text": "043-227-5388"
+   },
+   {
+    "href": "https://yellowsubmarine.co.jp/tmt_list/omiya_ps/",
+    "text": "大宮本店＆プレイソフト宮原店"
+   },
+   {
+    "href": "tel:https://yellowsubmarine.co.jp/tmt_list/omiya_ps/",
+    "text": "048-652-3535"
+   },
+   {
+    "href": "https://yellowsubmarine.co.jp/tmt_list/kawagoe_cs/",
+    "text": "川越カードショップ"
+   },
+   {
+    "href": "tel:https://yellowsubmarine.co.jp/tmt_list/kawagoe_cs/",
+    "text": "049-229-6377"
+   },
+   {
+    "href": "https://yellowsubmarine.co.jp/tmt_list/utsunomiya/",
+    "text": "宇都宮店"
+   },
+   {
+    "href": "tel:https://yellowsubmarine.co.jp/tmt_list/utsunomiya/",
+    "text": "028-651-0597"
+   },
+   {
+    "href": "https://yellowsubmarine.co.jp/tmt_list/nagoya_gs/",
+    "text": "名古屋GAME SHOP"
+   },
+   {
+    "href": "tel:https://yellowsubmarine.co.jp/tmt_list/nagoya_gs/",
+    "text": "052-238-3012"
+   },
+   {
+    "href": "https://yellowsubmarine.co.jp/tmt_list/nanba_s/",
+    "text": "なんば店"
+   },
+   {
+    "href": "tel:https://yellowsubmarine.co.jp/tmt_list/nanba_s/",
+    "text": "06-6635-4662"
+   },
+   {
+    "href": "https://yellowsubmarine.co.jp/tmt_list/nanba_3/",
+    "text": "なんば本店"
+   },
+   {
+    "href": "tel:https://yellowsubmarine.co.jp/tmt_list/nanba_3/",
+    "text": "06-6635-2101"
+   },
+   {
+    "href": "https://yellowsubmarine.co.jp/tmt_list/kyoto/",
+    "text": "京都店"
+   },
+   {
+    "href": "tel:https://yellowsubmarine.co.jp/tmt_list/kyoto/",
+    "text": "075-253-4300"
+   },
+   {
+    "href": "https://yellowsubmarine.co.jp/tmt_list/sannomiya/",
+    "text": "三宮店"
+   },
+   {
+    "href": "tel:https://yellowsubmarine.co.jp/tmt_list/sannomiya/",
+    "text": "078-327-5202"
+   },
+   {
+    "href": "https://yellowsubmarine.co.jp/tmt_list/himeji/",
+    "text": "姫路店"
+   },
+   {
+    "href": "tel:https://yellowsubmarine.co.jp/tmt_list/himeji/",
+    "text": "0792-21-8230"
+   },
+   {
+    "href": "https://yellowsubmarine.co.jp/tmt_list/hiroshima/",
+    "text": "広島店"
+   },
+   {
+    "href": "tel:https://yellowsubmarine.co.jp/tmt_list/hiroshima/",
+    "text": "082-545-9030"
+   },
+   {
+    "href": "https://yellowsubmarine.co.jp/tmt_list/fukuoka_mc/",
+    "text": "マジッカーズ福岡店"
+   },
+   {
+    "href": "tel:https://yellowsubmarine.co.jp/tmt_list/fukuoka_mc/",
+    "text": "092-739-1970"
+   },
+   {
+    "href": "https://yellowsubmarine.co.jp/about_event/",
+    "text": "イベント・大会についてのお問い合わせ"
+   },
+   {
+    "href": "http://shop.yellowsubmarine.co.jp/",
+    "text": "ONLINE FLAGSHOP"
+   },
+   {
+    "href": "https://yellowsubmarine.co.jp/#store",
+    "text": "店舗情報"
+   },
+   {
+    "href": "https://yellowsubmarine.co.jp/#store",
+    "text": "店舗情報"
+   },
+   {
+    "href": "https://yellowsubmarine.co.jp/tournament/",
+    "text": "大会情報一覧"
+   },
+   {
+    "href": "http://shop.yellowsubmarine.co.jp/",
+    "text": "ONLINE FLAGSHOP"
+   }
+  ]
+ },
+ "http://amenitydream.co.jp/matches/": {
+  "error": "URLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1010)'))"
+ },
+ "https://www.amenitydream.com/": {
+  "status": 200,
+  "final_url": "https://www.amenitydream.com/",
+  "forms": [
+   {
+    "action": "/product-list",
+    "method": "get",
+    "id": null
+   }
+  ],
+  "inputs": [
+   {
+    "type": "search",
+    "name": "keyword",
+    "value": "",
+    "id": "keywords4"
+   },
+   {
+    "type": "submit",
+    "name": "searchBtn4",
+    "value": null,
+    "id": "searchBtn4"
+   }
+  ],
+  "links": [
+   {
+    "href": "http://amenitydream.co.jp/matches/",
+    "text": "店舗大会情報"
+   }
+  ]
+ },
+ "_robots": {
+  "https://www.hareruyamtg.com": "Sitemap: https://www.hareruyamtg.com/sitemap.xml\r\n\r\nUser-agent: *\r\nAllow: /\r\nDisallow: /news/\r\nDisallow: /jp/k/\r\nDisallow: /index.php/\r\nDisallow: /a/*\r\nDisallow: /ja/forward/\r\nDisallow: /en/forward/\r\nDisallow: /ja/purchase/forward/\r\nDisallow: /en/purchase/forward/\r\nDisallow: /ja/events/*/*/\r\nDisallow: /purchase/g/*\r\nDisallow: /*.csv$\r\nDisallow: /en/deck/download/*\r\nDisallow: /ja/deck/download/*\r\nDisallow: /ja/deck/bulk/*\r\nDisallow: /en/deck/bulk/*\r\nDisallow: /ja/deck/result?*\r\nDisallow: /en/deck/result?*\r\nDisallow: /ja/events/list?*page=*\r\nDisallow: /en/events/list?*page=*\r\nDisallow: /ja/products/search?*page=*\r\nDisallow: /ja/products/search?*sort=*\r\nDisallow: /ja/products/search?*order=*\r\nDisallow: /en/products/search?*page=*\r\nDisallow: /en/products/search?*sort=*\r\nDisallow: /en/products/search?*order=*\r\nDisallow: /ja/purchase/search?*page=*\r\nDisallow: /ja/purchase/search?*sort=*\r\nDisallow: /ja/purchase/search?*order=*\r\nDisallow: /en/purchase/search?*page=*\r\nDisallow: /en/purchase/search?*sort=*\r\nDisallow: /en/purchase/search?*order=*\r\nDisallow: /gftesogvtnsbvv.html/\r\nDisallow: /Sitemap*/\r\n\r\nUser-agent: Googlebot\r\nAllow: /\r\nDisallow: /news/\r\nDisallow: /jp/k/\r\nDisallow: /index.php/\r\nDisallow: /a/*\r\nDisallow: /ja/forward/\r\nDisallow: /en/forward/\r\nDisallow: /ja/purchase/forward/\r\nDisallow: /en/purchase/forward/\r\nDisallow: /ja/events/*/*/\r\nDisallow: /purchase/g/*\r\nDisallow: /*.csv$\r\nDisallow: /en/deck/download/*\r\nDisallow: /ja/deck/download/*\r\nDisallow: /ja/deck/bulk/*\r\nDisallow",
+  "https://yellowsubmarine.co.jp": "User-agent: *\nDisallow: /wp/wp-admin/\nAllow: /wp/wp-admin/admin-ajax.php\n\nSitemap: https://yellowsubmarine.co.jp/sitemap.xml\n\nSitemap: https://yellowsubmarine.co.jp/sitemap.xml\n",
+  "http://amenitydream.co.jp": "robots error: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1010)>",
+  "https://www.amenitydream.com": "User-agent: GPTBot\nUser-agent: Bytespider\nUser-Agent: TikTokSpider\nUser-agent: meta-externalagent\nDisallow: /\n"
+ }
+}
