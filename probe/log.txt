@@ -1,111 +1,27 @@
-{
- "robots_amenity.txt": {
-  "url": "https://amenitydream.co.jp/robots.txt",
-  "error": "URLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1010)'))"
- },
- "robots_amenity_insecure.txt": {
-  "url": "https://amenitydream.co.jp/robots.txt",
-  "status": 200,
-  "len": 35,
-  "final": "https://amenitydream.co.jp/robots.txt",
-  "ctype": "text/plain; charset=utf-8"
- },
- "robots_hareruya.txt": {
-  "url": "https://www.hareruyamtg.com/robots.txt",
-  "status": 200,
-  "len": 3906,
-  "final": "https://www.hareruyamtg.com/robots.txt",
-  "ctype": "text/plain; charset=UTF-8"
- },
- "robots_yellowsub.txt": {
-  "url": "https://yellowsubmarine.co.jp/robots.txt",
-  "status": 200,
-  "len": 177,
-  "final": "https://yellowsubmarine.co.jp/robots.txt",
-  "ctype": "text/plain; charset=utf-8"
- },
- "robots_locator.txt": {
-  "url": "https://locator.wizards.com/robots.txt",
-  "status": 200,
-  "len": 106,
-  "final": "https://locator.wizards.com/robots.txt",
-  "ctype": "text/plain; charset=utf-8"
- },
- "robots_facebook.txt": {
-  "url": "https://www.facebook.com/robots.txt",
-  "status": 200,
-  "len": 42222,
-  "final": "https://www.facebook.com/robots.txt",
-  "ctype": "text/plain; charset=utf-8"
- },
- "amenity_matches.html": {
-  "url": "https://amenitydream.co.jp/matches/?type=2&shop=12&date=",
-  "error": "URLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1010)'))"
- },
- "amenity_matches_insecure.html": {
-  "url": "https://amenitydream.co.jp/matches/?type=2&shop=12&date=",
-  "status": 200,
-  "len": 16588,
-  "final": "https://amenitydream.co.jp/matches/?type=2&shop=12&date=",
-  "ctype": "text/html; charset=UTF-8"
- },
- "amenity_home_insecure.html": {
-  "url": "https://amenitydream.co.jp/",
-  "status": 200,
-  "len": 38322,
-  "final": "https://amenitydream.co.jp/",
-  "ctype": "text/html; charset=UTF-8"
- },
- "amenity_tls": "depth=0 CN = amenitydream.co.jp\nverify error:num=20:unable to get local issuer certificate\nverify return:1\ndepth=0 CN = amenitydream.co.jp\nverify error:num=21:unable to verify the first certificate\nverify return:1\ndepth=0 CN = amenitydream.co.jp\nverify return:1\nCONNECTED(00000003)\n---\nCertificate chain\n 0 s:CN = amenitydream.co.jp\n   i:C = US, O = Let's Encrypt, CN = YE2\n   a:PKEY: id-ecPublicKey, 256 (bit); sigalg: ecdsa-with-SHA384\n   v:NotBefore: Oct 16 18:54:31 2026 GMT; NotAfter: Jan 14 18:54:30 2027 GMT\n 1 s:C = US, O = Let's Encrypt, CN = R3\n   i:C = US, O = Internet Security Research Group, CN = ISRG Root X1\n   a:PKEY: rsaEncryption, 2048 (bit); sigalg: RSA-SHA256\n   v:NotBefore: Sep  4 00:00:00 2020 GMT; NotAfter: Sep 15 16:00:00 2025 GMT\n---\nServer certificate\n-----BEGIN CERTIFICATE-----\nMIIDlDCCAxmgAwIBAgISBZ5WWzEmXvYI4Mr/sCajwBy3MAoGCCqGSM49BAMDMDMx\nCzAJBgNVBAYTAlVTMRYwFAYDVQQKEw1MZXQncyBFbmNyeXB0MQwwCgYDVQQDEwNZ\nRTIwHhcNMjYxMDE2MTg1NDMxWhcNMjcwMTE0MTg1NDMwWjAdMRswGQYDVQQDExJh\nbWVuaXR5ZHJlYW0uY28uanAwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAAQmmkhL\nUEFC1tRetNOjqDIGJEOAZtpOhEUW2CWAheVHeJKOhw6mvGOUGnHF487oeaLKzEGV\nkm2nboi6/ZQQDM1Co4ICITCCAh0wDgYDVR0PAQH/BAQDAgeAMBMGA1UdJQQMMAoG\nCCsGAQUFBwMBMAwGA1UdEwEB/wQCMAAwHQYDVR0OBBYEFJ+W2Lzgdo+JmDsy/XRu\n3fRZIRQzMB8GA1UdIwQYMBaAFLlZ8o7PIvCG0zdI/3YUGLqC2FWHMDMGCCsGAQUF\n",
- "hareruya_cal_en.html": {
-  "url": "https://www.hareruyamtg.com/en/events/?shop=30",
-  "status": 200,
-  "len": 309534,
-  "final": "https://www.hareruyamtg.com/en/events/?shop=30",
-  "ctype": "text/html; charset=UTF-8"
- },
- "hareruya_cal_ja.html": {
-  "url": "https://www.hareruyamtg.com/ja/events/?shop=1",
-  "status": 200,
-  "len": 520207,
-  "final": "https://www.hareruyamtg.com/ja/events/?shop=1",
-  "ctype": "text/html; charset=UTF-8"
- },
- "hareruya_list.html": {
-  "url": "https://www.hareruyamtg.com/ja/events/list?formats%5B%5D=2&venues%5B%5D=1&isWeekday=true&isHoliday=true",
-  "status": 200,
-  "len": 59154,
-  "final": "https://www.hareruyamtg.com/ja/events/list?formats%5B%5D=2&venues%5B%5D=1&isWeekday=true&isHoliday=true",
-  "ctype": "text/html; charset=UTF-8"
- },
- "locator.html": {
-  "url": "https://locator.wizards.com/",
-  "status": 200,
-  "len": 47657,
-  "final": "https://locator.wizards.com/",
-  "ctype": "text/html; charset=utf-8"
- },
- "locator_js_0.js": {
-  "url": "https://global.ketchcdn.com/web/v3/config/hasbro/gatherer/boot.js",
-  "status": 204,
-  "len": 0,
-  "final": "https://global.ketchcdn.com/web/v3/config/hasbro/gatherer/boot.js",
-  "ctype": null
- },
- "locator_js_0_apis": [],
- "wpn_terms.html": {
-  "url": "https://wpn.wizards.com/en/terms-of-use",
-  "error": "<HTTPError 404: 'Not Found'>"
- },
- "locator_terms.html": {
-  "url": "https://locator.wizards.com/terms",
-  "error": "<HTTPError 404: 'Not Found'>"
- },
- "facebook_photo.html": {
-  "url": "https://www.facebook.com/photo?fbid=1608392257968123&set=a.459572686183425",
-  "status": 200,
-  "len": 427386,
-  "final": "https://www.facebook.com/login/?next=https%3A%2F%2Fwww.facebook.com%2Fphoto%3Ffbid%3D1608392257968123%26set%3Da.459572686183425",
-  "ctype": "text/html; charset=\"utf-8\""
- }
-}
+=== Hareruya store list
+ERR https://www.hareruyamtg.com/ja/store/ <HTTPError 500: 'Internal Server Error'>
+store links: []
+=== Hareruya next month, shop 1
+len 499792 days 30 events 570
+<li id="01" class="eventCalendar__calendarList__data"> <div class="eventCalendar__calendarList__data__wrapper sunday "> <span class="eventCalendar__calendarList__data__container date"> <span>1</span> </span> <span class="eventCalendar__calendarList__data__container weekday"> <span>日</span> </span> <br class="smp"> <span class="eventCalendar__calendarList__data__container title"> <div class="eventCalendar__unregular__tournament__container"> <div> <a href="https://www.hareruyamtg.com/ja/events/654049/detail"> <span class="format-icon format-icon-ML"></span> <span class="eventCalendar__calendarList__data__name">09:00</span> <span class="eventCalendar__calendarList__data__name">[毎日開催]マジックリーグ</span> </a> </div> </div> 
+title: トーナメントセンター 東京（2026年11月開催）MTGイベント・大会一覧 | 日本最大級 MTG通販サイト「晴れる屋」
+=== Amenity Dream
+type [('', '▼カード種別から選ぶ'), ('65', ' ハリー・ポッターカードゲーム'), ('66', 'プラコロ'), ('63', 'XrossStars'), ('62', 'GUNDAM CARD GAME'), ('61', 'ラブライブ！シリーズOCG'), ('60', 'ディズニー・ロルカナ・TCG'), ('54', 'DBSCG FUSION WORLD'), ('58', 'hololive OFFICIAL CARD GAME'), ('59', 'ウルトラマンカードゲーム'), ('55', 'DREAM ORDER'), ('57', '名探偵コナンカードゲーム'), ('37', 'ポケモンカードゲーム'), ('3', '遊戯王'), ('49', 'ONE PIECE CARDGAME'), ('2', 'ＭＴＧ'), ('52', 'UNION ARENA'), ('53', 'FaBtcg(Flesh and Blood)'), ('48', 'Shadowverse EVOLVE'), ('12', 'バトルスピリッツ'), ('5', 'ヴァイスシュヴァルツ'), ('40', 'デュエルマスターズ'), ('4', 'ヴァンガード'), ('44', 'デジモンカードゲーム'), ('43', 'Reバース for you'), ('8', 'Ｚ／Ｘ'), ('47', 'ビルディバイド(BUILD DIVIDE)'), ('42', 'LYCEE OVERTURE TCG'), ('32', 'ウィクロス'), ('35', 'ファイアーエムブレム0'), ('64', '【店舗からのお知らせ】'), ('18', 'その他TCG')]
+shop [('', '▼店舗から選ぶ'), ('19', '立川店'), ('4', '札幌店'), ('1', '吉祥寺店'), ('8', '池袋パワー9店'), ('16', '中野店'), ('10', '新宿店'), ('7', '秋葉原店'), ('18', '蒲田店'), ('12', '町田店'), ('6', '大宮店'), ('9', '横浜店'), ('13', '大須店'), ('14', '京都店'), ('3', 'なんば2号店')]
+date [('', '▼開催日から選ぶ'), ('2026-10-24', '10/24 (土)'), ('2026-10-25', '10/25 (日)'), ('2026-10-26', '10/26 (月)'), ('2026-10-27', '10/27 (火)'), ('2026-10-28', '10/28 (水)'), ('2026-10-29', '10/29 (木)'), ('2026-10-30', '10/30 (金)'), ('2026-10-31', '10/31 (土)'), ('2026-11-01', '11/01 (日)'), ('2026-11-02', '11/02 (月)'), ('2026-11-03', '11/03 (火)'), ('2026-11-04', '11/04 (水)'), ('2026-11-05', '11/05 (木)'), ('2026-11-06', '11/06 (金)'), ('2026-11-07', '11/07 (土)'), ('2026-11-08', '11/08 (日)'), ('2026-11-09', '11/09 (月)'), ('2026-11-10', '11/10 (火)'), ('2026-11-11', '11/11 (水)'), ('2026-11-12', '11/12 (木)'), ('2026-11-13', '11/13 (金)'), ('2026-11-14', '11/14 (土)'), ('2026-11-15', '11/15 (日)'), ('2026-11-16', '11/16 (月)'), ('2026-11-17', '11/17 (火)'), ('2026-11-18', '11/18 (水)'), ('2026-11-19', '11/19 (木)'), ('2026-11-20', '11/20 (金)'), ('2026-11-21', '11/21 (土)'), ('2026-11-22', '11/22 (日)'), ('2026-11-23', '11/23 (月)'), ('2026-11-24', '11/24 (火)')]
+all-shop rows 25 pagination:  
+rows per shop {'札幌店': 3, '新宿店': 4, '町田店': 4, '蒲田店': 3, '横浜店': 1, '大宮店': 2, '大須店': 2, '秋葉原店': 1, '立川店': 1, '京都店': 1, '池袋パワー9店': 2, 'なんば2号店': 1}
+   ['10/24(土) 13:00', '札幌店', 'ＭＴＧ', '「リアリティ・フラクチャー」ストアチャンピオンシップ', 'スイスドロー', '16名', '500円', '開始10分前', '']
+   ['10/24(土) 13:00', '新宿店', 'ＭＴＧ', '週末ドラフト', 'ドラフト大会', '8名', '300円', '開始10分前', '']
+   ['10/24(土) 13:00', '町田店', 'ＭＴＧ', '月1レガシー', 'スイスドロー/レガシー', '24名', '1,000円', '開始5分前', '']
+tokyo-akihabara 253-2726 営業時間 平日12:00～21:00 土日祝11:00～20:00 デュエルスペース 5階：24席、7階：128席 店舗情報 札幌店 吉祥寺店 大宮店 通販部
+tokyo-machida 851-7796（電話・FAX共通番号） 営業時間 年中無休 平日12:00～21:00 土日祝11:00～20:00 デュエルスペース 56席 店舗情報 札幌店 吉祥寺店 大
+aichi-osu 265-8848（電話・FAX共通番号） 営業時間 年中無休 平日12:00～21:00 土日祝11：00～20：00 デュエルスペース 68席 店舗情報 札幌店 吉祥寺店 大
+=== Yellow Submarine
+len 44661 tables 1 classes ['tmt_list customize-support']
+�C�x���g�J�×\��\�@�V�h�X�@| �{�[�h�Q�[���ETRPG�ETCG�E�A�i���O�Q�[���̔̔�����̓C�G���[�T�u�}���� | ONLINE FLAGSHOP | �y�V�s��X | �X�܏�� | �ϑ���t���ē� | ���Ô���T�[�r�X | ��ЊT�v | �̗p��� | ���₢���킹 | �C�x���g�J�×\��\ | �J�Ó� | 
+---
+
+--- table html:
+<table> <tr> <td>�J�Ó�</td> <td>���</td> <td>�C�x���g��</td> <td>�J�n</td> <td>��p</td> <td>���</td> <td>���l</td> </tr> <tr> <td>10/1(��)</td> <td>�V�Y��</td> <td>�����L���O�f���G��</td> <td>15:00</td> <td>����</td> <td>8��</td> <td>�}�b�`��A�j���[������莖�O�\��\ �����X����t���I</td> </tr> <tr> <td>10/1(��)</td> <td>�}�W�b�N</td> <td>���̑����~�e�b�h</td> <td>19:00</td> <td>���Q����3�p�b�N�w��</td> <td>8��</td> <td>�}�W�b�N���[�O�A�����R���p�j�I���A�v���œX����t�撅��</td> </tr> <tr> <td>10/1(��)</td> <td>�}�W�b�N</td> <td>���̑����~�e�b�h</td> <td>23:59</td> <td>�v�������[�X�p�b�N�w��</td> <td>99��</td> <td>���A���e�B�E�t���N�`���[ �������ŗV�ׂ�v�������[�X�C�x���g</td> </tr> <tr> <td>10/2(��)</td> <td>�E���g���}��TCG</td> <td>�E���g�����[�O�@�`�������W�}�b�`</td> <td>17:00</td> <td>300�~</td> <td>8��</td> <td>�A�v���ɂĎQ���A�X���`�F�b�N�C���K�{</td> </tr> <tr> <td>10/2(��)</td> <td>�|�P�����J�[�h</td> <td>�W���o�g��</td> <td>18:00</td> <td>100�~</td> <td>8��</td> <td>�A�v���ɂĎQ���A�����X����t�撅��</td> </tr> <tr> <td>10/2(��)</td> <td>�}�W�b�N</td> <td>�t���C�f�[�i�C�g�}�W�b�N</td> <td>18:30</td> <td>1�p�b�N�w��</td> <td>4��</td> <td>�X�^���_�[�h�A�����R���p�j�I���A�v���œX����t�撅��</td> </tr> <tr> <td>10/2(��)</td> <td>�}�W�b�N</td> <td>�t���C�f�[�i�C�g�}�W�b�N</td> <td>18:30</td> <td>1�p�b�N�w��</td> <td>4��</td> <td>���_���A�����R���p�j�I���A�v���œX����t�撅��</td> </tr> <tr> <td>10/2(��)</td> <td>�}�W�b�N</td> <td>�t���C�f�[�i�C�g�}�W�b�N</td> <td>19:30</td> <td>1�p�b�N�w��</td> <td>8��</td> <td>�����ҁA�����R���p�j�I���A�v���œX����t�撅��</td> </tr> <tr> <td>10/3(�y)</td> <td>���b�V���f���G��</td> <td>���̑�</td> <td>13:00</td> <td>����</td> <td>8��</td> <td>�C���X�g���N�^�[�C�x���g �f���G�����[���ɂĎ�t</td> </tr> <tr> <td>10/3(�y)</td> <td>���@���K�[�h</td> <td>�V���b�v�t�@�C�g</td> <td>14:00</td> <td>1�p�b�N�w��</td> <td>8��</td> <td>�u�V�i�r�ɂĐ撅�\��</td> </tr> <tr> <td>10/3(�y)</td> <td>�z�����C�uOCG</td> <td>�V���b�v���</td> <td>17:00</td> <td>100�~</td> <td>8��</td> <td>�u�V�i�r�ɂĐ撅�\��</td> </tr> <tr> <td>10/3(�y)</td> <td>���̑�TCG</td> <td>���̑�TCG</td> <td>19:00</td> <td>1�p�b�N�w��</td> <td>8��</td> <td>�j���W���X���C���[TCG����F���A�Q����t�撅��</td> </tr> <tr> <td>10/4(��)</td> <td>�f���G���}�X�^�[�Y</td> <td>���ʑ��</td> <td>12:00</td> <td>100�~</td> <td>16��</td> <td>���W�F���h�J�[�h���֍Ձ@�`�W���[�ҁ`�@�X����t�撅��</td> </tr> <tr> 
+tournament page links: ['http://shop.yellowsubmarine.co.jp/', 'https://yellowsubmarine.co.jp/#store', 'https://yellowsubmarine.co.jp/tmt_list/akihabara_mnt/', 'https://yellowsubmarine.co.jp/tmt_list/akihabara_rpg/', 'https://yellowsubmarine.co.jp/tmt_list/chiba_gs/', 'https://yellowsubmarine.co.jp/tmt_list/fukuoka_mc/', 'https://yellowsubmarine.co.jp/tmt_list/himeji/', 'https://yellowsubmarine.co.jp/tmt_list/hiroshima/', 'https://yellowsubmarine.co.jp/tmt_list/ikebukuro_gs/', 'https://yellowsubmarine.co.jp/tmt_list/kashiwa_m/', 'https://yellowsubmarine.co.jp/tmt_list/kawagoe_cs/', 'https://yellowsubmarine.co.jp/tmt_list/kawasaki/', 'https://yellowsubmarine.co.jp/tmt_list/kyoto/', 'https://yellowsubmarine.co.jp/tmt_list/machida/', 'https://yellowsubmarine.co.jp/tmt_list/mizo/', 'https://yellowsubmarine.co.jp/tmt_list/nagoya_gs/', 'https://yellowsubmarine.co.jp/tmt_list/nanba_3/', 'https://yellowsubmarine.co.jp/tmt_list/nanba_s/', 'https://yellowsubmarine.co.jp/tmt_list/omiya_ps/', 'https://yellowsubmarine.co.jp/tmt_list/sannomiya/', 'https://yellowsubmarine.co.jp/tmt_list/sapporo_gs/', 'https://yellowsubmarine.co.jp/tmt_list/shinjuku/', 'https://yellowsubmarine.co.jp/tmt_list/tachikawa/', 'https://yellowsubmarine.co.jp/tmt_list/utsunomiya/', 'https://yellowsubmarine.co.jp/tmt_list/yokohama/', 'https://yellowsubmarine.co.jp/tmt_list/yokohama_m/', 'tel:https://yellowsubmarine.co.jp/tmt_list/akihabara_mnt/', 'tel:https://yellowsubmarine.co.jp/tmt_list/akihabara_rpg/', 'tel:https://yellowsubmarine.co.jp/tmt_list/chiba_gs/', 'tel:https://yellowsubmarine.co.jp/tmt_list/fukuoka_mc/', 'tel:https://yellowsubmarine.co.jp/tmt_list/himeji/', 'tel:https://yellowsubmarine.co.jp/tmt_list/hiroshima/', 'tel:https://yellowsubmarine.co.jp/tmt_list/ikebukuro_gs/', 'tel:https://yellowsubmarine.co.jp/tmt_list/kashiwa_m/', 'tel:https://yellowsubmarine.co.jp/tmt_list/kawagoe_cs/', 'tel:https://yellowsubmarine.co.jp/tmt_list/kawasaki/', 'tel:https://yellowsubmarine.co.jp/tmt_list/kyoto/', 'tel:https://yellowsubmarine.co.jp/tmt_list/machida/', 'tel:https://yellowsubmarine.co.jp/tmt_list/mizo/', 'tel:https://yellowsubmarine.co.jp/tmt_list/nagoya_gs/', 'tel:https://yellowsubmarine.co.jp/tmt_list/nanba_3/', 'tel:https://yellowsubmarine.co.jp/tmt_list/nanba_s/', 'tel:https://yellowsubmarine.co.jp/tmt_list/omiya_ps/', 'tel:https://yellowsubmarine.co.jp/tmt_list/sannomiya/', 'tel:https://yellowsubmarine.co.jp/tmt_list/sapporo_gs/', 'tel:https://yellowsubmarine.co.jp/tmt_list/shinjuku/', 'tel:https://yellowsubmarine.co.jp/tmt_list/tachikawa/', 'tel:https://yellowsubmarine.co.jp/tmt_list/utsunomiya/', 'tel:https://yellowsubmarine.co.jp/tmt_list/yokohama/', 'tel:https://yellowsubmarine.co.jp/tmt_list/yokohama_m/']
