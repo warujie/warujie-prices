@@ -19,7 +19,9 @@ prices of every printing to the stored history, and writes:
                        and Mana Pool's public price lists and (with an API
                        token in CARDTRADER_TOKEN) CardTrader's sellers in Europe;
                        and ENNDAL GAMES' stock in yen (read once a night by
-                       shop_enndal.py, given with --enndal)
+                       shop_enndal.py, given with --enndal); and PullVault's
+                       singles in dollars (read and checked against their
+                       photos by shop_pullvault.py, given with --pullvault)
     movers.json        biggest risers and fallers over 1, 7 and 30 days, for
                        the US market (dollars) and the European one (euros)
     ids.json.gz        MTGJSON's card ids matched to Scryfall's (kept for a week)
@@ -60,6 +62,7 @@ import urllib.request
 from datetime import date, datetime, timedelta, timezone
 
 import shop_enndal
+import shop_pullvault
 
 BULK_DATA_ENDPOINT = "https://api.scryfall.com/bulk-data"
 HEADERS = {"User-Agent": "WarujiePriceHistory/1.1 (+https://github.com/warujie/warujie-prices)", "Accept": "application/json"}
@@ -82,7 +85,8 @@ CT_CONDITIONS = {"Mint": "M", "Near Mint": "NM", "Slightly Played": "SP", "Moder
 CT_LANGS = {"jp": "JA", "ja": "JA", "kr": "KO", "ko": "KO", "zh-cn": "CS", "zh-tw": "CT"}
 EUROPE = set("AD AL AT BA BE BG BY CH CY CZ DE DK EE ES FI FO FR GB GI GR HR HU IE IS IT LI LT LU LV MC MD ME MK MT NL NO PL PT RO RS SE SI SK SM UA VA XK".split())
 ENNDAL_SOURCE = "ENNDAL GAMES (offers in yen by language and condition, with stock; read once a night, with the shop's permission)"
-OFFER_MARKETS = {"ck": "us", "mp": "us", "ct": "eu", "ed": "jp"}   # "ed" = ENNDAL GAMES: prices in yen, not cents
+PULLVAULT_SOURCE = "PullVault (singles in dollars, each checked against the listing's photos; read once a day, with the shop's permission)"
+OFFER_MARKETS = {"ck": "us", "mp": "us", "pv": "us", "ct": "eu", "ed": "jp"}   # "ed" = ENNDAL GAMES: prices in yen, not cents
 
 FORMAT_VERSION = 1
 DAILY_DAYS = 120            # keep every day for this long, then weekly
@@ -825,9 +829,20 @@ def shop_offers(args, products, printings=({}, {})):
         except Exception as err:
             print(f"  note: ENNDAL GAMES' offers could not be read ({err}); keeping the earlier ones.")
     # (the earlier ones are kept for up to shop_enndal.KEEP_DAYS, so offers stop showing if the nightly reading stops)
+    # PullVault: today's singles that shop_pullvault.py matched and checked against their photos
+    if args.pullvault:
+        try:
+            data = shop_pullvault.load(args.pullvault)
+            n, held = shop_pullvault.add_offers(data, rows, links)
+            when["pullvault"] = data.get("updated") or "?"
+            print(f"  PullVault: {n} offers ({held} listings held back or not cards), read {when['pullvault']}")
+        except Exception as err:
+            print(f"  note: PullVault's offers could not be read ({err}); keeping the earlier ones.")
     run_day = datetime.fromisoformat(args.date).replace(tzinfo=timezone.utc) if args.date else datetime.now(timezone.utc)
     ed_cutoff = (run_day - timedelta(days=shop_enndal.KEEP_DAYS)).strftime("%Y-%m-%dT%H:%M:%SZ")
     keep_ed = "enndal" not in when and str(prev_when.get("enndal") or "") >= ed_cutoff
+    pv_cutoff = (run_day - timedelta(days=shop_pullvault.KEEP_DAYS)).strftime("%Y-%m-%dT%H:%M:%SZ")
+    keep_pv = "pullvault" not in when and str(prev_when.get("pullvault") or "") >= pv_cutoff
     token = os.environ.get("CARDTRADER_TOKEN", "").strip()
     resume = 0
     seen = set()
@@ -839,15 +854,15 @@ def shop_offers(args, products, printings=({}, {})):
         except Exception as err:
             print(f"  note: CardTrader's offers could not be read ({err}).")
             resume = int(prev_index.get("ct_resume") or 0)
-    # CardTrader's sets not read today, and ENNDAL GAMES when last night's
-    # products are missing, keep the offers published last time
+    # CardTrader's sets not read today, and ENNDAL GAMES and PullVault when
+    # their reading is missing, keep the offers published last time
     keep_ct = keep_ct and bool(prev_when.get("cardtrader"))
-    kept = {"ct": 0, "ed": 0}
+    kept = {"ct": 0, "ed": 0, "pv": 0}
     try:
-        for key in (prev_index.get("shards") or []) if keep_ct or keep_ed else []:
+        for key in (prev_index.get("shards") or []) if keep_ct or keep_ed or keep_pv else []:
             old = load_published(args.previous, f"q/{key}.json.gz") or {}
             for sid, old_rows in (old.get("l") or {}).items():
-                for shop, wanted in (("ct", keep_ct and sid not in seen), ("ed", keep_ed)):
+                for shop, wanted in (("ct", keep_ct and sid not in seen), ("ed", keep_ed), ("pv", keep_pv)):
                     got = [r for r in old_rows if r and r[0] == shop] if wanted else []
                     if got and not any(r[0] == shop for r in rows.get(sid, [])):
                         rows.setdefault(sid, []).extend(got)
@@ -860,6 +875,9 @@ def shop_offers(args, products, printings=({}, {})):
         if kept["ed"]:
             print(f"  kept the earlier ENNDAL GAMES offers of {kept['ed']} printings")
             when.setdefault("enndal", prev_when["enndal"])
+        if kept["pv"]:
+            print(f"  kept the earlier PullVault offers of {kept['pv']} printings")
+            when.setdefault("pullvault", prev_when["pullvault"])
     except Exception as err:
         print(f"  note: the earlier offers could not be read ({err}).")
     for sid, got in rows.items():
@@ -1101,11 +1119,14 @@ def build(args):
             sources.append(CARDTRADER_SOURCE)
         if "enndal" in offers[2] and ENNDAL_SOURCE not in sources:
             sources.append(ENNDAL_SOURCE)
+        if "pullvault" in offers[2] and PULLVAULT_SOURCE not in sources:
+            sources.append(PULLVAULT_SOURCE)
     check = source_check(dates, idx, shards, info, quote_data, ids)
     if offers:
         check["offers"] = {"as_of": offers[2], "printings": len(offers[0]), "rows": sum(len(r) for r in offers[0].values()),
                            "cardtrader_printings": sum(1 for r in offers[0].values() if any(x[0] == "ct" for x in r)),
-                           "enndal_printings": sum(1 for r in offers[0].values() if any(x[0] == "ed" for x in r)), "ct_resume": offers[3]}
+                           "enndal_printings": sum(1 for r in offers[0].values() if any(x[0] == "ed" for x in r)),
+                           "pullvault_printings": sum(1 for r in offers[0].values() if any(x[0] == "pv" for x in r)), "ct_resume": offers[3]}
     mover_data = movers(today, dates, shards, info, (quote_data or ({},))[0])
     check["movers_top"] = {w: {m: {d: [f"{e['n']} ({e['s']}) {e['then']}->{e['now']} {e['pct']}%" for e in blk[m][d][:5]]
                                    for d in ("up", "down")} for m in MARKETS} for w, blk in mover_data.items()}
@@ -1326,6 +1347,7 @@ def main():
     ap.add_argument("--manapool-variants", default="", help="a saved Mana Pool variant price list to use instead of downloading")
     ap.add_argument("--cardtrader", default="", help="a folder of saved CardTrader answers (normally the API, used when CARDTRADER_TOKEN is set)")
     ap.add_argument("--enndal", default="", help="last night's enndal.json.gz from shop_enndal.py (without it, the published ENNDAL offers are kept)")
+    ap.add_argument("--pullvault", default="", help="today's pullvault.json.gz from shop_pullvault.py (without it, the published PullVault offers are kept for a few days)")
     ap.add_argument("--cardtrader-minutes", type=float, default=CARDTRADER_MINUTES, help="time allowed for reading CardTrader")
     build(ap.parse_args())
 
