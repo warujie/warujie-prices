@@ -19,12 +19,20 @@ Sources:
                  (KAYAC's tournament site; the owner's request of 2026-10-25): its event-search
                  page opened in a headless browser (Playwright), keeping the lists the page
                  itself loads; offline events only
+  Pictures       shops' event calendars posted as pictures, read by hand (the owner's choice,
+                 2026-10-25: by hand first, automatic later) and kept in manual_events.json:
+                 shops' posts on X, from a picture the owner hands over (x.com itself is never
+                 read: its robots.txt forbids it), and MINT's monthly schedule pages
+                 (mint-web.jp, the owner's request); each event links to its post or page
 
     python3 build_events.py --out site/events.json [--days 35]
+    python3 build_events.py --out site/events.json --manual-only published.json
 
 Writes { "updated", "sources": {shop: events}, "events": [{ "d", "t", "p", "c",
 "shop", "store", "name", "url", "f" }] } (docs/README.md), or exits non-zero
-without writing if every source failed, so yesterday's file stays published.
+without writing if every shop's source failed, so yesterday's file stays published.
+--manual-only puts manual_events.json's events into an already published file without
+reading any shop (a change to manual_events.json goes out without a second crawl).
 """
 import argparse
 import html as htmllib
@@ -95,6 +103,28 @@ def formats_in(text):
     return [f for f, pat in FORMAT_WORDS if re.search(pat, text, re.I)]
 
 
+# an entry fee in yen: ¥1,000 / 1000円 / 無料 (a pack to buy instead, 1パック購入 or 200円以上購入, is no fee)
+YEN_RE = re.compile(r"[¥￥]\s*(\d{1,3}(?:,\d{3})+|\d{1,6})(?!\d)|(?<![\d,])(\d{1,3}(?:,\d{3})+|\d{1,6})\s*円(?!\s*(?:分|以上|の?購入|相当))")
+
+
+def yen_of(text):
+    """The first entry fee in yen a piece of text gives, as a whole number (0 when it says free),
+    or None."""
+    text = unicodedata.normalize("NFKC", text or "").replace("¥", "¥")
+    m = YEN_RE.search(text.replace("￥", "¥"))
+    if m and not re.search(r"購入", text[m.end():m.end() + 6]):
+        return int((m.group(1) or m.group(2)).replace(",", ""))
+    if re.search(r"無料|free", text, re.I) and not re.search(r"\d", text):
+        return 0
+    return None
+
+
+def tonamel_fee(description):
+    """The fee on a Tonamel description's 参加費 line (【参加費】1,000円, 参加費：無料…)."""
+    m = re.search(r"参加費[】\]）)]*[：:\s　]*([^\n<]{1,40})", description or "")
+    return yen_of(m.group(1)) if m else None
+
+
 def clean(s):
     s = re.sub(r"<[^>]+>", " ", s)
     return re.sub(r"\s+", " ", htmllib.unescape(s)).strip()
@@ -162,6 +192,54 @@ def read_hareruya(today, log):
     return events
 
 
+# Hareruya's calendar gives no fee; each event's own page does (■参加費 1,000円). A store's
+# recurring event (the same name) costs the same each time, so one page is read per store and
+# name, its fee kept in a small cache (hareruya_fees.json, beside events.json in R2) and re-read
+# after HARERUYA_FEE_DAYS; at most HARERUYA_FEE_PAGES pages a night, the soonest events first.
+HARERUYA_FEE_PAGES = 250          # about 17 minutes at PAGE_GAP
+HARERUYA_FEE_DAYS = 30
+HARERUYA_FEE_RE = re.compile(r'参加費</div>\s*<div class="event_detail_table_text">(.*?)</div>', re.S)
+
+
+def hareruya_fee(html):
+    """The fee on a Hareruya event page: its 参加費 row; None when the page gives none."""
+    m = HARERUYA_FEE_RE.search(html)
+    if m:
+        return yen_of(clean(m.group(1)))
+    m = re.search(r"■\s*参加費\s*([^■]{1,40})", clean(html))
+    return yen_of(m.group(1)) if m else None
+
+
+def hareruya_fees(events, cache, today, log, deadline):
+    """Puts the cached fee on each Hareruya event, after reading the pages of the store-and-name
+    pairs not in the cache yet (then the stalest), soonest event first, within the night's budget."""
+    key = lambda e: f"{e['store']}|{e['name']}"
+    first = {}
+    for e in sorted((e for e in events if e.get("shop") == "hareruya"), key=lambda e: (e["d"], e["t"] or "99:99")):
+        first.setdefault(key(e), e)
+    stale = (today - timedelta(days=HARERUYA_FEE_DAYS)).isoformat()
+    todo = [k for k in first if k not in cache] + sorted((k for k in first if k in cache and cache[k].get("read", "") < stale),
+                                                          key=lambda k: cache[k].get("read", ""))
+    read = 0
+    for k in todo[:HARERUYA_FEE_PAGES]:
+        if time.time() > deadline:
+            log("  hareruya fees: out of time for tonight")
+            break
+        try:
+            fee = hareruya_fee(fetch(first[k]["url"]))
+        except Exception as e:
+            log(f"  hareruya fee {first[k]['url']}: {e!r}"[:200])
+            continue
+        cache[k] = {"fee": fee, "read": today.isoformat(), "url": first[k]["url"]}
+        read += 1
+    for e in events:
+        if e.get("shop") == "hareruya" and cache.get(key(e), {}).get("fee") is not None:
+            e["fee"] = cache[key(e)]["fee"]
+    known = sum(1 for k in first if k in cache)
+    log(f"  hareruya fees: {read} pages read; {known} of {len(first)} store-and-name pairs known, {len(todo) - read} still to read")
+    return cache
+
+
 # ---- Amenity Dream
 def amenity_context(host="amenitydream.co.jp"):
     """A normal, verifying TLS context that also knows the intermediate certificate the
@@ -206,9 +284,12 @@ def parse_amenity(html, today):
         shop, pref, city = AMENITY[tds[1]]
         name, style = tds[3], tds[4]
         fs = formats_in(name) or formats_in(style)
+        # a fee column, should the table have one: a later cell that is only a sum (1,000円, ¥500, 無料)
+        fee = next((yen_of(x) for x in tds[5:] if re.fullmatch(r"(参加費[：:]?\s*)?([¥￥]\s*[\d,]+|[\d,]+\s*円|無料)", x)), None)
         out.append({"d": f"{year_for(mo, today):04d}-{mo:02d}-{da:02d}", "t": m.group(3) or "", "p": pref, "c": city,
                     "shop": "amenity", "store": tds[1], "name": name,
-                    "url": f"https://amenitydream.co.jp/matches/?type=2&shop={shop}&date={year_for(mo, today):04d}-{mo:02d}-{da:02d}", "f": fs})
+                    "url": f"https://amenitydream.co.jp/matches/?type=2&shop={shop}&date={year_for(mo, today):04d}-{mo:02d}-{da:02d}", "f": fs,
+                    "fee": fee})
     return out
 
 
@@ -257,6 +338,10 @@ TONAMEL_API = "https://tonamel.com/graphql/competition_management"
 TONAMEL_MAX_PAGES = 30   # lists of 32 events
 # shops read from their own pages: their Tonamel listings would only repeat them
 TONAMEL_SKIP = re.compile(r"晴れる屋|イエローサブマリン|イエサブ|アメニティ")
+# MINT's stores that list on Tonamel (MINTGAMESMTG店) join MINT's own entry, as 'GAMES MTG店'
+TONAMEL_MINT = re.compile(r"^(?:MINT|ミント)\s*(GAMES\s*\S.*?|[^\x00-\x7f].*?)\s*(?:[(（].*)?$", re.I)
+# Tonamel listings that aren't events: a store's play room for hire (【ルーム予約】貸切プレイルーム)
+TONAMEL_NOT_EVENT = re.compile(r"ルーム予約|貸切")
 PREF_NAMES = ["北海道", "青森県", "岩手県", "宮城県", "秋田県", "山形県", "福島県", "茨城県", "栃木県", "群馬県", "埼玉県",
               "千葉県", "東京都", "神奈川県", "新潟県", "富山県", "石川県", "福井県", "山梨県", "長野県", "岐阜県", "静岡県",
               "愛知県", "三重県", "滋賀県", "京都府", "大阪府", "兵庫県", "奈良県", "和歌山県", "鳥取県", "島根県", "岡山県",
@@ -331,12 +416,17 @@ def parse_tonamel(nodes):
             if not pref or not d:
                 continue
             title = clean(n.get("title") or "")
+            if TONAMEL_NOT_EVENT.search(title):
+                continue
+            shop, store = "tonamel", org or clean(loc.get("venueName") or "")
+            m = TONAMEL_MINT.match(unicodedata.normalize("NFKC", org))
+            if m:
+                shop, store = "mint", re.sub(r"^GAMES(?=\S)", "GAMES ", m.group(1), flags=re.I)
             # the format: from the title, else the description's 【フォーマット】 line
             m = re.search(r"フォーマット[】\]：:\s　]*([^<\n]{1,40})", n.get("description") or "")
             fs = formats_in(title) or (formats_in(clean(m.group(1))) if m else [])
-            out.append({"d": d, "t": t, "p": pref, "c": city, "shop": "tonamel",
-                        "store": org or clean(loc.get("venueName") or ""), "name": title,
-                        "url": f"https://tonamel.com/competition/{n['id']}", "f": fs})
+            out.append({"d": d, "t": t, "p": pref, "c": city, "shop": shop, "store": store, "name": title,
+                        "url": f"https://tonamel.com/competition/{n['id']}", "f": fs, "fee": tonamel_fee(n.get("description"))})
     return out
 
 
@@ -425,7 +515,7 @@ def parse_yellowsub(html, slug, pref, city, today):
             name = f"{name}（{'・'.join(FORMAT_JA[f] for f in fs)}）"
         t = tds[3] if re.fullmatch(r"\d{1,2}:\d{2}", tds[3]) else ""
         out.append({"d": f"{year_for(mo, today):04d}-{mo:02d}-{da:02d}", "t": t, "p": pref, "c": city,
-                    "shop": "yellowsub", "store": store, "name": name, "url": url, "f": fs})
+                    "shop": "yellowsub", "store": store, "name": name, "url": url, "f": fs, "fee": yen_of(tds[4])})
     return out
 
 
@@ -437,6 +527,101 @@ def read_yellowsub(today, log):
         except Exception as e:
             log(f"  yellowsub {slug}: {e!r}"[:200])
     return events
+
+
+# ---- calendar pictures (by hand): shops' X posts and MINT's schedule pages
+MANUAL = os.path.join(os.path.dirname(os.path.abspath(__file__)), "manual_events.json")
+# what each hand-kept event may link to: for X, the post, or the shop's X account (where its
+# calendars are) when the post's own link isn't known; for MINT, the store's schedule page
+MANUAL_LINKS = {
+    "x": re.compile(r"https://(?:x|twitter)\.com/[A-Za-z0-9_]{1,15}(?:/status/\d{1,20})?"),
+    "mint": re.compile(r"https://mint-web\.jp/\?pid=\d{1,12}"),
+}
+
+
+def read_manual(today, log):
+    """The events read by hand from shops' calendar pictures (manual_events.json): posts on X
+    (shop "x") and MINT's monthly schedule pages (shop "mint"). An entry that doesn't hold
+    together (a date, a time, a prefecture, a link of its kind) is left out."""
+    try:
+        with open(MANUAL, encoding="utf-8") as f:
+            rows = json.load(f).get("events", [])
+    except FileNotFoundError:
+        return []
+    out = []
+    for r in rows:
+        shop = r.get("shop") or "x"
+        url = str(r.get("url") or "").replace("https://twitter.com/", "https://x.com/")
+        url = url if shop == "mint" else url.split("?")[0]
+        ok = (shop in MANUAL_LINKS and MANUAL_LINKS[shop].fullmatch(url)
+              and re.fullmatch(r"\d{4}-\d{2}-\d{2}", str(r.get("d") or "")) and re.fullmatch(r"(\d{1,2}:\d{2})?", str(r.get("t") or ""))
+              and isinstance(r.get("p"), int) and 1 <= r["p"] <= 47 and r.get("store") and r.get("name"))
+        if not ok:
+            log(f"  manual: left out {json.dumps(r, ensure_ascii=False)[:160]}")
+            continue
+        fs = [f for f in (r.get("f") or []) if f in FORMAT_JA] or formats_in(r["name"])
+        fee = r.get("fee") if isinstance(r.get("fee"), int) and r["fee"] >= 0 else None
+        fee_to = r.get("fee_to") if fee is not None and isinstance(r.get("fee_to"), int) and r["fee_to"] > fee else None
+        out.append({"d": r["d"], "t": r.get("t") or "", "p": r["p"], "c": r.get("c") or "", "shop": shop,
+                    "store": r["store"], "name": r["name"], "url": url, "f": fs, "fee": fee, "fee_to": fee_to})
+    return out
+
+
+def hand_kept(e):
+    return any(link.fullmatch(e.get("url", "")) for link in MANUAL_LINKS.values())
+
+
+def store_key(name):
+    """A store's name for matching across sources: 'MINTGAMESMTG店' and 'GAMES MTG店' alike."""
+    k = re.sub(r"\s+", "", unicodedata.normalize("NFKC", name)).lower()
+    return re.sub(r"店$", "", re.sub(r"^(mint|ミント)", "", k))
+
+
+def minutes(t):
+    h, m = t.split(":")
+    return int(h) * 60 + int(m)
+
+
+def same_event(a, b):
+    """The same store's event on the same day: the same start, or starts within 30 minutes and a
+    format in common (a shop's picture may give the start where Tonamel gives the doors)."""
+    if a["d"] != b["d"] or store_key(a["store"]) != store_key(b["store"]):
+        return False
+    if a["t"] == b["t"]:
+        return True
+    return bool(a["t"] and b["t"] and abs(minutes(a["t"]) - minutes(b["t"])) <= 30 and set(a.get("f") or []) & set(b.get("f") or []))
+
+
+def tidy(events):
+    """One entry per event, sorted by day and start time. An event read by hand from a picture
+    that a shop also lists on Tonamel (or another read source) keeps that entry instead: its own
+    page, with the details (the owner's request, 2026-10-25)."""
+    read = {}
+    for e in events:
+        if not hand_kept(e):
+            read.setdefault((e["d"], store_key(e["store"])), []).append(e)
+    seen, unique = set(), []
+    for e in sorted(events, key=lambda e: (e["d"], e["t"] or "99:99", e["p"], e["store"], e["name"])):
+        k = (e["d"], e["t"], e["shop"], e["store"], e["name"])
+        twin = hand_kept(e) and next((o for o in read.get((e["d"], store_key(e["store"])), []) if same_event(e, o)), None)
+        if twin and twin.get("fee") is None and e.get("fee") is not None:
+            twin["fee"], twin["fee_to"] = e["fee"], e.get("fee_to")   # the picture's fee, where Tonamel gives none
+        if k in seen or twin:
+            continue
+        seen.add(k)
+        unique.append(e)
+    for e in unique:   # no empty fields in the file
+        for x in ("f", "fee", "fee_to"):
+            if e.get(x) is None or e.get(x) == []:
+                e.pop(x, None)
+    return unique
+
+
+def write(path, data, log):
+    os.makedirs(os.path.dirname(path) or ".", exist_ok=True)
+    with open(path, "w", encoding="utf-8") as f:
+        json.dump(data, f, ensure_ascii=False, separators=(",", ":"))
+    log(f"Wrote {len(data['events'])} events to {path} ({os.path.getsize(path) // 1024} KB)")
 
 
 def keep(e, first, last):
@@ -452,11 +637,28 @@ def main():
     ap.add_argument("--out", required=True)
     ap.add_argument("--days", type=int, default=35)
     ap.add_argument("--only", default="", help="comma-separated shops (for testing)")
+    ap.add_argument("--manual-only", metavar="PUBLISHED", help="put manual_events.json into this published file; no shop is read")
+    ap.add_argument("--fees", metavar="CACHE", help="Hareruya's fees: read and update this cache (hareruya_fees.json)")
+    ap.add_argument("--fee-minutes", type=float, default=25, help="stop reading Hareruya's event pages this long after the start")
     args = ap.parse_args()
     log = lambda s: print(s, flush=True)
+    started = time.time()
     today = datetime.now(JST).date()
     first, last = today.isoformat(), (today + timedelta(days=args.days)).isoformat()
-    readers = {"hareruya": read_hareruya, "amenity": read_amenity, "yellowsub": read_yellowsub, "tonamel": read_tonamel}
+    if args.manual_only:
+        with open(args.manual_only, encoding="utf-8") as f:
+            data = json.load(f)
+        shops = [e for e in data.get("events", []) if not hand_kept(e) and keep(e, first, last)]
+        if not shops:
+            log("The published file has no shop events: nothing written.")
+            sys.exit(1)
+        got = [e for e in read_manual(today, log) if keep(e, first, last)]
+        log(f"manual: {len(got)} events")
+        write(args.out, {"updated": data.get("updated", ""), "sources": {**data.get("sources", {}), "manual": len(got)},
+                         "events": tidy(shops + got)}, log)
+        return
+    readers = {"hareruya": read_hareruya, "amenity": read_amenity, "yellowsub": read_yellowsub, "tonamel": read_tonamel,
+               "manual": read_manual}
     only = [s for s in args.only.split(",") if s]
     events, sources = [], {}
     for shop, reader in readers.items():
@@ -467,22 +669,21 @@ def main():
         sources[shop] = len(got)
         log(f"{shop}: {len(got)} events ({time.time() - t0:.0f} s)")
         events += got
-    if not events:
-        log("No events from any source: nothing written, so the published file stays.")
+    # the hand-kept events alone would replace every shop's: only with --only manual (testing)
+    if not events or not any(n for shop, n in sources.items() if shop != "manual") and only != ["manual"]:
+        log("No events from any shop's source: nothing written, so the published file stays.")
         sys.exit(1)
-    seen, unique = set(), []
-    for e in sorted(events, key=lambda e: (e["d"], e["t"] or "99:99", e["p"], e["store"], e["name"])):
-        k = (e["d"], e["t"], e["shop"], e["store"], e["name"])
-        if k not in seen:
-            seen.add(k)
-            if not e["f"]:
-                del e["f"]
-            unique.append(e)
-    os.makedirs(os.path.dirname(args.out) or ".", exist_ok=True)
-    data = {"updated": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"), "sources": sources, "events": unique}
-    with open(args.out, "w", encoding="utf-8") as f:
-        json.dump(data, f, ensure_ascii=False, separators=(",", ":"))
-    log(f"Wrote {len(unique)} events to {args.out} ({os.path.getsize(args.out) // 1024} KB)")
+    if args.fees and sources.get("hareruya"):
+        try:
+            with open(args.fees, encoding="utf-8") as f:
+                cache = json.load(f).get("fees", {})
+        except (FileNotFoundError, ValueError):
+            cache = {}
+        cache = hareruya_fees(events, cache, today, log, started + args.fee_minutes * 60)
+        with open(args.fees, "w", encoding="utf-8") as f:
+            json.dump({"updated": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"), "fees": cache}, f, ensure_ascii=False, separators=(",", ":"))
+    write(args.out, {"updated": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"), "sources": sources,
+                     "events": tidy(events)}, log)
 
 
 if __name__ == "__main__":
