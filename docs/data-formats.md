@@ -118,7 +118,8 @@ A listing has either the printing it was matched to (`id`, with the picture chec
 features that fit, likeness of the straightened photo, which photo, and the name-and-text
 likeness to the English and the other-language picture) or `held`, the reason it is not shown.
 `note` marks a listing shown under the printing its photos clearly show although its title named
-another. Products that turn out not to be cards keep only `handle`, `title` and `held`.
+another, or (starting "the photos show the same art as") a copy in another language filed under
+the title's printing with the same art. Products that turn out not to be cards keep only `handle`, `title` and `held`.
 
 ## `movers.json`
 

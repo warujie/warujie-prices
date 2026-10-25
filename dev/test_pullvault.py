@@ -147,10 +147,15 @@ c, why, note = pv.choose(L("X (Showcase) - Doctor Who (WHO)"), who, pv.title_fit
 check("choose: photos that clearly show another printing win, with a note", c and c["id"] == "plain" and "clearly show WHO #194" in note, (c, why, note))
 c, why, note = pv.choose(L("X - Doctor Who (WHO)"), who, pv.title_fits(L("X - Doctor Who (WHO)"), who), sc(plain=(10, 0.1), show=(12, 0.2), serial=(9, 0.1), other=(0, 0)))
 check("choose: photos that show none of the printings: held back", c is None and "don't clearly show" in why, why)
-ja = [printing("jaonly", "pspl", "4", lang="ja"), printing("ppro", "ppro", "2025-1", set_name="Pro Tour Promos")]
+ja = [printing("jaonly", "pspl", "4", lang="ja", illustration="art2"), printing("ppro", "ppro", "2025-1", set_name="Pro Tour Promos")]
 c, why, note = pv.choose(L("X - Pro Tour Promos (PTP) (Japanese)"), ja, pv.title_fits(L("X - Pro Tour Promos (PTP) (Japanese)"), ja),
                          sc(jaonly=(430, 0.96), ppro=(220, 0.68)))
-check("choose: a Japanese copy under the wrong set: the Japanese printing the photos show", c and c["id"] == "jaonly" and note, (c, why, note))
+check("choose: a Japanese copy titled as another set's printing of other art: the Japanese printing the photos show", c and c["id"] == "jaonly" and note, (c, why, note))
+ja_twin = [dict(ja[0], illustration="cloud"), dict(ja[1], illustration="cloud")]
+c, why, note = pv.choose(L("X - Pro Tour Promos (PTP) (Japanese)"), ja_twin, pv.title_fits(L("X - Pro Tour Promos (PTP) (Japanese)"), ja_twin),
+                         sc(jaonly=(430, 0.96), ppro=(220, 0.68)))
+check("choose: …with the same art, filed under the title's printing (marked JA; the owner's choice for the Cloud promo)",
+      c and c["id"] == "ppro" and note.startswith(pv.SAME_ART), (c, why, note))
 c, why, note = pv.choose(L("X - Pro Tour Promos (PTP)"), ja, pv.title_fits(L("X - Pro Tour Promos (PTP)"), ja),
                          sc(jaonly=(430, 0.96), ppro=(220, 0.68)))
 check("choose: …but not for a listing that says English", c is None, (c, note))

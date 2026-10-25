@@ -90,6 +90,7 @@ FOIL_WORDS = ("foil", "etched", "serial", "surge", "galaxy", "textured")
 # treatments a plain title rules out (a serialized copy is always named so)
 SPECIAL = lambda c: "serialized" in c["promo_types"]
 NOT_A_CARD = "no card of that name on Scryfall"
+SAME_ART = "the photos show the same art as"   # a note: the title's printing, the copy in another language
 DEBUG = []              # filled with each listing's scores when --debug is given
 
 
@@ -403,6 +404,14 @@ def choose(listing, cands, fit, scores):
         said = (f"the title fits {', '.join(c['set'].upper() + ' #' + c['number'] for c in fit[:4])}" if fit
                 else "no printing fits the title")
         if decisive(listing, best, looks, cands, scores):
+            # a copy whose language only exists as a printing of its own (the Japanese
+            # Magic Spotlight Cloud), titled as the English printing with the same art:
+            # filed under the title's printing, marked with the copy's language (the
+            # owner's choice, 2026-10-25)
+            twins = [c for c in fit if best["lang"] != "en" and c["illustration"] and c["illustration"] == best["illustration"]]
+            if len({(c["set"], c["number"]) for c in twins}) == 1:
+                return twins[0], "", (f"{SAME_ART} {best['set'].upper()} #{best['number']} ({best['lang']}): filed under "
+                                      f"{twins[0]['set'].upper()} #{twins[0]['number']} as the title says, marked {listing['lang']}")
             return best, "", f"{said}, but the photos clearly show {best['set'].upper()} #{best['number']}"
         return None, f"the photos look like {best['set'].upper()} #{best['number']}, but {said}", ""
     if len({(c["set"], c["number"]) for c in both}) > 1:
@@ -462,7 +471,7 @@ def match_listing(listing, cands, foreign, photos, picture):
                 return {"held": f"the title says {listing['lang']}, but the photo's text looks like the English card"}
             if listing["lang"] == "EN" and t_fo > t_en:
                 return {"held": f"the title says English, but the photo's text looks like the {same[0]['lang']} card"}
-    elif listing["lang"] != "EN" and chosen["lang"] == "en" and not same:
+    elif listing["lang"] != "EN" and chosen["lang"] == "en" and not same and not note.startswith(SAME_ART):
         return {"held": f"Scryfall has no {listing['lang']} picture of {chosen['set'].upper()} #{chosen['number']} to check the language"}
     return out
 
@@ -583,7 +592,7 @@ def write_debug(folder):
         lines.append(f"== {listing['title']} -> {chosen['set'] + ' #' + chosen['number'] if chosen else 'held back'}")
         for c in sorted(cands, key=lambda c: (scores[c['id']][0] < MIN_INLIERS, -scores[c['id']][1])):
             inl, like, i, flat = scores[c["id"]]
-            lines.append(f"   {c['set']:>6} #{c['number']:<8} {c['lang']} inliers {inl:4d} likeness {like:6.3f} photo {i:2d} "
+            lines.append(f"   {c['set']:>6} #{c['number']:<8} {c['lang']} {c['illustration'][:8]} inliers {inl:4d} likeness {like:6.3f} photo {i:2d} "
                          f"{c['border_color']} {c['frame']} {','.join(c['frame_effects'])} {','.join(c['promo_types'])} {','.join(c['finishes'])}")
             if flat is not None and inl >= MIN_INLIERS:
                 cv2.imwrite(os.path.join(folder, f"{n:02d}_{c['set']}_{c['number']}.jpg"), cv2.resize(flat, (CARD_W // 2, CARD_H // 2)))

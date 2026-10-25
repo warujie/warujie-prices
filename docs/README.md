@@ -142,7 +142,10 @@ Then each listing is matched (`nightly()`, `match_listing()`):
 4. **The decision** (`choose()`): the printing both allow. When they disagree, the photos win
    only when they show one printing beyond doubt (`decisive()`: `SURE_INLIERS`,
    `SURE_LIKENESS`, every other look `SURE_GAP` behind, the listing's language); the listing is
-   then shown under that printing and the run log notes it. Otherwise it is held back with the
+   then shown under that printing and the run log notes it. One exception (the owner's choice,
+   2026-10-25): when that printing is a language-only one (a Japanese-only promo) with the same
+   artwork (`illustration_id`) as the printing the title names, the listing is filed under the
+   title's printing, marked with the copy's language (note starting `SAME_ART`). Otherwise it is held back with the
    reason (in the run's warnings and in the file); held-back listings are never shown.
 5. **The language** (`text_likeness()`): the straightened photo's name bar and text box against
    the English and the Japanese (or the listing's language) picture of that printing; a listing
@@ -156,7 +159,8 @@ printing (`scores.txt`) and the straightened photos, to check the picture check 
 First run (2026-10-25): 27 products, 4 looked like cards. The Tenth Doctor (Serial) → WHO #561z
 and The One Ring (Borderless Foil Poster) → LTR #748, both as titled. "Cloud, Midgar Mercenary -
 Pro Tour Promos (PTP) (Japanese)": the photos clearly show the Japanese Magic Spotlight promo
-(PSPL #4), not the English Pro Tour one (PPRO #2025-1), so it is shown as PSPL #4 with a note.
+(PSPL #4), which has the same art as the English Pro Tour one (PPRO #2025-1); the owner chose to
+show it under PPRO #2025-1, marked Japanese.
 A draft night ticket is not a card.
 
 ### `build_combos.py`
