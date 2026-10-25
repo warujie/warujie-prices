@@ -15,8 +15,12 @@ with sync_playwright() as p:
                 body = repr(e)
             out["xhr"].append({"url": r.url, "method": r.request.method, "post": (r.request.post_data or "")[:3000], "status": r.status, "body": body[:20000]})
     pg.on("response", on_resp)
-    pg.goto(URL, wait_until="networkidle", timeout=90000)
-    pg.wait_for_timeout(4000)
+    try:
+        pg.goto(URL, wait_until="domcontentloaded", timeout=90000)
+    except Exception as e:
+        out["goto_error"] = repr(e)[:500]
+    pg.wait_for_timeout(12000)
+    json.dump(out, open("probe/tonamel.json", "w"), ensure_ascii=False, indent=1)
     out["text"] = pg.inner_text("body")[:15000]
     out["links"] = pg.evaluate("[...document.querySelectorAll('a[href]')].map(a => a.href).filter(h => /competition/.test(h)).slice(0, 60)")
     html = pg.content()
@@ -27,8 +31,11 @@ with sync_playwright() as p:
     # one competition page, to see what an event shows (venue, date, organizer)
     if out["links"]:
         pg.wait_for_timeout(4000)
-        pg.goto(out["links"][0], wait_until="networkidle", timeout=90000)
-        pg.wait_for_timeout(3000)
+        try:
+            pg.goto(out["links"][0], wait_until="domcontentloaded", timeout=90000)
+        except Exception as e:
+            out["detail_error"] = repr(e)[:500]
+        pg.wait_for_timeout(8000)
         out["detail_url"] = out["links"][0]
         out["detail_text"] = pg.inner_text("body")[:8000]
     b.close()

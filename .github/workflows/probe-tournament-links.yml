@@ -14,4 +14,4 @@ jobs:
           tail -60 probe/log.txt
       - run: |
           git config user.name probe; git config user.email probe@users.noreply.github.com
-          git add probe/log.txt probe/tonamel.json probe/tonamel.png 2>/dev/null; git commit -m "probe result [skip ci]" && git push
+          git add -A probe/; git commit -m "probe result [skip ci]" && git push
