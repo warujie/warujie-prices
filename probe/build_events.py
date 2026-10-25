@@ -10,11 +10,14 @@ Facebook (no automated collection without written permission) are never read.
 Sources:
   Hareruya       each store's month calendar, /ja/events/?shop=<n>&date=<YYYYMM>, this
                  month and next; every event has its own page and format icons
-  Amenity Dream  one page lists every store's MTG events, /matches/?type=2 (its server
-                 sends an out-of-date certificate chain, so the missing intermediate is
-                 fetched from the certificate's own AIA link and checked normally)
+  Amenity Dream  every store's MTG list, /matches/?type=2, then one page per day it offers
+                 (about a month; its server sends an out-of-date certificate chain, so the
+                 missing intermediate is fetched from the certificate's own AIA link)
   Yellow Submarine  each store's schedule, /tmt_list/<store>/ (Shift_JIS), only the
                  rows whose game is マジック; the format is in the notes column
+  Tonamel        the MTG events in Japan that stores and players list on tonamel.com
+                 (KAYAC's tournament site; the owner's request of 2026-10-25), through the
+                 same query its event-search page sends, 32 a page; offline events only
 
     python3 build_events.py --out site/events.json [--days 35]
 
@@ -30,6 +33,7 @@ import re
 import ssl
 import sys
 import time
+import unicodedata
 import urllib.parse
 import urllib.request
 from datetime import datetime, timedelta, timezone
@@ -72,10 +76,12 @@ YELLOWSUB = [
     ("nagoya_gs", 23, "名古屋市"), ("nanba_s", 27, "大阪市"), ("nanba_3", 27, "大阪市"), ("kyoto", 26, "京都市"),
     ("sannomiya", 28, "神戸市"), ("himeji", 28, "姫路市"), ("hiroshima", 34, "広島市"), ("fukuoka_mc", 40, "福岡市"),
 ]
-# a format from words in an event's name or notes (the order matters: プレモダン before モダン)
+# the formats an event's name or notes name: スタン is スタンダード, プレモダン isn't モダン, and a
+# モダンホライゾン draft is limited, not modern
 FORMAT_WORDS = [
     ("premodern", r"プレモダン|premodern"), ("pauper", r"パウパー|pauper"), ("commander", r"統率者|EDH|コマンダー|commander"),
-    ("standard", r"スタンダード|standard"), ("pioneer", r"パイオニア|pioneer"), ("modern", r"モダン|modern"),
+    ("standard", r"スタン(?!プ)|standard"), ("pioneer", r"パイオニア|pioneer"),
+    ("modern", r"(?<!プレ)モダン(?!ホライゾン)|(?<!pre)modern(?! horizons)"),
     ("legacy", r"レガシー|legacy"), ("vintage", r"ヴィンテージ|vintage"),
     ("limited", r"ドラフト|シールド|リミテッド|プレリリース|draft|sealed|limited|prerelease"),
 ]
@@ -84,6 +90,7 @@ FORMAT_JA = {"standard": "スタンダード", "pioneer": "パイオニア", "mo
 
 
 def formats_in(text):
+    text = unicodedata.normalize("NFKC", text)
     return [f for f, pat in FORMAT_WORDS if re.search(pat, text, re.I)]
 
 
@@ -95,11 +102,15 @@ def clean(s):
 _last = [0.0]
 
 
-def fetch(url, encoding=None, context=None):
+def fetch(url, encoding=None, context=None, data=None):
+    """One page (or, with data, one JSON POST), at least PAGE_GAP seconds after the last."""
     wait = _last[0] + PAGE_GAP - time.time()
     if wait > 0:
         time.sleep(wait)
-    req = urllib.request.Request(url, headers={"User-Agent": USER_AGENT, "Accept-Language": "ja"})
+    headers = {"User-Agent": USER_AGENT, "Accept-Language": "ja"}
+    if data is not None:
+        headers["Content-Type"] = "application/json"
+    req = urllib.request.Request(url, data=data, headers=headers)
     try:
         with urllib.request.urlopen(req, timeout=60, context=context) as r:
             body = r.read()
@@ -239,6 +250,127 @@ def read_amenity(today, log):
     return events
 
 
+# ---- Tonamel (tonamel.com, KAYAC): stores and players list their events there
+TONAMEL_API = "https://tonamel.com/graphql/competition_management"
+TONAMEL_MAX_PAGES = 30   # 32 events a page
+# the event-search page's own query (getPublicCompetitions), asking only for what the calendar shows
+TONAMEL_QUERY = """query getPublicCompetitions($condition: PublicCompetitionsCondition!, $filter: PublicCompetitionsFilter!) {
+  publicCompetitions(condition: $condition, filter: $filter) {
+    edges { node { id title description status organization { name }
+      tournaments { displayStartAt isOnline location { venueName address { input } } } } }
+    pageInfo { endCursor hasNextPage }
+  }
+}"""
+# shops read from their own pages: their Tonamel listings would only repeat them
+TONAMEL_SKIP = re.compile(r"晴れる屋|イエローサブマリン|イエサブ|アメニティ")
+PREF_NAMES = ["北海道", "青森県", "岩手県", "宮城県", "秋田県", "山形県", "福島県", "茨城県", "栃木県", "群馬県", "埼玉県",
+              "千葉県", "東京都", "神奈川県", "新潟県", "富山県", "石川県", "福井県", "山梨県", "長野県", "岐阜県", "静岡県",
+              "愛知県", "三重県", "滋賀県", "京都府", "大阪府", "兵庫県", "奈良県", "和歌山県", "鳥取県", "島根県", "岡山県",
+              "広島県", "山口県", "徳島県", "香川県", "愛媛県", "高知県", "福岡県", "佐賀県", "長崎県", "熊本県", "大分県",
+              "宮崎県", "鹿児島県", "沖縄県"]
+# the prefecture from a postal code's first two digits (〒100-0001 → 東京都)
+POSTAL_PREF = {}
+for _pref, _ranges in {13: "10-20", 14: "21-25", 12: "26-29", 8: "30-31", 9: "32", 11: "33-36", 10: "37", 20: "38-39",
+                       19: "40", 22: "41-43", 23: "44-49", 21: "50", 24: "51", 25: "52", 27: "53-59", 26: "60-62", 29: "63",
+                       30: "64", 28: "65-67", 31: "68", 32: "69", 33: "70-71", 34: "72-73", 35: "74-75", 37: "76", 36: "77",
+                       39: "78", 38: "79", 40: "80-83", 41: "84", 42: "85", 43: "86", 44: "87", 45: "88", 46: "89", 47: "90",
+                       18: "91", 17: "92", 16: "93", 15: "94-95", 7: "96-97", 4: "98", 6: "99", 5: "01", 3: "02", 2: "03",
+                       1: "04-09"}.items():
+    _a, _b = (_ranges.split("-") + [_ranges])[:2]
+    for _n in range(int(_a), int(_b) + 1):
+        POSTAL_PREF[f"{_n:02d}"] = _pref
+# big cities often written without their prefecture
+CITY_PREF = {"札幌市": 1, "仙台市": 4, "さいたま市": 11, "千葉市": 12, "横浜市": 14, "川崎市": 14, "相模原市": 14, "新潟市": 15,
+             "静岡市": 22, "浜松市": 22, "名古屋市": 23, "京都市": 26, "大阪市": 27, "堺市": 27, "神戸市": 28, "岡山市": 33,
+             "広島市": 34, "北九州市": 40, "福岡市": 40, "熊本市": 43, "那覇市": 47}
+
+
+def place_of(address):
+    """(prefecture number, city or ward) from a free-text Japanese address, or (0, "")."""
+    a = unicodedata.normalize("NFKC", address or "").replace(" ", "")
+    pref, rest = 0, a
+    for i, name in enumerate(PREF_NAMES, 1):
+        k = a.find(name)
+        if k >= 0:
+            pref, rest = i, a[k + len(name):]
+            break
+    if not pref:
+        m = re.search(r"〒?(\d{3})-?\d{4}", a)
+        if m:
+            pref = POSTAL_PREF.get(m.group(1)[:2], 0)
+    rest = re.sub(r"^〒?\d{3}-?\d{4}", "", rest)
+    if pref == 13:
+        m = re.match(r"(.+?区|.+?市(?!市)|.+?郡.+?[町村])", rest)
+    else:
+        m = re.match(r"(.+?郡.+?[町村]|.+?市(?!市)|.+?[町村])", rest)
+    city = m.group(1) if m and len(m.group(1)) <= 10 else ""
+    if not pref:
+        pref = CITY_PREF.get(city, 0)
+    return pref, city
+
+
+def tonamel_time(v):
+    """displayStartAt (Unix seconds, as a number or text, or an ISO time) as a date and HH:MM in Japan."""
+    try:
+        t = datetime.fromtimestamp(int(float(v)), timezone.utc)
+    except (TypeError, ValueError):
+        try:
+            t = datetime.fromisoformat(str(v).replace("Z", "+00:00"))
+        except ValueError:
+            return "", ""
+    t = t.astimezone(JST)
+    return t.date().isoformat(), t.strftime("%H:%M")
+
+
+def parse_tonamel(nodes):
+    out = []
+    for n in nodes:
+        org = clean((n.get("organization") or {}).get("name") or "")
+        if TONAMEL_SKIP.search(org) or str(n.get("status", "")).upper() in ("CANCELED", "CANCELLED"):
+            continue
+        for tm in (n.get("tournaments") or [])[:1]:
+            if tm.get("isOnline"):
+                continue
+            loc = tm.get("location") or {}
+            pref, city = place_of(((loc.get("address") or {}).get("input") or "") + " " + (loc.get("venueName") or ""))
+            d, t = tonamel_time(tm.get("displayStartAt"))
+            if not pref or not d:
+                continue
+            title = clean(n.get("title") or "")
+            # the format: from the title, else the description's 【フォーマット】 line
+            m = re.search(r"フォーマット[】\]：:\s　]*([^<\n]{1,40})", n.get("description") or "")
+            fs = formats_in(title) or (formats_in(clean(m.group(1))) if m else [])
+            out.append({"d": d, "t": t, "p": pref, "c": city, "shop": "tonamel",
+                        "store": org or clean(loc.get("venueName") or ""), "name": title,
+                        "url": f"https://tonamel.com/competition/{n['id']}", "f": fs})
+    return out
+
+
+def read_tonamel(today, log):
+    start = int(datetime(today.year, today.month, today.day, tzinfo=JST).timestamp())
+    events, after = [], ""
+    for page in range(TONAMEL_MAX_PAGES):
+        body = json.dumps({"operationName": "getPublicCompetitions", "query": TONAMEL_QUERY, "variables": {
+            "condition": {"gameId": "mtg", "startAfter": str(start), "statuses": [], "region": "JP", "regionPrefectureIds": []},
+            "filter": {"first": 32, "last": 0, "before": "", "after": after}}}).encode()
+        try:
+            data = json.loads(fetch(TONAMEL_API, data=body))
+            conn = data["data"]["publicCompetitions"]
+        except Exception as e:
+            log(f"  tonamel page {page + 1}: {e!r}"[:300])
+            break
+        nodes = [e["node"] for e in conn.get("edges") or []]
+        got = parse_tonamel(nodes)
+        events += got
+        last = max((tonamel_time(tm.get("displayStartAt"))[0] for n in nodes for tm in (n.get("tournaments") or [])[:1]), default="")
+        info = conn.get("pageInfo") or {}
+        if not info.get("hasNextPage") or not nodes or last > (today + timedelta(days=40)).isoformat():
+            break
+        after = info.get("endCursor") or ""
+    log(f"  tonamel: {len(events)} offline events in {page + 1} pages")
+    return events
+
+
 # ---- Yellow Submarine
 def parse_yellowsub(html, slug, pref, city, today):
     title = re.search(r"<title>(.*?)</title>", html, re.S)
@@ -290,7 +422,7 @@ def main():
     log = lambda s: print(s, flush=True)
     today = datetime.now(JST).date()
     first, last = today.isoformat(), (today + timedelta(days=args.days)).isoformat()
-    readers = {"hareruya": read_hareruya, "amenity": read_amenity, "yellowsub": read_yellowsub}
+    readers = {"hareruya": read_hareruya, "amenity": read_amenity, "yellowsub": read_yellowsub, "tonamel": read_tonamel}
     only = [s for s in args.only.split(",") if s]
     events, sources = [], {}
     for shop, reader in readers.items():
