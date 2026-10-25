@@ -3,6 +3,7 @@ page and its calendar pictures (the owner's request, 2026-10-25). One page every
 import re, time, json, os, urllib.request, html as H
 UA = "WarujieEvents/1.0 (+https://warujie.jp; warujie.mtg@gmail.com)"
 OUT = "probe/mint"
+os.makedirs(OUT, exist_ok=True)
 def get(url, binary=False):
     time.sleep(4)
     req = urllib.request.Request(url, headers={"User-Agent": UA})
