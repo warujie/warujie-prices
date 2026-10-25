@@ -28,7 +28,7 @@ one small file instead of everything.
   "source": "…", "sources": ["…"],
   "quotes_date": "2026-10-14",
   "providers": {"tcgplayer": "USD", "cardkingdom": "USD", "cardmarket": "EUR", "tcgplayer_low": "USD", "cardmarket_low": "EUR", "…": "…"},
-  "offers": {"cardkingdom": "…", "manapool": "…", "cardtrader": "…", "enndal": "2026-10-17T17:00:00Z"},
+  "offers": {"cardkingdom": "…", "manapool": "…", "cardtrader": "…", "enndal": "2026-10-17T17:00:00Z", "pullvault": "2026-10-25T12:20:00Z"},
   "ct_resume": 0,
   "backfill_tried": "2026-06-20"
 }
@@ -57,7 +57,7 @@ printings; the site maps a Japanese printing to its English twin first.
  "p":  {"<scryfall id>": {"<shop>": [sell, sell_foil, buy, buy_foil]}},
  "l":  {"<scryfall id>": [["ck", 0, "NM", 1299, 4, ""], ["ct", 1, "SP", 950, 1, "JA", "DE"], ["ed", 0, "NM", 6980, 2, "JA"]]},
  "lk": {"<scryfall id>": {"tcg": 123456, "cm": 654321, "ck": ["<url>", "<foil url>"], "mp": "<url>", "ct": 98765,
-                          "ed": ["<path>", "<foil path>"]}}}
+                          "ed": ["<path>", "<foil path>"], "pv": "<product handle>"}}}
 ```
 
 - **`p`**: shop prices from MTGJSON's daily file (`tcgplayer`, `cardkingdom`, `cardsphere`,
@@ -65,13 +65,15 @@ printings; the site maps a Japanese printing to its English twin first.
   TCGCSV and Cardmarket's price guide; only the first two slots). Currencies are in
   `index.json` `providers`.
 - **`l`**: offers with stock: `[shop, foil (0/1), condition, cents, copies, language, country]`.
-  Shops: `ck` Card Kingdom, `mp` Mana Pool (US market), `ct` CardTrader (EU market; `country` is
+  Shops: `ck` Card Kingdom, `mp` Mana Pool, `pv` PullVault (US market; PullVault's condition is
+  empty when the listing doesn't state one, and a copy in another language has that language), `ct` CardTrader (EU market; `country` is
   the seller's), `ed` ENNDAL GAMES (Japan market, `OFFER_MARKETS`: **the price is in yen**, not
   cents; conditions NM and EX; language `JA` or empty for English). Language is empty for
   English. At most `LISTINGS_PER_FINISH` per market and finish, cheapest first.
 - **`lk`**: product ids or URLs for links straight to the product: TCGplayer product id,
   Cardmarket product id, Card Kingdom URLs (non-foil, foil), Mana Pool URL, CardTrader
-  blueprint id, ENNDAL GAMES product paths (non-foil, foil; after `https://www.enndalgames.com/`).
+  blueprint id, ENNDAL GAMES product paths (non-foil, foil; after `https://www.enndalgames.com/`),
+  PullVault product handle (after `https://pullvault.gg/product/`).
 
 `l` and `lk` are present only when offers were read.
 
@@ -93,6 +95,30 @@ nothing of the shop's pages is kept besides these values.
 Each product: Scryfall-style set code (`SET_ALIASES` fixes the codes that differ), collector
 number without leading zeros, finish (`normal`, `foil`, `etched`), its path on the shop, and an
 offer per language and condition `[language, condition, yen, copies]`.
+
+## `pullvault.json.gz` (not published): one day of PullVault
+
+Written by `shop_pullvault.py` (`nightly()`, `save()`) in the price workflow and read by
+`build_prices.py --pullvault` in the same run; not kept or published. Prices in cents (USD).
+
+```json
+{"version": 1, "updated": "2026-10-25T13:41:36Z", "products": 27,
+ "listings": [
+  {"handle": "the-tenth-doctor-serial-universes-beyond-doctor-who-who", "title": "The Tenth Doctor (Serial) - …",
+   "cents": 165000, "qty": 1, "cond": "", "lang": "EN", "foil": true,
+   "id": "<scryfall id>", "set": "who", "number": "561z", "inliers": 422, "likeness": 0.87, "photo": 0, "text": [0.8, 0.3]},
+  {"handle": "…", "title": "…", "cents": 72999, "qty": 1, "cond": "", "lang": "JA", "foil": false, "id": "…",
+   "set": "pspl", "number": "4", "inliers": 432, "likeness": 0.963, "photo": 0,
+   "note": "the title fits PPRO #2025-1, but the photos clearly show PSPL #4"},
+  {"handle": "…", "title": "…", "cents": 1000, "qty": 1, "cond": "", "lang": "EN", "foil": false,
+   "held": "the photos look like M11 #146, but the title fits M10 #146"}]}
+```
+
+A listing has either the printing it was matched to (`id`, with the picture check's numbers:
+features that fit, likeness of the straightened photo, which photo, and the name-and-text
+likeness to the English and the other-language picture) or `held`, the reason it is not shown.
+`note` marks a listing shown under the printing its photos clearly show although its title named
+another. Products that turn out not to be cards keep only `handle`, `title` and `held`.
 
 ## `movers.json`
 

@@ -16,8 +16,9 @@ public repositories on the free plan.
 
 | File | What it builds | Into | Source |
 |---|---|---|---|
-| [`build_prices.py`](../build_prices.py) | Price history, today's shop prices, lowest listings, offers with stock, price movers | `site/index.json`, `site/h/`, `site/q/`, `site/movers.json`, `site/cheap.json.gz`, `site/ids.json.gz` | Scryfall `default_cards` bulk file (TCGplayer USD, Cardmarket EUR), MTGJSON (history backfill, shop prices), TCGCSV and Cardmarket's price guide (lowest listings), Card Kingdom's and Mana Pool's public price lists, CardTrader's API, last night's ENNDAL GAMES data |
+| [`build_prices.py`](../build_prices.py) | Price history, today's shop prices, lowest listings, offers with stock, price movers | `site/index.json`, `site/h/`, `site/q/`, `site/movers.json`, `site/cheap.json.gz`, `site/ids.json.gz` | Scryfall `default_cards` bulk file (TCGplayer USD, Cardmarket EUR), MTGJSON (history backfill, shop prices), TCGCSV and Cardmarket's price guide (lowest listings), Card Kingdom's and Mana Pool's public price lists, CardTrader's API, last night's ENNDAL GAMES data, today's PullVault data |
 | [`shop_enndal.py`](../shop_enndal.py) | ENNDAL GAMES' in-stock singles in yen (Japan), read once a night; also matches them to printings for `build_prices.py` | `enndal.json.gz` (kept encrypted as an artifact, not published) | ENNDAL GAMES' shop pages, with the shop's permission |
+| [`shop_pullvault.py`](../shop_pullvault.py) | PullVault's in-stock singles in dollars (US), read once a day, each matched to its printing and checked against the listing's own photos | `pullvault.json.gz` (read by `build_prices.py` in the same run, not published) | pullvault.gg's singles page, with the shop's permission; Scryfall's search and card pictures |
 | [`build_combos.py`](../build_combos.py) | Commander combos per card | `site/c/` | Commander Spellbook's bulk file |
 | [`build_tags.py`](../build_tags.py) | Role tags (removal, draw, ramp…) and EDHREC rank per card | `site/t/tags.json.gz` | Scryfall Tagger oracle tags, via Scryfall's search API |
 | [`.github/workflows/update-prices.yml`](../.github/workflows/update-prices.yml) | Runs the three builders and publishes `site/` to R2 (GitHub Pages gets only a notice) | | |
@@ -44,6 +45,10 @@ be read or Scryfall's export looks incomplete (`--min-cards`, default 20,000 pri
 (5:45 in Japan): that is what we told ENNDAL GAMES. `shop_enndal.py` refuses to start outside
 that window, so a run by hand in the daytime does nothing. The evening price update then uses
 that night's data, so ENNDAL's stock on the site is from the night before.
+
+`shop_pullvault.py` runs inside `update-prices.yml`, just before the price build (step "Read
+PullVault's singles"). It can't stop the price update: if it fails, the build runs without
+`--pullvault` and the published PullVault offers are kept for `KEEP_DAYS` (3) days.
 
 `build_combos.py` and `build_tags.py` rebuild only when the published data is older than 7 days;
 on other days they copy the published files over. Neither can stop the price update: on any
@@ -73,7 +78,9 @@ the token anywhere else.
    CardTrader (`cardtrader_offers()`, time-limited by `CARDTRADER_MINUTES`; it resumes where it
    stopped on the next day via `ct_resume`), and ENNDAL GAMES from `--enndal` (`add_offers()` in
    `shop_enndal.py`: matched by set and collector number, or by a name that is unique in the set).
-   Without `--enndal`, the published ENNDAL offers are kept for up to `KEEP_DAYS`. The cheapest
+   Without `--enndal`, the published ENNDAL offers are kept for up to `KEEP_DAYS`. PullVault from
+   `--pullvault` (`add_offers()` in `shop_pullvault.py`: the listings already matched and checked
+   there; without it, the published ones are kept for up to its `KEEP_DAYS`). The cheapest
    `LISTINGS_PER_FINISH` per market and finish are kept.
 6. Price movers (`movers()`): biggest rises and falls over 1, 7 and 30 days (`WINDOWS`), US and EU,
    for cards worth at least `MIN_PRICE_CENTS` that moved at least `MIN_CHANGE_CENTS`, ignoring
@@ -97,6 +104,60 @@ Flesh and Blood), then each set's in-stock list pages (`list_url()`, 100 product
 sets read longest ago first, for at most `NIGHT_MINUTES`. A set not read tonight keeps its
 products for up to `KEEP_DAYS`. `parse_list()` reads each product's code
 (`SET-<rarity><colour>-<number>-<lang>-<condition>-<finish>`) and its price table.
+
+### `shop_pullvault.py`
+
+PullVault (pullvault.gg) is a US shop; its owner gave permission on 2026-10-25 (the site
+owner's word, recorded in the site's `CLAUDE.md`). We still read gently: once a day, only pages
+its robots.txt allows (it disallows `/api/`, `.json` and sort/filter/page links), with a
+User-Agent naming warujie.jp, and every listing links back to its product page. **Stop at once
+if PullVault asks.**
+
+The shop is a JavaScript page on Shopify. `read_shop()` opens `SHOP_PAGES` (only
+https://pullvault.gg/singles) in a headless browser (Playwright) and keeps the product list that
+page itself receives from Shopify (all products, 100 at a time; it scrolls for more, `PAGE_GAP`
+seconds apart, if the list says there are more). It sends no requests of its own to the shop.
+
+`listings()` keeps the in-stock products whose title reads "Card - Set" (not `SEALED_TYPES`), one
+listing per available variant (condition and finish come from the variant's options when it has
+them, else from the product's `card.condition` and `card.language` fields; an unknown condition
+stays empty). `parse_title()` splits "Name (Kind) - Set Name (CODE) (Language)".
+
+Then each listing is matched (`nightly()`, `match_listing()`):
+
+1. **Candidates**: every printing of that name from Scryfall's search (`printings()`, English
+   where there is one, a printing only made in Japanese as it is), and the same in the
+   listing's language, or in Japanese for an English listing, for the language check.
+   `SCRYFALL_PAUSE` between requests.
+2. **What the title allows** (`title_fits()`): the set by code, else by name; the words in
+   brackets (`VARIANT_WORDS`: Serial, Borderless, Extended, Showcase, Retro, Etched, Poster,
+   Surge…); a title without "Serial" rules serialized printings out; foil or not.
+3. **What the photos show** (`picture_scores()`, `match_photo()`): the listing's first
+   `PHOTOS_PER_LISTING` photos (at `PHOTO_WIDTH`) against each candidate's Scryfall picture: SIFT
+   features, a perspective fit (RANSAC), and the photo straightened into the card's shape and
+   compared with the whole picture (`_likeness()`, edge pictures, so frames and borders count). A
+   printing is shown when at least `MIN_INLIERS` features fit and the likeness is at least
+   `MIN_LIKENESS`; printings within `LOOK_MARGIN` of the best look alike (a serialized copy looks
+   like the plain showcase one; the title tells them apart).
+4. **The decision** (`choose()`): the printing both allow. When they disagree, the photos win
+   only when they show one printing beyond doubt (`decisive()`: `SURE_INLIERS`,
+   `SURE_LIKENESS`, every other look `SURE_GAP` behind, the listing's language); the listing is
+   then shown under that printing and the run log notes it. Otherwise it is held back with the
+   reason (in the run's warnings and in the file); held-back listings are never shown.
+5. **The language** (`text_likeness()`): the straightened photo's name bar and text box against
+   the English and the Japanese (or the listing's language) picture of that printing; a listing
+   whose text looks like the other language is held back.
+
+`python3 shop_pullvault.py --out x.json.gz --debug folder` also writes each listing's scores per
+printing (`scores.txt`) and the straightened photos, to check the picture check by eye.
+`--products saved.json` reads a saved product list instead of the shop. The offline checks are
+`python3 dev/test_pullvault.py` (made-up cards and photos; needs numpy and opencv).
+
+First run (2026-10-25): 27 products, 4 looked like cards. The Tenth Doctor (Serial) → WHO #561z
+and The One Ring (Borderless Foil Poster) → LTR #748, both as titled. "Cloud, Midgar Mercenary -
+Pro Tour Promos (PTP) (Japanese)": the photos clearly show the Japanese Magic Spotlight promo
+(PSPL #4), not the English Pro Tour one (PPRO #2025-1), so it is shown as PSPL #4 with a note.
+A draft night ticket is not a card.
 
 ### `build_combos.py`
 
@@ -150,6 +211,7 @@ The site reads these files directly, so a format change is a change in two repos
 | No price history, listings or movers on any card | GitHub → warujie-prices → Actions → the last "Update price history" run. A red run publishes nothing, so yesterday's data stays up. |
 | Data is a day old | Normal until 12:17 UTC plus the run time (the run can take over an hour with CardTrader) |
 | ENNDAL GAMES prices missing on the Japan tab | Actions → "ENNDAL GAMES nightly": a red run (the shop refused, or it started too late) keeps the earlier data for up to a week. Its notice line says how many sets were read |
+| PullVault listings missing | Actions → the "Update price history" run → the "Read PullVault's singles" step: its warnings list the listings held back and why (photos that don't show the printing the title names); a failed step keeps the published offers for 3 days |
 | CardTrader listings missing | Token missing or expired (the run log says so); the 40-minute budget may also have ended before a set was reached |
 | Role search falls back to text | `t/tags.json.gz` missing or broken; check the "Build the role tags" step |
 | Combos missing on the preview page | `c/index.json`; check the "Build the Commander combos" step |

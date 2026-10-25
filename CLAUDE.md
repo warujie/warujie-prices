@@ -20,7 +20,9 @@ and [`docs/data-formats.md`](docs/data-formats.md) (every published file).
    MTGJSON, TCGCSV, Cardmarket's price guide, Card Kingdom's and Mana Pool's public price lists,
    CardTrader's API (with the token), Commander Spellbook's bulk file, Scryfall Tagger tags, and
    ENNDAL GAMES (permission 2026-10-15: once a night 2-6am Japan time, one page every 4 s; see
-   `shop_enndal.py`). Any new source, above all Japanese shops, needs the owner's permission
+   `shop_enndal.py`), and PullVault (pullvault.gg, a US shop; its owner's permission, 2026-10-25,
+   per the site owner: its singles page once a day, robots.txt respected, each listing checked
+   against its photos; see `shop_pullvault.py`). Any new source, above all Japanese shops, needs the owner's permission
    first; never scrape.
 3. **No secrets in the repo or in chat.** The CardTrader token is the GitHub secret
    `CARDTRADER_TOKEN`; never print it, and never ask the owner to paste a token.

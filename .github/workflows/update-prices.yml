@@ -29,7 +29,7 @@ on:
   workflow_dispatch:         # adds a "Run workflow" button
   push:                      # and runs when the builder or this file changes
     branches: [main]
-    paths: [build_prices.py, shop_enndal.py, build_combos.py, build_tags.py, .github/workflows/update-prices.yml]
+    paths: [build_prices.py, shop_enndal.py, shop_pullvault.py, build_combos.py, build_tags.py, .github/workflows/update-prices.yml]
 
 permissions:
   contents: read
@@ -119,6 +119,22 @@ jobs:
             echo "::error::R2 could not be read (or has no index.json): stopping so the history is kept."; exit 1
           fi
 
+      # PullVault's singles (a US shop, read with its permission): its /singles page is
+      # opened once in a headless browser, and each listing is matched to its printing
+      # and checked against its own photos (shop_pullvault.py). Never stops the price
+      # update: without today's file the published PullVault offers are kept for a few days.
+      - uses: actions/setup-python@v6
+        with: { python-version: '3.12' }
+      - name: Read PullVault's singles
+        id: pullvault
+        continue-on-error: true
+        timeout-minutes: 20
+        run: |
+          pip install --quiet numpy opencv-python-headless playwright
+          python3 -m playwright install --with-deps chromium > /dev/null
+          python3 shop_pullvault.py --out pullvault/pullvault.json.gz
+          echo "arg=--pullvault pullvault/pullvault.json.gz" >> "$GITHUB_OUTPUT"
+
       # Stops (without publishing) if the old history can't be read or
       # Scryfall's export looks incomplete, so the history is never lost.
       # (If MTGJSON can't be reached, the day's update still goes ahead.)
@@ -128,7 +144,7 @@ jobs:
       - name: Build the price history
         env:
           CARDTRADER_TOKEN: ${{ secrets.CARDTRADER_TOKEN }}
-        run: python3 build_prices.py --out site --previous prev ${{ steps.pages.outputs.fresh }} ${{ steps.enndal.outputs.arg }}
+        run: python3 build_prices.py --out site --previous prev ${{ steps.pages.outputs.fresh }} ${{ steps.enndal.outputs.arg }} ${{ steps.pullvault.outputs.arg }}
 
       # Commander combos for the card pages, from Commander Spellbook's bulk
       # file: rebuilt once a week, copied over from the published data on
