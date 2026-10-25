@@ -16,8 +16,9 @@ Sources:
   Yellow Submarine  each store's schedule, /tmt_list/<store>/ (Shift_JIS), only the
                  rows whose game is マジック; the format is in the notes column
   Tonamel        the MTG events in Japan that stores and players list on tonamel.com
-                 (KAYAC's tournament site; the owner's request of 2026-10-25), through the
-                 same query its event-search page sends, 32 a page; offline events only
+                 (KAYAC's tournament site; the owner's request of 2026-10-25): its event-search
+                 page opened in a headless browser (Playwright), keeping the lists the page
+                 itself loads; offline events only
 
     python3 build_events.py --out site/events.json [--days 35]
 
@@ -251,16 +252,9 @@ def read_amenity(today, log):
 
 
 # ---- Tonamel (tonamel.com, KAYAC): stores and players list their events there
+TONAMEL_LIST = "https://tonamel.com/competitions?game=mtg&region=JP"
 TONAMEL_API = "https://tonamel.com/graphql/competition_management"
-TONAMEL_MAX_PAGES = 30   # 32 events a page
-# the event-search page's own query (getPublicCompetitions), asking only for what the calendar shows
-TONAMEL_QUERY = """query getPublicCompetitions($condition: PublicCompetitionsCondition!, $filter: PublicCompetitionsFilter!) {
-  publicCompetitions(condition: $condition, filter: $filter) {
-    edges { node { id title description status organization { name }
-      tournaments { displayStartAt isOnline location { venueName address { input } } } } }
-    pageInfo { endCursor hasNextPage }
-  }
-}"""
+TONAMEL_MAX_PAGES = 30   # lists of 32 events
 # shops read from their own pages: their Tonamel listings would only repeat them
 TONAMEL_SKIP = re.compile(r"晴れる屋|イエローサブマリン|イエサブ|アメニティ")
 PREF_NAMES = ["北海道", "青森県", "岩手県", "宮城県", "秋田県", "山形県", "福島県", "茨城県", "栃木県", "群馬県", "埼玉県",
@@ -347,27 +341,55 @@ def parse_tonamel(nodes):
 
 
 def read_tonamel(today, log):
-    start = int(datetime(today.year, today.month, today.day, tzinfo=JST).timestamp())
-    events, after = [], ""
-    for page in range(TONAMEL_MAX_PAGES):
-        body = json.dumps({"operationName": "getPublicCompetitions", "query": TONAMEL_QUERY, "variables": {
-            "condition": {"gameId": "mtg", "startAfter": str(start), "statuses": [], "region": "JP", "regionPrefectureIds": []},
-            "filter": {"first": 32, "last": 0, "before": "", "after": after}}}).encode()
-        try:
-            data = json.loads(fetch(TONAMEL_API, data=body))
-            conn = data["data"]["publicCompetitions"]
-        except Exception as e:
-            log(f"  tonamel page {page + 1}: {e!r}"[:300])
-            break
-        nodes = [e["node"] for e in conn.get("edges") or []]
-        got = parse_tonamel(nodes)
-        events += got
-        last = max((tonamel_time(tm.get("displayStartAt"))[0] for n in nodes for tm in (n.get("tournaments") or [])[:1]), default="")
-        info = conn.get("pageInfo") or {}
-        if not info.get("hasNextPage") or not nodes or last > (today + timedelta(days=40)).isoformat():
-            break
-        after = info.get("endCursor") or ""
-    log(f"  tonamel: {len(events)} offline events in {page + 1} pages")
+    """Tonamel's event-search page for MTG in Japan, opened in a headless browser as a visitor
+    would (its API answers only its own page), keeping the event lists the page itself fetches
+    (getPublicCompetitions, 32 at a time) and scrolling for more, PAGE_GAP seconds apart. Ads,
+    trackers and pictures are not loaded."""
+    try:
+        from playwright.sync_api import sync_playwright
+    except ImportError:
+        log("  tonamel: playwright is not installed")
+        return []
+    pages, horizon = [], (today + timedelta(days=40)).isoformat()
+
+    def on_response(r):
+        if r.url.startswith(TONAMEL_API) and "getPublicCompetitions" in (r.request.post_data_buffer or b"").decode("utf-8", "replace"):
+            try:
+                pages.append(r.json()["data"]["publicCompetitions"])
+            except Exception as e:
+                log(f"  tonamel: {e!r}"[:200])
+
+    def allowed(route):
+        u = urllib.parse.urlparse(route.request.url)
+        if route.request.resource_type in ("image", "media", "font") or not (
+                u.hostname == "tonamel.com" or (u.hostname or "").endswith((".googleapis.com", ".gstatic.com"))):
+            return route.abort()
+        return route.continue_()
+
+    try:
+        with sync_playwright() as p:
+            browser = p.chromium.launch()
+            page = browser.new_page(user_agent=USER_AGENT, locale="ja-JP", timezone_id="Asia/Tokyo")
+            page.route("**/*", allowed)
+            page.on("response", on_response)
+            page.goto(TONAMEL_LIST, wait_until="domcontentloaded", timeout=90000)
+            page.wait_for_timeout(PAGE_GAP * 2000)
+            while len(pages) < TONAMEL_MAX_PAGES and pages and (pages[-1].get("pageInfo") or {}).get("hasNextPage"):
+                last = max((tonamel_time(tm.get("displayStartAt"))[0] for e in pages[-1].get("edges") or []
+                            for tm in (e["node"].get("tournaments") or [])[:1]), default="")
+                if last > horizon:
+                    break
+                n = len(pages)
+                page.mouse.wheel(0, 20000)
+                page.evaluate("window.scrollTo(0, document.body.scrollHeight)")
+                page.wait_for_timeout(PAGE_GAP * 1000)
+                if len(pages) == n:   # nothing more came
+                    break
+            browser.close()
+    except Exception as e:
+        log(f"  tonamel: {e!r}"[:300])
+    events = parse_tonamel([e["node"] for c in pages for e in c.get("edges") or []])
+    log(f"  tonamel: {len(events)} offline events from {len(pages)} lists")
     return events
 
 
