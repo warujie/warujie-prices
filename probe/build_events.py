@@ -62,7 +62,7 @@ AMENITY = {
     "町田店": (12, 13, "町田市"), "大宮店": (6, 11, "さいたま市"), "横浜店": (9, 14, "横浜市"), "大須店": (13, 23, "名古屋市"),
     "京都店": (14, 26, "京都市"), "なんば2号店": (3, 27, "大阪市"),
 }
-AMENITY_MAX_PAGES = 5   # pages read per store at most, should its list ever run over several
+AMENITY_MAX_PAGES = 5   # pages read per day at most, should a day's list ever run over several
 # Yellow Submarine: [schedule page, prefecture, city]; the store's name comes from the page
 YELLOWSUB = [
     ("akihabara_mnt", 13, "千代田区"), ("akihabara_rpg", 13, "千代田区"), ("shinjuku", 13, "新宿区"), ("ikebukuro_gs", 13, "豊島区"),
@@ -196,7 +196,7 @@ def parse_amenity(html, today):
         fs = formats_in(name) or formats_in(style)
         out.append({"d": f"{year_for(mo, today):04d}-{mo:02d}-{da:02d}", "t": m.group(3) or "", "p": pref, "c": city,
                     "shop": "amenity", "store": tds[1], "name": name,
-                    "url": f"https://amenitydream.co.jp/matches/?type=2&shop={shop}", "f": fs})
+                    "url": f"https://amenitydream.co.jp/matches/?type=2&shop={shop}&date={year_for(mo, today):04d}-{mo:02d}-{da:02d}", "f": fs})
     return out
 
 
@@ -208,30 +208,34 @@ def amenity_pages(html):
     return [u for u in dict.fromkeys(urls) if u.startswith("https://amenitydream.co.jp/matches/")]
 
 
+def amenity_dates(html):
+    """The days the list's 開催日 drop-down offers (about a month ahead)."""
+    m = re.search(r'<select name="date">(.*?)</select>', html, re.S)
+    return re.findall(r'value="(\d{4}-\d{2}-\d{2})"', m.group(1)) if m else []
+
+
 def read_amenity(today, log):
-    """Each store's own MTG list (?type=2&shop=<n>), as the store's page shows it, and its further
-    pages if any. The all-stores list (shop=) shows only a few of each store's events."""
+    """Every store's MTG events, one day at a time (?type=2&shop=&date=<day>) for each day the
+    page's date drop-down offers: the list without a day shows only the coming week."""
     try:
         ctx = amenity_context()
+        first = fetch("https://amenitydream.co.jp/matches/?type=2&shop=&date=", context=ctx)
     except Exception as e:
         log(f"  amenity: {e!r}"[:300])
         return []
-    events = []
-    for store, (shop, _, _) in AMENITY.items():
-        first = f"https://amenitydream.co.jp/matches/?type=2&shop={shop}&date="
-        todo, done = [first], set()
+    events = parse_amenity(first, today)
+    for day in amenity_dates(first):
+        todo, done = [f"https://amenitydream.co.jp/matches/?type=2&shop=&date={day}"], set()
         while todo and len(done) < AMENITY_MAX_PAGES:
             url = todo.pop(0)
             done.add(url)
             try:
                 html = fetch(url, context=ctx)
             except Exception as e:
-                log(f"  amenity {store}: {e!r}"[:200])
+                log(f"  amenity {day}: {e!r}"[:200])
                 break
-            got = [e for e in parse_amenity(html, today) if e["store"] == store]
-            events += got
+            events += parse_amenity(html, today)
             todo += [u for u in amenity_pages(html) if u not in done and u not in todo]
-        log(f"  amenity {store}: {sum(e['store'] == store for e in events)} events")
     return events
 
 
