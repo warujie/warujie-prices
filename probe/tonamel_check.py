@@ -6,6 +6,8 @@ import build_events as b
 today = (datetime.now(timezone.utc) + timedelta(hours=9)).date()
 log = lambda s: print(s, flush=True)
 ev = b.read_tonamel(today, log)
+raw = [e for e in ev]
+print("stores with their venue:", sorted({(e["store"], e["c"]) for e in ev})[:80])
 json.dump(ev, open("probe/tonamel.json", "w"), ensure_ascii=False, indent=0)
 last = (today + timedelta(days=35)).isoformat()
 print("all:", len(ev), "dates:", min((e["d"] for e in ev), default=""), max((e["d"] for e in ev), default=""))

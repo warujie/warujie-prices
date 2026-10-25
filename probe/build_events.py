@@ -374,17 +374,29 @@ def read_tonamel(today, log):
             page.on("response", on_response)
             page.goto(TONAMEL_LIST, wait_until="domcontentloaded", timeout=90000)
             page.wait_for_timeout(PAGE_GAP * 2000)
-            while len(pages) < TONAMEL_MAX_PAGES and pages and (pages[-1].get("pageInfo") or {}).get("hasNextPage"):
+            stop = "no list came"
+            while pages:
                 last = max((tonamel_time(tm.get("displayStartAt"))[0] for e in pages[-1].get("edges") or []
                             for tm in (e["node"].get("tournaments") or [])[:1]), default="")
-                if last > horizon:
-                    break
-                n = len(pages)
-                page.mouse.wheel(0, 20000)
-                page.evaluate("window.scrollTo(0, document.body.scrollHeight)")
-                page.wait_for_timeout(PAGE_GAP * 1000)
-                if len(pages) == n:   # nothing more came
-                    break
+                if not (pages[-1].get("pageInfo") or {}).get("hasNextPage"):
+                    stop = "the end of the list"
+                elif last > horizon:
+                    stop = f"past {horizon}"
+                elif len(pages) >= TONAMEL_MAX_PAGES:
+                    stop = f"{TONAMEL_MAX_PAGES} lists"
+                else:
+                    n = len(pages)
+                    for _ in range(3):   # scroll to the bottom, where the page asks for the next 32
+                        page.mouse.wheel(0, 20000)
+                        page.evaluate("window.scrollTo(0, document.body.scrollHeight)")
+                        page.wait_for_timeout(PAGE_GAP * 1000)
+                        if len(pages) > n:
+                            break
+                    if len(pages) > n:
+                        continue
+                    stop = "no more came on scrolling"
+                break
+            log(f"  tonamel: stopped at {stop} (last date {last if pages else '-'})")
             browser.close()
     except Exception as e:
         log(f"  tonamel: {e!r}"[:300])
