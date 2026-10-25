@@ -5,7 +5,7 @@ Collecting cffi>=2.0.0 (from cryptography)
 Collecting pycparser (from cffi>=2.0.0->cryptography)
   Downloading pycparser-3.12-py3-none-any.whl.metadata (9.7 kB)
 Downloading cryptography-50.0.2-cp311-abi3-manylinux_2_34_x86_64.whl (4.8 MB)
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 4.8/4.8 MB 29.7 MB/s  0:00:00
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 4.8/4.8 MB 34.9 MB/s  0:00:00
 Downloading cffi-2.1.1-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (221 kB)
 Downloading pycparser-3.12-py3-none-any.whl (62 kB)
 Installing collected packages: pycparser, cffi, cryptography
@@ -14,33 +14,19 @@ Successfully installed cffi-2.1.1 cryptography-50.0.2 pycparser-3.12
 
 [notice] A new release of pip is available: 26.2.1 -> 26.2.2
 [notice] To update, run: pip install --upgrade pip
-  amenity 立川店: 1 events
-  amenity 札幌店: 1 events
-  amenity 吉祥寺店: 0 events
-  amenity 池袋パワー9店: 2 events
-  amenity 中野店: 0 events
-  amenity 新宿店: 2 events
-  amenity 秋葉原店: 1 events
-  amenity 蒲田店: 1 events
-  amenity 町田店: 3 events
-  amenity 大宮店: 1 events
-  amenity 横浜店: 0 events
-  amenity 大須店: 2 events
-  amenity 京都店: 1 events
-  amenity なんば2号店: 1 events
-per-store reader: 16
-[('町田店', 3), ('池袋パワー9店', 2), ('新宿店', 2), ('大須店', 2), ('立川店', 1), ('札幌店', 1), ('秋葉原店', 1), ('蒲田店', 1), ('大宮店', 1), ('京都店', 1), ('なんば2号店', 1)]
-[('2026-10-30', 11), ('2026-10-25', 3), ('2026-10-31', 1), ('2026-10-28', 1)]
-{'d': '2026-10-30', 't': '19:00', 'p': 13, 'c': '立川市', 'shop': 'amenity', 'store': '立川店', 'name': 'FNMスタン/モダン', 'url': 'https://amenitydream.co.jp/matches/?type=2&shop=19', 'f': ['modern']}
-{'d': '2026-10-30', 't': '19:00', 'p': 1, 'c': '札幌市', 'shop': 'amenity', 'store': '札幌店', 'name': 'フライデーナイトマジック(スタンダード)', 'url': 'https://amenitydream.co.jp/matches/?type=2&shop=4', 'f': ['standard']}
-{'d': '2026-10-30', 't': '19:00', 'p': 13, 'c': '豊島区', 'shop': 'amenity', 'store': '池袋パワー9店', 'name': 'フライデーナイトマジック (スタンダード)', 'url': 'https://amenitydream.co.jp/matches/?type=2&shop=8', 'f': ['standard']}
-{'d': '2026-10-30', 't': '19:00', 'p': 13, 'c': '豊島区', 'shop': 'amenity', 'store': '池袋パワー9店', 'name': 'フライデーナイトマジック (パイオニア)', 'url': 'https://amenitydream.co.jp/matches/?type=2&shop=8', 'f': ['pioneer']}
-{'d': '2026-10-30', 't': '18:30', 'p': 13, 'c': '新宿区', 'shop': 'amenity', 'store': '新宿店', 'name': 'FNM（スタン・レガシー）', 'url': 'https://amenitydream.co.jp/matches/?type=2&shop=10', 'f': ['legacy']}
-{'d': '2026-10-31', 't': '13:00', 'p': 13, 'c': '新宿区', 'shop': 'amenity', 'store': '新宿店', 'name': '週末ドラフト', 'url': 'https://amenitydream.co.jp/matches/?type=2&shop=10', 'f': ['limited']}
-{'d': '2026-10-28', 't': '18:00', 'p': 13, 'c': '千代田区', 'shop': 'amenity', 'store': '秋葉原店', 'name': 'PWS（カジュアル）', 'url': 'https://amenitydream.co.jp/matches/?type=2&shop=7', 'f': []}
-{'d': '2026-10-25', 't': '13:00', 'p': 13, 'c': '大田区', 'shop': 'amenity', 'store': '蒲田店', 'name': 'ストアチャンピオンシップ', 'url': 'https://amenitydream.co.jp/matches/?type=2&shop=18', 'f': []}
-{'d': '2026-10-25', 't': '13:00', 'p': 13, 'c': '町田市', 'shop': 'amenity', 'store': '町田店', 'name': 'Reality Fracture Store Championship', 'url': 'https://amenitydream.co.jp/matches/?type=2&shop=12', 'f': []}
-{'d': '2026-10-30', 't': '19:00', 'p': 13, 'c': '町田市', 'shop': 'amenity', 'store': '町田店', 'name': 'FNMスタンダード', 'url': 'https://amenitydream.co.jp/matches/?type=2&shop=12', 'f': ['standard']}
-{'d': '2026-10-30', 't': '19:00', 'p': 13, 'c': '町田市', 'shop': 'amenity', 'store': '町田店', 'name': 'FNMモダン', 'url': 'https://amenitydream.co.jp/matches/?type=2&shop=12', 'f': ['modern']}
-{'d': '2026-10-30', 't': '18:00', 'p': 11, 'c': 'さいたま市', 'shop': 'amenity', 'store': '大宮店', 'name': 'MTG フライデーナイトマジック (スタンダード)', 'url': 'https://amenitydream.co.jp/matches/?type=2&shop=6', 'f': ['standard']}
-all-stores list: 16 [('町田店', 3), ('大須店', 2), ('新宿店', 2), ('池袋パワー9店', 2), ('蒲田店', 1), ('秋葉原店', 1), ('大宮店', 1), ('立川店', 1), ('京都店', 1), ('札幌店', 1), ('なんば2号店', 1)]
+day-by-day reader: 32
+[('町田店', 6), ('大須店', 4), ('新宿店', 4), ('池袋パワー9店', 4), ('蒲田店', 2), ('秋葉原店', 2), ('大宮店', 2), ('立川店', 2), ('京都店', 2), ('札幌店', 2), ('なんば2号店', 2)]
+[('2026-10-30', 22), ('2026-10-25', 6), ('2026-10-28', 2), ('2026-10-31', 2)]
+{'d': '2026-10-25', 't': '11:00', 'p': 23, 'c': '名古屋市', 'shop': 'amenity', 'store': '大須店', 'name': 'MTG スタンダードショーダウン', 'url': 'https://amenitydream.co.jp/matches/?type=2&shop=13&date=2026-10-25', 'f': ['standard']}
+{'d': '2026-10-25', 't': '13:00', 'p': 13, 'c': '町田市', 'shop': 'amenity', 'store': '町田店', 'name': 'Reality Fracture Store Championship', 'url': 'https://amenitydream.co.jp/matches/?type=2&shop=12&date=2026-10-25', 'f': []}
+{'d': '2026-10-25', 't': '13:00', 'p': 13, 'c': '大田区', 'shop': 'amenity', 'store': '蒲田店', 'name': 'ストアチャンピオンシップ', 'url': 'https://amenitydream.co.jp/matches/?type=2&shop=18&date=2026-10-25', 'f': []}
+{'d': '2026-10-28', 't': '18:00', 'p': 13, 'c': '千代田区', 'shop': 'amenity', 'store': '秋葉原店', 'name': 'PWS（カジュアル）', 'url': 'https://amenitydream.co.jp/matches/?type=2&shop=7&date=2026-10-28', 'f': []}
+{'d': '2026-10-30', 't': '18:00', 'p': 23, 'c': '名古屋市', 'shop': 'amenity', 'store': '大須店', 'name': 'ＭＴＧ ＦＮＭ', 'url': 'https://amenitydream.co.jp/matches/?type=2&shop=13&date=2026-10-30', 'f': []}
+{'d': '2026-10-30', 't': '18:00', 'p': 11, 'c': 'さいたま市', 'shop': 'amenity', 'store': '大宮店', 'name': 'MTG フライデーナイトマジック (スタンダード)', 'url': 'https://amenitydream.co.jp/matches/?type=2&shop=6&date=2026-10-30', 'f': ['standard']}
+{'d': '2026-10-30', 't': '18:30', 'p': 13, 'c': '新宿区', 'shop': 'amenity', 'store': '新宿店', 'name': 'FNM（スタン・レガシー）', 'url': 'https://amenitydream.co.jp/matches/?type=2&shop=10&date=2026-10-30', 'f': ['legacy']}
+{'d': '2026-10-30', 't': '19:00', 'p': 13, 'c': '立川市', 'shop': 'amenity', 'store': '立川店', 'name': 'FNMスタン/モダン', 'url': 'https://amenitydream.co.jp/matches/?type=2&shop=19&date=2026-10-30', 'f': ['modern']}
+{'d': '2026-10-30', 't': '19:00', 'p': 26, 'c': '京都市', 'shop': 'amenity', 'store': '京都店', 'name': 'MTG FNMレガシー', 'url': 'https://amenitydream.co.jp/matches/?type=2&shop=14&date=2026-10-30', 'f': ['legacy']}
+{'d': '2026-10-30', 't': '19:00', 'p': 13, 'c': '豊島区', 'shop': 'amenity', 'store': '池袋パワー9店', 'name': 'フライデーナイトマジック (スタンダード)', 'url': 'https://amenitydream.co.jp/matches/?type=2&shop=8&date=2026-10-30', 'f': ['standard']}
+{'d': '2026-10-30', 't': '19:00', 'p': 13, 'c': '豊島区', 'shop': 'amenity', 'store': '池袋パワー9店', 'name': 'フライデーナイトマジック (パイオニア)', 'url': 'https://amenitydream.co.jp/matches/?type=2&shop=8&date=2026-10-30', 'f': ['pioneer']}
+{'d': '2026-10-30', 't': '19:00', 'p': 1, 'c': '札幌市', 'shop': 'amenity', 'store': '札幌店', 'name': 'フライデーナイトマジック(スタンダード)', 'url': 'https://amenitydream.co.jp/matches/?type=2&shop=4&date=2026-10-30', 'f': ['standard']}
+unique: 16 days: 4 last: 2026-10-31
