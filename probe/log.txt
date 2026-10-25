@@ -9,9 +9,9 @@ Get:3 http://azure.archive.ubuntu.com/ubuntu noble-updates InRelease [126 kB]
 Get:6 https://packages.microsoft.com/ubuntu/24.04/prod noble InRelease [3600 B]
 Get:4 http://azure.archive.ubuntu.com/ubuntu noble-backports InRelease [126 kB]
 Get:5 http://azure.archive.ubuntu.com/ubuntu noble-security InRelease [126 kB]
-Get:7 https://packages.microsoft.com/ubuntu/24.04/prod noble/main amd64 Packages [660 kB]
-Get:8 https://packages.microsoft.com/ubuntu/24.04/prod noble/main armhf Packages [12.4 kB]
-Get:9 https://packages.microsoft.com/ubuntu/24.04/prod noble/main arm64 Packages [598 kB]
+Get:7 https://packages.microsoft.com/ubuntu/24.04/prod noble/main arm64 Packages [598 kB]
+Get:8 https://packages.microsoft.com/ubuntu/24.04/prod noble/main amd64 Packages [660 kB]
+Get:9 https://packages.microsoft.com/ubuntu/24.04/prod noble/main armhf Packages [12.4 kB]
 Get:10 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 Packages [1400 kB]
 Get:11 http://azure.archive.ubuntu.com/ubuntu noble-updates/main Translation-en [310 kB]
 Get:12 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe amd64 Packages [1706 kB]
@@ -24,7 +24,7 @@ Get:18 http://azure.archive.ubuntu.com/ubuntu noble-security/universe amd64 Pack
 Get:19 http://azure.archive.ubuntu.com/ubuntu noble-security/universe Translation-en [246 kB]
 Get:20 http://azure.archive.ubuntu.com/ubuntu noble-security/restricted amd64 Packages [1713 kB]
 Get:21 http://azure.archive.ubuntu.com/ubuntu noble-security/restricted Translation-en [392 kB]
-Fetched 12.6 MB in 1s (9967 kB/s)
+Fetched 12.6 MB in 1s (10.0 MB/s)
 Reading package lists...
 Reading package lists...
 Building dependency tree...
@@ -109,7 +109,7 @@ Get:15 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 xfonts-cyrill
 Get:16 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 xfonts-scalable all 1:1.0.3-1.3 [304 kB]
 Get:17 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 xserver-common all 2:21.1.12-1ubuntu1.9 [35.0 kB]
 Get:18 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe amd64 xvfb amd64 2:21.1.12-1ubuntu1.9 [877 kB]
-Fetched 25.9 MB in 0s (61.7 MB/s)
+Fetched 25.9 MB in 1s (44.8 MB/s)
 Selecting previously unselected package fonts-ipafont-gothic.
 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 203540 files and directories currently installed.)
 Preparing to unpack .../00-fonts-ipafont-gothic_00303-21ubuntu1_all.deb ...
@@ -230,27 +230,229 @@ Downloading Chromium Headless Shell 141.0.7390.37 (playwright build v1194) from 
 |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■        |  90% of 104.3 MiB
 |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■| 100% of 104.3 MiB
 Chromium Headless Shell 141.0.7390.37 (playwright build v1194) downloaded to /home/runner/.cache/ms-playwright/chromium_headless_shell-1194
-  tonamel: stopped at the end of the list (last date 2099-06-01)
-  tonamel: 104 offline events from 4 lists
-stores with their venue: [('ABSOLUTE ZERO', '中城村'), ('ARCANA TCGイベント運営', '千代田区'), ('BIG MAGIC 秋葉原店', '千代田区'), ('BIGMAGIC池袋店', '豊島区'), ('BOOKBOX', '鹿児島市'), ('CozyGameSpace TiM', '長崎市'), ('MINTGAMESMTG店(東京・東日本橋)', '中央区'), ('Misteria', '名古屋市'), ('TCG SHOP Suzunone(すずのね）', '塩尻市'), ('yume', '旭川市'), ('いずマジ！', '出水市'), ('おうち', '千代田区'), ('アップキープ MTG用', '半田市'), ('カードショップLight', '草津市'), ('カードショップボルカ', '薩摩川内市'), ('カードショップ若院', '岡山市'), ('カードショップ黄鶏屋', '堺市'), ('カードプレイス', '大分市'), ('コミかる伊勢崎', '伊勢崎市'), ('コミかる高崎', '高崎市'), ('ドラゴンスターオタロード中央店MTGフロア', '大阪市'), ('ドンキー', '下新川郡朝日町'), ('パピー弥富店', '名古屋市'), ('パピー弥富店', '弥富市'), ('ブックオフ広島八木', '広島市'), ('ホウネンエソ', '小山市'), ('ホビーステーション本厚木店', '厚木市'), ('ホビーステーション松戸店', '松戸市'), ('マスターズギルド', '浜松市'), ('マスターズギルドなゆた', '浜松市'), ('尾張堂', '江南市'), ('岡山EDH交流会', '岡山市'), ('竜星の嵐名古屋店', '名古屋市'), ('紙屋敷', '稲沢市'), ('駄菓子のたまや', '岩手郡雫石町')]
-all: 104 dates: 2026-10-25 2026-11-29
-events in 35 days: 104
-by prefecture: [('東京都', 46), ('愛知県', 22), ('鹿児島県', 5), ('大阪府', 5), ('群馬県', 4), ('静岡県', 3), ('千葉県', 2), ('大分県', 2), ('岡山県', 2), ('北海道', 2), ('沖縄県', 2), ('長崎県', 2), ('富山県', 1), ('岩手県', 1), ('広島県', 1), ('長野県', 1), ('栃木県', 1), ('神奈川県', 1), ('滋賀県', 1)]
-by store: [('MINTGAMESMTG店(東京・東日本橋)', 42), ('アップキープ MTG用', 10), ('パピー弥富店', 7), ('ドラゴンスターオタロード中央店MTGフロア', 4), ('コミかる高崎', 3), ('ホビーステーション松戸店', 2), ('カードプレイス', 2), ('yume', 2), ('マスターズギルド', 2), ('ABSOLUTE ZERO', 2), ('CozyGameSpace TiM', 2), ('BOOKBOX', 2), ('尾張堂', 2), ('いずマジ！', 2), ('カードショップボルカ', 1), ('おうち', 1), ('岡山EDH交流会', 1), ('ARCANA TCGイベント運営', 1), ('紙屋敷', 1), ('ドンキー', 1), ('駄菓子のたまや', 1), ('ブックオフ広島八木', 1), ('竜星の嵐名古屋店', 1), ('コミかる伊勢崎', 1), ('TCG SHOP Suzunone(すずのね）', 1), ('ホウネンエソ', 1), ('カードショップ若院', 1), ('ホビーステーション本厚木店', 1), ('BIG MAGIC 秋葉原店', 1), ('BIGMAGIC池袋店', 1), ('マスターズギルドなゆた', 1), ('Misteria', 1), ('カードショップLight', 1), ('カードショップ黄鶏屋', 1)]
-formats: [(('standard',), 35), (('commander',), 23), (('limited',), 19), ((), 17), (('pauper',), 6), (('commander', 'limited'), 1), (('standard', 'modern', 'legacy'), 1), (('legacy',), 1), (('vintage',), 1)]
-okinawa / zero: [{'d': '2026-11-14', 't': '14:00', 'p': 47, 'c': '中城村', 'shop': 'tonamel', 'store': 'ABSOLUTE ZERO', 'name': '沖縄Vintage2026', 'url': 'https://tonamel.com/competition/Y8tFz', 'f': ['vintage']}, {'d': '2026-11-15', 't': '14:00', 'p': 47, 'c': '中城村', 'shop': 'tonamel', 'store': 'ABSOLUTE ZERO', 'name': 'チャンピオンズカップ店舗予選/Champions Cup Store Qualifier', 'url': 'https://tonamel.com/competition/Kmx2O', 'f': []}]
-{'d': '2026-10-25', 't': '10:00', 'p': 46, 'c': '薩摩川内市', 'shop': 'tonamel', 'store': 'カードショップボルカ', 'name': 'チャンピオンズカップ予選inボルカ シーズン5ラウンド2 2回目', 'url': 'https://tonamel.com/competition/3gCwH', 'f': []}
-{'d': '2026-10-25', 't': '10:00', 'p': 12, 'c': '松戸市', 'shop': 'tonamel', 'store': 'ホビーステーション松戸店', 'name': '【シーズン5ラウンド2】MtGチャンピオンズカップ店舗予選 シールド戦 in松戸市民劇場', 'url': 'https://tonamel.com/competition/TFXIy', 'f': ['limited']}
-{'d': '2026-10-25', 't': '11:00', 'p': 44, 'c': '大分市', 'shop': 'tonamel', 'store': 'カードプレイス', 'name': 'チャンピオンズカップ店舗予選シーズン5ラウンド2 鶴崎店', 'url': 'https://tonamel.com/competition/Wnieu', 'f': ['standard']}
-{'d': '2026-10-25', 't': '13:00', 'p': 13, 'c': '中央区', 'shop': 'tonamel', 'store': 'MINTGAMESMTG店(東京・東日本橋)', 'name': 'ストアチャンピオンシップ『リアリティ・フラクチャー』(2026/10/25)', 'url': 'https://tonamel.com/competition/tA0s3', 'f': ['standard']}
-{'d': '2026-10-25', 't': '13:00', 'p': 10, 'c': '高崎市', 'shop': 'tonamel', 'store': 'コミかる高崎', 'name': 'チャンピオンズカップ シーズン5ラウンド1 店舗予選', 'url': 'https://tonamel.com/competition/W6TNw', 'f': ['standard']}
-{'d': '2026-10-25', 't': '13:00', 'p': 27, 'c': '大阪市', 'shop': 'tonamel', 'store': 'ドラゴンスターオタロード中央店MTGフロア', 'name': 'チャンピオンズカップ Season5 Round2 店舗予選【スタンダード】', 'url': 'https://tonamel.com/competition/n0be1', 'f': ['standard']}
-{'d': '2026-10-25', 't': '13:00', 'p': 13, 'c': '千代田区', 'shop': 'tonamel', 'store': 'おうち', 'name': 'ストアチャンピオンシップ10月25日 『マジック：ザ・ギャザリング——リアリティ・フラクチャー』', 'url': 'https://tonamel.com/competition/Vz0GF', 'f': []}
-{'d': '2026-10-25', 't': '14:00', 'p': 33, 'c': '岡山市', 'shop': 'tonamel', 'store': '岡山EDH交流会', 'name': '第五十回 岡山EDH交流会 in カードショップ若院', 'url': 'https://tonamel.com/competition/20KVg', 'f': ['commander']}
-{'d': '2026-10-25', 't': '15:00', 'p': 1, 'c': '旭川市', 'shop': 'tonamel', 'store': 'yume', 'name': 'チャンピオンズカップ予選① SEASON5 ROUND2', 'url': 'https://tonamel.com/competition/WWIry', 'f': ['standard']}
-{'d': '2026-10-25', 't': '16:00', 'p': 44, 'c': '大分市', 'shop': 'tonamel', 'store': 'カードプレイス', 'name': 'チャンピオンズカップ店舗予選シーズン5ラウンド2 大分店', 'url': 'https://tonamel.com/competition/BpE11', 'f': ['standard']}
-{'d': '2026-10-26', 't': '19:30', 'p': 13, 'c': '千代田区', 'shop': 'tonamel', 'store': 'ARCANA TCGイベント運営', 'name': 'MTG PWS 10-12月シーズン [カジュアル]', 'url': 'https://tonamel.com/competition/xmGAh', 'f': []}
-{'d': '2026-10-26', 't': '20:00', 'p': 23, 'c': '稲沢市', 'shop': 'tonamel', 'store': '紙屋敷', 'name': '紙屋敷MTG PWS プレンズウォーカーフレンドリーシリーズ', 'url': 'https://tonamel.com/competition/DNnkK', 'f': ['standard']}
-{'d': '2026-10-28', 't': '15:00', 'p': 13, 'c': '中央区', 'shop': 'tonamel', 'store': 'MINTGAMESMTG店(東京・東日本橋)', 'name': 'スタンダードショーダウン（2026/10/28）', 'url': 'https://tonamel.com/competition/7ofLz', 'f': ['standard']}
-{'d': '2026-10-28', 't': '19:00', 'p': 13, 'c': '中央区', 'shop': 'tonamel', 'store': 'MINTGAMESMTG店(東京・東日本橋)', 'name': 'パックコマンダー（リミテッド統率者戦）（2026/10/28）', 'url': 'https://tonamel.com/competition/tjimJ', 'f': ['commander', 'limited']}
-{'d': '2026-10-29', 't': '15:00', 'p': 13, 'c': '中央区', 'shop': 'tonamel', 'store': 'MINTGAMESMTG店(東京・東日本橋)', 'name': 'スタンダードショーダウン（2026/10/29）', 'url': 'https://tonamel.com/competition/aUmAE', 'f': ['standard']}
+{
+ "kanto": {
+  "tabVisible": true,
+  "summary": "関東・2週間：2194件（開始の早い順）",
+  "note": "大会の参加費・定員・参加方法は、大会名から開く各店舗のページでご確認ください。掲載：Tonamel・晴れる屋・アメニティードリーム・イエローサブマリン（2026-10-25更新）",
+  "days": 2,
+  "rows": 200,
+  "wait": false,
+  "fmt": [
+   "すべて",
+   "スタンダード（1163）",
+   "パイオニア（864）",
+   "モダン（898）",
+   "レガシー（882）",
+   "ヴィンテージ（20）",
+   "パウパー（463）",
+   "統率者（1780）",
+   "プレモダン（60）",
+   "リミテッド（425）"
+  ],
+  "shop": [
+   "すべてのショップ",
+   "晴れる屋（5331）",
+   "イエローサブマリン（134）",
+   "MINTGAMESMTG店(東京・東日本橋)（42）",
+   "アメニティードリーム（11）",
+   "コミかる高崎（3）",
+   "ホビーステーション松戸店（2）",
+   "ARCANA TCGイベント運営（1）",
+   "BIG MAGIC 秋葉原店（1）",
+   "BIGMAGIC池袋店（1）",
+   "おうち（1）",
+   "コミかる伊勢崎（1）",
+   "ホウネンエソ（1）",
+   "ホビーステーション本厚木店（1）"
+  ],
+  "city": [
+   "関東すべて（5530）",
+   "茨城県（236）",
+   "水戸市（236）",
+   "栃木県（339）",
+   "宇都宮市（338）",
+   "小山市（1）",
+   "群馬県（312）",
+   "高崎市（311）",
+   "伊勢崎市（1）",
+   "埼玉県（580）",
+   "さいたま市（571）",
+   "川越市（9）"
+  ],
+  "first": [
+   "10:00 Li ホビーステーション松戸店 【シーズン5ラウンド2】MtGチャンピオンズカップ店舗予選 シールド戦 in松戸市民劇場⁠↗",
+   "10:00 晴れる屋 横浜店 マジックリーグ⁠↗",
+   "10:30 St Pi Mo Lg Pa 晴れる屋 トーナメントセンター東京 ホリデーモーニングクイックイベント[2回戦]⁠↗",
+   "11:00 Li 晴れる屋 吉祥寺店 [カジュアルイベント]カオスシールド交流会 in 吉祥寺⁠↗",
+   "11:00 Li 晴れる屋 吉祥寺店 マジック・リーグ⁠↗",
+   "11:00 晴れる屋 川崎店 マジック・リーグ⁠↗",
+   "11:00 晴れる屋 宇都宮店 マジックリーグ⁠↗",
+   "11:00 晴れる屋 渋谷店 マジックリーグ⁠↗"
+  ]
+ },
+ "okinawa-phone": {
+  "tabVisible": true,
+  "summary": "沖縄・30日：2件（開始の早い順）",
+  "note": "大会の参加費・定員・参加方法は、大会名から開く各店舗のページでご確認ください。掲載：Tonamel・晴れる屋・アメニティードリーム・イエローサブマリン（2026-10-25更新）",
+  "days": 2,
+  "rows": 2,
+  "wait": false,
+  "fmt": [
+   "すべて",
+   "スタンダード",
+   "パイオニア",
+   "モダン",
+   "レガシー",
+   "ヴィンテージ（1）",
+   "パウパー",
+   "統率者",
+   "プレモダン",
+   "リミテッド"
+  ],
+  "shop": [
+   "すべてのショップ",
+   "ABSOLUTE ZERO（2）"
+  ],
+  "city": [
+   "沖縄すべて（2）",
+   "沖縄県（2）",
+   "中城村（2）"
+  ],
+  "first": [
+   "14:00 Vt ABSOLUTE ZERO 沖縄Vintage2026⁠↗",
+   "14:00 ABSOLUTE ZERO チャンピオンズカップ店舗予選/Champions Cup Store Qualifier⁠↗"
+  ]
+ },
+ "tonamel-all": {
+  "tabVisible": true,
+  "summary": "全国・Tonamel・2週間：47件（開始の早い順）",
+  "note": "大会の参加費・定員・参加方法は、大会名から開く各店舗のページでご確認ください。掲載：Tonamel・晴れる屋・アメニティードリーム・イエローサブマリン（2026-10-25更新）",
+  "days": 12,
+  "rows": 47,
+  "wait": false,
+  "fmt": [
+   "すべて",
+   "スタンダード（36）",
+   "パイオニア",
+   "モダン（1）",
+   "レガシー（2）",
+   "ヴィンテージ（1）",
+   "パウパー（6）",
+   "統率者（24）",
+   "プレモダン",
+   "リミテッド（20）"
+  ],
+  "shop": [
+   "すべてのショップ",
+   "Tonamel",
+   "晴れる屋（10666）",
+   "イエローサブマリン（242）",
+   "MINTGAMESMTG店(東京・東日本橋)（42）",
+   "アメニティードリーム（16）",
+   "アップキープ MTG用（10）",
+   "パピー弥富店（7）",
+   "ドラゴンスターオタロード中央店MTGフロア（4）",
+   "コミかる高崎（3）",
+   "ABSOLUTE ZERO（2）",
+   "BOOKBOX（2）",
+   "CozyGameSpace TiM（2）",
+   "yume（2）",
+   "いずマジ！（2）",
+   "カードプレイス（2）",
+   "ホビーステーション松戸店（2）",
+   "マスターズギルド（2）",
+   "尾張堂（2）",
+   "ARCANA TCGイベント運営（1）",
+   "BIG MAGIC 秋葉原店（1）",
+   "BIGMAGIC池袋店（1）",
+   "Misteria（1）",
+   "TCG SHOP Suzunone(すずのね）（1）",
+   "おうち（1）"
+  ],
+  "city": [
+   "すべての都道府県（11028）",
+   "北海道（91）",
+   "青森県",
+   "岩手県（1）",
+   "宮城県（314）",
+   "秋田県",
+   "山形県",
+   "福島県（252）",
+   "茨城県（236）",
+   "栃木県（339）",
+   "群馬県（312）",
+   "埼玉県（580）"
+  ],
+  "first": [
+   "10:00 Li 千葉県 ホビーステーション松戸店 【シーズン5ラウンド2】MtGチャンピオンズカップ店舗予選 シールド戦 in松戸市民劇場⁠↗",
+   "10:00 鹿児島県 カードショップボルカ チャンピオンズカップ予選inボルカ シーズン5ラウンド2 2回目⁠↗",
+   "11:00 St 大分県 カードプレイス チャンピオンズカップ店舗予選シーズン5ラウンド2 鶴崎店⁠↗",
+   "13:00 St 東京都 MINTGAMESMTG店(東京・東日本橋) ストアチャンピオンシップ『リアリティ・フラクチャー』(2026/10/25)⁠↗",
+   "13:00 東京都 おうち ストアチャンピオンシップ10月25日 『マジック：ザ・ギャザリング——リアリティ・フラクチャー』⁠↗",
+   "13:00 St 大阪府 ドラゴンスターオタロード中央店MTGフロア チャンピオンズカップ Season5 Round2 店舗予選【スタンダード】⁠↗",
+   "13:00 St 群馬県 コミかる高崎 チャンピオンズカップ シーズン5ラウンド1 店舗予選⁠↗",
+   "14:00 Cm 岡山県 岡山EDH交流会 第五十回 岡山EDH交流会 in カードショップ若院⁠↗"
+  ]
+ },
+ "amenity": {
+  "tabVisible": true,
+  "summary": "関東・アメニティードリーム・すべて：11件（開始の早い順）",
+  "note": "大会の参加費・定員・参加方法は、大会名から開く各店舗のページでご確認ください。掲載：Tonamel・晴れる屋・アメニティードリーム・イエローサブマリン（2026-10-25更新）",
+  "days": 4,
+  "rows": 11,
+  "wait": false,
+  "fmt": [
+   "すべて",
+   "スタンダード（5）",
+   "パイオニア（1）",
+   "モダン（2）",
+   "レガシー（1）",
+   "ヴィンテージ",
+   "パウパー",
+   "統率者",
+   "プレモダン",
+   "リミテッド（1）"
+  ],
+  "shop": [
+   "すべてのショップ",
+   "晴れる屋（5331）",
+   "イエローサブマリン（134）",
+   "MINTGAMESMTG店(東京・東日本橋)（42）",
+   "アメニティードリーム（11）",
+   "コミかる高崎（3）",
+   "ホビーステーション松戸店（2）",
+   "ARCANA TCGイベント運営（1）",
+   "BIG MAGIC 秋葉原店（1）",
+   "BIGMAGIC池袋店（1）",
+   "おうち（1）",
+   "コミかる伊勢崎（1）",
+   "ホウネンエソ（1）",
+   "ホビーステーション本厚木店（1）"
+  ],
+  "city": [
+   "関東すべて（5530）",
+   "茨城県（236）",
+   "水戸市（236）",
+   "栃木県（339）",
+   "宇都宮市（338）",
+   "小山市（1）",
+   "群馬県（312）",
+   "高崎市（311）",
+   "伊勢崎市（1）",
+   "埼玉県（580）",
+   "さいたま市（571）",
+   "川越市（9）"
+  ],
+  "first": [
+   "13:00 アメニティードリーム 町田店 Reality Fracture Store Championship⁠↗",
+   "13:00 アメニティードリーム 蒲田店 ストアチャンピオンシップ⁠↗",
+   "18:00 アメニティードリーム 秋葉原店 PWS（カジュアル）⁠↗",
+   "18:00 St アメニティードリーム 大宮店 MTG フライデーナイトマジック (スタンダード)⁠↗",
+   "18:30 St Lg アメニティードリーム 新宿店 FNM（スタン・レガシー）⁠↗",
+   "19:00 St Mo アメニティードリーム 立川店 FNMスタン/モダン⁠↗",
+   "19:00 St アメニティードリーム 町田店 FNMスタンダード⁠↗",
+   "19:00 Mo アメニティードリーム 町田店 FNMモダン⁠↗"
+  ]
+ }
+}
