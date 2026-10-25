@@ -1,16 +1,367 @@
-hareruya: 10678 events (468 s)
-amenity: 16 events (5 s)
-yellowsub: 240 events (115 s)
-Wrote 10924 events to out/events.json (2622 KB)
-{'hareruya': 10678, 'amenity': 16, 'yellowsub': 240}
-[(13, 2685), (23, 938), (14, 882), (27, 675), (11, 583), (12, 444), (40, 392), (37, 373), (20, 360), (9, 338), (15, 334), (26, 324), (4, 314), (28, 308), (10, 308), (34, 298), (19, 271), (7, 252), (8, 236), (17, 228)]
-[(('hareruya', '吉祥寺店', '武蔵野市'), 657), (('hareruya', 'トーナメントセンター東京', '千代田区'), 644), (('hareruya', '大宮店', 'さいたま市'), 572), (('hareruya', 'トーナメントセンター大阪', '大阪市'), 531), (('hareruya', '名古屋店', '名古屋市'), 521), (('hareruya', '秋葉原店', '千代田区'), 511), (('hareruya', '渋谷店', '渋谷区'), 489), (('hareruya', '横浜店', '横浜市'), 463), (('hareruya', '川崎店', '川崎市'), 414), (('hareruya', '大須店', '名古屋市'), 408), (('hareruya', '福岡店', '福岡市'), 387), (('hareruya', '高松店', '高松市'), 373), (('hareruya', '千葉店', '千葉市'), 370), (('hareruya', '長野店', '長野市'), 360), (('hareruya', '宇都宮店', '宇都宮市'), 337), (('hareruya', '新潟店', '新潟市'), 334), (('hareruya', '町田店', '町田市'), 330), (('hareruya', '仙台店', '仙台市'), 314), (('hareruya', '高崎店', '高崎市'), 308), (('hareruya', '広島店', '広島市'), 290), (('hareruya', '京都店', '京都市'), 286), (('hareruya', '三宮店', '神戸市'), 282), (('hareruya', '甲府店', '甲府市'), 271), (('hareruya', '郡山店', '郡山市'), 252), (('hareruya', '水戸店', '水戸市'), 236), (('hareruya', '金沢店', '金沢市'), 228), (('hareruya', '四日市店', '四日市市'), 186), (('hareruya', '日本橋店', '大阪市'), 127), (('hareruya', '札幌店', '札幌市'), 79), (('hareruya', '静岡店', '静岡市'), 69), (('yellowsub', '柏マルイ店', '柏市'), 60), (('hareruya', '岡山店', '岡山市'), 37), (('yellowsub', '京都店', '京都市'), 37), (('yellowsub', '新宿店', '新宿区'), 36), (('yellowsub', '姫路店', '姫路市'), 20), (('yellowsub', 'なんば店', '大阪市'), 16), (('hareruya', '成田店', '成田市'), 11), (('yellowsub', '札幌GAMESHOP', '札幌市'), 9), (('yellowsub', 'プレイソフト', 'さいたま市'), 9), (('yellowsub', '広島店', '広島市'), 8), (('yellowsub', '名古屋GAMESHOP', '名古屋市'), 7), (('yellowsub', '三宮店', '神戸市'), 6), (('yellowsub', 'マジッカーズ福岡店', '福岡市'), 5), (('yellowsub', '立川店', '立川市'), 4), (('amenity', '町田店', '町田市'), 3), (('yellowsub', '溝口店', '川崎市'), 3), (('yellowsub', '千葉ゲームショップ', '千葉市'), 3), (('amenity', '大須店', '名古屋市'), 2), (('yellowsub', '横浜店', '横浜市'), 2), (('yellowsub', '秋葉原本店★ミント', '千代田区'), 2), (('amenity', '新宿店', '新宿区'), 2), (('yellowsub', '池袋ゲームショップ', '豊島区'), 2), (('amenity', '池袋パワー9店', '豊島区'), 2), (('amenity', '蒲田店', '大田区'), 1), (('amenity', '秋葉原店', '千代田区'), 1), (('amenity', '大宮店', 'さいたま市'), 1), (('yellowsub', '川越カードショップ', '川越市'), 1), (('yellowsub', '宇都宮店', '宇都宮市'), 1), (('amenity', '札幌店', '札幌市'), 1), (('amenity', '立川店', '立川市'), 1), (('amenity', '京都店', '京都市'), 1), (('amenity', 'なんば2号店', '大阪市'), 1)]
-[(('commander',), 3251), ((), 2362), (('standard',), 1295), (('limited',), 797), (('modern',), 453), (('legacy',), 449), (('pioneer',), 382), (('pauper',), 244), (('pioneer', 'legacy', 'modern', 'standard'), 224), (('pioneer', 'pauper', 'legacy', 'modern', 'standard'), 85), (('premodern',), 68), (('modern', 'legacy', 'pioneer'), 64), (('standard', 'modern', 'legacy', 'pioneer'), 59), (('pioneer', 'legacy', 'modern'), 51), (('standard', 'pioneer', 'pauper', 'legacy', 'modern'), 33)]
-{'d': '2026-10-25', 't': '10:00', 'name': 'マジックリーグ', 'url': 'https://www.hareruyamtg.com/ja/events/642773/detail', 'p': 14, 'c': '横浜市', 'shop': 'hareruya', 'store': '横浜店'}
-{'d': '2026-10-25', 't': '10:00', 'name': 'マジックリーグ', 'url': 'https://www.hareruyamtg.com/ja/events/628885/detail', 'p': 23, 'c': '名古屋市', 'shop': 'hareruya', 'store': '名古屋店'}
-{'d': '2026-10-25', 't': '10:00', 'name': 'TC大阪マジック相談室', 'url': 'https://www.hareruyamtg.com/ja/events/634635/detail', 'p': 27, 'c': '大阪市', 'shop': 'hareruya', 'store': 'トーナメントセンター大阪'}
-{'d': '2026-10-25', 't': '10:00', 'name': 'マジックリーグ', 'url': 'https://www.hareruyamtg.com/ja/events/645788/detail', 'p': 27, 'c': '大阪市', 'shop': 'hareruya', 'store': '日本橋店'}
-{'d': '2026-10-25', 't': '10:00', 'name': 'マジックリーグ in 高松（4週目）', 'url': 'https://www.hareruyamtg.com/ja/events/634359/detail', 'p': 37, 'c': '高松市', 'shop': 'hareruya', 'store': '高松店'}
-{'d': '2026-11-29', 't': '20:00', 'name': 'スタンダードショーダウン[3回戦]', 'url': 'https://www.hareruyamtg.com/ja/events/645256/detail', 'f': ['standard'], 'p': 40, 'c': '福岡市', 'shop': 'hareruya', 'store': '福岡店'}
-{'d': '2026-11-29', 't': '20:30', 'name': '『盛り上げハッピー！』コマンダー集会[2回戦]', 'url': 'https://www.hareruyamtg.com/ja/events/653693/detail', 'f': ['commander'], 'p': 13, 'c': '千代田区', 'shop': 'hareruya', 'store': 'トーナメントセンター東京'}
-{'d': '2026-11-29', 't': '22:00', 'name': '【1回戦固定】刹那の戦い 22時の部【BO3】', 'url': 'https://www.hareruyamtg.com/ja/events/645183/detail', 'f': ['standard', 'pioneer', 'pauper', 'legacy', 'modern'], 'p': 40, 'c': '福岡市', 'shop': 'hareruya', 'store': '福岡店'}
+Collecting playwright==1.56.0
+  Downloading playwright-1.56.0-py3-none-manylinux1_x86_64.whl.metadata (3.5 kB)
+Collecting pyee<14,>=13 (from playwright==1.56.0)
+  Downloading pyee-13.0.1-py3-none-any.whl.metadata (3.0 kB)
+Collecting greenlet<4.0.0,>=3.1.1 (from playwright==1.56.0)
+  Downloading greenlet-3.5.6-cp312-cp312-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl.metadata (3.8 kB)
+Collecting typing-extensions (from pyee<14,>=13->playwright==1.56.0)
+  Downloading typing_extensions-4.16.0-py3-none-any.whl.metadata (3.3 kB)
+Downloading playwright-1.56.0-py3-none-manylinux1_x86_64.whl (46.3 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 46.3/46.3 MB 202.1 MB/s  0:00:00
+Downloading greenlet-3.5.6-cp312-cp312-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl (621 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 621.4/621.4 kB 112.9 MB/s  0:00:00
+Downloading pyee-13.0.1-py3-none-any.whl (15 kB)
+Downloading typing_extensions-4.16.0-py3-none-any.whl (45 kB)
+Installing collected packages: typing-extensions, greenlet, pyee, playwright
+
+Successfully installed greenlet-3.5.6 playwright-1.56.0 pyee-13.0.1 typing-extensions-4.16.0
+
+[notice] A new release of pip is available: 26.2.1 -> 26.2.2
+[notice] To update, run: pip install --upgrade pip
+Installing dependencies...
+Switching to root user to install dependencies...
+Get:1 file:/etc/apt/apt-mirrors.txt Mirrorlist [144 B]
+Hit:2 http://azure.archive.ubuntu.com/ubuntu noble InRelease
+Get:6 https://packages.microsoft.com/ubuntu/24.04/prod noble InRelease [3600 B]
+Get:3 http://azure.archive.ubuntu.com/ubuntu noble-updates InRelease [126 kB]
+Get:4 http://azure.archive.ubuntu.com/ubuntu noble-backports InRelease [126 kB]
+Get:5 http://azure.archive.ubuntu.com/ubuntu noble-security InRelease [126 kB]
+Get:7 https://packages.microsoft.com/ubuntu/24.04/prod noble/main armhf Packages [12.4 kB]
+Get:8 https://packages.microsoft.com/ubuntu/24.04/prod noble/main amd64 Packages [660 kB]
+Get:9 https://packages.microsoft.com/ubuntu/24.04/prod noble/main arm64 Packages [598 kB]
+Get:10 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 Packages [1400 kB]
+Get:11 http://azure.archive.ubuntu.com/ubuntu noble-updates/main Translation-en [310 kB]
+Get:12 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe amd64 Packages [1706 kB]
+Get:13 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe Translation-en [342 kB]
+Get:14 http://azure.archive.ubuntu.com/ubuntu noble-updates/restricted amd64 Packages [1805 kB]
+Get:15 http://azure.archive.ubuntu.com/ubuntu noble-updates/restricted Translation-en [411 kB]
+Get:16 http://azure.archive.ubuntu.com/ubuntu noble-security/main amd64 Packages [1146 kB]
+Get:17 http://azure.archive.ubuntu.com/ubuntu noble-security/main Translation-en [231 kB]
+Get:18 http://azure.archive.ubuntu.com/ubuntu noble-security/universe amd64 Packages [1222 kB]
+Get:19 http://azure.archive.ubuntu.com/ubuntu noble-security/universe Translation-en [246 kB]
+Get:20 http://azure.archive.ubuntu.com/ubuntu noble-security/restricted amd64 Packages [1713 kB]
+Get:21 http://azure.archive.ubuntu.com/ubuntu noble-security/restricted Translation-en [392 kB]
+Fetched 12.6 MB in 1s (10.2 MB/s)
+Reading package lists...
+Reading package lists...
+Building dependency tree...
+Reading state information...
+libasound2t64 is already the newest version (1.2.11-1ubuntu0.3).
+libasound2t64 set to manually installed.
+libatk-bridge2.0-0t64 is already the newest version (2.52.0-1build1).
+libatk-bridge2.0-0t64 set to manually installed.
+libatk1.0-0t64 is already the newest version (2.52.0-1build1).
+libatk1.0-0t64 set to manually installed.
+libatspi2.0-0t64 is already the newest version (2.52.0-1build1).
+libatspi2.0-0t64 set to manually installed.
+libcairo2 is already the newest version (1.18.0-3build1).
+libcairo2 set to manually installed.
+libcups2t64 is already the newest version (2.4.7-1.2ubuntu7.14).
+libcups2t64 set to manually installed.
+libdbus-1-3 is already the newest version (1.14.10-4ubuntu4.1).
+libdbus-1-3 set to manually installed.
+libdrm2 is already the newest version (2.4.125-1ubuntu0.1~24.04.2).
+libdrm2 set to manually installed.
+libgbm1 is already the newest version (25.2.8-0ubuntu0.24.04.4).
+libgbm1 set to manually installed.
+libnspr4 is already the newest version (2:4.35-1.1build1).
+libnspr4 set to manually installed.
+libpango-1.0-0 is already the newest version (1.52.1+ds-1build1).
+libpango-1.0-0 set to manually installed.
+libx11-6 is already the newest version (2:1.8.7-1ubuntu0.1).
+libx11-6 set to manually installed.
+libxcb1 is already the newest version (1.15-1ubuntu2).
+libxcb1 set to manually installed.
+libxcomposite1 is already the newest version (1:0.4.5-1build3).
+libxcomposite1 set to manually installed.
+libxdamage1 is already the newest version (1:1.1.6-1build1).
+libxdamage1 set to manually installed.
+libxext6 is already the newest version (2:1.3.4-1build2).
+libxext6 set to manually installed.
+libxfixes3 is already the newest version (1:6.0.0-2build1).
+libxfixes3 set to manually installed.
+libxkbcommon0 is already the newest version (1.6.0-1build1).
+libxkbcommon0 set to manually installed.
+libxrandr2 is already the newest version (2:1.5.2-2build1).
+libxrandr2 set to manually installed.
+fonts-noto-color-emoji is already the newest version (2.047-0ubuntu0.24.04.1).
+libfontconfig1 is already the newest version (2.15.0-1.1ubuntu2).
+libfontconfig1 set to manually installed.
+libfreetype6 is already the newest version (2.13.2+dfsg-1ubuntu0.2).
+libfreetype6 set to manually installed.
+fonts-liberation is already the newest version (1:2.1.5-3).
+fonts-liberation set to manually installed.
+The following additional packages will be installed:
+  gir1.2-glib-2.0 libglib2.0-bin libglib2.0-data libnss3-tools
+  xfonts-encodings xfonts-utils xserver-common
+Suggested packages:
+  low-memory-monitor
+Recommended packages:
+  fonts-ipafont-mincho fonts-tlwg-loma xfonts-base
+The following NEW packages will be installed:
+  fonts-freefont-ttf fonts-ipafont-gothic fonts-tlwg-loma-otf fonts-unifont
+  fonts-wqy-zenhei xfonts-cyrillic xfonts-encodings xfonts-scalable
+  xfonts-utils
+The following packages will be upgraded:
+  gir1.2-glib-2.0 libglib2.0-0t64 libglib2.0-bin libglib2.0-data libnss3
+  libnss3-tools xserver-common xvfb
+8 upgraded, 9 newly installed, 0 to remove and 92 not upgraded.
+Need to get 25.9 MB of archives.
+After this operation, 79.5 MB of additional disk space will be used.
+Get:1 file:/etc/apt/apt-mirrors.txt Mirrorlist [144 B]
+Get:2 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 fonts-ipafont-gothic all 00303-21ubuntu1 [3513 kB]
+Get:3 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 libglib2.0-data all 2.80.0-6ubuntu3.10 [50.2 kB]
+Get:4 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 libglib2.0-bin amd64 2.80.0-6ubuntu3.10 [97.9 kB]
+Get:5 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 gir1.2-glib-2.0 amd64 2.80.0-6ubuntu3.10 [183 kB]
+Get:6 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 libglib2.0-0t64 amd64 2.80.0-6ubuntu3.10 [1548 kB]
+Get:7 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 fonts-freefont-ttf all 20211204+svn4273-2 [5641 kB]
+Get:8 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 fonts-tlwg-loma-otf all 1:0.7.3-1 [107 kB]
+Get:9 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 fonts-unifont all 1:15.1.01-1build1 [2993 kB]
+Get:10 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 fonts-wqy-zenhei all 0.9.45-8 [7472 kB]
+Get:11 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 libnss3 amd64 2:3.98-1ubuntu0.3 [1445 kB]
+Get:12 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 libnss3-tools amd64 2:3.98-1ubuntu0.3 [615 kB]
+Get:13 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 xfonts-encodings all 1:1.0.5-0ubuntu2 [578 kB]
+Get:14 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 xfonts-utils amd64 1:7.7+6build3 [94.4 kB]
+Get:15 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 xfonts-cyrillic all 1:1.0.5+nmu1 [384 kB]
+Get:16 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 xfonts-scalable all 1:1.0.3-1.3 [304 kB]
+Get:17 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 xserver-common all 2:21.1.12-1ubuntu1.9 [35.0 kB]
+Get:18 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe amd64 xvfb amd64 2:21.1.12-1ubuntu1.9 [877 kB]
+Fetched 25.9 MB in 1s (25.0 MB/s)
+Selecting previously unselected package fonts-ipafont-gothic.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 203540 files and directories currently installed.)
+Preparing to unpack .../00-fonts-ipafont-gothic_00303-21ubuntu1_all.deb ...
+Unpacking fonts-ipafont-gothic (00303-21ubuntu1) ...
+Preparing to unpack .../01-libglib2.0-data_2.80.0-6ubuntu3.10_all.deb ...
+Unpacking libglib2.0-data (2.80.0-6ubuntu3.10) over (2.80.0-6ubuntu3.9) ...
+Preparing to unpack .../02-libglib2.0-bin_2.80.0-6ubuntu3.10_amd64.deb ...
+Unpacking libglib2.0-bin (2.80.0-6ubuntu3.10) over (2.80.0-6ubuntu3.9) ...
+Preparing to unpack .../03-gir1.2-glib-2.0_2.80.0-6ubuntu3.10_amd64.deb ...
+Unpacking gir1.2-glib-2.0:amd64 (2.80.0-6ubuntu3.10) over (2.80.0-6ubuntu3.9) ...
+Preparing to unpack .../04-libglib2.0-0t64_2.80.0-6ubuntu3.10_amd64.deb ...
+Unpacking libglib2.0-0t64:amd64 (2.80.0-6ubuntu3.10) over (2.80.0-6ubuntu3.9) ...
+Selecting previously unselected package fonts-freefont-ttf.
+Preparing to unpack .../05-fonts-freefont-ttf_20211204+svn4273-2_all.deb ...
+Unpacking fonts-freefont-ttf (20211204+svn4273-2) ...
+Selecting previously unselected package fonts-tlwg-loma-otf.
+Preparing to unpack .../06-fonts-tlwg-loma-otf_1%3a0.7.3-1_all.deb ...
+Unpacking fonts-tlwg-loma-otf (1:0.7.3-1) ...
+Selecting previously unselected package fonts-unifont.
+Preparing to unpack .../07-fonts-unifont_1%3a15.1.01-1build1_all.deb ...
+Unpacking fonts-unifont (1:15.1.01-1build1) ...
+Selecting previously unselected package fonts-wqy-zenhei.
+Preparing to unpack .../08-fonts-wqy-zenhei_0.9.45-8_all.deb ...
+Unpacking fonts-wqy-zenhei (0.9.45-8) ...
+Preparing to unpack .../09-libnss3_2%3a3.98-1ubuntu0.3_amd64.deb ...
+Unpacking libnss3:amd64 (2:3.98-1ubuntu0.3) over (2:3.98-1ubuntu0.2) ...
+Preparing to unpack .../10-libnss3-tools_2%3a3.98-1ubuntu0.3_amd64.deb ...
+Unpacking libnss3-tools (2:3.98-1ubuntu0.3) over (2:3.98-1ubuntu0.2) ...
+Selecting previously unselected package xfonts-encodings.
+Preparing to unpack .../11-xfonts-encodings_1%3a1.0.5-0ubuntu2_all.deb ...
+Unpacking xfonts-encodings (1:1.0.5-0ubuntu2) ...
+Selecting previously unselected package xfonts-utils.
+Preparing to unpack .../12-xfonts-utils_1%3a7.7+6build3_amd64.deb ...
+Unpacking xfonts-utils (1:7.7+6build3) ...
+Selecting previously unselected package xfonts-cyrillic.
+Preparing to unpack .../13-xfonts-cyrillic_1%3a1.0.5+nmu1_all.deb ...
+Unpacking xfonts-cyrillic (1:1.0.5+nmu1) ...
+Selecting previously unselected package xfonts-scalable.
+Preparing to unpack .../14-xfonts-scalable_1%3a1.0.3-1.3_all.deb ...
+Unpacking xfonts-scalable (1:1.0.3-1.3) ...
+Preparing to unpack .../15-xserver-common_2%3a21.1.12-1ubuntu1.9_all.deb ...
+Unpacking xserver-common (2:21.1.12-1ubuntu1.9) over (2:21.1.12-1ubuntu1.8) ...
+Preparing to unpack .../16-xvfb_2%3a21.1.12-1ubuntu1.9_amd64.deb ...
+Unpacking xvfb (2:21.1.12-1ubuntu1.9) over (2:21.1.12-1ubuntu1.8) ...
+Setting up fonts-wqy-zenhei (0.9.45-8) ...
+Setting up fonts-freefont-ttf (20211204+svn4273-2) ...
+Setting up libnss3:amd64 (2:3.98-1ubuntu0.3) ...
+Setting up libglib2.0-0t64:amd64 (2.80.0-6ubuntu3.10) ...
+Setting up libglib2.0-data (2.80.0-6ubuntu3.10) ...
+Setting up fonts-tlwg-loma-otf (1:0.7.3-1) ...
+Setting up xfonts-encodings (1:1.0.5-0ubuntu2) ...
+Setting up gir1.2-glib-2.0:amd64 (2.80.0-6ubuntu3.10) ...
+Setting up fonts-ipafont-gothic (00303-21ubuntu1) ...
+update-alternatives: using /usr/share/fonts/opentype/ipafont-gothic/ipag.ttf to provide /usr/share/fonts/truetype/fonts-japanese-gothic.ttf (fonts-japanese-gothic.ttf) in auto mode
+Setting up xserver-common (2:21.1.12-1ubuntu1.9) ...
+Setting up libnss3-tools (2:3.98-1ubuntu0.3) ...
+Setting up fonts-unifont (1:15.1.01-1build1) ...
+Setting up xvfb (2:21.1.12-1ubuntu1.9) ...
+Setting up libglib2.0-bin (2.80.0-6ubuntu3.10) ...
+Setting up xfonts-utils (1:7.7+6build3) ...
+Setting up xfonts-cyrillic (1:1.0.5+nmu1) ...
+Setting up xfonts-scalable (1:1.0.3-1.3) ...
+Processing triggers for libc-bin (2.39-0ubuntu8.9) ...
+Processing triggers for man-db (2.12.0-4build2) ...
+Not building database; man-db/auto-update is not 'true'.
+Processing triggers for fontconfig (2.15.0-1.1ubuntu2) ...
+
+Running kernel seems to be up-to-date.
+
+Restarting services...
+ systemctl restart packagekit.service php8.3-fpm.service polkit.service udisks2.service
+
+Service restarts being deferred:
+ systemctl restart ModemManager.service
+ systemctl restart networkd-dispatcher.service
+
+No containers need to be restarted.
+
+No user sessions are running outdated binaries.
+
+No VM guests are running outdated hypervisor (qemu) binaries on this host.
+Downloading Chromium 141.0.7390.37 (playwright build v1194) from https://cdn.playwright.dev/dbazure/download/playwright/builds/chromium/1194/chromium-linux.zip
+|                                                                                |   0% of 173.9 MiB
+|■■■■■■■■                                                                        |  10% of 173.9 MiB
+|■■■■■■■■■■■■■■■■                                                                |  20% of 173.9 MiB
+|■■■■■■■■■■■■■■■■■■■■■■■■                                                        |  30% of 173.9 MiB
+|■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                                |  40% of 173.9 MiB
+|■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                        |  50% of 173.9 MiB
+|■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                |  60% of 173.9 MiB
+|■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                        |  70% of 173.9 MiB
+|■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                |  80% of 173.9 MiB
+|■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■        |  90% of 173.9 MiB
+|■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■| 100% of 173.9 MiB
+Chromium 141.0.7390.37 (playwright build v1194) downloaded to /home/runner/.cache/ms-playwright/chromium-1194
+Downloading FFMPEG playwright build v1011 from https://cdn.playwright.dev/dbazure/download/playwright/builds/ffmpeg/1011/ffmpeg-linux.zip
+|                                                                                |   0% of 2.3 MiB
+|■■■■■■■■                                                                        |  10% of 2.3 MiB
+|■■■■■■■■■■■■■■■■                                                                |  20% of 2.3 MiB
+|■■■■■■■■■■■■■■■■■■■■■■■■                                                        |  30% of 2.3 MiB
+|■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                                |  40% of 2.3 MiB
+|■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                        |  50% of 2.3 MiB
+|■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                |  60% of 2.3 MiB
+|■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                        |  70% of 2.3 MiB
+|■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                |  80% of 2.3 MiB
+|■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■        |  90% of 2.3 MiB
+|■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■| 100% of 2.3 MiB
+FFMPEG playwright build v1011 downloaded to /home/runner/.cache/ms-playwright/ffmpeg-1011
+Downloading Chromium Headless Shell 141.0.7390.37 (playwright build v1194) from https://cdn.playwright.dev/dbazure/download/playwright/builds/chromium/1194/chromium-headless-shell-linux.zip
+|                                                                                |   0% of 104.3 MiB
+|■■■■■■■■                                                                        |  10% of 104.3 MiB
+|■■■■■■■■■■■■■■■■                                                                |  20% of 104.3 MiB
+|■■■■■■■■■■■■■■■■■■■■■■■■                                                        |  30% of 104.3 MiB
+|■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                                |  40% of 104.3 MiB
+|■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                        |  50% of 104.3 MiB
+|■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                |  60% of 104.3 MiB
+|■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                        |  70% of 104.3 MiB
+|■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                |  80% of 104.3 MiB
+|■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■        |  90% of 104.3 MiB
+|■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■| 100% of 104.3 MiB
+Chromium Headless Shell 141.0.7390.37 (playwright build v1194) downloaded to /home/runner/.cache/ms-playwright/chromium_headless_shell-1194
+{
+ "desktop": {
+  "tabVisible": true,
+  "summary": "東京都・2週間：1057件（開始の早い順）",
+  "note": "大会の参加費・定員・参加方法は、大会名から開く各店舗のページでご確認ください。掲載：晴れる屋・アメニティードリーム・イエローサブマリン（2026-10-25更新）",
+  "days": 3,
+  "rows": 200,
+  "wait": false,
+  "fmt": [
+   "すべて",
+   "スタンダード（555）",
+   "パイオニア（416）",
+   "モダン（451）",
+   "レガシー（433）",
+   "ヴィンテージ（20）",
+   "パウパー（228）",
+   "統率者（863）",
+   "プレモダン（45）",
+   "リミテッド（222）"
+  ],
+  "city": [
+   "すべての市区町村",
+   "千代田区（1158）",
+   "武蔵野市（657）",
+   "渋谷区（489）",
+   "町田市（333）",
+   "新宿区（38）",
+   "豊島区（7）",
+   "立川市（5）",
+   "大田区（1）"
+  ],
+  "first": [
+   "10:30 晴れる屋 トーナメントセンター東京 ホリデーモーニングクイックイベント[2回戦]⁠↗",
+   "11:00 晴れる屋 吉祥寺店 [カジュアルイベント]カオスシールド交流会 in 吉祥寺⁠↗",
+   "11:00 晴れる屋 吉祥寺店 マジック・リーグ⁠↗",
+   "11:00 晴れる屋 渋谷店 マジックリーグ⁠↗",
+   "11:30 晴れる屋 トーナメントセンター東京 コマンダー交流会：甘口(ブラケット2基準)お昼の部⁠↗",
+   "11:30 晴れる屋 トーナメントセンター東京 コマンダー交流会：辛口(ブラケット4推奨)お昼の部⁠↗",
+   "12:00 晴れる屋 秋葉原店 【ビギナー向け】【推奨ブラケット2】コマンダー交流会[2回戦]⁠↗",
+   "12:00 晴れる屋 トーナメントセンター東京 Let's 5 パイオニア[5回戦]⁠↗"
+  ]
+ },
+ "phone": {
+  "tabVisible": true,
+  "summary": "東京都・2週間：1057件（開始の早い順）",
+  "note": "大会の参加費・定員・参加方法は、大会名から開く各店舗のページでご確認ください。掲載：晴れる屋・アメニティードリーム・イエローサブマリン（2026-10-25更新）",
+  "days": 3,
+  "rows": 200,
+  "wait": false,
+  "fmt": [
+   "すべて",
+   "スタンダード（555）",
+   "パイオニア（416）",
+   "モダン（451）",
+   "レガシー（433）",
+   "ヴィンテージ（20）",
+   "パウパー（228）",
+   "統率者（863）",
+   "プレモダン（45）",
+   "リミテッド（222）"
+  ],
+  "city": [
+   "すべての市区町村",
+   "千代田区（1158）",
+   "武蔵野市（657）",
+   "渋谷区（489）",
+   "町田市（333）",
+   "新宿区（38）",
+   "豊島区（7）",
+   "立川市（5）",
+   "大田区（1）"
+  ],
+  "first": [
+   "10:30 晴れる屋 トーナメントセンター東京 ホリデーモーニングクイックイベント[2回戦]⁠↗",
+   "11:00 晴れる屋 吉祥寺店 [カジュアルイベント]カオスシールド交流会 in 吉祥寺⁠↗",
+   "11:00 晴れる屋 吉祥寺店 マジック・リーグ⁠↗",
+   "11:00 晴れる屋 渋谷店 マジックリーグ⁠↗",
+   "11:30 晴れる屋 トーナメントセンター東京 コマンダー交流会：甘口(ブラケット2基準)お昼の部⁠↗",
+   "11:30 晴れる屋 トーナメントセンター東京 コマンダー交流会：辛口(ブラケット4推奨)お昼の部⁠↗",
+   "12:00 晴れる屋 秋葉原店 【ビギナー向け】【推奨ブラケット2】コマンダー交流会[2回戦]⁠↗",
+   "12:00 晴れる屋 トーナメントセンター東京 Let's 5 パイオニア[5回戦]⁠↗"
+  ]
+ },
+ "osaka": {
+  "tabVisible": true,
+  "summary": "大阪府・2週間：345件（開始の早い順）",
+  "note": "大会の参加費・定員・参加方法は、大会名から開く各店舗のページでご確認ください。掲載：晴れる屋・アメニティードリーム・イエローサブマリン（2026-10-25更新）",
+  "days": 7,
+  "rows": 200,
+  "wait": false,
+  "fmt": [
+   "すべて",
+   "スタンダード（148）",
+   "パイオニア（149）",
+   "モダン（147）",
+   "レガシー（142）",
+   "ヴィンテージ（14）",
+   "パウパー（23）",
+   "統率者（177）",
+   "プレモダン",
+   "リミテッド（51）"
+  ],
+  "city": [
+   "すべての市区町村",
+   "大阪市（675）"
+  ],
+  "first": [
+   "10:00 晴れる屋 トーナメントセンター大阪 TC大阪マジック相談室⁠↗",
+   "10:00 晴れる屋 日本橋店 マジックリーグ⁠↗",
+   "11:00 晴れる屋 トーナメントセンター大阪 《司書、ワン・シー・トン》争奪スタンダード⁠↗",
+   "11:00 晴れる屋 トーナメントセンター大阪 《霧深い雨林》争奪モダン⁠↗",
+   "11:00 晴れる屋 トーナメントセンター大阪 207th KMC⁠↗",
+   "11:00 イエサブ なんば店 その他（リミテッド）⁠↗",
+   "11:00 イエサブ なんば店 その他統率者戦⁠↗",
+   "11:00 晴れる屋 トーナメントセンター大阪 第23期関西帝王戦リミテッド⁠↗"
+  ]
+ }
+}
