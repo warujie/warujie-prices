@@ -19,7 +19,7 @@ Sources:
     python3 build_events.py --out site/events.json [--days 35]
 
 Writes { "updated", "sources": {shop: events}, "events": [{ "d", "t", "p", "c",
-"shop", "store", "name", "url", "f" }] } (docs/data-formats.md), or exits non-zero
+"shop", "store", "name", "url", "f" }] } (docs/README.md), or exits non-zero
 without writing if every source failed, so yesterday's file stays published.
 """
 import argparse
@@ -30,6 +30,7 @@ import re
 import ssl
 import sys
 import time
+import urllib.parse
 import urllib.request
 from datetime import datetime, timedelta, timezone
 
@@ -61,6 +62,7 @@ AMENITY = {
     "町田店": (12, 13, "町田市"), "大宮店": (6, 11, "さいたま市"), "横浜店": (9, 14, "横浜市"), "大須店": (13, 23, "名古屋市"),
     "京都店": (14, 26, "京都市"), "なんば2号店": (3, 27, "大阪市"),
 }
+AMENITY_MAX_PAGES = 5   # pages read per store at most, should its list ever run over several
 # Yellow Submarine: [schedule page, prefecture, city]; the store's name comes from the page
 YELLOWSUB = [
     ("akihabara_mnt", 13, "千代田区"), ("akihabara_rpg", 13, "千代田区"), ("shinjuku", 13, "新宿区"), ("ikebukuro_gs", 13, "豊島区"),
@@ -198,12 +200,39 @@ def parse_amenity(html, today):
     return out
 
 
+def amenity_pages(html):
+    """The further pages of a list, from its page links (<p class="pagination">), if it has any."""
+    m = re.search(r'<p class="pagination">(.*?)</p>', html, re.S)
+    links = re.findall(r'href="([^"]+)"', m.group(1)) if m else []
+    urls = [urllib.parse.urljoin("https://amenitydream.co.jp/matches/", htmllib.unescape(u)) for u in links]
+    return [u for u in dict.fromkeys(urls) if u.startswith("https://amenitydream.co.jp/matches/")]
+
+
 def read_amenity(today, log):
+    """Each store's own MTG list (?type=2&shop=<n>), as the store's page shows it, and its further
+    pages if any. The all-stores list (shop=) shows only a few of each store's events."""
     try:
-        return parse_amenity(fetch("https://amenitydream.co.jp/matches/?type=2&shop=&date=", context=amenity_context()), today)
+        ctx = amenity_context()
     except Exception as e:
         log(f"  amenity: {e!r}"[:300])
         return []
+    events = []
+    for store, (shop, _, _) in AMENITY.items():
+        first = f"https://amenitydream.co.jp/matches/?type=2&shop={shop}&date="
+        todo, done = [first], set()
+        while todo and len(done) < AMENITY_MAX_PAGES:
+            url = todo.pop(0)
+            done.add(url)
+            try:
+                html = fetch(url, context=ctx)
+            except Exception as e:
+                log(f"  amenity {store}: {e!r}"[:200])
+                break
+            got = [e for e in parse_amenity(html, today) if e["store"] == store]
+            events += got
+            todo += [u for u in amenity_pages(html) if u not in done and u not in todo]
+        log(f"  amenity {store}: {sum(e['store'] == store for e in events)} events")
+    return events
 
 
 # ---- Yellow Submarine
