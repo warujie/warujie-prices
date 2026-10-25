@@ -4,14 +4,14 @@
 Installing dependencies...
 Switching to root user to install dependencies...
 Get:1 file:/etc/apt/apt-mirrors.txt Mirrorlist [144 B]
-Get:6 https://packages.microsoft.com/ubuntu/24.04/prod noble InRelease [3600 B]
 Hit:2 http://azure.archive.ubuntu.com/ubuntu noble InRelease
 Get:3 http://azure.archive.ubuntu.com/ubuntu noble-updates InRelease [126 kB]
+Get:6 https://packages.microsoft.com/ubuntu/24.04/prod noble InRelease [3600 B]
 Get:4 http://azure.archive.ubuntu.com/ubuntu noble-backports InRelease [126 kB]
 Get:5 http://azure.archive.ubuntu.com/ubuntu noble-security InRelease [126 kB]
-Get:7 https://packages.microsoft.com/ubuntu/24.04/prod noble/main arm64 Packages [598 kB]
-Get:8 https://packages.microsoft.com/ubuntu/24.04/prod noble/main amd64 Packages [660 kB]
-Get:9 https://packages.microsoft.com/ubuntu/24.04/prod noble/main armhf Packages [12.4 kB]
+Get:7 https://packages.microsoft.com/ubuntu/24.04/prod noble/main amd64 Packages [660 kB]
+Get:8 https://packages.microsoft.com/ubuntu/24.04/prod noble/main armhf Packages [12.4 kB]
+Get:9 https://packages.microsoft.com/ubuntu/24.04/prod noble/main arm64 Packages [598 kB]
 Get:10 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 Packages [1400 kB]
 Get:11 http://azure.archive.ubuntu.com/ubuntu noble-updates/main Translation-en [310 kB]
 Get:12 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe amd64 Packages [1706 kB]
@@ -24,7 +24,7 @@ Get:18 http://azure.archive.ubuntu.com/ubuntu noble-security/universe amd64 Pack
 Get:19 http://azure.archive.ubuntu.com/ubuntu noble-security/universe Translation-en [246 kB]
 Get:20 http://azure.archive.ubuntu.com/ubuntu noble-security/restricted amd64 Packages [1713 kB]
 Get:21 http://azure.archive.ubuntu.com/ubuntu noble-security/restricted Translation-en [392 kB]
-Fetched 12.6 MB in 1s (9511 kB/s)
+Fetched 12.6 MB in 1s (9967 kB/s)
 Reading package lists...
 Reading package lists...
 Building dependency tree...
@@ -109,7 +109,7 @@ Get:15 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 xfonts-cyrill
 Get:16 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 xfonts-scalable all 1:1.0.3-1.3 [304 kB]
 Get:17 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 xserver-common all 2:21.1.12-1ubuntu1.9 [35.0 kB]
 Get:18 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe amd64 xvfb amd64 2:21.1.12-1ubuntu1.9 [877 kB]
-Fetched 25.9 MB in 0s (54.4 MB/s)
+Fetched 25.9 MB in 0s (61.7 MB/s)
 Selecting previously unselected package fonts-ipafont-gothic.
 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 203540 files and directories currently installed.)
 Preparing to unpack .../00-fonts-ipafont-gothic_00303-21ubuntu1_all.deb ...
@@ -230,7 +230,9 @@ Downloading Chromium Headless Shell 141.0.7390.37 (playwright build v1194) from 
 |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■        |  90% of 104.3 MiB
 |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■| 100% of 104.3 MiB
 Chromium Headless Shell 141.0.7390.37 (playwright build v1194) downloaded to /home/runner/.cache/ms-playwright/chromium_headless_shell-1194
+  tonamel: stopped at the end of the list (last date 2099-06-01)
   tonamel: 104 offline events from 4 lists
+stores with their venue: [('ABSOLUTE ZERO', '中城村'), ('ARCANA TCGイベント運営', '千代田区'), ('BIG MAGIC 秋葉原店', '千代田区'), ('BIGMAGIC池袋店', '豊島区'), ('BOOKBOX', '鹿児島市'), ('CozyGameSpace TiM', '長崎市'), ('MINTGAMESMTG店(東京・東日本橋)', '中央区'), ('Misteria', '名古屋市'), ('TCG SHOP Suzunone(すずのね）', '塩尻市'), ('yume', '旭川市'), ('いずマジ！', '出水市'), ('おうち', '千代田区'), ('アップキープ MTG用', '半田市'), ('カードショップLight', '草津市'), ('カードショップボルカ', '薩摩川内市'), ('カードショップ若院', '岡山市'), ('カードショップ黄鶏屋', '堺市'), ('カードプレイス', '大分市'), ('コミかる伊勢崎', '伊勢崎市'), ('コミかる高崎', '高崎市'), ('ドラゴンスターオタロード中央店MTGフロア', '大阪市'), ('ドンキー', '下新川郡朝日町'), ('パピー弥富店', '名古屋市'), ('パピー弥富店', '弥富市'), ('ブックオフ広島八木', '広島市'), ('ホウネンエソ', '小山市'), ('ホビーステーション本厚木店', '厚木市'), ('ホビーステーション松戸店', '松戸市'), ('マスターズギルド', '浜松市'), ('マスターズギルドなゆた', '浜松市'), ('尾張堂', '江南市'), ('岡山EDH交流会', '岡山市'), ('竜星の嵐名古屋店', '名古屋市'), ('紙屋敷', '稲沢市'), ('駄菓子のたまや', '岩手郡雫石町')]
 all: 104 dates: 2026-10-25 2026-11-29
 events in 35 days: 104
 by prefecture: [('東京都', 46), ('愛知県', 22), ('鹿児島県', 5), ('大阪府', 5), ('群馬県', 4), ('静岡県', 3), ('千葉県', 2), ('大分県', 2), ('岡山県', 2), ('北海道', 2), ('沖縄県', 2), ('長崎県', 2), ('富山県', 1), ('岩手県', 1), ('広島県', 1), ('長野県', 1), ('栃木県', 1), ('神奈川県', 1), ('滋賀県', 1)]
