@@ -1,19 +1,10 @@
-hareruya: 10786 events (485 s)
-  hareruya fees: out of time for tonight
-  hareruya fees: 12 pages read; 12 of 1666 store-and-name pairs known, 1654 still to read
-Wrote 10785 events to probe/hfee/events-h.json (2601 KB)
-10785 events; 331 with a fee; 12 pairs read
-1666 pairs in all
-[(100, 6), (0, 4), (300, 1), (500, 1)]
-横浜店|マジックリーグ 100
-名古屋店|マジックリーグ 300
-トーナメントセンター大阪|TC大阪マジック相談室 0
-日本橋店|マジックリーグ 100
-高松店|マジックリーグ in 高松（4週目） 100
-高松店|高松構築リーグ！ 500
-福岡店|マジックリーグ 0
-トーナメントセンター東京|ホリデーモーニングクイックイベント[2回戦] 100
-渋谷店|マジックリーグ 100
-吉祥寺店|マジック・リーグ 0
-吉祥寺店|[カジュアルイベント]カオスシールド交流会 in 吉祥寺 100
-川崎店|マジック・リーグ 0
+warujie.warujie-mtg.workers.dev 200 250427
+  ev-cal-btn: 0
+  ev-where-t: 0
+  square-3rd.jp: 0
+  EV_CAL_ICON: 0
+staging-warujie.warujie-mtg.workers.dev 200 261333
+  ev-cal-btn: 9
+  ev-where-t: 2
+  square-3rd.jp: 1
+  EV_CAL_ICON: 2
