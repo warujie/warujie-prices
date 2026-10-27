@@ -29,7 +29,7 @@ on:
   workflow_dispatch:         # adds a "Run workflow" button
   push:                      # and runs when the builder or this file changes
     branches: [main]
-    paths: [build_prices.py, shop_enndal.py, shop_pullvault.py, build_combos.py, build_tags.py, .github/workflows/update-prices.yml]
+    paths: [build_prices.py, shop_enndal.py, shop_pullvault.py, build_combos.py, build_tags.py, build_precons.py, .github/workflows/update-prices.yml]
 
 permissions:
   contents: read
@@ -158,6 +158,12 @@ jobs:
       # Never stops the price update.
       - name: Build the role tags
         run: python3 build_tags.py --out site/t --previous prev
+
+      # Commander precon deck lists for the site's Commander set pages and the deck price
+      # page's precon menu, from MTGJSON's deck files: rebuilt once a week, copied over
+      # from the published data on the other days. Never stops the price update.
+      - name: Build the Commander precon lists
+        run: python3 build_precons.py --out site --previous prev
 
       # Files are only added or replaced, never deleted.
       - name: Publish to R2

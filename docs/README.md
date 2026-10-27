@@ -21,7 +21,8 @@ public repositories on the free plan.
 | [`shop_pullvault.py`](../shop_pullvault.py) | PullVault's in-stock singles in dollars (US), read once a day, each matched to its printing and checked against the listing's own photos | `pullvault.json.gz` (read by `build_prices.py` in the same run, not published) | pullvault.gg's singles page, with the shop's permission; Scryfall's search and card pictures |
 | [`build_combos.py`](../build_combos.py) | Commander combos per card | `site/c/` | Commander Spellbook's bulk file |
 | [`build_tags.py`](../build_tags.py) | Role tags (removal, draw, ramp…) and EDHREC rank per card | `site/t/tags.json.gz` | Scryfall Tagger oracle tags, via Scryfall's search API |
-| [`.github/workflows/update-prices.yml`](../.github/workflows/update-prices.yml) | Runs the three builders and publishes `site/` to R2 (GitHub Pages gets only a notice) | | |
+| [`build_precons.py`](../build_precons.py) | Every Commander precon's deck list (commander and cards), for the site's Commander set pages and the deck price page's precon menu | `site/precons.json.gz` | MTGJSON's `DeckList.json`, `SetList.json` and deck files (MIT licence) |
+| [`.github/workflows/update-prices.yml`](../.github/workflows/update-prices.yml) | Runs the builders and publishes `site/` to R2 (GitHub Pages gets only a notice) | | |
 | [`.github/workflows/enndal-nightly.yml`](../.github/workflows/enndal-nightly.yml) | Runs `shop_enndal.py` at 2am Japan time and keeps the result, encrypted, as the "enndal" artifact (older ones are deleted) | | |
 
 **Nothing is committed by the workflow.** Each run reads yesterday's published data
@@ -38,7 +39,7 @@ be read or Scryfall's export looks incomplete (`--min-cards`, default 20,000 pri
 `update-prices.yml` runs:
 
 - every day at **12:17 UTC** (21:17 in Japan), after Scryfall's daily export;
-- when `build_prices.py`, `build_combos.py`, `build_tags.py` or the workflow changes on `main`;
+- when `build_prices.py`, `build_combos.py`, `build_tags.py`, `build_precons.py` or the workflow changes on `main`;
 - by hand ("Run workflow" in GitHub Actions).
 
 `enndal-nightly.yml` runs every day at **17:00 UTC** (2:00 in Japan) and stops by 20:45 UTC
@@ -50,7 +51,7 @@ that night's data, so ENNDAL's stock on the site is from the night before.
 PullVault's singles"). It can't stop the price update: if it fails, the build runs without
 `--pullvault` and the published PullVault offers are kept for `KEEP_DAYS` (3) days.
 
-`build_combos.py` and `build_tags.py` rebuild only when the published data is older than 7 days;
+`build_combos.py`, `build_tags.py` and `build_precons.py` rebuild only when the published data is older than 7 days;
 on other days they copy the published files over. Neither can stop the price update: on any
 problem they keep the published data and exit normally.
 
@@ -177,6 +178,15 @@ waiting a minute after a 429, within a 15-minute budget (`MINUTES`). A tag that 
 published cards. **`TAGS` must contain every tag the site's `ROLE_LIST` uses**; add a tag here
 when the site gets a role that needs it.
 
+### `build_precons.py`
+
+Reads MTGJSON's `DeckList.json`, keeps the decks of type "Commander Deck" (`DECK_TYPES`; about
+200, from Commander 2011 on), and reads each one's file, one every `DECK_GAP` (0.5) seconds,
+with `SetList.json` for the set names and parent sets. A card listed twice (foil and not) is
+added up. Fewer than `MIN_DECKS` (100) decks, or more than a fifth of the files failing, keeps
+the published file. The first run (2026-10-27) found 198 decks from 49 sets, every one 100
+cards, in a 107 kB file.
+
 ## Running a builder on your computer
 
 All three use only Python's standard library.
@@ -185,6 +195,7 @@ All three use only Python's standard library.
 python3 build_prices.py --out site --previous https://warujie.github.io/warujie-prices/
 python3 build_combos.py --out site/c --previous https://warujie.github.io/warujie-prices/
 python3 build_tags.py   --out site/t --previous https://warujie.github.io/warujie-prices/ --force
+python3 build_precons.py --out site --force
 ```
 
 `build_prices.py` downloads Scryfall's bulk file and several hundred MB from MTGJSON. To work
