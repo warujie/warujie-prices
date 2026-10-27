@@ -199,8 +199,8 @@ def main():
             return keep_previous(f"{failed} of {len(wanted)} deck files could not be read")
         if len(decks) < (1 if args.limit else MIN_DECKS):
             return keep_previous(f"only {len(decks)} decks")
-        decks.sort(key=lambda d: (d["date"], d["set"], d["name"]))
-        decks.reverse()
+        decks.sort(key=lambda d: d["name"])
+        decks.sort(key=lambda d: (d["date"], d["set"]), reverse=True)   # newest first, A-Z in a set
         used = {d["set"] for d in decks}
         out = {
             "version": 1,
