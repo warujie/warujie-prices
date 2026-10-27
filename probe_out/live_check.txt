@@ -1,0 +1,8 @@
+set blc: precon box visible True decks 4 deck list shown False
+set blc: text このセットの構築済みデッキ（4） | 押すと価格とリスト | 表示
+after 表示: list shown True このセットの構築済みデッキ（4） | 押すと価格とリスト | 表示 | 茨の吟遊詩人、べロ | Animated Army | → | 渓間の声、ジニア | Family Matters | → | バンブルフラワー夫人 | Peace Offering | → | 根花のヘイゼル | Squirreled Away | →
+import: precon decks loaded [198, 49] picker visible True
+search アジャニ: tiles 30 filter button True first アジャニ最後の抵抗 | St | Pi | Mo | Lg | Vt | Pa | Cm | 別版 | レア | M19 | ¥41 img https://cards.scryfall.io/normal/front/1/3/13108be9-6162-446f-8f47-4ed776f4d958.jpg?1782931481
+about: rows 18 Rakuten mentioned False
+home shop boxes present 0
+page errors []
