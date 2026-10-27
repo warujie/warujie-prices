@@ -94,6 +94,11 @@ def card_lines(cards):
     counts = {}
     for card in cards or []:
         name = (card.get("name") or "").strip()
+        halves = name.split(" // ")
+        # "Zndrsplt, Eye of Wisdom // Zndrsplt, Eye of Wisdom"; a meld card ("Bruna, the Fading
+        # Light // Brisela, Voice of Nightmares") goes by its own face
+        if len(halves) == 2 and (halves[0] == halves[1] or card.get("layout") == "meld"):
+            name = card.get("faceName") or halves[0]
         if not name:
             continue
         counts[name] = counts.get(name, 0) + int(card.get("count") or 1)

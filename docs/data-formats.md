@@ -16,6 +16,7 @@ one small file instead of everything.
 | `ids.json.gz` | `build_prices.py` | nobody (the builder's own cache: MTGJSON ids → Scryfall ids, kept a week) |
 | `c/index.json`, `c/<xx>.json.gz` | `build_combos.py` | `loadComboIndex()`, `loadComboShard()` |
 | `t/tags.json.gz` | `build_tags.py` | `loadTags()` |
+| `precons.json.gz` | `build_precons.py` | `loadPrecons()`, `renderSetPrecons()`, `drawPreconMenu()`, `openPrecon()` |
 
 ## `index.json`
 
@@ -191,3 +192,19 @@ card has in all (the site links to Commander Spellbook for the rest).
 
 Each card row: shortened oracle id, EDHREC rank (or `null`), then the positions of its tags in
 `tags`. The site's `ROLE_LIST` names roles by these tag names.
+
+## `precons.json.gz`: Commander precon deck lists
+
+```json
+{"version": 1, "generated": "2026-10-27T15:04:02Z",
+ "source": {"name": "MTGJSON", "url": "https://mtgjson.com/", "license": "MIT"},
+ "sets": {"blc": {"name": "Bloomburrow Commander", "parent": "blb", "date": "2024-08-02"}},
+ "decks": [{"id": "AnimatedArmy_BLC", "name": "Animated Army", "set": "blc", "date": "2024-08-02",
+            "commander": [[1, "Bello, Bard of the Brambles"]],
+            "main": [[1, "Sol Ring"], [1, "Discovery // Dispersal"]]}]}
+```
+
+Decks newest first. `id` is MTGJSON's deck file name (the site's `?view=import&precon=<id>`);
+set codes are lower case, as Scryfall's; `parent` is the main set a Commander set belongs to (empty
+for sets like Commander 2021). Cards are `[count, English name]`, two-part cards written
+`A // B`; partner commanders are two rows of `commander`. Deck names are English only.

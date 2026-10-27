@@ -1,5 +1,0 @@
-{'code': 'BLC', 'commander': 1, 'displayCommander': 0, 'mainBoard': 85, 'name': 'Animated Army', 'planes': 0, 'releaseDate': '2024-08-02', 'schemes': 0, 'sealedProductUuids': 1, 'sideBoard': 0, 'source': 'https://magic.wizards.com/en/news/announcements/bloomburrow-commander-decklists', 'sourceSetCodes': 2, 'tokens': 0, 'type': 'Commander Deck'}
-commander 1 Bello, Bard of the Brambles None BLC 1
-mainBoard 1 Wildsear, Scouring Maw None BLC 8
-mainBoard 1 Domri, Anarch of Bolas None BLC 98
-mainBoard 1 Etali, Primal Storm None BLC 196
