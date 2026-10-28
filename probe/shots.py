@@ -1,6 +1,7 @@
 # Screenshots of the deck builder's round 4 (smooth foil shine, one フォイル choice, back to non-foil, sliding pickers) on the staging test site (a throwaway probe)
 import json, os, time, urllib.parse, urllib.request
 from playwright.sync_api import sync_playwright
+os.environ.setdefault("ONLY", "set")
 SITE = os.environ.get("SITE", "https://staging-warujie.warujie-mtg.workers.dev/")
 OUT = os.environ.get("OUT", "probe_out/")
 DECK = ("About\nName ボロス・バーン\n\nDeck\n4 稲妻\n4 Ragavan, Nimble Pilferer\n4 Monastery Swiftspear\n4 ボロスの魔除け\n4 Lightning Helix\n"
@@ -59,7 +60,7 @@ def run(p):
             page.screenshot(path=f"{OUT}1-foil-pictures-{tag}.png")
             for i in range(4):
                 el.screenshot(path=f"{OUT}2-foil-frame-{i}-{tag}.png"); page.wait_for_timeout(1500)
-        step("foil", foil)
+        if os.environ.get("ONLY") != "set": step("foil", foil)
         def finishes():
             for name in ("The Necrobloom", "Sol Ring"):
                 sel = f"#importBody [data-ip='main'][data-in=\"{name}\"][data-imp-act='art']"
@@ -72,10 +73,10 @@ def run(p):
                     page.screenshot(path=f"{OUT}3b-art-picker-{slug}-nonfoil-{tag}.png")
                     print(tag, "after non-foil:", [l for l in page.evaluate("lists.deck").split("\n") if "Necrobloom" in l], "toast:", page.inner_text("#wantToast"), "dimmed", page.locator("#artPicker .ap-item.off").count(), file=log, flush=True)
                 page.keyboard.press("Escape"); page.wait_for_timeout(600)
-        step("finishes", finishes)
+        if os.environ.get("ONLY") != "set": step("finishes", finishes)
         def setpage():
-            page.goto(SITE + "?set=mh3"); page.wait_for_selector("#cardGrid .card-tile .tile-art", timeout=90000); page.wait_for_timeout(3000)
-            page.locator("#cardGrid .card-tile .tile-art").first.click(); page.wait_for_timeout(110)
+            page.goto(SITE + "?set=mh3"); page.wait_for_selector("#setGrid .card-tile .tile-art", timeout=90000); page.wait_for_timeout(3000)
+            page.locator("#setGrid .card-tile .tile-art").first.click(); page.wait_for_timeout(110)
             page.screenshot(path=f"{OUT}4-set-picker-sliding-in-{tag}.png")
             page.wait_for_selector("#artPicker .ap-item", timeout=60000); page.wait_for_timeout(2500)
             page.screenshot(path=f"{OUT}4b-set-picker-open-{tag}.png")
