@@ -1,9 +1,0 @@
-build there after 3
-desktop CMDR: ゴルガリの女王、サヴラ | Savra, Queen of the Golgari | ゴルガリの死者の王、ジャラド | Jarad, Golgari Lich Lord
-desktop FILTERED: 4,665枚 絞り込み中 ×
-desktop ub FAILED TimeoutError('Page.wait_for_selector: Timeout 60000ms exceeded.\nCall log:\nwaiting for locator(".card-tile") to be visible\n')
-desktop errors: []
-phone CMDR: ゴルガリの死者の王、ジャラド | Jarad, Golgari Lich Lord
-phone filters FAILED TimeoutError('Page.click: Timeout 30000ms exceeded.\nCall log:\nwaiting for locator("#filterOpenBtn")\n  -   locator resolved to <button title="絞り込み" type="button" aria-label="絞り込み" class="bar-filter" id="filterOpenBtn" aria-expanded="false" aria-controls="filterPanel" data-i18n-title="filter.title">…</button>\n  - attempting click action\n  -   waiting for element to be visible, enabled and stabl
-phone ub FAILED TimeoutError('Page.wait_for_selector: Timeout 60000ms exceeded.\nCall log:\nwaiting for locator(".card-tile") to be visible\n')
-phone errors: []

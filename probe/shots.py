@@ -26,7 +26,7 @@ def wait_for_build():
     for i in range(40):
         try:
             req = urllib.request.Request(SITE + "?probe=" + str(time.time()), headers={"User-Agent": "warujie.jp probe"})
-            if b"impCmdr" in urllib.request.urlopen(req, timeout=30).read(): print("build there after", i, file=log, flush=True); return
+            if b"li > img" in urllib.request.urlopen(req, timeout=30).read(): print("build there after", i, file=log, flush=True); return
         except Exception as e: print("wait", repr(e)[:120], file=log, flush=True)
         time.sleep(30)
     print("build NOT seen", file=log, flush=True)
@@ -81,20 +81,23 @@ def run(p):
         step("commander", cmd)
         def filt():
             page.goto(SITE + "?view=import&d=burn1"); builder_ready(page)
-            if tag == "phone": page.click("#impPbar button"); page.wait_for_timeout(800)
             page.click("#filterOpenBtn"); page.wait_for_timeout(1200)
             page.locator("#sideAdvSlot .chip[data-color=U]").click(); page.wait_for_timeout(2500)
             page.screenshot(path=f"{OUT}9-filters-drawer-{tag}.png")
             page.click("#filterClose") if page.locator("#filterClose").is_visible() else page.keyboard.press("Escape"); page.wait_for_timeout(1500)
+            if tag == "phone": page.click("#impPbar [data-sheet=search]"); page.wait_for_timeout(1500)
             page.screenshot(path=f"{OUT}10-filtered-search-{tag}.png")
             print(tag, "FILTERED:", page.inner_text("#impQNote")[:200].replace("\n", " | "), file=log, flush=True)
             if page.locator("[data-imp-unfilter]").count(): page.click("[data-imp-unfilter]"); page.wait_for_timeout(500)
         step("filters", filt)
         def ub():
-            page.goto(SITE + "?q=" + urllib.parse.quote("Battle at the Big Bridge")); page.wait_for_selector(".card-tile", timeout=60000); page.wait_for_timeout(3000)
+            page.goto(SITE); page.wait_for_timeout(3000)
+            sel = "#searchInput" if page.locator("#searchInput").is_visible() else "#heroInput"
+            page.fill(sel, "Battle at the Big Bridge"); page.press(sel, "Escape"); page.press(sel, "Enter")
+            page.wait_for_selector("#cardGrid .card-tile", timeout=60000); page.wait_for_timeout(3000)
             page.screenshot(path=f"{OUT}11-search-ub-name-{tag}.png")
-            print(tag, "UB SEARCH:", page.locator(".card-tile").first.inner_text()[:120].replace("\n", " | "), file=log, flush=True)
-            page.locator(".card-tile").first.click(); page.wait_for_selector("#cardViewCard .cp-name-sub", timeout=60000); page.wait_for_timeout(5000)
+            print(tag, "UB SEARCH:", page.locator("#cardGrid .card-tile").first.inner_text()[:120].replace("\n", " | "), file=log, flush=True)
+            page.locator("#cardGrid .card-tile").first.click(); page.wait_for_selector("#cardViewCard .cp-name-sub", timeout=60000); page.wait_for_timeout(5000)
             page.screenshot(path=f"{OUT}12-card-page-other-name-{tag}.png")
             print(tag, "CARD:", page.inner_text("#cardViewCard")[:300].replace("\n", " | "), file=log, flush=True)
             sw = page.locator("#offerFoil")
