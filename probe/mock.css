@@ -162,3 +162,8 @@ select.mk-mini { padding-right: 4px; }
   .mk-line { gap: 8px; margin-right: -16px; padding-right: 16px; }
   .mk-pane .mk-stats, .mk-pane .mk-cmd { display: grid; overflow: visible; margin-right: 0; padding-right: 0; }
 }
+@media (max-width: 640px) {
+  .want-bar-l:has(.mk-mini) { flex-wrap: wrap; row-gap: 8px; }
+  .want-bar-l:has(.mk-mini) > :first-child { flex: none; }
+  .want-bar-l .mk-mini { flex: 1 1 40%; }
+}
