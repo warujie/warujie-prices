@@ -1,4 +1,4 @@
-# Screenshots of the deck builder's round 2 (commander box, cart, foil, filters, other names) on the staging test site (a throwaway probe)
+# Screenshots of the deck builder's round 3 (foil shine and dots, finishes, commander box, phone sheet) on the staging test site (a throwaway probe)
 import json, os, time, urllib.parse, urllib.request
 from playwright.sync_api import sync_playwright
 SITE = os.environ.get("SITE", "https://staging-warujie.warujie-mtg.workers.dev/")
@@ -7,7 +7,7 @@ DECK = ("About\nName ボロス・バーン\n\nDeck\n4 稲妻\n4 Ragavan, Nimble 
         "4 Skewer the Critics\n4 Lava Spike\n4 Rift Bolt\n4 Goblin Guide *F*\n4 Sacred Foundry\n4 Inspiring Vantage\n4 Arid Mesa\n12 Mountain\n\nSideboard\n2 Blood Moon\n3 Path to Exile\n\nMaybeboard\n2 Eidolon of the Great Revel\n2 Fireblast\n")
 DECK2 = "About\nName エルフ\n\nDeck\n4 Llanowar Elves\n4 Elvish Mystic\n4 Heritage Druid\n4 Nettle Sentinel\n4 Elvish Archdruid\n20 Forest\n"
 DECK3 = ("About\nName アトラクサ\n\nCommander\n1 Atraxa, Praetors' Voice\n\nDeck\n1 Sol Ring *F*\n1 Arcane Signet\n1 Swords to Plowshares\n1 Cultivate\n"
-         "1 Doubling Season *F*\n1 Deepglow Skate\n1 Evolution Sage\n1 Command Tower\n1 Rhystic Study\n1 Smothering Tithe\n1 Avenger of Zendikar\n1 Parallel Lives\n"
+         "1 Doubling Season *F*\n1 Deepglow Skate\n1 Evolution Sage\n1 Command Tower\n1 Jace, Multiverse Architect *F*\n1 Rhystic Study\n1 Smothering Tithe\n1 Avenger of Zendikar\n1 Parallel Lives\n"
          "1 Hallowed Fountain\n1 Breeding Pool\n1 Kodama's Reach\n1 Beast Within\n10 Forest\n10 Plains\n10 Island\n10 Swamp\n\nMaybeboard\n1 Cyclonic Rift\n")
 now = int(time.time() * 1000)
 STORE = {"v": 1, "cur": "burn1", "folders": ["大会用", "統率者"], "decks": [
@@ -26,7 +26,7 @@ def wait_for_build():
     for i in range(40):
         try:
             req = urllib.request.Request(SITE + "?probe=" + str(time.time()), headers={"User-Agent": "warujie.jp probe"})
-            if b"li > img" in urllib.request.urlopen(req, timeout=30).read(): print("build there after", i, file=log, flush=True); return
+            if b"imp-title-row" in urllib.request.urlopen(req, timeout=30).read(): print("build there after", i, file=log, flush=True); return
         except Exception as e: print("wait", repr(e)[:120], file=log, flush=True)
         time.sleep(30)
     print("build NOT seen", file=log, flush=True)
@@ -51,62 +51,54 @@ def run(p):
         def step(name, fn):
             try: fn()
             except Exception as e: print(tag, name, "FAILED", repr(e)[:400], file=log, flush=True)
-        def cmd():
+        def head():
             page.goto(SITE + "?view=import&d=atx1"); builder_ready(page)
-            if tag == "phone": page.evaluate("setImpSheet(false)"); page.wait_for_timeout(500)
-            page.screenshot(path=f"{OUT}1-head-pips-commander-{tag}.png")
-            page.fill("#impCmdr", "ゴルガリ" if tag == "desktop" else "ジャラド"); page.wait_for_timeout(2500)
-            page.screenshot(path=f"{OUT}2-commander-search-{tag}.png")
-            print(tag, "CMDR:", page.inner_text("#impCmdrList")[:300].replace("\n", " | "), file=log, flush=True)
-            page.fill("#impCmdr", ""); page.wait_for_timeout(300)
-            page.click("#impCart summary"); page.wait_for_timeout(800)
-            page.screenshot(path=f"{OUT}3-cart-{tag}.png")
-            page.click("#impCart summary"); page.wait_for_timeout(300)
-            if tag == "phone": page.evaluate("window.scrollTo(0, 0)")
-            page.click("#impTabs [data-pane=stats]" if tag == "desktop" else "#impPbarStats"); page.wait_for_timeout(5000)
-            page.screenshot(path=f"{OUT}4-stats-hand-icons-{tag}.png")
-            page.click("#impHandBtn"); page.wait_for_timeout(3500)
-            page.screenshot(path=f"{OUT}5-hand-{tag}.png"); page.keyboard.press("Escape"); page.wait_for_timeout(400)
-            if tag == "phone": page.evaluate("setImpSheet(false)"); page.wait_for_timeout(500)
+            page.screenshot(path=f"{OUT}1-head-commander-{tag}.png")
+            print(tag, "CMDR VALUE:", page.input_value("#impCmdr"), file=log, flush=True)
+            page.click("#impCmdr"); page.wait_for_timeout(300)
+            page.screenshot(path=f"{OUT}2-commander-focused-{tag}.png")
+            page.locator("#impCmdr").evaluate("e => e.blur()"); page.wait_for_timeout(300)
+        step("head", head)
+        def foil():
             if page.locator("#importBody [data-iview=image]").count(): page.click("#importBody [data-iview=image]"); page.wait_for_timeout(4000)
             el = page.locator("#importBody .dc-pic.foil").first
-            if el.count():
-                el.scroll_into_view_if_needed(); page.wait_for_timeout(1500)
-                page.screenshot(path=f"{OUT}6-foil-pictures-{tag}.png")
-            else: print(tag, "no foil pictures", file=log, flush=True)
-            if page.locator("#importBody [data-iview=list]").count(): page.click("#importBody [data-iview=list]"); page.wait_for_timeout(1500)
-            el = page.locator("#importBody .foil-tag").first
-            if el.count(): el.scroll_into_view_if_needed(); page.wait_for_timeout(500); page.screenshot(path=f"{OUT}7-foil-list-{tag}.png")
-            page.screenshot(path=f"{OUT}8-commander-full-{tag}.png", full_page=True)
-        step("commander", cmd)
-        def filt():
-            page.goto(SITE + "?view=import&d=burn1"); builder_ready(page)
-            page.click("#filterOpenBtn"); page.wait_for_timeout(1200)
-            page.locator("#sideAdvSlot .chip[data-color=U]").click(); page.wait_for_timeout(2500)
-            page.screenshot(path=f"{OUT}9-filters-drawer-{tag}.png")
-            page.click("#filterClose") if page.locator("#filterClose").is_visible() else page.keyboard.press("Escape"); page.wait_for_timeout(1500)
-            if tag == "phone": page.click("#impPbar [data-sheet=search]"); page.wait_for_timeout(1500)
-            page.screenshot(path=f"{OUT}10-filtered-search-{tag}.png")
-            print(tag, "FILTERED:", page.inner_text("#impQNote")[:200].replace("\n", " | "), file=log, flush=True)
-            if page.locator("[data-imp-unfilter]").count(): page.click("[data-imp-unfilter]"); page.wait_for_timeout(500)
-        step("filters", filt)
-        def ub():
-            page.goto(SITE); page.wait_for_timeout(3000)
+            el.scroll_into_view_if_needed(); page.evaluate("window.scrollBy(0, -120)"); page.wait_for_timeout(2000)
+            page.screenshot(path=f"{OUT}3-foil-pictures-{tag}.png")
+            page.wait_for_timeout(4500)
+            page.screenshot(path=f"{OUT}3b-foil-pictures-later-{tag}.png")
+            page.click("#importBody [data-iview=list]"); page.wait_for_timeout(1500)
+            el = page.locator("#importBody .dl-name .foil-dot").first
+            el.scroll_into_view_if_needed(); page.evaluate("window.scrollBy(0, -200)"); page.wait_for_timeout(500)
+            page.screenshot(path=f"{OUT}4-foil-dots-list-{tag}.png")
+        step("foil", foil)
+        def finishes():
+            for name in ("Jace, Multiverse Architect", "Sol Ring"):
+                sel = f"#importBody [data-ip='main'][data-in=\"{name}\"][data-imp-act='art']"
+                page.locator(sel).first.scroll_into_view_if_needed(); page.click(sel); page.wait_for_selector("#artPicker .ap-item", timeout=60000); page.wait_for_timeout(3000)
+                page.screenshot(path=f"{OUT}5-art-picker-{name.split(',')[0].replace(' ', '-').lower()}-{tag}.png")
+                print(tag, name, "FINISHES:", page.evaluate("[...document.querySelectorAll('#artPicker [data-ap-finish]')].map(b => b.textContent)"), "items", page.locator("#artPicker .ap-item").count(), "fin-tags", page.locator("#artPicker .fin-tag").count(), file=log, flush=True)
+                page.keyboard.press("Escape"); page.wait_for_timeout(500)
+        step("finishes", finishes)
+        if tag == "phone":
+            def sheet():
+                page.evaluate("window.scrollTo(0, 0)"); page.wait_for_timeout(300)
+                page.click("#impPbarStats"); page.wait_for_timeout(120)
+                page.screenshot(path=f"{OUT}6-sheet-sliding-{tag}.png")
+                page.wait_for_timeout(600)
+                page.screenshot(path=f"{OUT}6b-sheet-open-{tag}.png")
+            step("sheet", sheet)
+        def card():
+            page.goto(SITE); page.wait_for_timeout(2500)
             sel = "#searchInput" if page.locator("#searchInput").is_visible() else "#heroInput"
-            page.fill(sel, "Battle at the Big Bridge"); page.press(sel, "Escape"); page.press(sel, "Enter")
-            page.wait_for_selector("#cardGrid .card-tile", timeout=60000); page.wait_for_timeout(3000)
-            page.screenshot(path=f"{OUT}11-search-ub-name-{tag}.png")
-            print(tag, "UB SEARCH:", page.locator("#cardGrid .card-tile").first.inner_text()[:120].replace("\n", " | "), file=log, flush=True)
-            page.locator("#cardGrid .card-tile").first.click(); page.wait_for_selector("#cardViewCard .cp-name-sub", timeout=60000); page.wait_for_timeout(5000)
-            page.screenshot(path=f"{OUT}12-card-page-other-name-{tag}.png")
-            print(tag, "CARD:", page.inner_text("#cardViewCard")[:300].replace("\n", " | "), file=log, flush=True)
-            sw = page.locator("#offerFoil")
-            if sw.count():
-                if sw.get_attribute("aria-checked") != "true": sw.click()
-                page.wait_for_timeout(1500); page.evaluate("window.scrollTo(0, 0)"); page.wait_for_timeout(500)
-                page.screenshot(path=f"{OUT}13-card-page-foil-{tag}.png")
-            else: print(tag, "no foil switch", file=log, flush=True)
-        step("ub", ub)
+            page.fill(sel, "Sol Ring"); page.press(sel, "Escape"); page.press(sel, "Enter")
+            page.wait_for_selector("#cardGrid .card-tile", timeout=60000); page.wait_for_timeout(1500)
+            page.locator("#cardGrid .card-tile").first.click(); page.wait_for_selector("#cardViewCard .cp-name-sub, #cardViewCard h1, #cardViewCard", timeout=60000); page.wait_for_timeout(6000)
+            v = page.locator("#versionMenuPanel")
+            if v.count():
+                v.scroll_into_view_if_needed(); page.wait_for_timeout(2500)
+                page.screenshot(path=f"{OUT}7-card-page-printings-{tag}.png")
+                print(tag, "CARD fin-tags:", page.locator("#versionMenuPanel .fin-tag").count(), file=log, flush=True)
+        step("card", card)
         print(tag, "errors:", errs, file=log, flush=True)
         ctx.close()
     b.close()
