@@ -5,6 +5,8 @@ window.MOCK = (() => {
   const yen = y => '¥' + Math.round(y).toLocaleString('ja-JP');
   const items = () => { const r = importState.result; return r.commander.concat(r.main); };
   const rowOf = it => (it.info && it.info.row) || rowByEnglishName(it.name);
+  const lab = it => { const r = rowOf(it); return JA && r && r.name_ja ? r.name_ja.split(' // ')[0] : it.name; };
+  const liOf = it => [...document.querySelectorAll('#importBody .deck-section:not(.mk-maybe) .dl-row')].find(l => ((l.querySelector('.dl-name') || {}).textContent || '').includes(it.name));
   const typeOf = row => String((row && row.type_en) || '').toLowerCase();
   const isLand = row => /\bland\b/.test(typeOf(row)) && !/creature/.test(typeOf(row));
   const isPerm = row => /creature|artifact|enchantment|planeswalker|battle/.test(typeOf(row));
@@ -92,7 +94,7 @@ window.MOCK = (() => {
       let m; while ((m = re.exec(t))) {
         const kind = (m[3] || '').trim().split(' ').pop() || ''; if (!kind) continue;
         const key = `${m[1] || ''} ${kind}`.trim();
-        if (!found.has(key)) found.set(key, { pt: m[1] || '', kind, col: (m[2] || '').trim(), from: it.label });
+        if (!found.has(key)) found.set(key, { pt: m[1] || '', kind, col: (m[2] || '').trim(), from: lab(it) });
       }
     });
     return [...found.values()].slice(0, 8);
@@ -113,10 +115,9 @@ window.MOCK = (() => {
     if (maybe.length) maybeboard(maybe);
     sectionAfter('', tokensHtml(tokens()));
     // not on Arena: a small mark on those rows
-    if (arena) document.querySelectorAll('#importBody .deck-section:not(.mk-maybe) .dl-row').forEach(li => {
-      const it = items().find(x => (li.querySelector('.dl-name') || {}).textContent.startsWith(x.label));
-      const row = it && rowOf(it); const cr = row && cheapRow(row.name_en, row);
-      if (row && !(cr && cr[2]) && !BASIC[row.name_en] && !isLand(row)) li.querySelector('.dl-name').insertAdjacentHTML('beforeend', `<span class="mk-na">${L('アリーナなし', 'not on Arena')}</span>`);
+    if (arena) importState.result.main.concat(importState.result.side).forEach(it => {
+      const row = rowOf(it); const cr = row && cheapRow(row.name_en, row); const li = liOf(it);
+      if (li && row && !(cr && cr[2]) && !BASIC[row.name_en]) li.querySelector('.dl-name').insertAdjacentHTML('beforeend', `<span class="mk-na">${L('アリーナなし', 'not on Arena')}</span>`);
     });
   }
   // ---- sample hand ----
@@ -127,7 +128,7 @@ window.MOCK = (() => {
     for (let i = pool.length - 1; i > 0; i--) { const j = Math.floor(rnd() * (i + 1)); [pool[i], pool[j]] = [pool[j], pool[i]]; }
     const h = pool.slice(0, 7), next = pool[7];
     const lands = h.filter(it => isLand(rowOf(it))).length;
-    const card = (it, cls = '') => { const row = rowOf(it); return `<span class="mk-hc ${cls}"><img src="${trayPic(row, 'normal')}" alt="${esc(it.label)}"></span>`; };
+    const card = (it, cls = '') => { const row = rowOf(it); return `<span class="mk-hc ${cls}"><img src="${trayPic(row, 'normal')}" alt="${esc(lab(it))}"></span>`; };
     document.body.insertAdjacentHTML('beforeend', `<div class="mk-dim"></div><div class="mk-hand" role="dialog"><div class="mk-hh"><h2>${L('サンプル手札', 'Sample hand')}</h2>`
       + `<span class="mk-hs">${L(`手札7枚 · 土地${lands}枚 · ライブラリー残り${pool.length - 8}枚`, `7 cards · ${lands} lands · ${pool.length - 8} left`)}</span><button class="adv-btn mk-x">×</button></div>`
       + `<div class="mk-hcards">${h.map(it => card(it)).join('')}${card(next, 'drawn')}</div>`
@@ -176,7 +177,7 @@ window.MOCK = (() => {
       + `<small>${esc((JA ? c.results_ja : c.results).slice(0, 2).join(' · '))}</small></li>`;
     const html = `<section class="mk-cmd"><div class="mk-tile mk-roles"><h3>${L('統率者デッキのチェック', 'Commander checklist')}<small>${L('役割タグで数えた目安', 'counted by role tags')}</small></h3><ul>${roleHtml}</ul></div>`
       + `<div class="mk-tile mk-br"><h3>${L('ブラケット', 'Bracket')}</h3><p class="mk-big">${bracket}<small>${L(bracket === 2 ? 'コア（構築済み相当）' : 'アップグレード', bracket === 2 ? 'Core' : 'Upgraded')}</small></p>`
-      + `<p>${L('ゲームチェンジャー', 'Game Changers')} <b>${gc.length}${L('枚', '')}</b>${gc.length ? `：${gc.map(it => esc(it.label)).join('、')}` : ''}</p><p>${L('2枚で揃うコンボ', 'Two-card combos')} <b>${cb.have.filter(c => c.cards.length === 2).length}</b></p><p class="mk-dim2">${L('ゲームチェンジャー・コンボ・追加ターンから判定', 'From Game Changers, combos, extra turns')}</p></div>`
+      + `<p>${L('ゲームチェンジャー', 'Game Changers')} <b>${gc.length}${L('枚', '')}</b>${gc.length ? `：${gc.map(it => esc(lab(it))).join('、')}` : ''}</p><p>${L('2枚で揃うコンボ', 'Two-card combos')} <b>${cb.have.filter(c => c.cards.length === 2).length}</b></p><p class="mk-dim2">${L('ゲームチェンジャー・コンボ・追加ターンから判定', 'From Game Changers, combos, extra turns')}</p></div>`
       + `<div class="mk-tile mk-cb"><h3>${L('コンボ', 'Combos')}<small>Commander Spellbook</small></h3>`
       + `<p class="mk-sub">${L(`このデッキにある ${cb.have.length}`, `In this deck: ${cb.have.length}`)}</p><ul>${cb.have.slice(0, 2).map(c => comboLi(c, false)).join('') || `<li class="mk-dim2">${L('なし', 'None')}</li>`}</ul>`
       + `<p class="mk-sub">${L(`あと1枚 ${cb.near.length}`, `One card away: ${cb.near.length}`)}</p><ul>${cb.near.slice(0, 3).map(c => comboLi(c, true)).join('')}</ul></div></section>`;
@@ -190,11 +191,11 @@ window.MOCK = (() => {
     const inDeck = new Set(names);
     const alts = similarTo(target.row, 400).map(x => x.row).filter(r => r && !inDeck.has(r.name_en) && String(r.legal || '').includes('c') && String(r.colors || '').split('').every(c => cols.has(c)))
       .map(r => ({ r, y: rowPriceYen(r) })).filter(x => x.y && x.y < target.y * 0.4).slice(0, 4);
-    const li = [...document.querySelectorAll('#importBody .dl-row')].find(l => (l.querySelector('.dl-name') || {}).textContent.startsWith(target.it.label));
+    const li = liOf(target.it);
     if (li) {
       li.classList.add('mk-hl');
       li.querySelector('.dl-name').insertAdjacentHTML('afterend', `<span class="mk-alt-btn">${L('安い代わり', 'Cheaper')}</span>`);
-      li.insertAdjacentHTML('afterend', `<li class="mk-alt"><p>${L(`「${esc(target.it.label)}」(${yen(target.y)}) と同じ役割で安いカード`, `Cards with the same role for less than ${yen(target.y)}`)}</p><ul>${alts.map(x =>
+      li.insertAdjacentHTML('afterend', `<li class="mk-alt"><p>${L(`「${esc(lab(target.it))}」(${yen(target.y)}) と同じ役割で安いカード`, `Cards with the same role for less than ${yen(target.y)}`)}</p><ul>${alts.map(x =>
         `<li><img src="${cardArtUrl(x.r.id)}" alt=""><span>${esc(JA && x.r.name_ja ? x.r.name_ja : x.r.name_en)}</span><b>${yenSmall(x.y)}</b><span class="mk-sw">${L('入れ替える', 'Swap')}</span></li>`).join('')}</ul></li>`);
       li.scrollIntoView({ block: 'center' });
     }

@@ -98,10 +98,11 @@ li.mk-alt img { width: 48px; height: 35px; object-fit: cover; border-radius: 4px
 .mk-chip.on small { color: inherit; opacity: 0.8; }
 .mk-chip.add { border-style: dashed; color: var(--muted); }
 .mk-fold { font-size: 11px; color: var(--text-2); border: 1px solid var(--line); border-radius: 4px; padding: 0 5px; align-self: flex-start; margin: 0 14px; }
-/* the want list tray pushes the results aside on wide screens, like the filters */
+/* the want list tray pushes the results aside on wide screens, like the filters (under the top bar, no dimming) */
 html.mk-push #wantTrayBg { display: none !important; }
-html.mk-push .search-layout > main { margin-right: max(0px, 436px - max(20px, (100vw - 1280px) / 2 + 20px)); }
-html.mk-push #wantTray { box-shadow: -8px 0 24px rgba(0, 0, 0, 0.12); }
+html.mk-push #wantTray { top: var(--bar-h) !important; width: 380px !important; z-index: 39 !important; box-shadow: none !important; border-left: 1px solid var(--line); }
+html.mk-push[data-view="search"] .search-layout > main { margin-right: max(0px, 396px - max(20px, (100vw - 1280px) / 2 + 20px)) !important; }
+html.mk-push.tray-open { overflow: visible !important; }
 @media (max-width: 900px) {
   .mk-stats, .mk-cmd, .mk-stats:not(:has(.mk-wc)) { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .mk-cmd { grid-template-columns: 1fr; }
@@ -111,4 +112,13 @@ html.mk-push #wantTray { box-shadow: -8px 0 24px rgba(0, 0, 0, 0.12); }
   .mk-turn { margin-left: 0; flex-basis: 100%; }
   .mk-roles li { grid-template-columns: 64px 1fr 24px 62px 40px; gap: 6px; }
   .mk-sort > span { display: none; }
+}
+/* phones: the tiles are a strip you swipe sideways, so the deck stays near the top */
+@media (max-width: 640px) {
+  .mk-stats, .mk-cmd, .mk-stats:not(:has(.mk-wc)) { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 8px; padding-bottom: 6px; margin-right: -16px; padding-right: 16px; }
+  .mk-stats .mk-tile, .mk-cmd .mk-tile { flex: 0 0 82%; scroll-snap-align: start; }
+  .mk-cvs { height: 70px; }
+  .mk-hh { flex-wrap: wrap; }
+  .mk-hh h2 { white-space: nowrap; }
+  .mk-hs { order: 3; flex-basis: 100%; }
 }
