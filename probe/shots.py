@@ -47,18 +47,7 @@ def run(p, route=None):
         def step(name, fn):
             try: fn()
             except Exception as e: print(tag, name, "FAILED", repr(e)[:400], file=log, flush=True)
-        # 1. a 60-card deck: stats, order, maybeboard, tokens, not on Arena
-        def s1():
-            page.goto(SITE + "?view=import&d=burn1"); builder_ready(page); mock(page)
-            page.evaluate("MOCK.builder({ arena: true, maybe: ['Eidolon of the Great Revel', 'Fireblast', 'Bonecrusher Giant'] })")
-            page.wait_for_timeout(2500); page.evaluate("scrollTo(0, 0)")
-            page.screenshot(path=f"{OUT}1-stats-{tag}.png")
-            page.screenshot(path=f"{OUT}1-stats-full-{tag}.png", full_page=True)
-            page.evaluate("MOCK.hand(11)"); page.wait_for_timeout(3500)
-            page.screenshot(path=f"{OUT}2-hand-{tag}.png")
-        step("builder", s1)
-        # 2. a Commander deck (a precon): the Commander-only extras
-        def s2():
+        def open_precon():
             page.goto(SITE + "?view=decks"); page.wait_for_selector("#dkGrid .dk-card", timeout=60000)
             page.click("#preconBtn")
             try:
@@ -67,37 +56,27 @@ def run(p, route=None):
             except Exception:
                 print("no precons, using the Atraxa deck", file=log, flush=True); page.goto(SITE + "?view=import&d=atx1")
             builder_ready(page); mock(page)
-            page.evaluate("MOCK.commander()"); page.wait_for_timeout(3000)
-            page.evaluate("scrollTo(0, 0)"); page.wait_for_timeout(500)
-            page.screenshot(path=f"{OUT}3-commander-{tag}.png")
+        # A: one thin line under the bar
+        def a1():
+            page.goto(SITE + "?view=import&d=burn1"); builder_ready(page); mock(page)
+            page.evaluate("MOCK.slimLine({ maybe: ['Eidolon of the Great Revel', 'Fireblast'] })"); page.wait_for_timeout(2500)
+            page.screenshot(path=f"{OUT}A1-line-{tag}.png")
+            page.screenshot(path=f"{OUT}A1-line-full-{tag}.png", full_page=True)
+        step("A1", a1)
+        def a2():
+            open_precon()
+            page.evaluate("MOCK.slimLine({ commander: true })"); page.wait_for_timeout(3000)
+            page.screenshot(path=f"{OUT}A2-line-commander-{tag}.png")
+        step("A2", a2)
+        # B: a 統計 tab in the left panel (a sheet on phones)
+        def b1():
+            open_precon()
+            page.evaluate("MOCK.slimTab({ commander: true, open: true })"); page.wait_for_timeout(3000)
+            page.screenshot(path=f"{OUT}B1-tab-commander-{tag}.png")
             if tag == "phone":
-                page.evaluate("document.querySelector('.mk-cmd').scrollIntoView({ block: 'start' }); scrollBy(0, -120)"); page.wait_for_timeout(800)
-                page.screenshot(path=f"{OUT}3-commander-checks-phone.png")
-                page.evaluate("document.querySelector('.mk-cmd').scrollLeft = 10000"); page.wait_for_timeout(800)
-                page.screenshot(path=f"{OUT}3-commander-combos-phone.png")
-            page.screenshot(path=f"{OUT}3-commander-full-{tag}.png", full_page=True)
-            page.evaluate("document.querySelector('li.mk-alt') && document.querySelector('li.mk-alt').scrollIntoView({ block: 'center' })"); page.wait_for_timeout(1500)
-            page.screenshot(path=f"{OUT}4-cheaper-{tag}.png")
-            print(tag, "commander deck:", page.evaluate("curDeck() && deckName(curDeck())"), file=log, flush=True)
-        step("commander", s2)
-        # 3. my decks: folders and order
-        def s3():
-            page.goto(SITE + "?view=decks"); page.wait_for_selector("#dkGrid .dk-art", timeout=60000)
-            page.wait_for_timeout(2500); mock(page); page.evaluate("MOCK.decks()"); page.wait_for_timeout(500)
-            page.screenshot(path=f"{OUT}5-mydecks-{tag}.png")
-        step("decks", s3)
-        # 4. the want list tray from the right (on wide screens it pushes the results aside, like the filters)
-        def s4():
-            page.goto(SITE); page.wait_for_timeout(2000)
-            sel = "#searchInput" if page.locator("#searchInput").is_visible() else "#heroInput"
-            page.fill(sel, "ドラゴン"); page.press(sel, "Escape"); page.press(sel, "Enter")
-            page.wait_for_selector("#cardGrid .card-tile", timeout=60000); page.wait_for_timeout(3000)
-            mock(page)
-            page.click("#wantBtnBar" if page.locator("#wantBtnBar").is_visible() else "#wantBtn"); page.wait_for_timeout(2500)
-            if tag == "desktop": page.evaluate("document.documentElement.classList.add('mk-push')"); page.wait_for_timeout(800)
-            print(tag, "main margin:", page.evaluate("getComputedStyle(document.querySelector('.search-layout > main')).marginRight"), file=log, flush=True)
-            page.screenshot(path=f"{OUT}6-want-{tag}.png")
-        step("want", s4)
+                page.evaluate("setImpSheet(false)"); page.wait_for_timeout(800)
+                page.screenshot(path=f"{OUT}B2-tab-closed-phone.png")
+        step("B1", b1)
         print(tag, "errors:", errs, file=log, flush=True)
         ctx.close()
     b.close()

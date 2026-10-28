@@ -1,6 +1,0 @@
-desktop commander deck: Calling All Angels
-desktop main margin: 376px
-desktop errors: []
-phone commander deck: Calling All Angels
-phone main margin: 0px
-phone errors: []

@@ -200,6 +200,98 @@ window.MOCK = (() => {
       li.scrollIntoView({ block: 'center' });
     }
   }
+
+  // ---- slim versions (the owner, 2026-10-28: "slim down all the data") ----
+  async function cmdData(s) {
+    const its = items();
+    const count = id => its.reduce((a, it) => { const r = rowOf(it); return a + (r && !isLand(r) && hasRole(r, id) ? it.count : 0); }, 0);
+    const roles = [[L('土地', 'Lands'), s.lands, 36, 38], [L('マナ加速', 'Ramp'), count('ramp'), 10, 12], [L('ドロー', 'Draw'), count('draw'), 10, 12],
+      [L('除去', 'Removal'), count('removal'), 8, 10], [L('全体除去', 'Wipes'), count('boardwipe'), 2, 4], [L('除去対策', 'Protection'), count('protection'), 3, 5]];
+    const gc = its.filter(it => GC.has((rowOf(it) || {}).name_en));
+    const cb = await combos(its.map(it => it.name));
+    return { roles, gc, cb, bracket: cb.have.length || gc.length ? 3 : 2 };
+  }
+  function spark(s) {
+    const top = Math.max(1, ...s.curve.map(([a, b]) => a + b));
+    return `<span class="mk-spark" title="${L('マナカーブ', 'Mana curve')}">${s.curve.map(([a, b], v) => `<i style="height:${Math.max(2, (a + b) / top * 100)}%" title="${v === 6 ? '6+' : v}: ${a + b}"></i>`).join('')}</span>`;
+  }
+  function lineHtml(s, cd) {
+    const needT = COLS.reduce((a, c) => a + s.need[c], 0) || 1;
+    const short = { creature: L('クリーチャー', 'Creatures'), instant: L('インスタント', 'Instants'), sorcery: L('ソーサリー', 'Sorceries'), artifact: L('アーティファクト', 'Artifacts'), enchantment: L('エンチャント', 'Enchantments'), planeswalker: 'PW', land: L('土地', 'Lands') };
+    const types = TYPES.filter(([id]) => s.types.get(id)).map(([id]) => `<span>${short[id]} <b>${s.types.get(id)}</b></span>`).join('');
+    const cols = COLS.filter(c => s.need[c]).map(c => `<span class="mk-c">${pipImg(c)}${Math.round(s.need[c] / needT * 100)}%</span>`).join('');
+    let html = `<div class="mk-line">${spark(s)}<span class="mk-avg">${L('平均', 'avg')} <b>${s.avg.toFixed(2)}</b></span><span class="mk-dot"></span>`
+      + `<span class="mk-ty">${types}</span><span class="mk-dot"></span><span class="mk-cols">${cols}</span>`
+      + `<span class="mk-line-r"><button class="mk-link">${L('詳しく ▾', 'More ▾')}</button></span></div>`;
+    if (cd) {
+      const chk = cd.roles.map(([n, v, lo, hi]) => `<span class="mk-chk ${v < lo ? 'low' : 'ok'}">${n} <b>${v}</b>${v < lo ? `<small>/${lo}</small>` : ''}</span>`).join('');
+      html += `<div class="mk-line mk-line2"><span class="mk-lbl">${L('統率者', 'Commander')}</span>${chk}<span class="mk-dot"></span>`
+        + `<span class="mk-chk">${L('ブラケット', 'Bracket')} <b>${cd.bracket}</b></span><span class="mk-chk">${L('コンボ', 'Combos')} <b>${cd.cb.have.length}</b>${cd.cb.near.length ? `<small>${L(`・あと1枚 ${cd.cb.near.length}`, ` · ${cd.cb.near.length} one away`)}</small>` : ''}</span></div>`;
+    }
+    return html;
+  }
+  function barSlim() {
+    const l = document.querySelector('.want-bar .want-bar-l');
+    if (!l) return;
+    l.insertAdjacentHTML('beforeend', `<select class="adv-btn mk-mini" aria-label="${L('並べ方', 'Order')}"><option>${L('種類別', 'By type')}</option><option>${L('マナ総量別', 'By mana value')}</option><option>${L('色別', 'By colour')}</option><option>${L('名前順', 'By name')}</option><option>${L('価格順', 'By price')}</option></select>`
+      + `<button type="button" class="adv-btn mk-mini">${L('手札を試す', 'Sample hand')}</button>`);
+  }
+  function tokensLine(list) {
+    if (!list.length) return '';
+    return `<p class="mk-tokline"><b>${L('トークン', 'Tokens')}</b>${list.map(x => `<span>${esc([x.pt, JA ? (TOKEN_JA[x.kind] || x.kind) : x.kind].filter(Boolean).join(' '))}</span>`).join('')}</p>`;
+  }
+  function cheaperChip() {
+    const priced = importState.result.main.map(it => ({ it, row: rowOf(it) })).filter(x => x.row && !isLand(x.row)).map(x => Object.assign(x, { y: rowPriceYen(x.row) || 0 })).sort((a, b) => b.y - a.y);
+    const li = priced[0] && liOf(priced[0].it);
+    if (li) li.querySelector('.dl-yen').insertAdjacentHTML('afterbegin', `<span class="mk-cheap" title="${L('安い代わりを見る', 'Cheaper cards')}">${L('安く', 'Save')}</span>`);
+  }
+  // A: one thin line (two for Commander) under the bar; 詳しく opens the tiles
+  async function slimLine({ commander: isCmd = false, maybe = [] } = {}) {
+    await ready();
+    const s = stats();
+    document.querySelector('.deck-curve') && document.querySelector('.deck-curve').remove();
+    const cd = isCmd ? await cmdData(s) : null;
+    anchor().insertAdjacentHTML('afterend', lineHtml(s, cd)); barSlim();
+    const wc = document.querySelector('.want-bar .dcst-wc');
+    if (!isCmd && wc && s.noArena) wc.insertAdjacentHTML('beforeend', `<span class="mk-na big">${L(`アリーナなし ${s.noArena}`, `${s.noArena} not on Arena`)}</span>`);
+    if (maybe.length) maybeboard(maybe);
+    const last = [...document.querySelectorAll('#importBody .deck-section')].pop();
+    last.insertAdjacentHTML('afterend', tokensLine(tokens()));
+    if (isCmd) cheaperChip();
+    scrollTo(0, 0);
+  }
+  // B: the numbers in a 統計 tab of the left panel (a sheet on phones); the deck side shows only the deck
+  async function slimTab({ commander: isCmd = false, maybe = [], open = true } = {}) {
+    await ready();
+    const s = stats();
+    document.querySelector('.deck-curve') && document.querySelector('.deck-curve').remove();
+    const cd = isCmd ? await cmdData(s) : null;
+    barSlim();
+    if (maybe.length) maybeboard(maybe);
+    const last = [...document.querySelectorAll('#importBody .deck-section')].pop();
+    last.insertAdjacentHTML('afterend', tokensLine(tokens()));
+    if (isCmd) cheaperChip();
+    const tabs = document.getElementById('impTabs');
+    tabs.insertAdjacentHTML('beforeend', `<button type="button" role="tab" data-pane="stats" aria-selected="false"><span>${L('統計', 'Stats')}</span>${cd && cd.roles.some(([, v, lo]) => v < lo) ? '<span class="mk-warn-dot"></span>' : ''}</button>`);
+    const pb = document.getElementById('impPbar');
+    const pw = document.getElementById('impPbarWant');
+    if (pw) pw.insertAdjacentHTML('afterend', `<button type="button" class="adv-btn mk-pbar-stats">${L('統計', 'Stats')}</button>`);
+    const roleHtml = cd ? cd.roles.map(([n, v, lo, hi]) => { const st = v < lo ? 'low' : 'ok';
+      return `<li class="${st}"><span>${n}</span><span class="mk-bar"><i style="width:${Math.min(100, v / hi * 100)}%"></i><em style="left:${lo / hi * 100}%"></em></span><b>${v}</b><small>${lo}〜${hi}</small></li>`; }).join('') : '';
+    const comboLi = (c, near) => `<li>${c.cards.map(k => `<span class="combo-chip${near && k === c.miss ? ' mk-miss' : ''}">${near && k === c.miss ? '＋ ' : ''}${cname(k)}</span>`).join('<span class="mk-plus">+</span>')}</li>`;
+    const pane = `<div class="imp-pane mk-pane" id="impPaneStats">${statsHtml(s, false)}`
+      + (cd ? `<section class="mk-cmd"><div class="mk-tile mk-roles"><h3>${L('統率者デッキのチェック', 'Commander checklist')}</h3><ul>${roleHtml}</ul></div>`
+        + `<div class="mk-tile mk-br"><h3>${L('ブラケット', 'Bracket')} <b class="mk-bn">${cd.bracket}</b></h3><p>${L('ゲームチェンジャー', 'Game Changers')} <b>${cd.gc.length}</b> · ${L('2枚コンボ', 'Two-card combos')} <b>${cd.cb.have.filter(c => c.cards.length === 2).length}</b></p></div>`
+        + `<div class="mk-tile mk-cb"><h3>${L('コンボ', 'Combos')}<small>${L(`あと1枚 ${cd.cb.near.length}`, `${cd.cb.near.length} one card away`)}</small></h3><ul>${cd.cb.near.slice(0, 3).map(c => comboLi(c, true)).join('')}</ul></div></section>` : '')
+      + `</div>`;
+    document.getElementById('impPaneText').insertAdjacentHTML('afterend', pane);
+    if (open) {
+      ['impPaneSearch', 'impPaneWant', 'impPaneText'].forEach(id => { document.getElementById(id).hidden = true; });
+      tabs.querySelectorAll('[role=tab]').forEach(b => b.setAttribute('aria-selected', String(b.dataset.pane === 'stats')));
+      if (innerWidth < 1000) setImpSheet(true);
+    } else document.getElementById('impPaneStats').hidden = true;
+    scrollTo(0, 0);
+  }
   // ---- my decks: folders and order ----
   function decks() {
     const grid = document.getElementById('dkGrid');
@@ -208,5 +300,5 @@ window.MOCK = (() => {
       + `<label class="mk-sort"><span>${L('並べ替え', 'Order')}</span><select class="adv-btn"><option>${L('最近の更新順', 'Last edited')}</option><option>${L('名前順', 'Name')}</option><option>${L('フォーマット順', 'Format')}</option><option>${L('価格順', 'Price')}</option></select></label></div>`);
     grid.querySelectorAll('.dk-card:not(.dk-want)').forEach((c, i) => c.querySelector('.dk-when') && c.querySelector('.dk-when').insertAdjacentHTML('beforebegin', `<span class="mk-fold">${['大会用', '統率者', '大会用', '統率者'][i] || ''}</span>`));
   }
-  return { builder, hand, commander, decks };
+  return { builder, hand, commander, decks, slimLine, slimTab };
 })();
