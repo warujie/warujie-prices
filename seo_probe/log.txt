@@ -1,0 +1,29 @@
+== robots
+User-agent: *
+Disallow: /data/
+
+Sitemap: https://warujie.jp/sitemap.xml
+== sitemap
+HTTP/2 200 
+content-type: application/xml
+34943
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<url><loc>https://warujie.jp/</loc></url>
+<url><loc>https://warujie.jp/?view=sets</loc></url>
+<url><loc>https://warujie.jp/?view=meta</loc></url>
+<url><loc>https://warujie.jp/?view=events</loc></url>
+<url><loc>https://warujie.jp/?view=prices</loc></url>
+<url><loc>https://warujie.jp/?view=decks</loc></url>
+<url><loc>https://warujie.jp/?view=about</loc></url>
+<url><loc>https://warujie.jp/?view=meta&amp;format=standard</loc></url>
+<url><loc>https://warujie.jp/?view=meta&amp;format=pioneer</loc></ur
+<url><loc>https://warujie.jp/?card=84f2c8f5-8e11-4639-b7de-00e4a2cbabee</loc></url>
+<url><loc>https://warujie.jp/?card=68832214-2943-4253-8884-ffa490e84087</loc></url>
+== card page
+HTTP/2 200 
+x-robots-tag: noindex
+<link rel="canonical" href="https://warujie.jp/?card=0b2ee2c9-1f8b-4d48-a1d4-8f0fd6b8a1bd">
+1
+== live workers.dev (before publish)
+HTTP/2 200 
