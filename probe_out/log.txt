@@ -1,5 +1,0 @@
-build there after 3
-desktop errors: []
-phone decks FAILED TimeoutError('Page.goto: Timeout 30000ms exceeded.\nCall log:\nnavigating to "https://staging-warujie.warujie-mtg.workers.dev/?view=decks", waiting until "load"\n')
-phone commander FAILED TimeoutError('Page.goto: Timeout 30000ms exceeded.\nCall log:\nnavigating to "https://staging-warujie.warujie-mtg.workers.dev/?view=import&d=atx1", waiting until "load"\n')
-phone errors: []
