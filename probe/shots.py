@@ -28,12 +28,12 @@ with sync_playwright() as p:
         for attempt in range(20):   # until the test site has the new build
             page.goto(SITE + "?view=decks")
             try:
-                page.wait_for_selector("#dkGrid a.dk-card", timeout=20000); break
+                page.wait_for_selector("#dkGrid .dk-art", timeout=20000); break
             except Exception:
                 print(tag, "not yet", attempt, file=log, flush=True); page.wait_for_timeout(30000)
         page.wait_for_function("[...document.querySelectorAll('#dkGrid .dk-yen')].some(e => e.textContent.startsWith('約'))", timeout=60000)
         page.wait_for_timeout(2500)
-        page.wait_for_function("[...document.querySelectorAll('#dkGrid .dk-art img')].filter(i => i.complete && i.naturalWidth).length >= 3", timeout=60000)
+        page.wait_for_function("[...document.querySelectorAll('#dkGrid .dk-art img')].filter(i => i.complete && i.naturalWidth).length >= 2", timeout=90000)
         page.screenshot(path=f"{OUT}decks-{tag}.png", full_page=tag == "phone")
         # the box's ⋯ -> pick the deck's picture
         page.goto(SITE + "?view=import&d=atx1"); page.wait_for_selector("#importBody .deck-section", timeout=60000); page.wait_for_timeout(2000)
