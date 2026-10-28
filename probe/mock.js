@@ -194,7 +194,7 @@ window.MOCK = (() => {
     const li = liOf(target.it);
     if (li) {
       li.classList.add('mk-hl');
-      li.querySelector('.dl-name').insertAdjacentHTML('afterend', `<span class="mk-alt-btn">${L('安い代わり', 'Cheaper')}</span>`);
+      li.querySelector('.dl-name').insertAdjacentHTML('beforeend', ` <span class="mk-alt-btn">${L('安い代わり', 'Cheaper')}</span>`);
       li.insertAdjacentHTML('afterend', `<li class="mk-alt"><p>${L(`「${esc(lab(target.it))}」(${yen(target.y)}) と同じ役割で安いカード`, `Cards with the same role for less than ${yen(target.y)}`)}</p><ul>${alts.map(x =>
         `<li><img src="${cardArtUrl(x.r.id)}" alt=""><span>${esc(JA && x.r.name_ja ? x.r.name_ja : x.r.name_en)}</span><b>${yenSmall(x.y)}</b><span class="mk-sw">${L('入れ替える', 'Swap')}</span></li>`).join('')}</ul></li>`);
       li.scrollIntoView({ block: 'center' });
