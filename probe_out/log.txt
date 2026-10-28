@@ -1,3 +1,0 @@
-desktop errors: []
-precon menu left/right/width: [16, 374, 390]
-phone errors: []
