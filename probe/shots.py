@@ -45,6 +45,7 @@ def run(p):
         ctx = b.new_context(viewport={"width": w, "height": h}, device_scale_factor=2 if tag == "phone" else 1, is_mobile=tag == "phone", has_touch=tag == "phone", locale="ja-JP")
         ctx.add_init_script(INIT)
         page = ctx.new_page()
+        page.set_default_navigation_timeout(120000)
         errs = []
         page.on("pageerror", lambda e: errs.append(str(e)))
         def step(name, fn):
@@ -63,7 +64,9 @@ def run(p):
                 page.click("#impPbarStats")
             page.wait_for_timeout(6000)
             page.screenshot(path=f"{OUT}3-stats-{tag}.png")
-            page.locator("#impPaneStats").screenshot(path=f"{OUT}3b-stats-pane-{tag}.png")
+            print(tag, "STATS:", page.inner_text("#impPaneStats")[-900:].replace("\n", " | "), file=log, flush=True)
+            page.evaluate("(() => { const t = [...document.querySelectorAll('#impPaneStats .st-tile')]; t[t.length - 2].scrollIntoView({ block: 'start' }); })()"); page.wait_for_timeout(600)
+            page.screenshot(path=f"{OUT}3b-stats-lower-{tag}.png")
             if tag == "phone": page.evaluate("setImpSheet(false)"); page.wait_for_timeout(600)
             page.screenshot(path=f"{OUT}4-commander-full-{tag}.png", full_page=True)
             if page.locator(".imp-cheap").count():
