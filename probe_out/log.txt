@@ -1,0 +1,13 @@
+build there after 7
+desktop The Necrobloom FINISHES: ['ノンフォイル:false', 'フォイル:true'] items 5
+desktop after non-foil: ['1 The Necrobloom'] toast: ノンフォイルにしました（選んでいた版はフォイルのみなので、版の指定を外しました）
+元に戻す dimmed 2
+desktop Sol Ring FINISHES: ['ノンフォイル:false', 'フォイル:true'] items 141
+desktop setpage FAILED TimeoutError('Page.wait_for_selector: Timeout 90000ms exceeded.\nCall log:\nwaiting for locator("#cardGrid .card-tile .tile-art") to be visible\n')
+desktop errors: []
+phone The Necrobloom FINISHES: ['ノンフォイル:false', 'フォイル:true'] items 5
+phone after non-foil: ['1 The Necrobloom'] toast: ノンフォイルにしました（選んでいた版はフォイルのみなので、版の指定を外しました）
+元に戻す dimmed 2
+phone Sol Ring FINISHES: ['ノンフォイル:false', 'フォイル:true'] items 141
+phone setpage FAILED TimeoutError('Page.wait_for_selector: Timeout 90000ms exceeded.\nCall log:\nwaiting for locator("#cardGrid .card-tile .tile-art") to be visible\n')
+phone errors: []
