@@ -45,7 +45,7 @@ with sync_playwright() as p:
         if tag == "phone":   # the owner's screenshot: dark mode, English, the precon menu open
             page.evaluate("localStorage.setItem('akuchie-theme', 'dark'); localStorage.setItem('akuchie-lang', 'en')")
             page.reload(); page.wait_for_selector("#dkGrid a.dk-card")
-            page.click("#preconBtn"); page.wait_for_selector("#preconList button", timeout=60000); page.wait_for_timeout(1500)
+            page.click("#preconBtn"); page.wait_for_selector("#preconList .pc-set, #preconList .pc-empty", timeout=60000); page.wait_for_timeout(1500)
             box = page.evaluate("(() => { const r = document.getElementById('preconMenu').getBoundingClientRect(); return [r.left, r.right, innerWidth]; })()")
             print("precon menu left/right/width:", box, file=log)
             page.screenshot(path=f"{OUT}precon-menu-phone-dark-en.png")
