@@ -1,4 +1,4 @@
-# Mock-ups (not built): two ways to make the builder's ☆ tab and the want tray one list, on the staging test site (a throwaway probe)
+# Screenshots of the one want list (the ☆ tray with deck buttons over the builder) on the staging test site (a throwaway probe)
 import json, os, time, urllib.parse, urllib.request
 from playwright.sync_api import sync_playwright
 SITE = os.environ.get("SITE", "https://staging-warujie.warujie-mtg.workers.dev/")
@@ -22,69 +22,15 @@ log = open(OUT + "log.txt", "w")
 
 
 
-MOCK_CSS = """
-.wt-row.mk { grid-template-rows: auto auto; }
-.wt-row.mk .wt-pic { grid-row: span 2; align-self: start; }
-.wt-deck { grid-column: 2 / -1; display: flex; align-items: center; justify-content: space-between; gap: 8px; font-size: 11.5px; color: var(--muted); }
-.wt-deck b { color: var(--accent); font-weight: 700; }
-.wt-deck-btns { display: flex; gap: 8px; flex: none; }
-.wt-deckbar { margin: 0; padding: 8px 16px; border-bottom: 1px solid var(--line); background: var(--surface-2); font-size: 12.5px; color: var(--text-2); }
-.wt-deckbar b { color: var(--text); }
-#impPaneWant .want-step button { width: 30px; height: 30px; font-size: 16px; }
-#impPaneWant .want-step .want-c { min-width: 34px; font-size: 13px; }
-#impPaneWant .wt-sub { padding: 0 0 8px; }
-#impPaneWant .wt-foot { margin-top: 10px; border: 1px solid var(--line); border-radius: 10px; }
-.mk-tag { position: fixed; left: 8px; bottom: 8px; z-index: 999; padding: 4px 10px; border-radius: 6px; background: #c2185b; color: #fff; font: 700 12px system-ui; pointer-events: none; }
-"""
-MOCK_JS = r"""
-(() => {
-  const st = document.createElement('style'); st.textContent = %s; document.head.appendChild(st);
-  const tag = document.createElement('div'); tag.className = 'mk-tag'; tag.textContent = %s; document.body.appendChild(tag);
-  const btn = (part, n, text) => `<button type="button" class="imp-add${part === 'side' ? ' sb' : part === 'maybe' ? ' mb' : ''}${n ? ' on' : ''}">${text}${n ? `<span class="imp-add-n">${n}</span>` : ''}</button>`;
-  // a row of the want list gets a second line: how many are in this deck, and ＋ / SB / 考慮 into it
-  window.mkDeckLines = (root) => {
-    const counts = impCounts(); if (!counts) return;
-    const byKey = new Map(wantData().list.map(x => [x.k, x]));
-    root.querySelectorAll('.wt-row').forEach(li => {
-      const x = byKey.get(li.dataset.wantRow); if (!x || li.classList.contains('mk')) return;
-      const nm = exportName(x.name), m = counts.main.get(nm) || 0, s = counts.side.get(nm) || 0, mb = counts.maybe.get(nm) || 0;
-      li.classList.add('mk');
-      li.insertAdjacentHTML('beforeend', `<span class="wt-deck"><span>${m + s ? `<b>${esc(t('imp.w.in', { n: m + s }))}</b>` : esc(t('imp.w.out'))}</span>`
-        + `<span class="wt-deck-btns">${btn('main', m, '＋')}${deckFmt() === 'commander' ? '' : btn('side', s, 'SB')}${btn('maybe', mb, esc(t('imp.q.maybe.short')))}</span></span>`);
-    });
-  };
-  const deckTitle = () => (document.getElementById('impName') || {}).value || '';
-  if (%s === 'B') {
-    // B: one tray everywhere; on a deck page its rows also put cards into the deck; the panel loses its ☆ tab
-    document.querySelectorAll('#impTabs [data-pane=want]').forEach(b => b.remove());
-    const orig = drawTray;
-    window.drawTray = function () {
-      orig();
-      const tray = document.getElementById('wantTray');
-      if (!impCounts()) return;
-      mkDeckLines(tray);
-      const sub = tray.querySelector('.wt-sub');
-      if (sub && !tray.querySelector('.wt-deckbar')) sub.insertAdjacentHTML('afterend', `<p class="wt-deckbar">＋ SB 考慮 で <b>${esc(deckTitle())}</b> に入れる（ウォントからは消えません）</p>`);
-    };
-  } else {
-    // A: the panel's ☆ tab becomes the whole want list (the tray's − n ＋, trash, total, export, 晴れる屋)
-    window.drawImpWant = function () {
-      const el = document.getElementById('impPaneWant');
-      if (el.hidden) return;
-      const d = wantData(), items = trayItems(d);
-      el.innerHTML = `<div class="wt-sub"><span class="wt-count"><b>${esc(tn('want.f.cards', d.total))}</b> <span class="sep">·</span> ${esc(t('want.f.kinds', { n: fmtNum(d.list.length) }))}</span></div>`
-        + `<p class="imp-q-note">${esc(t('imp.w.lead'))}</p><ul class="wt-list">${items.map(trayRowHtml).join('')}</ul>`
-        + `<div class="wt-foot">${trayTotalHtml(items)}<div class="wt-foot-btns">${trayExportHtml()}<a class="adv-btn wt-buy" href="#">${t('imp.hareruya')} ↗</a></div></div>`;
-      mkDeckLines(el);
-    };
-  }
-})();
-"""
 
-
-def mock(page, which):
-    label = {"A": "案A（イメージ）: ☆タブが全部入り", "B": "案B（イメージ）: 右のトレイ1つ"}[which]
-    page.evaluate(MOCK_JS % (json.dumps(MOCK_CSS), json.dumps(label), json.dumps(which)))
+def wait_for_build():
+    for i in range(40):
+        try:
+            req = urllib.request.Request(SITE + "?probe=" + str(time.time()), headers={"User-Agent": "warujie.jp probe"})
+            if b"wt-deckbar" in urllib.request.urlopen(req, timeout=30).read(): print("build there after", i, file=log, flush=True); return
+        except Exception as e: print("wait", repr(e)[:120], file=log, flush=True)
+        time.sleep(30)
+    print("build NOT seen", file=log, flush=True)
 
 
 def builder_ready(page):
@@ -104,29 +50,31 @@ def run(p):
         def step(name, fn):
             try: fn()
             except Exception as e: print(tag, name, "FAILED", repr(e)[:400], file=log, flush=True)
-        def a():
-            page.goto(SITE + "?view=import&d=burn1"); builder_ready(page); mock(page, "A")
+        def go():
+            page.goto(SITE + "?view=import&d=burn1"); builder_ready(page)
+            page.screenshot(path=f"{OUT}1-builder-{tag}.png")
             if tag == "phone": page.click("#impPbarWant")
-            else: page.click("#impTabs [data-pane=want]")
-            page.wait_for_selector("#impPaneWant .wt-deck", timeout=60000); page.wait_for_timeout(3500)
-            page.evaluate("drawImpWant()"); page.wait_for_timeout(800)
-            page.screenshot(path=f"{OUT}A1-tab-is-the-want-list-{tag}.png")
-            page.evaluate("document.querySelector('#impPaneWant .wt-foot') && document.querySelector('#impPaneWant .wt-foot').scrollIntoView({block:'end'})"); page.wait_for_timeout(600)
-            page.screenshot(path=f"{OUT}A2-tab-bottom-total-export-{tag}.png")
-        step("A", a)
-        def bb():
-            page.goto(SITE + "?view=import&d=burn1"); builder_ready(page); mock(page, "B")
-            page.screenshot(path=f"{OUT}B1-builder-without-want-tab-{tag}.png")
-            page.evaluate("openTray()")
-            page.wait_for_selector("#wantTray .wt-deck", timeout=60000); page.wait_for_timeout(3500)
-            page.evaluate("drawTray()"); page.wait_for_timeout(800)
-            page.screenshot(path=f"{OUT}B2-tray-adds-to-deck-{tag}.png")
-        step("B", bb)
+            else: page.click("#wantBtn")
+            page.wait_for_selector("#wantTray .wt-deck", timeout=60000); page.wait_for_timeout(4000)
+            page.screenshot(path=f"{OUT}2-tray-over-deck-{tag}.png")
+            page.locator("#wantTray .wt-row", has_text="The One Ring").locator("[data-tadd=main]").click(); page.wait_for_timeout(1200)
+            page.screenshot(path=f"{OUT}3-after-plus-one-ring-{tag}.png")
+            print(tag, "row:", page.inner_text("#wantTray .wt-row:has-text('The One Ring') .wt-deck"), file=log, flush=True)
+            page.click("#wantTray [data-tview=image]"); page.wait_for_timeout(2500)
+            page.screenshot(path=f"{OUT}4-tray-pictures-{tag}.png")
+            page.click("#wantTray [data-tview=list]"); page.wait_for_timeout(500)
+            page.keyboard.press("Escape"); page.wait_for_timeout(500)
+            page.goto(SITE + "?view=decks"); page.wait_for_selector("#dkGrid .dk-want", timeout=90000); page.wait_for_timeout(2000)
+            page.click("#dkGrid .dk-want"); page.wait_for_selector("#wantTray .wt-row", timeout=60000); page.wait_for_timeout(2500)
+            print(tag, "deck buttons on my decks:", page.locator("#wantTray [data-tadd]").count(), file=log, flush=True)
+            page.screenshot(path=f"{OUT}5-tray-on-my-decks-{tag}.png")
+        step("go", go)
         print(tag, "errors:", errs, file=log, flush=True)
         ctx.close()
     b.close()
 
 
 if __name__ == "__main__":
+    wait_for_build()
     with sync_playwright() as p:
         run(p)
