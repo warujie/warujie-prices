@@ -27,7 +27,7 @@ def wait_for_build():
     for i in range(40):
         try:
             req = urllib.request.Request(SITE + "?probe=" + str(time.time()), headers={"User-Agent": "warujie.jp probe"})
-            if b"wt-deckbar" in urllib.request.urlopen(req, timeout=30).read(): print("build there after", i, file=log, flush=True); return
+            if b"minmax(0, 1fr); gap: 6px; }" in urllib.request.urlopen(req, timeout=30).read(): print("build there after", i, file=log, flush=True); return
         except Exception as e: print("wait", repr(e)[:120], file=log, flush=True)
         time.sleep(30)
     print("build NOT seen", file=log, flush=True)
