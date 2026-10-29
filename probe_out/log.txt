@@ -1,0 +1,15 @@
+build there after 4
+desktop row: このデッキに1枚
+＋
+1
+SB
+考慮
+desktop deck buttons on my decks: 0
+desktop errors: []
+phone row: このデッキに1枚
+＋
+1
+SB
+考慮
+phone deck buttons on my decks: 0
+phone errors: []
