@@ -1,7 +1,6 @@
-# Screenshots of the deck builder's round 4 (smooth foil shine, one フォイル choice, back to non-foil, sliding pickers) on the staging test site (a throwaway probe)
+# Screenshots of the want list tray (from マイデッキ, total and export) and the Arena wildcards in 統計 on the staging test site (a throwaway probe)
 import json, os, time, urllib.parse, urllib.request
 from playwright.sync_api import sync_playwright
-os.environ.setdefault("ONLY", "set")
 SITE = os.environ.get("SITE", "https://staging-warujie.warujie-mtg.workers.dev/")
 OUT = os.environ.get("OUT", "probe_out/")
 DECK = ("About\nName ボロス・バーン\n\nDeck\n4 稲妻\n4 Ragavan, Nimble Pilferer\n4 Monastery Swiftspear\n4 ボロスの魔除け\n4 Lightning Helix\n"
@@ -23,11 +22,11 @@ log = open(OUT + "log.txt", "w")
 
 
 def wait_for_build():
-    # the test site has the new build once its page has the sliding pickers
+    # the test site has the new build once its page has the wildcards in 統計
     for i in range(40):
         try:
             req = urllib.request.Request(SITE + "?probe=" + str(time.time()), headers={"User-Agent": "warujie.jp probe"})
-            if b"sheet-rise-in" in urllib.request.urlopen(req, timeout=30).read(): print("build there after", i, file=log, flush=True); return
+            if b"st-wcs" in urllib.request.urlopen(req, timeout=30).read(): print("build there after", i, file=log, flush=True); return
         except Exception as e: print("wait", repr(e)[:120], file=log, flush=True)
         time.sleep(30)
     print("build NOT seen", file=log, flush=True)
@@ -52,38 +51,24 @@ def run(p):
         def step(name, fn):
             try: fn()
             except Exception as e: print(tag, name, "FAILED", repr(e)[:400], file=log, flush=True)
-        def foil():
-            page.goto(SITE + "?view=import&d=atx1"); builder_ready(page)
-            if page.locator("#importBody [data-iview=image]").count(): page.click("#importBody [data-iview=image]"); page.wait_for_timeout(4000)
-            el = page.locator("#importBody .dc-pic.foil").first
-            el.scroll_into_view_if_needed(); page.evaluate("window.scrollBy(0, -120)"); page.wait_for_timeout(2000)
-            page.screenshot(path=f"{OUT}1-foil-pictures-{tag}.png")
-            for i in range(4):
-                el.screenshot(path=f"{OUT}2-foil-frame-{i}-{tag}.png"); page.wait_for_timeout(1500)
-        if os.environ.get("ONLY") != "set": step("foil", foil)
-        def finishes():
-            for name in ("The Necrobloom", "Sol Ring"):
-                sel = f"#importBody [data-ip='main'][data-in=\"{name}\"][data-imp-act='art']"
-                page.locator(sel).first.scroll_into_view_if_needed(); page.click(sel); page.wait_for_selector("#artPicker .ap-item", timeout=60000); page.wait_for_timeout(3000)
-                slug = name.replace(' ', '-').lower()
-                page.screenshot(path=f"{OUT}3-art-picker-{slug}-{tag}.png")
-                print(tag, name, "FINISHES:", page.evaluate("[...document.querySelectorAll('#artPicker [data-ap-finish]')].map(b => b.textContent + ':' + b.getAttribute('aria-checked'))"), "items", page.locator("#artPicker .ap-item").count(), file=log, flush=True)
-                if name == "The Necrobloom":
-                    page.click("#artPicker [data-ap-finish='']"); page.wait_for_timeout(1500)
-                    page.screenshot(path=f"{OUT}3b-art-picker-{slug}-nonfoil-{tag}.png")
-                    print(tag, "after non-foil:", [l for l in page.evaluate("lists.deck").split("\n") if "Necrobloom" in l], "toast:", page.inner_text("#wantToast"), "dimmed", page.locator("#artPicker .ap-item.off").count(), file=log, flush=True)
-                page.keyboard.press("Escape"); page.wait_for_timeout(600)
-        if os.environ.get("ONLY") != "set": step("finishes", finishes)
-        def setpage():
-            page.goto(SITE + "?set=mh3"); page.wait_for_selector("#setGrid .card-tile .tile-art", timeout=90000); page.wait_for_timeout(3000)
-            page.locator("#setGrid .card-tile .tile-art").first.click(); page.wait_for_timeout(110)
-            page.screenshot(path=f"{OUT}4-set-picker-sliding-in-{tag}.png")
-            page.wait_for_selector("#artPicker .ap-item", timeout=60000); page.wait_for_timeout(2500)
-            page.screenshot(path=f"{OUT}4b-set-picker-open-{tag}.png")
-            print(tag, "SET fin-tags:", page.locator("#artPicker .fin-tag").count(), "switch:", page.locator("#artPicker .ap-finish").count(), file=log, flush=True)
-            page.keyboard.press("Escape"); page.wait_for_timeout(110)
-            page.screenshot(path=f"{OUT}4c-set-picker-sliding-out-{tag}.png")
-        step("setpage", setpage)
+        def want():
+            page.goto(SITE + "?view=decks"); page.wait_for_selector("#dkGrid .dk-want", timeout=90000); page.wait_for_timeout(2500)
+            page.click("#dkGrid .dk-want"); page.wait_for_selector("#wantTray .wt-row", timeout=60000); page.wait_for_timeout(4000)
+            page.screenshot(path=f"{OUT}1-want-box-opens-tray-{tag}.png")
+            print(tag, "URL after want box:", page.url, "total:", page.inner_text("#wantTray .wt-total") if page.locator("#wantTray .wt-total").count() else None, file=log, flush=True)
+            page.click("#trayExport summary"); page.wait_for_timeout(500)
+            page.screenshot(path=f"{OUT}2-tray-export-menu-{tag}.png")
+            page.keyboard.press("Escape"); page.wait_for_timeout(400)
+        step("want", want)
+        def stats():
+            page.goto(SITE + "?view=import&d=burn1"); builder_ready(page)
+            if tag == "phone": page.click("#impPbarStats")
+            else: page.click("#impTabs [data-pane=stats]")
+            page.wait_for_selector("#impPaneStats .st-wcs", timeout=60000); page.wait_for_timeout(800)
+            page.locator("#impPaneStats .st-wcs").scroll_into_view_if_needed(); page.wait_for_timeout(500)
+            page.screenshot(path=f"{OUT}3-stats-wildcards-{tag}.png")
+            print(tag, "WC:", page.inner_text("#impPaneStats .st-tile:has(.st-wcs)"), file=log, flush=True)
+        step("stats", stats)
         print(tag, "errors:", errs, file=log, flush=True)
         ctx.close()
     b.close()
