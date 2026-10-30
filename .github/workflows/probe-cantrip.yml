@@ -1,0 +1,23 @@
+name: Probe CANTRIP
+on: push
+permissions: { contents: write }
+jobs:
+  probe:
+    if: github.ref == 'refs/heads/probe-cantrip'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          mkdir -p probe_out; cd probe_out
+          UA="warujie.jp tournament calendar (https://warujie.jp)"
+          ( curl -sS -A "$UA" -o page.html https://cantripmtg.com/pages/hachiojistore
+            grep -o '<img[^>]*src="[^"]*"' page.html > imgs.txt
+            pic=$(grep -o 'src="[^"]*Google__page[^"]*"' page.html | head -1 | sed 's/src="//;s/"$//;s/&amp;/\&/g'); case "$pic" in //*) pic="https:$pic";; esac
+            echo "pic=$pic"; sleep 4; curl -sS -A "$UA" -o cal.jpg "$pic"
+            sleep 4; curl -sS -A "$UA" -o cantrip_robots.txt https://cantripmtg.com/robots.txt
+            sleep 4; curl -sS -A "$UA" -o twipla_robots.txt https://twipla.jp/robots.txt
+            sleep 4; curl -sS -A "$UA" -o twipla.html https://twipla.jp/users/MTG_CANTRIP
+            ls -la ) > log.txt 2>&1 || true
+          cat log.txt
+          cd ..; git config user.name probe; git config user.email probe@users.noreply.github.com
+          git add probe_out && git commit -m "probe result [skip ci]" && git push
