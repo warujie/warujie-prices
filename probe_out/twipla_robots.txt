@@ -1,0 +1,72 @@
+User-agent: Mediapartners-Google
+Disallow:
+Disallow: /accounts/twitter_callback
+
+User-agent: AdsBot-Google
+Disallow:
+Disallow: /accounts/twitter_callback
+
+User-Agent: *
+Disallow: /events/printlist/
+Disallow: /accounts/
+Disallow: /accounts/twitter_callback
+Disallow: /events/all/users
+Disallow: /events/*?comment
+Disallow: /events/search/
+
+User-agent: Twitterbot
+Disallow:
+Disallow: /accounts/twitter_callback
+Allow: /users/
+
+User-agent: Ezooms
+Disallow: /
+
+User-agent: Verity/1.1 
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: GPTBot
+Disallow: /
+User-agent: ChatGPT-User
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: ClaudeBot
+Disallow: /
+
+User-agent: Google-Extended
+Disallow: /
+
+User-agent: Applebot-Extended
+Disallow: /
+
+User-agent: DataForSeoBot
+Disallow: /
+
+User-agent: Bingbot
+Disallow: /
+User-agent: BingPreview
+Disallow: /
+
+User-agent: TikTokSpider
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: Slurp
+Crawl-delay: 20
+
+User-agent: proximic
+Crawl-delay: 20
+
+User-agent: ias_crawler
+Crawl-delay: 20
+
+User-agent: CriteoBot
+Crawl-delay: 20

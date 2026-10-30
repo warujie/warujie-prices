@@ -1,0 +1,11 @@
+pic=https://cdn.shopify.com/s/files/1/0613/9595/9990/files/2026_-_Google__page-0001_4_e77d9e49-5770-4bc8-9ecd-fc00b9007cf3.jpg?v=1790798843
+total 1036
+drwxr-xr-x 2 runner runner   4096 Oct 30 08:35 .
+drwxr-xr-x 7 runner runner   4096 Oct 30 08:35 ..
+-rw-r--r-- 1 runner runner 877068 Oct 30 08:35 cal.jpg
+-rw-r--r-- 1 runner runner   3688 Oct 30 08:35 cantrip_robots.txt
+-rw-r--r-- 1 runner runner   1299 Oct 30 08:35 imgs.txt
+-rw-r--r-- 1 runner runner    140 Oct 30 08:35 log.txt
+-rw-r--r-- 1 runner runner 139482 Oct 30 08:35 page.html
+-rw-r--r-- 1 runner runner   9976 Oct 30 08:35 twipla.html
+-rw-r--r-- 1 runner runner   1080 Oct 30 08:35 twipla_robots.txt

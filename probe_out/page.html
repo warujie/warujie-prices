@@ -1,0 +1,1929 @@
+<!doctype html>
+<html class="js" lang="ja">
+  <head><script data-source-attribution="shopify.exit_interstitial">(()=>{var s=Function.prototype.bind.bind(Function.prototype.call),yt=(c,r)=>{for(let d=c;d;d=Object.getPrototypeOf(d)){let g=Object.getOwnPropertyDescriptor(d,r);if(g)return g}throw new TypeError(`${r} is not defined`)},u=(c,r)=>s(yt(c,r).get),B=(c,r)=>s(yt(c,r).set);var Et=s(String.prototype.endsWith),xe=s(String.prototype.slice),v=s(RegExp.prototype.exec),Pe=/^_(self|top|parent)$/i,Le=/(^|\s)noreferrer(\s|$)/i,mt=/^(no-referrer(-when-downgrade)?|same-origin|(strict-)?origin(-when-cross-origin)?|unsafe-url)$/i,Oe=/^(never|default|always|origin-when-crossorigin)$/i,wt=/^(no-referrer|same-origin|never)$/i,ht=c=>Et(c,".")?xe(c,0,-1):c,bt=c=>{let r=ht(c),d=`.${r}`;return g=>{let m=ht(g);return m===r||Et(m,d)}},_t=(c,r,d)=>c!==void 0&&(c.protocol==="https:"||c.protocol==="http:")&&c.origin!==r&&!d(c.hostname),kt=(c,r,d)=>c!==null&&v(Le,c)!==null?!0:r!==null&&v(mt,r)!==null?v(wt,r)!==null:d,vt=(c,r)=>v(mt,c)!==null||v(Oe,c)!==null?v(wt,c)!==null:r,A=(c,{metaKey:r,ctrlKey:d,shiftKey:g,button:m})=>c&&v(Pe,c)===null?c:r||d||g||m===1?"_blank":"";var Ae="http://www.w3.org/2000/svg",Te="http://www.w3.org/1999/xlink",G=["rel","referrerpolicy","download","ping","hreflang","type"];function Nt(c){let r=window;if(r.top!==r)return;let d=document,g=r.navigation,m=location.origin,N=URL,q=u(N.prototype,"href"),St=u(N.prototype,"origin"),Rt=u(N.prototype,"protocol"),xt=u(N.prototype,"hostname"),Y=s(Event.prototype.preventDefault),Pt=s(Event.prototype.stopPropagation),j=s(Event.prototype.stopImmediatePropagation),V=s(Event.prototype.composedPath),Lt=u(Event.prototype,"type"),Ot=u(Event.prototype,"cancelable"),X=u(Event.prototype,"defaultPrevented"),At=u(Event.prototype,"bubbles"),Tt=u(Event.prototype,"currentTarget"),It=u(Event.prototype,"eventPhase"),{CAPTURING_PHASE:Wt}=Event,z=u(Event.prototype,"cancelBubble"),Mt=B(Event.prototype,"cancelBubble"),Ct=u(MouseEvent.prototype,"button"),Dt=u(MouseEvent.prototype,"metaKey"),Ft=u(MouseEvent.prototype,"ctrlKey"),Ht=u(MouseEvent.prototype,"shiftKey"),$t=g&&u(NavigateEvent.prototype,"destination"),Kt=g&&u(NavigationDestination.prototype,"url"),J=g&&u(NavigateEvent.prototype,"navigationType"),Ut=g&&u(NavigateEvent.prototype,"formData"),Q=g&&"sourceElement"in NavigateEvent.prototype?u(NavigateEvent.prototype,"sourceElement"):void 0,w=s(Element.prototype.getAttribute),Bt=s(Element.prototype.getAttributeNS),T=s(Element.prototype.setAttribute),Gt=u(Element.prototype,"localName"),qt=u(Element.prototype,"namespaceURI"),Yt=s(Document.prototype.querySelector),jt=s(Document.prototype.querySelectorAll),Vt=u(NodeList.prototype,"length"),Xt=s(NodeList.prototype.item),I=u(Node.prototype,"baseURI"),zt=s(Document.prototype.createElement),Jt=s(HTMLElement.prototype.click),Qt=s(r.open),Zt=s(location.assign),te=s(location.replace),ee=encodeURIComponent,ne=s(String.prototype.startsWith),Z=s(r.setTimeout),oe=s(r.addEventListener),re=s(r.removeEventListener),tt=s(EventTarget.prototype.addEventListener),et=s(EventTarget.prototype.removeEventListener),nt=Object.defineProperties,ot=t=>{let e=[],n=[HTMLElement.prototype,SVGElement.prototype,Document.prototype,r];for(let o=0;o<n.length;o+=1)try{e[e.length]={get:u(n[o],t),set:B(n[o],t)}}catch{}return e},se={click:ot("onclick"),auxclick:ot("onauxclick")},rt=WeakMap,ce=WeakSet,st=s(WeakMap.prototype.get),ie=s(WeakMap.prototype.set),ae=s(WeakMap.prototype.delete),le=s(WeakSet.prototype.add),ue=s(WeakSet.prototype.has),pe=bt(c.site),ct=q(new N(c.exitPath,m)),fe=`${ct}?`,P=(t,e)=>{try{let n=new N(t,e);return{href:q(n),origin:St(n),protocol:Rt(n),hostname:xt(n)}}catch{return}},de=(t,e,n)=>{let o=n?"&noreferrer=1":"";return`${ct}?q=${ee(t.href)}&trigger=${e}${o}`},it=()=>{let t=jt(d,'meta[name="referrer" i][content]'),e=!1;for(let n=0;n<Vt(t);n+=1)e=vt(w(Xt(t,n),"content"),e);return e},at=(t,e,{target:n,noReferrer:o,replaces:a})=>{let f=de(t,e,o);if(n){Qt(r,f,n,"noopener");return}(a?te:Zt)(location,f)},W=t=>_t(t,m,pe),L=0,M,C=!1,ge=t=>{if(L>0){M=t;return}t()},ye=t=>{if(L-=1,t&&(C=!0),L>0)return;let e=C?void 0:M;M=void 0,C=!1,e&&e()},he=t=>t!==void 0&&ne(t.href,fe),lt=t=>{try{return Gt(t)}catch{return}},ut=t=>kt(w(t,"rel"),w(t,"referrerpolicy"),it()),Ee=t=>{let e=Q?Q(t):null,n=e===null?void 0:lt(e);return n==="a"||n==="area"?ut(e):it()},me=t=>{let e=P(Kt($t(t)));if(he(e)){j(t);return}if(!Ot(t)||J(t)==="traverse"||!W(e)||Ut(t)!==null)return;Y(t);let n={target:"",noReferrer:Ee(t),replaces:J(t)==="replace"};ge(()=>at(e,"navigate",n))},R=t=>{let e=w(t,"href");return e===null&&qt(t)===Ae?Bt(t,Te,"href"):e},we=t=>{let e=V(t);for(let n=0;n<e.length;n+=1){let o=e[n],a=lt(o);if(a==="a"||a==="area"){let f=R(o);if(f!==null)return{node:o,href:f}}}},D=t=>{let e=w(t,"target");if(e!==null)return e;let n=Yt(d,"base[target]");return n?w(n,"target"):""},be=t=>{try{return{metaKey:Dt(t),ctrlKey:Ft(t),shiftKey:Ht(t),button:Ct(t)}}catch{return}},pt=new ce,_e=t=>{let e=!1,n=()=>{e=!0},o=()=>e||ue(pt,t);return nt(t,{__proto__:null,preventDefault:{__proto__:null,configurable:!0,value:n},defaultPrevented:{__proto__:null,configurable:!0,get:o},returnValue:{__proto__:null,configurable:!0,get:()=>!o(),set:a=>{a||n()}}}),o},ke={click:new rt,auxclick:new rt},ve=(t,e)=>{let n=se[t],o=ke[t],a=[],f=p=>{for(let l=0;l<a.length;l+=1)if(a[l]===p)return!0;return!1},b=(p,l,E)=>{let y=s(E);function O(k){let x=y(this,k);return x===!1&&typeof k=="object"&&k!==null&&le(pt,k),x}return{target:p,accessor:l,handler:E,wrapper:O,inFlight:0}},_=()=>{for(let p=0;p<e.length;p+=1)for(let l=0;l<n.length;l+=1){let E;try{E=n[l].get(e[p])}catch{continue}if(typeof E=="function"){let y=st(o,e[p]);(!y||y.wrapper!==E)&&(y=b(e[p],n[l],E),n[l].set(e[p],y.wrapper),ie(o,e[p],y)),f(y)||(y.inFlight+=1,a[a.length]=y)}break}};return _(),{wrap:_,unwrap:()=>{for(let p=0;p<a.length;p+=1){let l=a[p];l.inFlight-=1,!(l.inFlight>0)&&(st(o,l.target)===l&&ae(o,l.target),l.accessor.get(l.target)===l.wrapper&&l.accessor.set(l.target,l.handler))}}}},ft=(t,e,n)=>{let o=R(t),a=o===null?void 0:P(o,I(d));if(!W(a))return;let f={target:A(D(t),n),noReferrer:ut(t),replaces:!1};return{inWindow:f.target==="",go:()=>at(a,e,f)}},dt=t=>{let e=R(t);if(e===null||w(t,"download")===null)return!1;let n=P(e,I(d));return n!==void 0&&(n.origin===m||n.protocol==="blob:"||n.protocol==="data:")},Ne=(t,e)=>R(t)!==null&&!dt(t)&&A(D(t),e)==="",Se=(t,e)=>{let n=R(t);if(n===null)return!1;let o=zt(d,"a"),a=A(D(t),e);T(o,"href",n),T(o,"target",a||"_self");for(let f=0;f<G.length;f+=1){let b=w(t,G[f]);b!==null&&T(o,G[f],b)}return Jt(o),a===""&&!dt(t)},Re=(t,e,n,o)=>{L+=1;let a=V(t),f=a.length-1,b=0,_=!1,F=!1,p=i=>{F||(F=!0,ye(i))},l=i=>{if(_)return;_=!0;let S=X(t),h=S?void 0:ft(n,e,o),U;!S&&(h||i)&&(Y(t),U=_e(t)),Z(r,()=>{if(!U){p(!X(t)&&Ne(n,o));return}if(U()){p(!1);return}if(i&&(h=ft(n,e,o),!h)){p(Se(n,o));return}h.go(),p(h.inWindow)},0)},E=(i,S)=>{for(let h=0;h<a.length;h+=1)if(a[h]===i)return S===Wt?f-h:a.length+h;return-1},y=()=>{E(Tt(t),It(t))<=b&&l(!0)},O=i=>{i===t&&l(!1)},k=ve(e,a),x=i=>S=>{if(S===t){if(b=i,z(t)){l(!1);return}k.wrap()}},H=[],$=[],K=At(t);if(K){for(let i=0;i<f;i+=1)H[i]=x(f-i),$[i]=x(a.length+i),tt(a[i],e,H[i],!0),tt(a[i],e,$[i],!1);oe(r,e,O,!1)}if(Z(r,()=>{if(_||p(!1),_=!0,k.unwrap(),!!K){for(let i=0;i<f;i+=1)et(a[i],e,H[i],!0),et(a[i],e,$[i],!1);re(r,e,O,!1)}},0),!K){l(!0);return}nt(t,{__proto__:null,stopPropagation:{__proto__:null,configurable:!0,value:()=>{y(),Pt(t)}},stopImmediatePropagation:{__proto__:null,configurable:!0,value:()=>{l(!0),j(t)}},cancelBubble:{__proto__:null,configurable:!0,get:()=>z(t),set:i=>{i&&y(),Mt(t,i)}}})},gt=t=>{let e=Lt(t),n=be(t);if(!n||e==="auxclick"&&n.button!==1)return;let o=we(t);!o||!W(P(o.href,I(d)))||Re(t,e,o.node,n)};g?.addEventListener("navigate",me,!0),r.addEventListener("click",gt,!0),r.addEventListener("auxclick",gt,!0)}Nt({"site":"cantripmtg.com","exitPath":"\/url"});})();
+//# sourceURL=exit-interstitial.js
+</script>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="theme-color" content="">
+    <link rel="canonical" href="https://cantripmtg.com/pages/hachiojistore"><link rel="icon" type="image/png" href="//cantripmtg.com/cdn/shop/files/51e6bfc1a902510f369878d687d4af54.png?crop=center&height=32&v=1675280679&width=32"><link rel="preconnect" href="https://fonts.shopifycdn.com" crossorigin><link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/luminous-lightbox@2.4.0/dist/luminous-basic.min.css">
+    <link href="//cantripmtg.com/cdn/shop/t/34/assets/swiper-bundle.min.css?v=133104967036440478991791442834" rel="stylesheet" type="text/css" media="all" />
+    <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js" defer="defer"></script>
+
+    <title>
+      TCG専門店CANTRIP八王子店　大会情報・アクセス
+ &ndash; TCG専門店 CANTRIP</title>
+
+    
+      <meta name="description" content="大会予約はこちら   店舗情報 営業時間 平日：15:00~23:00 土曜日：13:00~23:00 日曜日：13:00~21:00   所在地 東京都八王子市三崎町4-11トーネンビル4F JR中央線八王子駅北口　徒歩3分  ">
+    
+
+    
+
+<meta property="og:site_name" content="TCG専門店 CANTRIP">
+<meta property="og:url" content="https://cantripmtg.com/pages/hachiojistore">
+<meta property="og:title" content="TCG専門店CANTRIP八王子店　大会情報・アクセス">
+<meta property="og:type" content="website">
+<meta property="og:description" content="大会予約はこちら   店舗情報 営業時間 平日：15:00~23:00 土曜日：13:00~23:00 日曜日：13:00~21:00   所在地 東京都八王子市三崎町4-11トーネンビル4F JR中央線八王子駅北口　徒歩3分  "><meta property="og:image" content="http://cantripmtg.com/cdn/shop/files/CANTRIP_SNS.png?v=1699438459">
+  <meta property="og:image:secure_url" content="https://cantripmtg.com/cdn/shop/files/CANTRIP_SNS.png?v=1699438459">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="628"><meta name="twitter:site" content="@MTG_CANTRIP?s=20&t=XwiA9McmPB4g4FPEiKXOxw"><meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="TCG専門店CANTRIP八王子店　大会情報・アクセス">
+<meta name="twitter:description" content="大会予約はこちら   店舗情報 営業時間 平日：15:00~23:00 土曜日：13:00~23:00 日曜日：13:00~21:00   所在地 東京都八王子市三崎町4-11トーネンビル4F JR中央線八王子駅北口　徒歩3分  ">
+
+
+    <script src="//cantripmtg.com/cdn/shop/t/34/assets/constants.js?v=132983761750457495441791442834" defer="defer"></script>
+    <script src="//cantripmtg.com/cdn/shop/t/34/assets/pubsub.js?v=158357773527763999511791442834" defer="defer"></script>
+    <script src="//cantripmtg.com/cdn/shop/t/34/assets/global.js?v=88558128918567037191791442834" defer="defer"></script>
+    <script src="//cantripmtg.com/cdn/shop/t/34/assets/details-disclosure.js?v=13653116266235556501791442834" defer="defer"></script>
+    <script src="//cantripmtg.com/cdn/shop/t/34/assets/details-modal.js?v=25581673532751508451791442834" defer="defer"></script>
+    <script src="//cantripmtg.com/cdn/shop/t/34/assets/search-form.js?v=133129549252120666541791442834" defer="defer"></script><script src="//cantripmtg.com/cdn/shop/t/34/assets/animations.js?v=88693664871331136111791442834" defer="defer"></script><script>window.performance && window.performance.mark && window.performance.mark('shopify.content_for_header.start');</script><meta name="google-site-verification" content="FMdF-wgcqVGjiFABHhF_Tm_euD53utQQSKekdotfs_I">
+<meta name="google-site-verification" content="4pNcKLDxQK3GTIwS82s8wp55CyYfjMGXW0QK6KrXuzk">
+<meta id="shopify-digital-wallet" name="shopify-digital-wallet" content="/61395959990/digital_wallets/dialog">
+<meta id="in-context-paypal-metadata" data-shop-id="61395959990" data-venmo-supported="false" data-environment="production" data-locale="ja_JP" data-paypal-v4="true" data-currency="JPY">
+<link rel="ucp" href="/.well-known/ucp" version="2026-08-25"><script async="async" src="/checkouts/internal/preloads.js?locale=ja-JP"></script>
+<script id="apple-pay-shop-capabilities" type="application/json">{"shopId":61395959990,"countryCode":"JP","currencyCode":"JPY","merchantCapabilities":["supports3DS"],"merchantId":"gid:\/\/shopify\/Shop\/61395959990","merchantName":"TCG専門店 CANTRIP","requiredBillingContactFields":["postalAddress","email","phone"],"requiredShippingContactFields":["postalAddress","email","phone"],"shippingType":"shipping","supportedNetworks":["visa","masterCard","jcb","discover"],"total":{"type":"pending","label":"TCG専門店 CANTRIP","amount":"1.00"},"shopifyPaymentsEnabled":true,"supportsSubscriptions":true}</script>
+<script id="shopify-features" type="application/json">{"accessToken":"18a98ccecef28c7c4b47d8bd7e464e08","betas":["rich-media-storefront-analytics"],"domain":"cantripmtg.com","predictiveSearch":false,"shopId":61395959990,"locale":"ja"}</script>
+<script>var Shopify = Shopify || {};
+Shopify.shop = "mtg-tomonyan.myshopify.com";
+Shopify.locale = "ja";
+Shopify.currency = {"active":"JPY","rate":"1.0"};
+Shopify.country = "JP";
+Shopify.theme = {"name":"販売_共通改修_作業用_20261008","id":188753936566,"schema_name":"Dawn","schema_version":"15.0.2","theme_store_id":887,"role":"main"};
+Shopify.theme.handle = "null";
+Shopify.theme.style = {"id":null,"handle":null};
+Shopify.cdnHost = "cantripmtg.com/cdn";
+Shopify.routes = Shopify.routes || {};
+Shopify.routes.root = "/";
+Shopify.shopJsCdnBaseUrl = "https://cdn.shopify.com/shopifycloud/shop-js";
+Shopify.SignInWithShop = Shopify.SignInWithShop || {};
+Shopify.SignInWithShop.User = Shopify.SignInWithShop.User || {};
+Shopify.SignInWithShop.User.recognized = false;</script>
+<script type="module">!function(o){(o.Shopify=o.Shopify||{}).modules=!0}(window);</script>
+<script>!function(o){function n(){var o=[];function n(){o.push(Array.prototype.slice.apply(arguments))}return n.q=o,n}var t=o.Shopify=o.Shopify||{};t.loadFeatures=n(),t.autoloadFeatures=n()}(window);</script>
+<script>
+  window.Shopify = window.Shopify || {};
+  window.Shopify.SignInWithShop = window.Shopify.SignInWithShop || {};
+  window.Shopify.SignInWithShop.assetMetrics = { sampleRate: 0.25 };
+  window.Shopify.SignInWithShop.eligible = true;
+</script>
+<script id="shop-js-analytics" type="application/json">{"pageType":"page"}</script>
+<script defer="defer" async type="module" src="https://cdn.shopify.com/shopifycloud/shop-js/modules/v2/loader.init-shop-cart-sync.ja.esm.js"></script>
+<script type="module">
+  await import("https://cdn.shopify.com/shopifycloud/shop-js/modules/v2/loader.init-shop-cart-sync.ja.esm.js");
+
+  window.Shopify.SignInWithShop?.initShopCartSync?.({"fedCMEnabled":true,"windoidEnabled":true,"backendHost":"Y2FudHJpcG10Zy5jb20="});
+
+</script>
+<script>
+  window.Shopify = window.Shopify || {};
+  if (!window.Shopify.featureAssets) window.Shopify.featureAssets = {};
+  window.Shopify.featureAssets['shop-js'] = {"avatar":["modules/v2/loader.avatar.ja.esm.js"],"checkout-modal":["modules/v2/loader.checkout-modal.ja.esm.js"],"init-customer-accounts-sign-up":["modules/v2/loader.init-customer-accounts-sign-up.ja.esm.js"],"init-customer-accounts":["modules/v2/loader.init-customer-accounts.ja.esm.js"],"init-fed-cm":["modules/v2/loader.init-fed-cm.ja.esm.js"],"init-shop-cart-sync":["modules/v2/loader.init-shop-cart-sync.ja.esm.js"],"init-shop-email-lookup-coordinator":["modules/v2/loader.init-shop-email-lookup-coordinator.ja.esm.js"],"init-shop-for-new-customer-accounts":["modules/v2/loader.init-shop-for-new-customer-accounts.ja.esm.js"],"init-shop-user-recognition":["modules/v2/loader.init-shop-user-recognition.ja.esm.js"],"init-windoid":["modules/v2/loader.init-windoid.ja.esm.js"],"lead-capture":["modules/v2/loader.lead-capture.ja.esm.js"],"listener":["modules/v2/loader.listener.ja.esm.js"],"pay-button":["modules/v2/loader.pay-button.ja.esm.js"],"payment-terms":["modules/v2/loader.payment-terms.ja.esm.js"],"shop-button":["modules/v2/loader.shop-button.ja.esm.js"],"shop-cart-sync":["modules/v2/loader.shop-cart-sync.ja.esm.js"],"shop-cash-offers":["modules/v2/loader.shop-cash-offers.ja.esm.js"],"shop-follow-button":["modules/v2/loader.shop-follow-button.ja.esm.js"],"shop-login-button":["modules/v2/loader.shop-login-button.ja.esm.js"],"shop-login":["modules/v2/loader.shop-login.ja.esm.js"],"shop-toast-manager":["modules/v2/loader.shop-toast-manager.ja.esm.js"],"shop-user-recognition":["modules/v2/loader.shop-user-recognition.ja.esm.js"]};
+</script>
+<script id="__st">var __st={"a":61395959990,"offset":32400,"reqid":"ca3376cc-8de9-4620-8544-7e7698445774-1793349304","pageurl":"cantripmtg.com\/pages\/hachiojistore","s":"pages-94236573878","u":"76db6f72c2e6","p":"page","rtyp":"page","rid":94236573878};</script>
+<script>window.ShopifyPaypalV4VisibilityTracking = true;</script>
+<script id="captcha-bootstrap">!function(){'use strict';const t='contact',e='account',n='new_comment',o=[[t,t],['blogs',n],['comments',n],[t,'customer']],c=[[e,'customer_login'],[e,'guest_login'],[e,'recover_customer_password'],[e,'create_customer']],r=t=>t.map((([t,e])=>`form[action*='/${t}']:not([data-nocaptcha='true']) input[name='form_type'][value='${e}']`)).join(','),a=t=>()=>t?[...document.querySelectorAll(t)].map((t=>t.form)):[];function s(){const t=[...o],e=r(t);return a(e)}const i='password',u='form_key',d=['recaptcha-v3-token','g-recaptcha-response','h-captcha-response',i],f=()=>{try{return window.sessionStorage}catch{return}},m='__shopify_v',_=t=>t.elements[u];function p(t,e,n=!1){try{const o=window.sessionStorage,c=JSON.parse(o.getItem(e)),{data:r}=function(t){const{data:e,action:n}=t;return t[m]||n?{data:e,action:n}:{data:t,action:n}}(c);for(const[e,n]of Object.entries(r))t.elements[e]&&(t.elements[e].value=n);n&&o.removeItem(e)}catch(o){console.error('form repopulation failed',{error:o})}}const l='form_type',E='cptcha';function T(t){t.dataset[E]=!0}const w=window,h=w.document,L='Shopify',v='ce_forms',y='captcha';let A=!1;((t,e)=>{const n=(g='f06e6c50-85a8-45c8-87d0-21a2b65856fe',I='https://cdn.shopify.com/shopifycloud/storefront-forms-hcaptcha/ce_storefront_forms_captcha_hcaptcha.v1.5.3.iife.js',D={infoText:'hCaptchaによる保護',privacyText:'プライバシー',termsText:'利用規約'},(t,e,n)=>{const o=w[L][v],c=o.bindForm;if(c)return c(t,g,e,D).then(n);var r;o.q.push([[t,g,e,D],n]),r=I,A||(h.body.append(Object.assign(h.createElement('script'),{id:'captcha-provider',async:!0,src:r})),A=!0)});var g,I,D;w[L]=w[L]||{},w[L][v]=w[L][v]||{},w[L][v].q=[],w[L][y]=w[L][y]||{},w[L][y].protect=function(t,e){n(t,void 0,e),T(t)},Object.freeze(w[L][y]),function(t,e,n,w,h,L){const[v,y,A,g]=function(t,e,n){const i=e?o:[],u=t?c:[],d=[...i,...u],f=r(d),m=r(i),_=r(d.filter((([t,e])=>n.includes(e))));return[a(f),a(m),a(_),s()]}(w,h,L),I=t=>{const e=t.target;return e instanceof HTMLFormElement?e:e&&e.form},D=t=>v().includes(t);t.addEventListener('submit',(t=>{const e=I(t);if(!e)return;const n=D(e)&&!e.dataset.hcaptchaBound&&!e.dataset.recaptchaBound,o=_(e),c=g().includes(e)&&(!o||!o.value);(n||c)&&t.preventDefault(),c&&!n&&(function(t){try{if(!f())return;!function(t){const e=f();if(!e)return;const n=_(t);if(!n)return;const o=n.value;o&&e.removeItem(o)}(t);const e=Array.from(Array(32),(()=>Math.random().toString(36)[2])).join('');!function(t,e){_(t)||t.append(Object.assign(document.createElement('input'),{type:'hidden',name:u})),t.elements[u].value=e}(t,e),function(t,e){const n=f();if(!n)return;const o=[...t.querySelectorAll(`input[type='${i}']`)].map((({name:t})=>t)),c=[...d,...o],r={};for(const[a,s]of new FormData(t).entries())c.includes(a)||(r[a]=s);n.setItem(e,JSON.stringify({[m]:1,action:t.action,data:r}))}(t,e)}catch(e){console.error('failed to persist form',e)}}(e),e.submit())}));const S=(t,e)=>{t&&!t.dataset[E]&&(n(t,e.some((e=>e===t))),T(t))};for(const o of['focusin','change'])t.addEventListener(o,(t=>{const e=I(t);D(e)&&S(e,y())}));const B=e.get('form_key'),M=e.get(l),P=B&&M;t.addEventListener('DOMContentLoaded',(()=>{const t=y();if(P)for(const e of t)e.elements[l].value===M&&p(e,B);[...new Set([...A(),...v().filter((t=>'true'===t.dataset.shopifyCaptcha))])].forEach((e=>S(e,t)))}))}(h,new URLSearchParams(w.location.search),n,t,e,['guest_login'])})(!0,!0)}();</script>
+<script integrity="sha256-FYHzja/5XSmzkjz6zHj7s4rACJGFuVoYZdumgoO2Ecs=" data-source-attribution="shopify.loadfeatures" defer="defer" src="//cantripmtg.com/cdn/shopifycloud/storefront/assets/storefront/load_feature-ed94c51f.js" crossorigin="anonymous"></script>
+<script>(function () {var userAgent = navigator.userAgent;var platform = navigator.platform;var maxTouchPoints = navigator.maxTouchPoints || 0;var isIOS = /iPad|iPhone|iPod/.test(platform) || (platform === 'MacIntel' && maxTouchPoints > 1);var isMacSafari = platform.indexOf('Mac') === 0 && /Safari/.test(userAgent) && !/Chrome|Chromium|CriOS|FxiOS|Edg|OPR|Android/.test(userAgent);var isAppleSafari = isIOS || isMacSafari;if (isAppleSafari) {fetch('/sf_private_access_tokens' + location.search).catch(function () {});}function browserMajorVersion(pattern) {var match = userAgent.match(pattern);return match ? parseInt(match[1], 10) : null;}function shouldLoadAutosizesPolyfill() {if (!window.PerformanceObserver?.supportedEntryTypes?.includes('paint')) {return false;}var chromeVersion = browserMajorVersion(/Chrome\/(\d+)/);if (chromeVersion !== null) {return chromeVersion < 126;}var firefoxVersion = browserMajorVersion(/Firefox\/(\d+)/);if (firefoxVersion !== null) {return firefoxVersion < 150;}var safariVersion = isAppleSafari ? browserMajorVersion(/Version\/(\d+).*Safari\//) : null;if (safariVersion !== null) {return safariVersion < 27;}return true;}if (shouldLoadAutosizesPolyfill()) {var autosizesScript = document.createElement('script');autosizesScript.async = true;autosizesScript.crossOrigin = 'anonymous';autosizesScript.src = "//cantripmtg.com/cdn/shopifycloud/storefront/assets/storefront/autosizes-84416378.js";(document.head || document.documentElement).appendChild(autosizesScript);}window.ShopifyAnalytics = window.ShopifyAnalytics || {};window.ShopifyAnalytics.performance = window.ShopifyAnalytics.performance || {};(function () {var LONG_FRAME_THRESHOLD = 50;var longAnimationFrames = [];var activeRafId = null;function collectLongFrames() {var previousTime = null;function rafMonitor(now) {if (activeRafId === null) {return;}var delta = now - previousTime;if (delta > LONG_FRAME_THRESHOLD) {longAnimationFrames.push({startTime: previousTime,endTime: now,});}previousTime = now;activeRafId = requestAnimationFrame(rafMonitor);}previousTime = performance.now();activeRafId = requestAnimationFrame(rafMonitor);}if (!window.PerformanceObserver?.supportedEntryTypes?.includes('long-animation-frame')) {collectLongFrames();var timeoutId = setTimeout(function () {cancelAnimationFrame(activeRafId);}, 10000);window.ShopifyAnalytics.performance.getLongAnimationFrames = function (stopCollection) {if (stopCollection === undefined) {stopCollection = false;}if (stopCollection) {clearTimeout(timeoutId);cancelAnimationFrame(activeRafId);}return longAnimationFrames;};}})();})();</script><script id="shopify-origin-trials" async="async" integrity="sha256-qJbe/jEZBHtr5W/BlA2cKAz3vkXu6vJQyLjgvgCC86g=" src="//cdn.shopify.com/shopifycloud/storefront/assets/storefront/origin_trials-318ab40a.js" crossorigin="anonymous" onload="window.__shopifyOriginTrialsDone = true" onerror="window.__shopifyOriginTrialsDone = true"></script>
+<script>(()=>{var d="shopify:webmcp_adapter_loaded",n=Symbol.for("shopify.webmcp_adapter_loading");function s(c,a,{win:r=window,doc:o=document}={}){function p(){try{return r.localStorage.getItem(d)==="true"}catch{return!1}}function l(){try{r.localStorage.setItem(d,"true")}catch{}}function u(){return typeof(o.modelContext||r.navigator?.modelContext)?.registerTool=="function"}function f(){if(r[n]||!u())return;let t=o.head||o.getElementsByTagName("head")[0];if(!t)return;let e=o.createElement("script");e.type="module",e.crossOrigin="anonymous",a&&(e.integrity=a),e.src=c,e.addEventListener("load",l,{once:!0}),e.addEventListener("error",()=>{r[n]=!1},{once:!0}),t.appendChild(e),r[n]=!0}function _(t){let e=o.getElementById("shopify-origin-trials");if(!e||r.__shopifyOriginTrialsDone){t();return}e.addEventListener("load",t,{once:!0}),e.addEventListener("error",t,{once:!0})}function i(){_(()=>r.setTimeout(f,0))}function m(){o.addEventListener("DOMContentLoaded",i,{once:!0})}p()?i():m()}s("\/\/cantripmtg.com\/cdn\/shopifycloud\/storefront\/assets\/storefront\/webmcp-23c12384.js","sha256-r8Pww6V2udgtSdaVbcRtdZ4Kg+gXP7aLPZOtQSJPrbM=");})();
+</script>
+<script data-source-attribution="shopify.dynamic_checkout.dynamic.init">var Shopify=Shopify||{};Shopify.PaymentButton=Shopify.PaymentButton||{isStorefrontPortableWallets:!0,init:function(){window.Shopify.PaymentButton.init=function(){};var t=document.createElement("script");t.src="https://cantripmtg.com/cdn/shopifycloud/portable-wallets/latest/portable-wallets.ja.js",t.type="module",document.head.appendChild(t)}};
+</script>
+<script data-source-attribution="shopify.dynamic_checkout.buyer_consent">
+  function portableWalletsHideBuyerConsent(e){var t=document.getElementById("shopify-buyer-consent"),n=document.getElementById("shopify-subscription-policy-button");t&&n&&(t.classList.add("hidden"),t.setAttribute("aria-hidden","true"),n.removeEventListener("click",e))}function portableWalletsShowBuyerConsent(e){var t=document.getElementById("shopify-buyer-consent"),n=document.getElementById("shopify-subscription-policy-button");t&&n&&(t.classList.remove("hidden"),t.removeAttribute("aria-hidden"),n.addEventListener("click",e))}window.Shopify?.PaymentButton&&(window.Shopify.PaymentButton.hideBuyerConsent=portableWalletsHideBuyerConsent,window.Shopify.PaymentButton.showBuyerConsent=portableWalletsShowBuyerConsent);
+</script>
+<script data-source-attribution="shopify.dynamic_checkout.cart.bootstrap">document.addEventListener("DOMContentLoaded",(function(){function t(){return document.querySelector("shopify-accelerated-checkout-cart, shopify-accelerated-checkout")}if(t())Shopify.PaymentButton.init();else{new MutationObserver((function(e,n){t()&&(Shopify.PaymentButton.init(),n.disconnect())})).observe(document.body,{childList:!0,subtree:!0})}}));
+</script>
+<link id="shopify-accelerated-checkout-styles" rel="stylesheet" media="screen" href="https://cantripmtg.com/cdn/shopifycloud/portable-wallets/latest/accelerated-checkout-backwards-compat.css" crossorigin="anonymous">
+<style id="shopify-accelerated-checkout-cart">
+        #shopify-buyer-consent {
+  margin-top: 1em;
+  display: inline-block;
+  width: 100%;
+}
+
+#shopify-buyer-consent.hidden {
+  display: none;
+}
+
+#shopify-subscription-policy-button {
+  background: none;
+  border: none;
+  padding: 0;
+  text-decoration: underline;
+  font-size: inherit;
+  cursor: pointer;
+}
+
+#shopify-subscription-policy-button::before {
+  box-shadow: none;
+}
+
+      </style>
+<script id="sections-script" data-sections="header" defer="defer" src="//cantripmtg.com/cdn/shop/t/34/compiled_assets/scripts.js?v=184325197989695213571791442834"></script>
+<script id="shopify-cfh-end">window.performance && window.performance.mark && window.performance.mark('shopify.content_for_header.end');</script>
+
+
+    <style data-shopify>
+      @font-face {
+  font-family: "M PLUS 1";
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  src: url("//cantripmtg.com/cdn/fonts/m_plus_1/mplus1_n4.cad2f08174e6ebea7ec6b4709ac9bfdc6c234e9f.woff2") format("woff2"),
+       url("//cantripmtg.com/cdn/fonts/m_plus_1/mplus1_n4.758166fcd30f332323a69ebe95534c872722d3cd.woff") format("woff");
+}
+
+      @font-face {
+  font-family: "M PLUS 1";
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+  src: url("//cantripmtg.com/cdn/fonts/m_plus_1/mplus1_n7.d41cba0c4d40e89ddcdcdaf3f80e93020d5dde1a.woff2") format("woff2"),
+       url("//cantripmtg.com/cdn/fonts/m_plus_1/mplus1_n7.97c542408f5d240c748f12a4b8be393707ae1e55.woff") format("woff");
+}
+
+      
+      
+      @font-face {
+  font-family: "M PLUS 1";
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  src: url("//cantripmtg.com/cdn/fonts/m_plus_1/mplus1_n4.cad2f08174e6ebea7ec6b4709ac9bfdc6c234e9f.woff2") format("woff2"),
+       url("//cantripmtg.com/cdn/fonts/m_plus_1/mplus1_n4.758166fcd30f332323a69ebe95534c872722d3cd.woff") format("woff");
+}
+
+
+      
+        :root,
+        .color-scheme-1 {
+          --color-background: 255,255,255;
+        
+          --gradient-background: #ffffff;
+        
+
+        
+
+        --color-foreground: 18,18,18;
+        --color-background-contrast: 191,191,191;
+        --color-shadow: 18,18,18;
+        --color-button: 18,18,18;
+        --color-button-text: 255,255,255;
+        --color-secondary-button: 255,255,255;
+        --color-secondary-button-text: 18,18,18;
+        --color-link: 18,18,18;
+        --color-badge-foreground: 18,18,18;
+        --color-badge-background: 255,255,255;
+        --color-badge-border: 18,18,18;
+        --payment-terms-background-color: rgb(255 255 255);
+      }
+      
+        
+        .color-scheme-2 {
+          --color-background: 243,243,243;
+        
+          --gradient-background: #f3f3f3;
+        
+
+        
+
+        --color-foreground: 18,18,18;
+        --color-background-contrast: 179,179,179;
+        --color-shadow: 18,18,18;
+        --color-button: 18,18,18;
+        --color-button-text: 243,243,243;
+        --color-secondary-button: 243,243,243;
+        --color-secondary-button-text: 18,18,18;
+        --color-link: 18,18,18;
+        --color-badge-foreground: 18,18,18;
+        --color-badge-background: 243,243,243;
+        --color-badge-border: 18,18,18;
+        --payment-terms-background-color: rgb(243 243 243);
+      }
+      
+        
+        .color-scheme-3 {
+          --color-background: 36,40,51;
+        
+          --gradient-background: #242833;
+        
+
+        
+
+        --color-foreground: 255,255,255;
+        --color-background-contrast: 47,52,66;
+        --color-shadow: 18,18,18;
+        --color-button: 255,255,255;
+        --color-button-text: 0,0,0;
+        --color-secondary-button: 36,40,51;
+        --color-secondary-button-text: 255,255,255;
+        --color-link: 255,255,255;
+        --color-badge-foreground: 255,255,255;
+        --color-badge-background: 36,40,51;
+        --color-badge-border: 255,255,255;
+        --payment-terms-background-color: rgb(36 40 51);
+      }
+      
+        
+        .color-scheme-4 {
+          --color-background: 18,18,18;
+        
+          --gradient-background: #121212;
+        
+
+        
+
+        --color-foreground: 255,255,255;
+        --color-background-contrast: 146,146,146;
+        --color-shadow: 18,18,18;
+        --color-button: 255,255,255;
+        --color-button-text: 18,18,18;
+        --color-secondary-button: 18,18,18;
+        --color-secondary-button-text: 255,255,255;
+        --color-link: 255,255,255;
+        --color-badge-foreground: 255,255,255;
+        --color-badge-background: 18,18,18;
+        --color-badge-border: 255,255,255;
+        --payment-terms-background-color: rgb(18 18 18);
+      }
+      
+        
+        .color-scheme-5 {
+          --color-background: 51,79,180;
+        
+          --gradient-background: #334fb4;
+        
+
+        
+
+        --color-foreground: 255,255,255;
+        --color-background-contrast: 23,35,81;
+        --color-shadow: 18,18,18;
+        --color-button: 255,255,255;
+        --color-button-text: 51,79,180;
+        --color-secondary-button: 51,79,180;
+        --color-secondary-button-text: 255,255,255;
+        --color-link: 255,255,255;
+        --color-badge-foreground: 255,255,255;
+        --color-badge-background: 51,79,180;
+        --color-badge-border: 255,255,255;
+        --payment-terms-background-color: rgb(51 79 180);
+      }
+      
+        
+        .color-scheme-de56c6a4-8a10-4eea-b288-ef97bece5b5b {
+          --color-background: 36,40,51;
+        
+          --gradient-background: #242833;
+        
+
+        
+
+        --color-foreground: 255,255,0;
+        --color-background-contrast: 47,52,66;
+        --color-shadow: 18,18,18;
+        --color-button: 18,18,18;
+        --color-button-text: 255,230,241;
+        --color-secondary-button: 36,40,51;
+        --color-secondary-button-text: 18,18,18;
+        --color-link: 18,18,18;
+        --color-badge-foreground: 255,255,0;
+        --color-badge-background: 36,40,51;
+        --color-badge-border: 255,255,0;
+        --payment-terms-background-color: rgb(36 40 51);
+      }
+      
+
+      body, .color-scheme-1, .color-scheme-2, .color-scheme-3, .color-scheme-4, .color-scheme-5, .color-scheme-de56c6a4-8a10-4eea-b288-ef97bece5b5b {
+        color: rgba(var(--color-foreground), 0.75);
+        background-color: rgb(var(--color-background));
+      }
+
+      :root {
+        --font-body-family: "M PLUS 1", sans-serif;
+        --font-body-style: normal;
+        --font-body-weight: 400;
+        --font-body-weight-bold: 700;
+
+        --font-heading-family: "M PLUS 1", sans-serif;
+        --font-heading-style: normal;
+        --font-heading-weight: 400;
+
+        --font-body-scale: 1.2;
+        --font-heading-scale: 0.8333333333333334;
+
+        --media-padding: px;
+        --media-border-opacity: 0.05;
+        --media-border-width: 1px;
+        --media-radius: 0px;
+        --media-shadow-opacity: 0.0;
+        --media-shadow-horizontal-offset: 0px;
+        --media-shadow-vertical-offset: 4px;
+        --media-shadow-blur-radius: 5px;
+        --media-shadow-visible: 0;
+
+        --page-width: 160rem;
+        --page-width-margin: 0rem;
+
+        --product-card-image-padding: 0.0rem;
+        --product-card-corner-radius: 0.0rem;
+        --product-card-text-alignment: center;
+        --product-card-border-width: 0.0rem;
+        --product-card-border-opacity: 0.1;
+        --product-card-shadow-opacity: 0.0;
+        --product-card-shadow-visible: 0;
+        --product-card-shadow-horizontal-offset: 0.0rem;
+        --product-card-shadow-vertical-offset: 0.4rem;
+        --product-card-shadow-blur-radius: 0.5rem;
+
+        --collection-card-image-padding: 0.0rem;
+        --collection-card-corner-radius: 0.0rem;
+        --collection-card-text-alignment: left;
+        --collection-card-border-width: 0.0rem;
+        --collection-card-border-opacity: 0.0;
+        --collection-card-shadow-opacity: 0.1;
+        --collection-card-shadow-visible: 1;
+        --collection-card-shadow-horizontal-offset: 0.0rem;
+        --collection-card-shadow-vertical-offset: 0.0rem;
+        --collection-card-shadow-blur-radius: 0.0rem;
+
+        --blog-card-image-padding: 0.0rem;
+        --blog-card-corner-radius: 0.0rem;
+        --blog-card-text-alignment: left;
+        --blog-card-border-width: 0.0rem;
+        --blog-card-border-opacity: 0.0;
+        --blog-card-shadow-opacity: 0.1;
+        --blog-card-shadow-visible: 1;
+        --blog-card-shadow-horizontal-offset: 0.0rem;
+        --blog-card-shadow-vertical-offset: 0.0rem;
+        --blog-card-shadow-blur-radius: 0.0rem;
+
+        --badge-corner-radius: 4.0rem;
+
+        --popup-border-width: 1px;
+        --popup-border-opacity: 0.1;
+        --popup-corner-radius: 0px;
+        --popup-shadow-opacity: 0.0;
+        --popup-shadow-horizontal-offset: 0px;
+        --popup-shadow-vertical-offset: 4px;
+        --popup-shadow-blur-radius: 5px;
+
+        --drawer-border-width: 1px;
+        --drawer-border-opacity: 0.1;
+        --drawer-shadow-opacity: 0.0;
+        --drawer-shadow-horizontal-offset: 0px;
+        --drawer-shadow-vertical-offset: 4px;
+        --drawer-shadow-blur-radius: 5px;
+
+        --spacing-sections-desktop: 40px;
+        --spacing-sections-mobile: 28px;
+
+        --grid-desktop-vertical-spacing: 8px;
+        --grid-desktop-horizontal-spacing: 8px;
+        --grid-mobile-vertical-spacing: 4px;
+        --grid-mobile-horizontal-spacing: 4px;
+
+        --text-boxes-border-opacity: 0.1;
+        --text-boxes-border-width: 0px;
+        --text-boxes-radius: 0px;
+        --text-boxes-shadow-opacity: 0.0;
+        --text-boxes-shadow-visible: 0;
+        --text-boxes-shadow-horizontal-offset: 0px;
+        --text-boxes-shadow-vertical-offset: 4px;
+        --text-boxes-shadow-blur-radius: 5px;
+
+        --buttons-radius: 0px;
+        --buttons-radius-outset: 0px;
+        --buttons-border-width: 1px;
+        --buttons-border-opacity: 1.0;
+        --buttons-shadow-opacity: 0.0;
+        --buttons-shadow-visible: 0;
+        --buttons-shadow-horizontal-offset: 0px;
+        --buttons-shadow-vertical-offset: 4px;
+        --buttons-shadow-blur-radius: 5px;
+        --buttons-border-offset: 0px;
+
+        --inputs-radius: 0px;
+        --inputs-border-width: 1px;
+        --inputs-border-opacity: 0.55;
+        --inputs-shadow-opacity: 0.0;
+        --inputs-shadow-horizontal-offset: 0px;
+        --inputs-margin-offset: 0px;
+        --inputs-shadow-vertical-offset: 4px;
+        --inputs-shadow-blur-radius: 5px;
+        --inputs-radius-outset: 0px;
+
+        --variant-pills-radius: 40px;
+        --variant-pills-border-width: 1px;
+        --variant-pills-border-opacity: 0.55;
+        --variant-pills-shadow-opacity: 0.0;
+        --variant-pills-shadow-horizontal-offset: 0px;
+        --variant-pills-shadow-vertical-offset: 4px;
+        --variant-pills-shadow-blur-radius: 5px;
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: inherit;
+      }
+
+      html {
+        box-sizing: border-box;
+        font-size: calc(var(--font-body-scale) * 62.5%);
+        height: 100%;
+      }
+
+      body {
+        display: grid;
+        grid-template-rows: auto auto 1fr auto;
+        grid-template-columns: 100%;
+        min-height: 100%;
+        margin: 0;
+        font-size: 1.5rem;
+        letter-spacing: 0.06rem;
+        line-height: calc(1 + 0.8 / var(--font-body-scale));
+        font-family: var(--font-body-family);
+        font-style: var(--font-body-style);
+        font-weight: var(--font-body-weight);
+      }
+      body .collection-list-wrapper,
+      body .collection .collection__title,
+      body .collection__title,
+      body .page-width-desktop{
+        padding-left: 0;
+        padding-right: 0;
+      }
+      body .collection-list-wrapper h2,
+      body .collection__title .title{
+        background: #222;
+        color: #fff;
+        padding: 8px 24px;
+        border-radius: 8px;
+      }
+      body .collection-list-wrapper h2{
+        width: 100%;
+      }
+      @media screen and (min-width: 750px) {
+        body {
+          font-size: 1.6rem;
+        }
+      }
+      body .facet-checkbox--disabled {
+        color: inherit;
+        opacity: .5;
+      }
+      body .lum-lightbox{
+        z-index: 4;
+      }
+      @media (max-width: 460px) {
+        .lum-lightbox-inner img {
+          max-width: 100%;
+          max-height: 100%;
+        }
+      }
+    </style>
+
+    <link href="//cantripmtg.com/cdn/shop/t/34/assets/base.css?v=174980050956832215351791442834" rel="stylesheet" type="text/css" media="all" />
+    <link href="//cantripmtg.com/cdn/shop/t/34/assets/adjust.css?v=182146274794736568041791442834" rel="stylesheet" type="text/css" media="all" />
+    
+    <link rel="stylesheet" href="//cantripmtg.com/cdn/shop/t/34/assets/component-cart-items.css?v=127384614032664249911791442834" media="print" onload="this.media='all'">
+      <link rel="preload" as="font" href="//cantripmtg.com/cdn/fonts/m_plus_1/mplus1_n4.cad2f08174e6ebea7ec6b4709ac9bfdc6c234e9f.woff2" type="font/woff2" crossorigin>
+      
+
+      <link rel="preload" as="font" href="//cantripmtg.com/cdn/fonts/m_plus_1/mplus1_n4.cad2f08174e6ebea7ec6b4709ac9bfdc6c234e9f.woff2" type="font/woff2" crossorigin>
+      
+<link
+        rel="stylesheet"
+        href="//cantripmtg.com/cdn/shop/t/34/assets/component-predictive-search.css?v=118923337488134913561791442834"
+        media="print"
+        onload="this.media='all'"
+      ><script>
+      if (Shopify.designMode) {
+        document.documentElement.classList.add('shopify-design-mode');
+      }
+    </script>
+    <script async src="https://zen.one/analytics.js"></script>
+  <link href="//cantripmtg.com/cdn/shop/t/34/assets/cantrip-foil.css?v=22264214125858042851791442834" rel="stylesheet" type="text/css" media="all" />
+<style>:root{--cantrip-foil-opacity:0.52}</style>
+<link href="//cantripmtg.com/cdn/shop/t/34/assets/cantrip-top.css?v=8082465465092756371791525714" rel="stylesheet" type="text/css" media="all" />
+<!-- BEGIN app block: shopify://apps/pagefly-ai-page-builder/blocks/app-embed/83e179f7-59a0-4589-8c66-c0dddf959200 -->
+
+<!-- BEGIN app snippet: pagefly-cro-ab-testing-main -->
+
+
+
+
+
+
+
+<script>
+  ;(function () {
+    const url = new URL(window.location)
+    const viewParam = url.searchParams.get('view')
+    if (viewParam && viewParam.includes('variant-pf-')) {
+      url.searchParams.set('pf_v', viewParam)
+      url.searchParams.delete('view')
+      window.history.replaceState({}, '', url)
+    }
+  })()
+</script>
+
+
+
+<script type='module'>
+  
+  window.PAGEFLY_CRO = window.PAGEFLY_CRO || {}
+
+  window.PAGEFLY_CRO['data_debug'] = {
+    original_template_suffix: "cantrip-hachioji",
+    allow_ab_test: false,
+    ab_test_start_time: 0,
+    ab_test_end_time: 0,
+    today_date_time: 1793349304000,
+  }
+  window.PAGEFLY_CRO['GA4'] = { enabled: false}
+</script>
+
+<!-- END app snippet -->
+
+
+
+
+
+
+
+
+  <script src='https://cdn.shopify.com/extensions/01a18689-6320-7aa9-9c15-b1d824c6b95e/pagefly-ai-page-builder-382/assets/pagefly-helper.js' defer='defer'></script>
+
+  <script src='https://cdn.shopify.com/extensions/01a18689-6320-7aa9-9c15-b1d824c6b95e/pagefly-ai-page-builder-382/assets/pagefly-general-helper.js' defer='defer'></script>
+
+  <script src='https://cdn.shopify.com/extensions/01a18689-6320-7aa9-9c15-b1d824c6b95e/pagefly-ai-page-builder-382/assets/pagefly-snap-slider.js' defer='defer'></script>
+
+  <script src='https://cdn.shopify.com/extensions/01a18689-6320-7aa9-9c15-b1d824c6b95e/pagefly-ai-page-builder-382/assets/pagefly-slideshow-v3.js' defer='defer'></script>
+
+  <script src='https://cdn.shopify.com/extensions/01a18689-6320-7aa9-9c15-b1d824c6b95e/pagefly-ai-page-builder-382/assets/pagefly-slideshow-v4.js' defer='defer'></script>
+
+  <script src='https://cdn.shopify.com/extensions/01a18689-6320-7aa9-9c15-b1d824c6b95e/pagefly-ai-page-builder-382/assets/pagefly-glider.js' defer='defer'></script>
+
+  <script src='https://cdn.shopify.com/extensions/01a18689-6320-7aa9-9c15-b1d824c6b95e/pagefly-ai-page-builder-382/assets/pagefly-slideshow-v1-v2.js' defer='defer'></script>
+
+  <script src='https://cdn.shopify.com/extensions/01a18689-6320-7aa9-9c15-b1d824c6b95e/pagefly-ai-page-builder-382/assets/pagefly-product-media.js' defer='defer'></script>
+
+  <script src='https://cdn.shopify.com/extensions/01a18689-6320-7aa9-9c15-b1d824c6b95e/pagefly-ai-page-builder-382/assets/pagefly-product.js' defer='defer'></script>
+
+
+<script id='pagefly-helper-data' type='application/json'>
+  {
+    "page_optimization": {
+      "assets_prefetching": false
+    },
+    "elements_asset_mapper": {
+      "Accordion": "https://cdn.shopify.com/extensions/01a18689-6320-7aa9-9c15-b1d824c6b95e/pagefly-ai-page-builder-382/assets/pagefly-accordion.js",
+      "Accordion3": "https://cdn.shopify.com/extensions/01a18689-6320-7aa9-9c15-b1d824c6b95e/pagefly-ai-page-builder-382/assets/pagefly-accordion3.js",
+      "CountDown": "https://cdn.shopify.com/extensions/01a18689-6320-7aa9-9c15-b1d824c6b95e/pagefly-ai-page-builder-382/assets/pagefly-countdown.js",
+      "GMap1": "https://cdn.shopify.com/extensions/01a18689-6320-7aa9-9c15-b1d824c6b95e/pagefly-ai-page-builder-382/assets/pagefly-gmap.js",
+      "GMap2": "https://cdn.shopify.com/extensions/01a18689-6320-7aa9-9c15-b1d824c6b95e/pagefly-ai-page-builder-382/assets/pagefly-gmap.js",
+      "GMapBasicV2": "https://cdn.shopify.com/extensions/01a18689-6320-7aa9-9c15-b1d824c6b95e/pagefly-ai-page-builder-382/assets/pagefly-gmap.js",
+      "GMapAdvancedV2": "https://cdn.shopify.com/extensions/01a18689-6320-7aa9-9c15-b1d824c6b95e/pagefly-ai-page-builder-382/assets/pagefly-gmap.js",
+      "HTML.Video": "https://cdn.shopify.com/extensions/01a18689-6320-7aa9-9c15-b1d824c6b95e/pagefly-ai-page-builder-382/assets/pagefly-htmlvideo.js",
+      "HTML.Video2": "https://cdn.shopify.com/extensions/01a18689-6320-7aa9-9c15-b1d824c6b95e/pagefly-ai-page-builder-382/assets/pagefly-htmlvideo2.js",
+      "HTML.Video3": "https://cdn.shopify.com/extensions/01a18689-6320-7aa9-9c15-b1d824c6b95e/pagefly-ai-page-builder-382/assets/pagefly-htmlvideo2.js",
+      "BackgroundVideo": "https://cdn.shopify.com/extensions/01a18689-6320-7aa9-9c15-b1d824c6b95e/pagefly-ai-page-builder-382/assets/pagefly-htmlvideo2.js",
+      "Instagram": "https://cdn.shopify.com/extensions/01a18689-6320-7aa9-9c15-b1d824c6b95e/pagefly-ai-page-builder-382/assets/pagefly-instagram.js",
+      "Instagram2": "https://cdn.shopify.com/extensions/01a18689-6320-7aa9-9c15-b1d824c6b95e/pagefly-ai-page-builder-382/assets/pagefly-instagram.js",
+      "Insta3": "https://cdn.shopify.com/extensions/01a18689-6320-7aa9-9c15-b1d824c6b95e/pagefly-ai-page-builder-382/assets/pagefly-instagram3.js",
+      "Tabs": "https://cdn.shopify.com/extensions/01a18689-6320-7aa9-9c15-b1d824c6b95e/pagefly-ai-page-builder-382/assets/pagefly-tab.js",
+      "Tabs3": "https://cdn.shopify.com/extensions/01a18689-6320-7aa9-9c15-b1d824c6b95e/pagefly-ai-page-builder-382/assets/pagefly-tab3.js",
+      "ProductBox": "https://cdn.shopify.com/extensions/01a18689-6320-7aa9-9c15-b1d824c6b95e/pagefly-ai-page-builder-382/assets/pagefly-cart.js",
+      "FBPageBox2": "https://cdn.shopify.com/extensions/01a18689-6320-7aa9-9c15-b1d824c6b95e/pagefly-ai-page-builder-382/assets/pagefly-facebook.js",
+      "FBLikeButton2": "https://cdn.shopify.com/extensions/01a18689-6320-7aa9-9c15-b1d824c6b95e/pagefly-ai-page-builder-382/assets/pagefly-facebook.js",
+      "TwitterFeed2": "https://cdn.shopify.com/extensions/01a18689-6320-7aa9-9c15-b1d824c6b95e/pagefly-ai-page-builder-382/assets/pagefly-twitter.js",
+      "Paragraph4": "https://cdn.shopify.com/extensions/01a18689-6320-7aa9-9c15-b1d824c6b95e/pagefly-ai-page-builder-382/assets/pagefly-paragraph4.js",
+
+      "AliReviews": "https://cdn.shopify.com/extensions/01a18689-6320-7aa9-9c15-b1d824c6b95e/pagefly-ai-page-builder-382/assets/pagefly-3rd-elements.js",
+      "BackInStock": "https://cdn.shopify.com/extensions/01a18689-6320-7aa9-9c15-b1d824c6b95e/pagefly-ai-page-builder-382/assets/pagefly-3rd-elements.js",
+      "GloboBackInStock": "https://cdn.shopify.com/extensions/01a18689-6320-7aa9-9c15-b1d824c6b95e/pagefly-ai-page-builder-382/assets/pagefly-3rd-elements.js",
+      "GrowaveWishlist": "https://cdn.shopify.com/extensions/01a18689-6320-7aa9-9c15-b1d824c6b95e/pagefly-ai-page-builder-382/assets/pagefly-3rd-elements.js",
+      "InfiniteOptionsShopPad": "https://cdn.shopify.com/extensions/01a18689-6320-7aa9-9c15-b1d824c6b95e/pagefly-ai-page-builder-382/assets/pagefly-3rd-elements.js",
+      "InkybayProductPersonalizer": "https://cdn.shopify.com/extensions/01a18689-6320-7aa9-9c15-b1d824c6b95e/pagefly-ai-page-builder-382/assets/pagefly-3rd-elements.js",
+      "LimeSpot": "https://cdn.shopify.com/extensions/01a18689-6320-7aa9-9c15-b1d824c6b95e/pagefly-ai-page-builder-382/assets/pagefly-3rd-elements.js",
+      "Loox": "https://cdn.shopify.com/extensions/01a18689-6320-7aa9-9c15-b1d824c6b95e/pagefly-ai-page-builder-382/assets/pagefly-3rd-elements.js",
+      "Opinew": "https://cdn.shopify.com/extensions/01a18689-6320-7aa9-9c15-b1d824c6b95e/pagefly-ai-page-builder-382/assets/pagefly-3rd-elements.js",
+      "Powr": "https://cdn.shopify.com/extensions/01a18689-6320-7aa9-9c15-b1d824c6b95e/pagefly-ai-page-builder-382/assets/pagefly-3rd-elements.js",
+      "ProductReviews": "https://cdn.shopify.com/extensions/01a18689-6320-7aa9-9c15-b1d824c6b95e/pagefly-ai-page-builder-382/assets/pagefly-3rd-elements.js",
+      "PushOwl": "https://cdn.shopify.com/extensions/01a18689-6320-7aa9-9c15-b1d824c6b95e/pagefly-ai-page-builder-382/assets/pagefly-3rd-elements.js",
+      "ReCharge": "https://cdn.shopify.com/extensions/01a18689-6320-7aa9-9c15-b1d824c6b95e/pagefly-ai-page-builder-382/assets/pagefly-3rd-elements.js",
+      "Rivyo": "https://cdn.shopify.com/extensions/01a18689-6320-7aa9-9c15-b1d824c6b95e/pagefly-ai-page-builder-382/assets/pagefly-3rd-elements.js",
+      "TrackingMore": "https://cdn.shopify.com/extensions/01a18689-6320-7aa9-9c15-b1d824c6b95e/pagefly-ai-page-builder-382/assets/pagefly-3rd-elements.js",
+      "Vitals": "https://cdn.shopify.com/extensions/01a18689-6320-7aa9-9c15-b1d824c6b95e/pagefly-ai-page-builder-382/assets/pagefly-3rd-elements.js",
+      "Wiser": "https://cdn.shopify.com/extensions/01a18689-6320-7aa9-9c15-b1d824c6b95e/pagefly-ai-page-builder-382/assets/pagefly-3rd-elements.js"
+    },
+    "custom_elements_mapper": {
+      "pf-click-action-element": "https://cdn.shopify.com/extensions/01a18689-6320-7aa9-9c15-b1d824c6b95e/pagefly-ai-page-builder-382/assets/pagefly-click-action-element.js",
+      "pf-dialog-element": "https://cdn.shopify.com/extensions/01a18689-6320-7aa9-9c15-b1d824c6b95e/pagefly-ai-page-builder-382/assets/pagefly-dialog-element.js"
+    }
+  }
+</script>
+
+<script id='pagefly-heatmap-config' type='application/json'>
+  {}
+</script>
+<script>
+  (function () {
+    var el = document.getElementById('pagefly-heatmap-config')
+    if (!el) { window.__pagefly_heatmap_config__ = {}; return }
+    try {
+      window.__pagefly_heatmap_config__ = JSON.parse(el.textContent || '{}') || {}
+    } catch (e) {
+      window.__pagefly_heatmap_config__ = {}
+    }
+  })()
+</script>
+<script>
+  // Heatmap overlay loader. Three gates, all of them cheap, none of them trusting the URL:
+  // the visitor must have arrived on a pf_heatmap link, the SERVER must have published an
+  // overlay path in the metafield, and this page must already be one the merchant enabled
+  // tracking for. The last gate is what stops a crafted link pulling the asset onto an
+  // arbitrary storefront page. Everything else is decided inside the asset, and by the server.
+  (function () {
+    var cfg = window.__pagefly_heatmap_config__ || {}
+    var id = (window.__pagefly_page_setting__ || {}).pageId
+    if (!/[#&]pf_heatmap=/.test(window.location.hash || '')) return
+    if (!cfg.overlay_data_path || !Array.isArray(cfg.enabled_page_ids)) return
+    if (!id || cfg.enabled_page_ids.indexOf(id) === -1) return
+    var s = document.createElement('script')
+    s.src = 'https://cdn.shopify.com/extensions/01a18689-6320-7aa9-9c15-b1d824c6b95e/pagefly-ai-page-builder-382/assets/pagefly-heatmap-overlay.js'
+    s.defer = true
+    document.head.appendChild(s)
+  })()
+</script>
+
+<!-- BEGIN app snippet: pf-ai-schema -->
+<!-- END app snippet -->
+
+
+<!-- END app block --><!-- BEGIN app block: shopify://apps/min-max-limits-by-limitsify/blocks/limitsify_default/17f09861-7fd3-44b8-af2c-d752652e61ec --><!-- id:   -->
+<!-- vt:  -->
+<!-- shop: https://cantripmtg.com -->
+  
+  
+  <script>
+    window.limitsifyConfig = {
+      apiToken: 'fab1e39f56e92daa104d6f3e779072',
+      cart: {"note":null,"attributes":{},"original_total_price":0,"total_price":0,"total_discount":0,"total_weight":0.0,"item_count":0,"items":[],"requires_shipping":false,"currency":"JPY","items_subtotal_price":0,"cart_level_discount_applications":[],"checkout_charge_amount":0},
+      theme: 'alertify',
+      rememberButtonLabels: false,
+      settings: 'color=black&dots=yes&extended=0&space=0'
+    };
+
+  </script>
+  
+  <script src="//cdn.shopify.com/extensions/01a0a3a7-8598-78f5-ba01-4c403322254e/min-max-limits-by-limitsify-57/assets/limitsify_v1.min.js" type="text/javascript"></script>
+  <script src="//cdn.shopify.com/extensions/01a0a3a7-8598-78f5-ba01-4c403322254e/min-max-limits-by-limitsify-57/assets/alertify2_alertify.js" type="text/javascript"></script>
+  <link href="//cdn.shopify.com/extensions/01a0a3a7-8598-78f5-ba01-4c403322254e/min-max-limits-by-limitsify-57/assets/alertify2_alertify.css" rel="stylesheet" type="text/css" media="all" />  
+  
+
+
+
+
+
+
+
+  
+  
+  
+
+<!-- END app block --><link href="https://monorail-edge.shopifysvc.com" rel="dns-prefetch">
+<script>
+  window.__TREKKIE_SHIM_QUEUE = window.__TREKKIE_SHIM_QUEUE || [];
+</script>
+<script>(function(){var wpmLoader=function(){"use strict";var e=/Googlebot|Storebot-Google|bingbot|Baiduspider|YandexBot|DuckDuckBot|Slurp|facebookexternalhit|Twitterbot|LinkedInBot|Applebot|AdsBot-Google|Mediapartners-Google|APIs-Google|PetalBot|SemrushBot|AhrefsBot|MJ12bot|DotBot|Acunetix|PerplexityBot|Perplexity-User/i,t=/bytedance/i;function i(){try{var e=document.cookie;if(!e||"string"!=typeof e)return;for(var t=0,i=e.split(";");t<i.length;t++){var n=i[t],r=n.indexOf("=");if(-1!==r){var o=n.slice(0,r).trim();if(o){var a=void 0;try{a=decodeURIComponent(o)}catch(e){a=o}if("_shopify_s"===a){var d=n.slice(r+1).trim();try{return decodeURIComponent(d)}catch(e){return d}}}}}return}catch(e){return}}function n(e){try{"undefined"!=typeof console&&"function"==typeof console.warn&&console.warn(e)}catch(e){}}function r(e,t){return"string"==typeof e&&e.length>0&&e.length<=t?e:void 0}function o(e){var t;switch(null==(t=null==e?void 0:e.navigation)?void 0:t.type){case 0:return"navigate";case 1:return"reload";case 2:return"back_forward";default:return}}function a(){var e,t,i;try{var n=null==(i=null==(t=null==(e=self.ShopifyAnalytics)?void 0:e.lib)?void 0:t.trekkie)?void 0:i.state;return"awaiting-consent"===n||"initialized"===n?n:void 0}catch(e){return}}return function(d,s,u,l){var c=arguments.length>4&&void 0!==arguments[4]?arguments[4]:{};try{var p=c.trekkieShim;!0!==p&&"true"!==p||null!=window.__TREKKIE_SHIM_QUEUE||(window.__TREKKIE_SHIM_QUEUE=[])}catch(e){}var f,v,h,y,g=(v=(f={modern:/Edge?\/(1{2}[4-9]|1[2-9]\d|[2-9]\d{2}|\d{4,})\.\d+(\.\d+|)|Firefox\/(1{2}[4-9]|1[2-9]\d|[2-9]\d{2}|\d{4,})\.\d+(\.\d+|)|Chrom(ium|e)\/(9{2}|\d{3,})\.\d+(\.\d+|)|(Maci|X1{2}).+ Version\/(15\.\d+|(1[6-9]|[2-9]\d|\d{3,})\.\d+)([,.]\d+|)( \(\w+\)|)( Mobile\/\w+|) Safari\/|Chrome.+OPR\/(9{2}|\d{3,})\.\d+\.\d+|(CPU[ +]OS|iPhone[ +]OS|CPU[ +]iPhone|CPU IPhone OS|CPU iPad OS)[ +]+(15[._]\d+|(1[6-9]|[2-9]\d|\d{3,})[._]\d+)([._]\d+|)|Android:?[ /-](14[89]|1[5-9]\d|[2-9]\d{2}|\d{4,})(\.\d+|)(\.\d+|)|Android.+Firefox\/(15\d|1[6-9]\d|[2-9]\d{2}|\d{4,})\.\d+(\.\d+|)|Android.+Chrom(ium|e)\/(14[89]|1[5-9]\d|[2-9]\d{2}|\d{4,})\.\d+(\.\d+|)|SamsungBrowser\/([2-9]\d|\d{3,})\.\d+/,legacy:/Edge?\/(1[6-9]|[2-9]\d|\d{3,})\.\d+(\.\d+|)|Firefox\/(5[4-9]|[6-9]\d|\d{3,})\.\d+(\.\d+|)|Chrom(ium|e)\/(5[1-9]|[6-9]\d|\d{3,})\.\d+(\.\d+|)([\d.]+$|.*Safari\/(?![\d.]+ Edge\/[\d.]+$))|(Maci|X1{2}).+ Version\/(10\.\d+|(1[1-9]|[2-9]\d|\d{3,})\.\d+)([,.]\d+|)( \(\w+\)|)( Mobile\/\w+|) Safari\/|Chrome.+OPR\/(3[89]|[4-9]\d|\d{3,})\.\d+\.\d+|(CPU[ +]OS|iPhone[ +]OS|CPU[ +]iPhone|CPU IPhone OS|CPU iPad OS)[ +]+(10[._]\d+|(1[1-9]|[2-9]\d|\d{3,})[._]\d+)([._]\d+|)|Android:?[ /-](14[89]|1[5-9]\d|[2-9]\d{2}|\d{4,})(\.\d+|)(\.\d+|)|Mobile Safari.+OPR\/([89]\d|\d{3,})\.\d+\.\d+|Android.+Firefox\/(15\d|1[6-9]\d|[2-9]\d{2}|\d{4,})\.\d+(\.\d+|)|Android.+Chrom(ium|e)\/(14[89]|1[5-9]\d|[2-9]\d{2}|\d{4,})\.\d+(\.\d+|)|Android.+(UC? ?Browser|UCWEB|U3)[ /]?(15\.([5-9]|\d{2,})|(1[6-9]|[2-9]\d|\d{3,})\.\d+)\.\d+|SamsungBrowser\/(5\.\d+|([6-9]|\d{2,})\.\d+)|Android.+MQ{2}Browser\/(14(\.(9|\d{2,})|)|(1[5-9]|[2-9]\d|\d{3,})(\.\d+|))(\.\d+|)|K[Aa][Ii]OS\/(3\.\d+|([4-9]|\d{2,})\.\d+)(\.\d+|)/}).modern,h=f.legacy,(y=navigator.userAgent).match(e)?"bot":y.match(v)?"modern":y.match(h)?"legacy":y.match(t)?"bot":"unknown"),m=function(e){var t,i,n=r(e,128);try{var a=window.performance,d=null==(t=null==a?void 0:a.getEntriesByType)?void 0:t.call(a,"navigation")[0];if(!d)return{requestId:n,navigationType:o(a)};var s="type"in d?r(d.type,64):void 0,u="serverTiming"in d&&Array.isArray(d.serverTiming)?d.serverTiming:[];return{requestId:null!=n?n:r(null==(i=u.find(function(e){return"requestID"===e.name}))?void 0:i.description,128),navigationType:s}}catch(e){return{requestId:n}}}(c.requestId),w=function(e){var t=e.version,r=e.browserTarget,o=e.surface,a=e.shopId,d=e.monorailEndpoint,s=window.location.href;return{emit:function(e){var u=e.status,l=e.errorMsg,c=e.failureReason,p=e.useKeepaliveFallback,f=void 0!==p&&p,v=e.navigationType,h=e.pagehidePersisted,y=e.requestId,g=e.trekkieState;if(d){var m,w;try{var b=(new Date).getTime();m=JSON.stringify({metadata:{event_sent_at_ms:b},events:[{schema_id:"web_pixels_manager_load/3.3",payload:{version:t,bundle_target:r,page_url:s,status:u,surface:o,error_msg:l,failure_reason:c,navigation_type:v,pagehide_persisted:h,request_id:y,trekkie_state:g,shop_id:a,visit_token:i()},metadata:{event_created_at_ms:b}}]})}catch(e){return}try{if("function"==typeof window.navigator.sendBeacon&&-1===(w=window.navigator.userAgent).indexOf("iPhone; CPU iPhone OS 12_")&&-1===w.indexOf("iPad; CPU OS 12_")&&-1===w.indexOf("iPod touch; CPU iPhone OS 12_")&&window.navigator.sendBeacon.bind(window.navigator)(d,m))return}catch(e){}if(f)try{"function"==typeof window.fetch&&window.fetch(d,{method:"POST",headers:{"Content-Type":"text/plain"},body:m,keepalive:!0}).catch(function(){})}catch(e){}else try{var _=new XMLHttpRequest;_.open("POST",d,!0),_.setRequestHeader("Content-Type","text/plain"),_.send(m)}catch(e){n("[Web Pixels Manager] Got an unhandled error while logging to Monorail.")}}else n("[Web Pixels Manager] No Monorail endpoint provided, skipping logging.")}}}({version:u,browserTarget:g,surface:d.surface,shopId:d.shopId,monorailEndpoint:d.monorailEndpoint});if(Boolean(null==(_=null==(b=window.Shopify)?void 0:b.analytics)?void 0:_.replayQueue))w.emit({status:"setup-skipped",errorMsg:"replay queue already initialized."});else{var b,_;w.emit({status:"setup-started"}),window.Shopify=window.Shopify||{};var S=window.Shopify;S.analytics=S.analytics||{};var P=S.analytics;P.replayQueue=[],P.publish=function(e,t,i){return P.replayQueue.push([e,t,i]),!0};try{self.performance.mark("wpm:start")}catch(e){}var k,C="modern"===g?"modern":"legacy",E=(null!=l?l:{modern:"",legacy:""})[C],I=[(k={baseUrl:s,hashVersion:u,buildTarget:C}).baseUrl,"/wpm","/b",k.hashVersion,"modern"===k.buildTarget?"m":"l",".js"].join(""),O=!1,T=!1;try{c.browserTarget=g,function(){O=!0;try{window.addEventListener("pagehide",M)}catch(e){O=!1}}(),R(function(){try{R(x)}catch(e){D(e)}}),w.emit({status:"loading",requestId:m.requestId,navigationType:m.navigationType,trekkieState:a()})}catch(e){D(e)}}function U(){var e;if(q(),!function(){var e,t;return Boolean(null==(t=null==(e=window.Shopify)?void 0:e.analytics)?void 0:t.initialized)}()){var t,i,n;try{if("function"!=typeof(null==(e=window.webPixelsManager)?void 0:e.init))return void A();if(!(null!==(n=i=t=window.webPixelsManager.init(d))&&"function"!=typeof n&&Object(n)===n&&"publish"in i&&"function"==typeof i.publish&&"publishCustomEvent"in i&&"function"==typeof i.publishCustomEvent&&"visitor"in i&&"function"==typeof i.visitor))return void A()}catch(e){return void A(e)}var r=window.Shopify.analytics;r.replayQueue.forEach(function(e){var i=e[0],n=e[1],r=e[2];t.publishCustomEvent(i,n,r)}),r.replayQueue=[],r.publish=t.publishCustomEvent,r.visitor=t.visitor,r.initialized=!0}}function A(e){B("manager_api_unavailable",void 0===e?void 0:Q(e))}function x(){B("script_load_failed","".concat(I," has failed to load"))}function B(e,t){T||(T=!0,q(),w.emit({status:"failed",errorMsg:t,failureReason:e,requestId:m.requestId,navigationType:m.navigationType,trekkieState:a()}))}function M(e){O&&(q(),w.emit({status:"pagehide-while-loading",useKeepaliveFallback:!0,pagehidePersisted:e.persisted,requestId:m.requestId,navigationType:m.navigationType,trekkieState:a()}))}function q(){O=!1;try{window.removeEventListener("pagehide",M)}catch(e){}}function R(e){var t;!function(e){var t=e.src,i=e.async,n=void 0===i||i,r=e.onload,o=e.onerror,a=e.sri,d=e.scriptDataAttributes,s=void 0===d?{}:d,u=document.createElement("script"),l=document.querySelector("head"),c=document.querySelector("body");if(u.async=n,u.src=t,a&&(u.integrity=a,u.crossOrigin="anonymous"),s)for(var p in s)if(Object.prototype.hasOwnProperty.call(s,p))try{u.dataset[p]=String(s[p])}catch(e){}if(r&&u.addEventListener("load",r),o&&u.addEventListener("error",o),l)l.appendChild(u);else{if(!c)throw new Error("Did not find a head or body element to append the script");c.appendChild(u)}}({src:I,async:!0,onload:U,onerror:e,sri:(t=E,"string"==typeof t&&/^sha384-[A-Za-z0-9+/=]+$/.test(t)?E:""),scriptDataAttributes:c})}function D(e){B("script_append_failed",Q(e))}function Q(e){return e instanceof Error?e.message:"Unknown error"}}}();wpmLoader({shopId: 61395959990,storefrontBaseUrl: "https://cantripmtg.com",extensionsBaseUrl: "https://extensions.shopifycdn.com/cdn/shopifycloud/web-pixels-manager",monorailEndpoint: "https://cantripmtg.com/.well-known/shopify/monorail/unstable/produce_batch",surface: "storefront-renderer",enabledBetaFlags: ["7b21cf0b","4c64608a","08197dfb"],webPixelsConfigList: [{"id":"3126100150","configuration":"{\"config\":\"{\\\"google_tag_ids\\\":[\\\"GT-TWT8294Q\\\"],\\\"target_country\\\":\\\"JP\\\",\\\"gtag_events\\\":[{\\\"type\\\":\\\"view_item\\\",\\\"action_label\\\":\\\"MC-88Q0HNZ8P2\\\"},{\\\"type\\\":\\\"purchase\\\",\\\"action_label\\\":\\\"MC-88Q0HNZ8P2\\\"},{\\\"type\\\":\\\"page_view\\\",\\\"action_label\\\":\\\"MC-88Q0HNZ8P2\\\"}],\\\"enable_monitoring_mode\\\":false}\"}","eventPayloadVersion":"v1","runtimeContext":"OPEN","scriptVersion":"a3321ca85cf5aaf6b57585fcd8d67b3a","type":"APP","apiClientId":1780363,"privacyPurposes":[],"dataSharingAdjustments":{"protectedCustomerApprovalScopes":["read_customer_address","read_customer_email","read_customer_name","read_customer_personal_data","read_customer_phone"],"dataSharingControls":["share_all_events"]},"dataSharingState":"optimized","enabledFlags":["9a3ed68a"]},{"id":"shopify-app-pixel","configuration":"{}","eventPayloadVersion":"v1","runtimeContext":"STRICT","scriptVersion":"0530","apiClientId":"shopify-pixel","type":"APP","privacyPurposes":["ANALYTICS","MARKETING"]},{"id":"shopify-custom-pixel","eventPayloadVersion":"v1","runtimeContext":"LAX","scriptVersion":"0530","apiClientId":"shopify-pixel","type":"CUSTOM","privacyPurposes":["ANALYTICS","MARKETING"]}],isMerchantRequest: false,initData: {"shop":{"name":"TCG専門店 CANTRIP","paymentSettings":{"currencyCode":"JPY"},"myshopifyDomain":"mtg-tomonyan.myshopify.com","countryCode":"JP","storefrontUrl":"https:\/\/cantripmtg.com"},"customer":null,"cart":null,"checkout":null,"productVariants":[],"products":[],"purchasingCompany":null},},"https://cantripmtg.com/cdn","610a19cewf693d529pf324840bm6169d9b4",{"modern":"","legacy":""},{"trekkieShim":true,"agentContext":true,"apiClientId":"580111","facebookCapiEnabled":"false","themeId":"188753936566","themeStoreId":"887","themePublished":"true","eventMetadataId":"46c146b8-0692-441c-a07e-3856799dda0d","pageType":"page","resourceId":"94236573878","shopId":"61395959990","storefrontBaseUrl":"https:\/\/cantripmtg.com","extensionBaseUrl":"https:\/\/extensions.shopifycdn.com\/cdn\/shopifycloud\/web-pixels-manager","surface":"storefront-renderer","enabledBetaFlags":"[\"7b21cf0b\", \"4c64608a\", \"08197dfb\"]","isMerchantRequest":"false","hashVersion":"610a19cewf693d529pf324840bm6169d9b4","publish":"custom","events":"[[\"page_viewed\",{}]]"});})();</script><script>
+  window.ShopifyAnalytics = window.ShopifyAnalytics || {};
+  window.ShopifyAnalytics.meta = window.ShopifyAnalytics.meta || {};
+  window.ShopifyAnalytics.meta.currency = 'JPY';
+  var meta = {"page":{"pageType":"page","resourceType":"page","resourceId":94236573878,"requestId":"ca3376cc-8de9-4620-8544-7e7698445774-1793349304"}};
+  for (var attr in meta) {
+    window.ShopifyAnalytics.meta[attr] = meta[attr];
+  }
+</script>
+<script class="analytics">
+  (function () {
+    var customDocumentWrite = function(content) {
+      var jquery = null;
+
+      if (window.jQuery) {
+        jquery = window.jQuery;
+      } else if (window.Checkout && window.Checkout.$) {
+        jquery = window.Checkout.$;
+      }
+
+      if (jquery) {
+        jquery('body').append(content);
+      }
+    };
+
+    var hasLoggedConversion = function(token) {
+      if (token) {
+        return document.cookie.indexOf('loggedConversion=' + token) !== -1;
+      }
+      return false;
+    }
+
+    var setCookieIfConversion = function(token) {
+      if (token) {
+        var twoMonthsFromNow = new Date(Date.now());
+        twoMonthsFromNow.setMonth(twoMonthsFromNow.getMonth() + 2);
+
+        document.cookie = 'loggedConversion=' + token + '; expires=' + twoMonthsFromNow;
+      }
+    }
+
+    var trekkie = window.ShopifyAnalytics.lib = window.trekkie = window.trekkie || [];
+    window.ShopifyAnalytics.lib.trekkie = window.trekkie;
+    if (trekkie.integrations) {
+      return;
+    }
+    trekkie.methods = [
+      'identify',
+      'page',
+      'ready',
+      'track',
+      'trackForm',
+      'trackLink'
+    ];
+    trekkie.factory = function(method) {
+      return function() {
+        var args = Array.prototype.slice.call(arguments);
+        args.unshift(method);
+        trekkie.push(args);
+        if (method == 'track' || method == 'page') {
+          var pageUrl;
+          try {
+            pageUrl = window.location.href;
+          } catch (e) {}
+          var pageReferrer;
+          try {
+            pageReferrer = document.referrer;
+          } catch (e) {}
+          try {
+            if (window.__TREKKIE_SHIM_QUEUE == null) {
+              window.__TREKKIE_SHIM_QUEUE = [];
+            }
+            window.__TREKKIE_SHIM_QUEUE.push({
+              from: 'trekkie-stub',
+              method: method,
+              args: args.slice(1),
+              pageContext: {
+                url: pageUrl,
+                referrer: pageReferrer
+              }
+            });
+          } catch (e) {
+            // no-op
+          }
+        }
+        return trekkie;
+      };
+    };
+    for (var i = 0; i < trekkie.methods.length; i++) {
+      var key = trekkie.methods[i];
+      trekkie[key] = trekkie.factory(key);
+    }
+    trekkie.load = function(config) {
+      trekkie.config = config || {};
+      trekkie.config.initialDocumentCookie = document.cookie;
+      var first = document.getElementsByTagName('script')[0];
+var script = document.createElement('script');
+script.type = 'text/javascript';
+script.onerror = function(e) {
+  var scriptFallback = document.createElement('script');
+  scriptFallback.type = 'text/javascript';
+  scriptFallback.onerror = function(error) {
+          var Monorail = {
+      produce: function produce(monorailDomain, schemaId, payload) {
+        var currentMs = new Date().getTime();
+        var event = {
+          schema_id: schemaId,
+          payload: payload,
+          metadata: {
+            event_created_at_ms: currentMs,
+            event_sent_at_ms: currentMs
+          }
+        };
+        return Monorail.sendRequest("https://" + monorailDomain + "/v1/produce", JSON.stringify(event));
+      },
+      sendRequest: function sendRequest(endpointUrl, payload) {
+        // Try the sendBeacon API
+        if (window && window.navigator && typeof window.navigator.sendBeacon === 'function' && typeof window.Blob === 'function' && !Monorail.isIos12()) {
+          var blobData = new window.Blob([payload], {
+            type: 'text/plain'
+          });
+
+          if (window.navigator.sendBeacon(endpointUrl, blobData)) {
+            return true;
+          } // sendBeacon was not successful
+
+        } // XHR beacon
+
+        var xhr = new XMLHttpRequest();
+
+        try {
+          xhr.open('POST', endpointUrl);
+          xhr.setRequestHeader('Content-Type', 'text/plain');
+          xhr.send(payload);
+        } catch (e) {
+          console.log(e);
+        }
+
+        return false;
+      },
+      isIos12: function isIos12() {
+        return window.navigator.userAgent.lastIndexOf('iPhone; CPU iPhone OS 12_') !== -1 || window.navigator.userAgent.lastIndexOf('iPad; CPU OS 12_') !== -1;
+      }
+    };
+    Monorail.produce('monorail-edge.shopifysvc.com',
+      'trekkie_storefront_load_errors/1.1',
+      {shop_id: 61395959990,
+      theme_id: 188753936566,
+      app_name: "storefront",
+      context_url: window.location.href,
+      source_url: "//cantripmtg.com/cdn/s/trekkie.storefront.188d9897a23fc8c6cfb5e02821b2b8baec7b147d.min.js"});
+
+  };
+  scriptFallback.async = true;
+  scriptFallback.src = '//cantripmtg.com/cdn/s/trekkie.storefront.188d9897a23fc8c6cfb5e02821b2b8baec7b147d.min.js';
+  first.parentNode.insertBefore(scriptFallback, first);
+};
+script.async = true;
+script.src = '//cantripmtg.com/cdn/s/trekkie.storefront.188d9897a23fc8c6cfb5e02821b2b8baec7b147d.min.js';
+first.parentNode.insertBefore(script, first);
+
+    };
+    trekkie.load(
+      {"Trekkie":{"appName":"storefront","development":false,"defaultAttributes":{"shopId":61395959990,"isMerchantRequest":null,"themeId":188753936566,"themeCityHash":"15118758057857375355","contentLanguage":"ja","currency":"JPY","eventMetadataId":"46c146b8-0692-441c-a07e-3856799dda0d"},"isServerSideCookieWritingEnabled":true,"monorailRegion":"shop_domain","enabledBetaFlags":["7b21cf0b","4c64608a"]},"Session Attribution":{},"S2S":{"facebookCapiEnabled":false,"source":"trekkie-storefront-renderer","apiClientId":580111}}
+    );
+
+    var loaded = false;
+    trekkie.ready(function() {
+      if (loaded) return;
+      loaded = true;
+
+      window.ShopifyAnalytics.lib = window.trekkie;
+
+      var originalDocumentWrite = document.write;
+      document.write = customDocumentWrite;
+      try { window.ShopifyAnalytics.merchantGoogleAnalytics.call(this); } catch(error) {};
+      document.write = originalDocumentWrite;
+
+      var match = window.location.pathname.match(/checkouts\/(.+)\/(thank_you|post_purchase)/)
+      var token = match? match[1]: undefined;
+      if (!hasLoggedConversion(token)) {
+        setCookieIfConversion(token);
+        
+      }
+    });
+
+    window.ShopifyAnalytics.lib.page(null,{"pageType":"page","resourceType":"page","resourceId":94236573878,"requestId":"ca3376cc-8de9-4620-8544-7e7698445774-1793349304","shopifyEmitted":true});
+
+    var eventsListenerScript = document.createElement('script');
+    eventsListenerScript.async = true;
+    eventsListenerScript.src = "//cantripmtg.com/cdn/shopifycloud/storefront/assets/shop_events_listener-819172a8.js";
+    document.getElementsByTagName('head')[0].appendChild(eventsListenerScript);
+})();</script>
+<script
+  defer
+  src="https://cantripmtg.com/cdn/shopifycloud/perf-kit/shopify-perf-kit-3.14.0.min.js"
+  data-application="storefront-renderer"
+  data-shop-id="61395959990"
+  data-render-region="gcp-us-west1"
+  data-page-type="page"
+  data-theme-instance-id="188753936566"
+  data-theme-name="Dawn"
+  data-theme-version="15.0.2"
+  data-monorail-region="shop_domain"
+  data-resource-timing-sampling-rate="10"
+  data-shs="true"
+  data-shs-beacon="true"
+  data-shs-export-with-fetch="true"
+  data-shs-logs-sample-rate="1"
+  data-shs-beacon-endpoint="https://cantripmtg.com/api/collect"
+></script>
+<meta name="shopify-y" content="e47f7446-5cc6-44cf-8edf-ce635a9ca14e" data-expiration="1824906904000"><meta name="shopify-s" content="43705ac7-add5-4064-81c8-0fb57db773fc" data-expiration="1793351104000"><meta name="request-id" content="ca3376cc-8de9-4620-8544-7e7698445774-1793349304"        >
+</head>
+
+  <body class="gradient animate--hover-default">
+    <a class="skip-to-content-link button visually-hidden" href="#MainContent">
+      コンテンツに進む
+    </a><div id="shopify-section-search-keyword" class="shopify-section search-keyword"><template id="search-keyword">
+  <select>
+    
+      <option value="MTG">MTG</option>
+    
+      <option value="ポケカ">ポケカ</option>
+    
+      <option value="ワンピース">ワンピース</option>
+    
+      <option value="ホロライブ">ホロライブ</option>
+    
+      <option value="GRAND ARCHIVE">GRAND ARCHIVE</option>
+    
+      <option value="FAB">FAB</option>
+    
+  </select>
+</template>
+
+</div>
+    
+    <!-- BEGIN sections: header-group -->
+<div id="shopify-section-sections--27894798713014__announcement_bar_qx8fbQ" class="shopify-section shopify-section-group-header-group announcement-bar-section"><link href="//cantripmtg.com/cdn/shop/t/34/assets/component-slideshow.css?v=170654395204511176521791442834" rel="stylesheet" type="text/css" media="all" />
+<link href="//cantripmtg.com/cdn/shop/t/34/assets/component-slider.css?v=14039311878856620671791442834" rel="stylesheet" type="text/css" media="all" />
+
+  <link href="//cantripmtg.com/cdn/shop/t/34/assets/component-list-social.css?v=35792976012981934991791442834" rel="stylesheet" type="text/css" media="all" />
+
+
+<div
+  class="utility-bar color-scheme-5 gradient"
+  
+>
+  <div class="page-width utility-bar__grid"><div
+        class="announcement-bar"
+        role="region"
+        aria-label="告知"
+        
+      ><a
+              href="https://cantripbuy.com/"
+              class="announcement-bar__link link link--text focus-inset animate-arrow"
+            ><p class="announcement-bar__message h5">
+            <span>買取価格はこちら</span><svg
+  viewBox="0 0 14 10"
+  fill="none"
+  aria-hidden="true"
+  focusable="false"
+  class="icon icon-arrow"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M8.537.808a.5.5 0 01.817-.162l4 4a.5.5 0 010 .708l-4 4a.5.5 0 11-.708-.708L11.793 5.5H1a.5.5 0 010-1h10.793L8.646 1.354a.5.5 0 01-.109-.546z" fill="currentColor">
+</svg>
+
+</p></a></div><div class="localization-wrapper">
+</div>
+  </div>
+</div>
+
+
+</div><div id="shopify-section-sections--27894798713014__header" class="shopify-section shopify-section-group-header-group section-header"><link rel="stylesheet" href="//cantripmtg.com/cdn/shop/t/34/assets/component-list-menu.css?v=151968516119678728991791442834" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="//cantripmtg.com/cdn/shop/t/34/assets/component-search.css?v=165164710990765432851791442834" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="//cantripmtg.com/cdn/shop/t/34/assets/component-menu-drawer.css?v=110695408305392539491791442834" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="//cantripmtg.com/cdn/shop/t/34/assets/component-cart-notification.css?v=54116361853792938221791442834" media="print" onload="this.media='all'"><link rel="stylesheet" href="//cantripmtg.com/cdn/shop/t/34/assets/component-price.css?v=70172745017360139101791442834" media="print" onload="this.media='all'"><link rel="stylesheet" href="//cantripmtg.com/cdn/shop/t/34/assets/header-search.css?v=136917936560810399671791450623">
+
+<style>
+  header-drawer {
+    justify-self: start;
+    margin-left: -1.2rem;
+  }@media screen and (min-width: 990px) {
+      header-drawer {
+        display: none;
+      }
+    }.menu-drawer-container {
+    display: flex;
+  }
+
+  .list-menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .list-menu--inline {
+    display: inline-flex;
+    flex-wrap: wrap;
+  }
+
+  summary.list-menu__item {
+    padding-right: 2.7rem;
+  }
+
+  .list-menu__item {
+    display: flex;
+    align-items: center;
+    line-height: calc(1 + 0.3 / var(--font-body-scale));
+  }
+
+  .list-menu__item--link {
+    text-decoration: none;
+    padding-bottom: 1rem;
+    padding-top: 1rem;
+    line-height: calc(1 + 0.8 / var(--font-body-scale));
+  }
+
+  @media screen and (min-width: 750px) {
+    .list-menu__item--link {
+      padding-bottom: 0.5rem;
+      padding-top: 0.5rem;
+    }
+  }
+</style><style data-shopify>.header {
+    padding: 10px 3rem 10px 3rem;
+  }
+
+  .section-header {
+    position: sticky; /* This is for fixing a Safari z-index issue. PR #2147 */
+    margin-bottom: 3px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-header {
+      margin-bottom: 4px;
+    }
+  }
+
+  @media screen and (min-width: 990px) {
+    .header {
+      padding-top: 20px;
+      padding-bottom: 20px;
+    }
+  }
+  .search.search-modal__form.adjust select{
+    padding: 13px 4px 13px;
+    margin-right: 4px;
+    outline: none !important;
+    border: none;
+    box-shadow: none;
+    -webkit-appearance: none;
+    appearance: none;
+    background: #fff url(data:image/svg+xml;charset=US-ASCII,%3Csvg%20width%3D%2220%22%20height%3D%2220%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath%20d%3D%22M5%206l5%205%205-5%202%201-7%207-7-7%202-1z%22%20fill%3D%22%23555%22%2F%3E%3C%2Fsvg%3E) no-repeat right 5px top 55%;
+    background-size: 16px 16px;
+    padding-right: 24px;
+    cursor: pointer;
+  }
+  .search.search-modal__form.adjust{
+      display: flex;
+  }
+  @media(max-width: 767px){
+    .search.search-modal__form .custom_search_options{
+      /* display: none; */
+      max-width: clamp(75px, 25%, 300px);
+    }
+    .search.search-modal__form .custom_search_options select{
+      max-width: calc(100% - 3px);
+    }
+    header .header .form-area{
+      max-width: calc(100% - 31.2px * 3);
+    }
+    header .header .search__input.field__input{
+      padding-right: 0;
+    }
+    header .header .field__button{
+      width: 3rem;
+    }
+    header .header .search__button .icon {
+        height: 1.4rem;
+        width: 1.4rem;
+    }
+  } 
+  .header {
+    padding: 0 1.5rem;
+}</style><script src="//cantripmtg.com/cdn/shop/t/34/assets/cart-notification.js?v=133508293167896966491791442834" defer="defer"></script>
+<script src="//cantripmtg.com/cdn/shop/t/34/assets/header-search.js?v=69874811841062502971791488785" defer="defer"></script>
+
+<svg xmlns="http://www.w3.org/2000/svg" class="hidden">
+  <symbol id="icon-search" viewbox="0 0 18 19" fill="none">
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M11.03 11.68A5.784 5.784 0 112.85 3.5a5.784 5.784 0 018.18 8.18zm.26 1.12a6.78 6.78 0 11.72-.7l5.4 5.4a.5.5 0 11-.71.7l-5.41-5.4z" fill="currentColor"/>
+  </symbol>
+
+  <symbol id="icon-reset" class="icon icon-close"  fill="none" viewBox="0 0 18 18" stroke="currentColor">
+    <circle r="8.5" cy="9" cx="9" stroke-opacity="0.2"/>
+    <path d="M6.82972 6.82915L1.17193 1.17097" stroke-linecap="round" stroke-linejoin="round" transform="translate(5 5)"/>
+    <path d="M1.22896 6.88502L6.77288 1.11523" stroke-linecap="round" stroke-linejoin="round" transform="translate(5 5)"/>
+  </symbol>
+
+  <symbol id="icon-close" class="icon icon-close" fill="none" viewBox="0 0 18 17">
+    <path d="M.865 15.978a.5.5 0 00.707.707l7.433-7.431 7.579 7.282a.501.501 0 00.846-.37.5.5 0 00-.153-.351L9.712 8.546l7.417-7.416a.5.5 0 10-.707-.708L8.991 7.853 1.413.573a.5.5 0 10-.693.72l7.563 7.268-7.418 7.417z" fill="currentColor">
+  </symbol>
+</svg><sticky-header data-sticky-type="on-scroll-up" class="header-wrapper color-scheme-1 gradient header-wrapper--border-bottom"><header>
+  <div style="display:none;">
+
+<details-modal class="header__search">
+  <details>
+    <summary
+      class="header__icon header__icon--search header__icon--summary link focus-inset modal__toggle"
+      aria-haspopup="dialog"
+      aria-label="検索"
+    >
+      <span>
+        <svg class="modal__toggle-open icon icon-search" aria-hidden="true" focusable="false">
+          <use href="#icon-search">
+        </svg>
+        <svg class="modal__toggle-close icon icon-close" aria-hidden="true" focusable="false">
+          <use href="#icon-close">
+        </svg>
+      </span>
+    </summary>
+    <div
+      class="search-modal modal__content gradient"
+      role="dialog"
+      aria-modal="true"
+      aria-label="検索"
+    >
+      <div class="modal-overlay"></div>
+      <div
+        class="search-modal__content search-modal__content-bottom"
+        tabindex="-1"
+      ><predictive-search class="search-modal__form" data-loading-text="読み込み中…"><form action="/search" method="get" role="search" class="search search-modal__form">
+          <div class="field">
+            <input
+              class="search__input field__input"
+              id="Search-In-Modal"
+              type="search"
+              name="q"
+              value=""
+              placeholder="検索"role="combobox"
+                aria-expanded="false"
+                aria-owns="predictive-search-results"
+                aria-controls="predictive-search-results"
+                aria-haspopup="listbox"
+                aria-autocomplete="list"
+                autocorrect="off"
+                autocomplete="off"
+                autocapitalize="off"
+                spellcheck="false">
+            <label class="field__label" for="Search-In-Modal">検索</label>
+            <input type="hidden" name="options[prefix]" value="last">
+            <button
+              type="reset"
+              class="reset__button field__button hidden"
+              aria-label="検索ワードをクリアする"
+            >
+              <svg class="icon icon-close" aria-hidden="true" focusable="false">
+                <use xlink:href="#icon-reset">
+              </svg>
+            </button>
+            <button class="search__button field__button" aria-label="検索">
+              <svg class="icon icon-search" aria-hidden="true" focusable="false">
+                <use href="#icon-search">
+              </svg>
+            </button>
+          </div><div class="predictive-search predictive-search--header" tabindex="-1" data-predictive-search>
+
+<div class="predictive-search__loading-state">
+  <svg
+    aria-hidden="true"
+    focusable="false"
+    class="spinner"
+    viewBox="0 0 66 66"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <circle class="path" fill="none" stroke-width="6" cx="33" cy="33" r="30"></circle>
+  </svg>
+</div>
+</div>
+
+            <span class="predictive-search-status visually-hidden" role="status" aria-hidden="true"></span></form></predictive-search><button
+          type="button"
+          class="search-modal__close-button modal__close-button link link--text focus-inset"
+          aria-label="閉じる"
+        >
+          <svg class="icon icon-close" aria-hidden="true" focusable="false">
+            <use href="#icon-close">
+          </svg>
+        </button>
+      </div>
+    </div>
+  </details>
+</details-modal>
+</div>
+    <div class="header header--top-left page-width header--has-menu"><header-drawer data-breakpoint="tablet">
+          <details id="Details-menu-drawer-container" class="menu-drawer-container">
+            <summary class="header__icon header__icon--menu header__icon--summary link focus-inset" aria-label="メニュー">
+              <span>
+                <svg
+  xmlns="http://www.w3.org/2000/svg"
+  aria-hidden="true"
+  focusable="false"
+  class="icon icon-hamburger"
+  fill="none"
+  viewBox="0 0 18 16"
+>
+  <path d="M1 .5a.5.5 0 100 1h15.71a.5.5 0 000-1H1zM.5 8a.5.5 0 01.5-.5h15.71a.5.5 0 010 1H1A.5.5 0 01.5 8zm0 7a.5.5 0 01.5-.5h15.71a.5.5 0 010 1H1a.5.5 0 01-.5-.5z" fill="currentColor">
+</svg>
+
+                <svg
+  xmlns="http://www.w3.org/2000/svg"
+  aria-hidden="true"
+  focusable="false"
+  class="icon icon-close"
+  fill="none"
+  viewBox="0 0 18 17"
+>
+  <path d="M.865 15.978a.5.5 0 00.707.707l7.433-7.431 7.579 7.282a.501.501 0 00.846-.37.5.5 0 00-.153-.351L9.712 8.546l7.417-7.416a.5.5 0 10-.707-.708L8.991 7.853 1.413.573a.5.5 0 10-.693.72l7.563 7.268-7.418 7.417z" fill="currentColor">
+</svg>
+
+              </span>
+            </summary>
+            <div id="menu-drawer" class="menu-drawer motion-reduce" tabindex="-1">
+              <div class="menu-drawer__inner-container">
+                <div class="menu-drawer__navigation-container">
+                  <nav class="menu-drawer__navigation">
+                    <div id="cantrip-navigation-mobile"></div>
+                    <ul class="menu-drawer__menu list-menu" role="list"><li><a href="/" class="menu-drawer__menu-item list-menu__item link link--text focus-inset">
+                              TOP
+                            </a></li><li><a href="https://cantripbuy.com/" class="menu-drawer__menu-item list-menu__item link link--text focus-inset">
+                              買取
+                            </a></li><li><a href="https://cantripmtg.com/pages/hachiojistore" class="menu-drawer__menu-item list-menu__item link link--text focus-inset">
+                              大会スケジュール・アクセス
+                            </a></li><li><details id="Details-menu-drawer-menu-item-4">
+                              <summary class="menu-drawer__menu-item list-menu__item link link--text focus-inset">
+                                デッキ検索・大会結果
+                                <svg
+  viewBox="0 0 14 10"
+  fill="none"
+  aria-hidden="true"
+  focusable="false"
+  class="icon icon-arrow"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M8.537.808a.5.5 0 01.817-.162l4 4a.5.5 0 010 .708l-4 4a.5.5 0 11-.708-.708L11.793 5.5H1a.5.5 0 010-1h10.793L8.646 1.354a.5.5 0 01-.109-.546z" fill="currentColor">
+</svg>
+
+                                <svg aria-hidden="true" focusable="false" class="icon icon-caret" viewBox="0 0 10 6">
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M9.354.646a.5.5 0 00-.708 0L5 4.293 1.354.646a.5.5 0 00-.708.708l4 4a.5.5 0 00.708 0l4-4a.5.5 0 000-.708z" fill="currentColor">
+</svg>
+
+                              </summary>
+                              <div id="link-デッキ検索・大会結果" class="menu-drawer__submenu motion-reduce" tabindex="-1">
+                                <div class="menu-drawer__inner-submenu">
+                                  <button class="menu-drawer__close-button link link--text focus-inset" aria-expanded="true">
+                                    <svg
+  viewBox="0 0 14 10"
+  fill="none"
+  aria-hidden="true"
+  focusable="false"
+  class="icon icon-arrow"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M8.537.808a.5.5 0 01.817-.162l4 4a.5.5 0 010 .708l-4 4a.5.5 0 11-.708-.708L11.793 5.5H1a.5.5 0 010-1h10.793L8.646 1.354a.5.5 0 01-.109-.546z" fill="currentColor">
+</svg>
+
+                                    デッキ検索・大会結果
+                                  </button>
+                                  <ul class="menu-drawer__menu list-menu" role="list" tabindex="-1"><li><a href="https://cantripmtg.com/pages/mtg-decks" class="menu-drawer__menu-item link link--text list-menu__item focus-inset">
+                                            MTG
+                                          </a></li><li><a href="https://cantripmtg.com/pages/grand-archive-metagame#mtg:archetypes" class="menu-drawer__menu-item link link--text list-menu__item focus-inset">
+                                            GRAND ARCHIVE
+                                          </a></li><li><a href="https://cantripmtg.com/pages/holo-decks" class="menu-drawer__menu-item link link--text list-menu__item focus-inset">
+                                            ホロライブ
+                                          </a></li></ul>
+                                </div>
+                              </div>
+                            </details></li></ul>
+                    <div id="menu-from-side-bar" class="side-bar"></div>
+                    <div id="menu-from-side-bar-adjust" class="side-bar"></div>
+                    <div id="banner-from-side-bar"></div>
+                  </nav>
+                </div>
+              </div>
+            </div>
+          </details>
+        </header-drawer><h1>TCG専門店 CANTRIP</h1>
+
+      <div class="form-area"><form action="/search" method="get" role="search" class="search search-modal__form adjust" id="header-search-custom" data-default-title="">
+          <div class="custom-floating-board" hidden></div>
+          <div class="custom_search_options">
+            <label class="visually-hidden" for="custom_search_options">検索するタイトル</label>
+            <select id="custom_search_options" name="filter.p.m.custom.title_">
+              <option value="">全タイトル</option>
+
+            </select>
+          </div>
+          <div class="field">
+            <input class="search__input field__input" id="Cantrip-Search-Input" type="search" name="q"
+              value="" placeholder="検索"
+              role="combobox" aria-expanded="false" aria-controls="cantrip-search-options"
+              aria-haspopup="listbox" aria-autocomplete="list" autocorrect="off" autocomplete="off"
+              autocapitalize="off" spellcheck="false">
+            <label class="field__label" for="Cantrip-Search-Input">検索</label>
+            <input type="hidden" name="type" value="product">
+            <input type="hidden" name="options[prefix]" value="last">
+            <input type="hidden" name="options[unavailable_products]" value="last">
+            <button type="submit" class="search__button field__button" aria-label="検索">
+              <svg class="icon icon-search" aria-hidden="true" focusable="false"><use href="#icon-search"></use></svg>
+            </button>
+          </div>
+          <span class="visually-hidden" role="status" aria-live="polite" data-search-status></span>
+        </form>
+      </div>
+
+      <div class="header__icons"><a href="/pages/member-points" class="header__icon header__icon--account link focus-inset small-hide">
+            <svg
+  xmlns="http://www.w3.org/2000/svg"
+  aria-hidden="true"
+  focusable="false"
+  class="icon icon-account"
+  fill="none"
+  viewBox="0 0 18 19"
+>
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M6 4.5a3 3 0 116 0 3 3 0 01-6 0zm3-4a4 4 0 100 8 4 4 0 000-8zm5.58 12.15c1.12.82 1.83 2.24 1.91 4.85H1.51c.08-2.6.79-4.03 1.9-4.85C4.66 11.75 6.5 11.5 9 11.5s4.35.26 5.58 1.15zM9 10.5c-2.5 0-4.65.24-6.17 1.35C1.27 12.98.5 14.93.5 18v.5h17V18c0-3.07-.77-5.02-2.33-6.15-1.52-1.1-3.67-1.35-6.17-1.35z" fill="currentColor">
+</svg>
+
+            <span class="visually-hidden">ログイン</span>
+          </a><a href="/cart" class="header__icon header__icon--cart link focus-inset" id="cart-icon-bubble"><svg
+  class="icon icon-cart-empty"
+  aria-hidden="true"
+  focusable="false"
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 40 40"
+  fill="none"
+>
+  <path d="m15.75 11.8h-3.16l-.77 11.6a5 5 0 0 0 4.99 5.34h7.38a5 5 0 0 0 4.99-5.33l-.78-11.61zm0 1h-2.22l-.71 10.67a4 4 0 0 0 3.99 4.27h7.38a4 4 0 0 0 4-4.27l-.72-10.67h-2.22v.63a4.75 4.75 0 1 1 -9.5 0zm8.5 0h-7.5v.63a3.75 3.75 0 1 0 7.5 0z" fill="currentColor" fill-rule="evenodd"/>
+</svg>
+<span class="visually-hidden">カート</span></a>
+      </div>
+    </div>
+    <div class="header-logo__area page-width">
+      <div id="move_header__heading"><a href="/" class="header__heading-link link link--text focus-inset"><div class="header__heading-logo-wrapper">
+                
+                <img src="//cantripmtg.com/cdn/shop/files/3_58fb1bd5-d658-4e3f-abcd-35e09ec297c9.png?v=1675047990&amp;width=600" alt="TCG専門店 CANTRIP" srcset="//cantripmtg.com/cdn/shop/files/3_58fb1bd5-d658-4e3f-abcd-35e09ec297c9.png?v=1675047990&amp;width=250 250w, //cantripmtg.com/cdn/shop/files/3_58fb1bd5-d658-4e3f-abcd-35e09ec297c9.png?v=1675047990&amp;width=375 375w, //cantripmtg.com/cdn/shop/files/3_58fb1bd5-d658-4e3f-abcd-35e09ec297c9.png?v=1675047990&amp;width=500 500w" width="250" height="80.3834808259587" loading="eager" class="header__heading-logo" sizes="(min-width: 750px) 250px, 50vw">
+              </div>
+                <!--<img srcset="//cantripmtg.com/cdn/shopifycloud/storefront/assets/no-image-100-2a702f30_small.gif 1x, //cantripmtg.com/cdn/shopifycloud/storefront/assets/no-image-100-2a702f30_small@2x.gif 2x"
+                  src="//cantripmtg.com/cdn/shopifycloud/storefront/assets/no-image-100-2a702f30_small.gif"
+                  loading="lazy"
+                  class="header__heading-logo"
+                  width=""
+                  height=""
+                  alt="TCG専門店 CANTRIP"
+                > --></a></div>
+      <div id="cantrip-header-title"></div>
+    </div>
+    <div class="header-nav__wrap page-width"><nav class="header__inline-menu">
+          <ul class="list-menu list-menu--inline" role="list"><li><a href="/" class="header__menu-item header__menu-item list-menu__item link link--text focus-inset">
+                    <span>TOP</span>
+                  </a></li><li><a href="https://cantripbuy.com/" class="header__menu-item header__menu-item list-menu__item link link--text focus-inset">
+                    <span>買取</span>
+                  </a></li><li><a href="https://cantripmtg.com/pages/hachiojistore" class="header__menu-item header__menu-item list-menu__item link link--text focus-inset">
+                    <span>大会スケジュール・アクセス</span>
+                  </a></li><li><details-disclosure>
+                    <details id="Details-HeaderMenu-4">
+                      <summary class="header__menu-item list-menu__item link focus-inset">
+                        <span>デッキ検索・大会結果</span>
+                        <svg aria-hidden="true" focusable="false" class="icon icon-caret" viewBox="0 0 10 6">
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M9.354.646a.5.5 0 00-.708 0L5 4.293 1.354.646a.5.5 0 00-.708.708l4 4a.5.5 0 00.708 0l4-4a.5.5 0 000-.708z" fill="currentColor">
+</svg>
+
+                      </summary>
+                      <ul id="HeaderMenu-MenuList-4" class="header__submenu list-menu list-menu--disclosure caption-large motion-reduce" role="list" tabindex="-1"><li><a href="https://cantripmtg.com/pages/mtg-decks" class="header__menu-item list-menu__item link link--text focus-inset caption-large">
+                                MTG
+                              </a></li><li><a href="https://cantripmtg.com/pages/grand-archive-metagame#mtg:archetypes" class="header__menu-item list-menu__item link link--text focus-inset caption-large">
+                                GRAND ARCHIVE
+                              </a></li><li><a href="https://cantripmtg.com/pages/holo-decks" class="header__menu-item list-menu__item link link--text focus-inset caption-large">
+                                ホロライブ
+                              </a></li></ul>
+                    </details>
+                  </details-disclosure></li></ul>
+        </nav><template id="sp-header-nav-area">
+          <nav class="sp-nav">
+            <ul><li><a href="/" class="header__menu-item header__menu-item list-menu__item link link--text focus-inset">
+                      <span>TOP</span>
+                    </a></li><li><a href="https://cantripbuy.com/" class="header__menu-item header__menu-item list-menu__item link link--text focus-inset">
+                      <span>買取</span>
+                    </a></li><li><a href="https://cantripmtg.com/pages/hachiojistore" class="header__menu-item header__menu-item list-menu__item link link--text focus-inset">
+                      <span>大会スケジュール・アクセス</span>
+                    </a></li><li><div>
+                      <div class="label">
+                        <span>デッキ検索・大会結果</span>
+                        <svg aria-hidden="true" focusable="false" class="icon icon-caret" viewBox="0 0 10 6">
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M9.354.646a.5.5 0 00-.708 0L5 4.293 1.354.646a.5.5 0 00-.708.708l4 4a.5.5 0 00.708 0l4-4a.5.5 0 000-.708z" fill="currentColor">
+</svg>
+
+                      </div>
+                        <ul id="HeaderMenu-MenuList-4" class="menu-b"><li><a href="https://cantripmtg.com/pages/mtg-decks" class="header__menu-item list-menu__item link link--text focus-inset caption-large">
+                                  MTG
+                                </a></li><li><a href="https://cantripmtg.com/pages/grand-archive-metagame#mtg:archetypes" class="header__menu-item list-menu__item link link--text focus-inset caption-large">
+                                  GRAND ARCHIVE
+                                </a></li><li><a href="https://cantripmtg.com/pages/holo-decks" class="header__menu-item list-menu__item link link--text focus-inset caption-large">
+                                  ホロライブ
+                                </a></li></ul>
+                    </div></li></ul>
+          </nav>
+        </template></div>
+</header>
+</sticky-header>
+
+<cart-notification>
+  <div class="cart-notification-wrapper page-width">
+    <div
+      id="cart-notification"
+      class="cart-notification focus-inset color-scheme-1 gradient"
+      aria-modal="true"
+      aria-label="カートにアイテムが追加されました"
+      role="dialog"
+      tabindex="-1"
+    >
+      <div class="cart-notification__header">
+        <h2 class="cart-notification__heading caption-large text-body"><svg
+  class="icon icon-checkmark"
+  aria-hidden="true"
+  focusable="false"
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 12 9"
+  fill="none"
+>
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M11.35.643a.5.5 0 01.006.707l-6.77 6.886a.5.5 0 01-.719-.006L.638 4.845a.5.5 0 11.724-.69l2.872 3.011 6.41-6.517a.5.5 0 01.707-.006h-.001z" fill="currentColor"/>
+</svg>
+カートにアイテムが追加されました
+        </h2>
+        <button
+          type="button"
+          class="cart-notification__close modal__close-button link link--text focus-inset"
+          aria-label="閉じる"
+        >
+          <svg class="icon icon-close" aria-hidden="true" focusable="false">
+            <use href="#icon-close">
+          </svg>
+        </button>
+      </div>
+      <div id="cart-notification-product" class="cart-notification-product"></div>
+      <div class="cart-notification__links">
+        <a
+          href="/cart"
+          id="cart-notification-button"
+          class="button button--secondary button--full-width"
+        >カートを見る</a>
+        <form action="/cart" method="post" id="cart-notification-form">
+          <button class="button button--primary button--full-width" name="checkout">
+            ご購入手続きへ
+          </button>
+        </form>
+        <button type="button" class="link button-label">買い物を続ける</button>
+      </div>
+    </div>
+  </div>
+</cart-notification>
+<style data-shopify>
+  .cart-notification {
+    display: none;
+  }
+</style>
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "Organization",
+    "name": "TCG専門店 CANTRIP",
+    
+      "logo": "https:\/\/cantripmtg.com\/cdn\/shop\/files\/3_58fb1bd5-d658-4e3f-abcd-35e09ec297c9.png?v=1675047990\u0026width=500",
+    
+    "sameAs": [
+      "https:\/\/twitter.com\/MTG_CANTRIP?s=20\u0026t=XwiA9McmPB4g4FPEiKXOxw",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "https:\/\/www.youtube.com\/channel\/UCkl_qS6KXZbv18CKafK--Ug",
+      ""
+    ],
+    "url": "https:\/\/cantripmtg.com\/pages\/hachiojistore"
+  }
+</script>
+</div>
+<!-- END sections: header-group -->
+
+    <div class="main-container">
+      <aside class="side-bar">
+        
+          <div id="shopify-section-cantrip-navigation" class="shopify-section"><link href="//cantripmtg.com/cdn/shop/t/34/assets/cantrip-navigation.css?v=122144251807823830271791528407" rel="stylesheet" type="text/css" media="all" />
+<script src="//cantripmtg.com/cdn/shop/t/34/assets/cantrip-navigation.js?v=93400406546269077761791488760" defer></script>
+<div id="ct-navigation-options" hidden data-title-choice-mode="banner"></div>
+<style data-shopify>:root{--ct-title-width:210px;--ct-title-height:80px}</style>
+
+</div>
+              <!-- BEGIN sections: cantrip-navigation-group -->
+<section id="shopify-section-sections--27897073041590__mtg" class="shopify-section shopify-section-group-cantrip-navigation-group ct-title-section"><template class="ct-title-choice" data-game="mtg">
+  <a href="/pages/mtg" aria-label="MTG TOP" class="ct-has-title-image"><img src="//cantripmtg.com/cdn/shop/files/MTG_5d807c75-a7e2-4ad0-a26e-e2cf76bc1d01.png?v=1724405808&amp;width=520" alt="" srcset="//cantripmtg.com/cdn/shop/files/MTG_5d807c75-a7e2-4ad0-a26e-e2cf76bc1d01.png?v=1724405808&amp;width=352 352w, //cantripmtg.com/cdn/shop/files/MTG_5d807c75-a7e2-4ad0-a26e-e2cf76bc1d01.png?v=1724405808&amp;width=520 520w" width="520" height="104" loading="lazy"><span>MTG</span>
+  </a>
+</template>
+
+</section><section id="shopify-section-sections--27897073041590__onepiece" class="shopify-section shopify-section-group-cantrip-navigation-group ct-title-section"><template class="ct-title-choice" data-game="onepiece">
+  <a href="/pages/onepiece" aria-label="ワンピース TOP" class="ct-has-title-image"><img src="//cantripmtg.com/cdn/shop/files/791e4cab2bd07f72ad4d7a2965813e80_1a58e83d-1768-4ea0-9bbe-eb79461ad01d.png?v=1724405883&amp;width=520" alt="" srcset="//cantripmtg.com/cdn/shop/files/791e4cab2bd07f72ad4d7a2965813e80_1a58e83d-1768-4ea0-9bbe-eb79461ad01d.png?v=1724405883&amp;width=352 352w, //cantripmtg.com/cdn/shop/files/791e4cab2bd07f72ad4d7a2965813e80_1a58e83d-1768-4ea0-9bbe-eb79461ad01d.png?v=1724405883&amp;width=520 520w" width="520" height="104" loading="lazy"><span>ワンピース</span>
+  </a>
+</template>
+
+</section><section id="shopify-section-sections--27897073041590__pokemon" class="shopify-section shopify-section-group-cantrip-navigation-group ct-title-section"><template class="ct-title-choice" data-game="pokemon">
+  <a href="/pages/pokemon" aria-label="ポケカ TOP" class="ct-has-title-image"><img src="//cantripmtg.com/cdn/shop/files/9ec105a15d1db3ebf11d5090f64e9529_c56e457d-1158-44c9-a10d-e7cfb449291c.png?v=1724405861&amp;width=520" alt="" srcset="//cantripmtg.com/cdn/shop/files/9ec105a15d1db3ebf11d5090f64e9529_c56e457d-1158-44c9-a10d-e7cfb449291c.png?v=1724405861&amp;width=352 352w, //cantripmtg.com/cdn/shop/files/9ec105a15d1db3ebf11d5090f64e9529_c56e457d-1158-44c9-a10d-e7cfb449291c.png?v=1724405861&amp;width=520 520w" width="520" height="104" loading="lazy"><span>ポケカ</span>
+  </a>
+</template>
+
+</section><section id="shopify-section-sections--27897073041590__hololive" class="shopify-section shopify-section-group-cantrip-navigation-group ct-title-section"><template class="ct-title-choice" data-game="hololive">
+  <a href="/pages/hololive" aria-label="ホロライブ TOP" class="ct-has-title-image"><img src="//cantripmtg.com/cdn/shop/files/d578930531d85d27444f19e5f8d33553.jpg?v=1726775635&amp;width=520" alt="" srcset="//cantripmtg.com/cdn/shop/files/d578930531d85d27444f19e5f8d33553.jpg?v=1726775635&amp;width=352 352w, //cantripmtg.com/cdn/shop/files/d578930531d85d27444f19e5f8d33553.jpg?v=1726775635&amp;width=520 520w" width="520" height="104" loading="lazy"><span>ホロライブ</span>
+  </a>
+</template>
+
+</section><section id="shopify-section-sections--27897073041590__ga" class="shopify-section shopify-section-group-cantrip-navigation-group ct-title-section"><template class="ct-title-choice" data-game="ga">
+  <a href="/pages/grandarchivetop" aria-label="GRAND ARCHIVE TOP" class="ct-has-title-image"><img src="//cantripmtg.com/cdn/shop/files/f1dc83bba1099140ddbf5036e1cb92de.jpg?v=1764958828&amp;width=520" alt="" srcset="//cantripmtg.com/cdn/shop/files/f1dc83bba1099140ddbf5036e1cb92de.jpg?v=1764958828&amp;width=352 352w, //cantripmtg.com/cdn/shop/files/f1dc83bba1099140ddbf5036e1cb92de.jpg?v=1764958828&amp;width=520 520w" width="520" height="104" loading="lazy"><span>GRAND ARCHIVE</span>
+  </a>
+</template>
+
+</section><section id="shopify-section-sections--27897073041590__fab" class="shopify-section shopify-section-group-cantrip-navigation-group ct-title-section"><template class="ct-title-choice" data-game="fab">
+  <a href="/pages/fab" aria-label="FAB TOP" class="ct-has-title-image"><img src="//cantripmtg.com/cdn/shop/files/FaB_646269f0-89de-42f1-8793-da977ea20e72.webp?v=1724405959&amp;width=520" alt="" srcset="//cantripmtg.com/cdn/shop/files/FaB_646269f0-89de-42f1-8793-da977ea20e72.webp?v=1724405959&amp;width=352 352w, //cantripmtg.com/cdn/shop/files/FaB_646269f0-89de-42f1-8793-da977ea20e72.webp?v=1724405959&amp;width=520 520w" width="520" height="104" loading="lazy"><span>FAB</span>
+  </a>
+</template>
+
+</section><section id="shopify-section-sections--27897073041590__xrossstars" class="shopify-section shopify-section-group-cantrip-navigation-group ct-title-section"><template class="ct-title-choice" data-game="xrossstars">
+  <a href="/pages/xrosstop" aria-label="XrossStars TOP" class="ct-has-title-image"><img src="//cantripmtg.com/cdn/shop/files/xross.jpg?v=1755774029&amp;width=520" alt="" srcset="//cantripmtg.com/cdn/shop/files/xross.jpg?v=1755774029&amp;width=352 352w, //cantripmtg.com/cdn/shop/files/xross.jpg?v=1755774029&amp;width=520 520w" width="520" height="104" loading="lazy"><span>XrossStars</span>
+  </a>
+</template>
+
+</section><section id="shopify-section-sections--27897073041590__general" class="shopify-section shopify-section-group-cantrip-navigation-group ct-title-section"><div id="cantrip-navigation-home" data-title-section="sections--27897073041590__general">
+    <div class="ct-title-tools" hidden data-current-game="general"><details class="ct-title-picker"><summary>タイトル選択<span class="ct-nav-chevron" aria-hidden="true"></span></summary><ul class="ct-title-choices" role="list"></ul></details>
+    </div>
+    <nav id="cantrip-navigation" class="ct-navigation ct-navigation-v2" data-game="general" aria-label="総合メニューのメニュー" style="--ct-mobile-banner-columns:2">
+      <details class="ct-mobile-title-picker"><summary>カードタイトル選択<span class="ct-nav-chevron" aria-hidden="true"></span></summary><ul class="ct-title-choices" role="list"></ul></details><h2 class="ct-nav-title">総合メニュー</h2><ul class="ct-nav-items" role="list"><li class="ct-nav-item"><div class="ct-menu-entry" data-menu-title="MTG TOP" data-menu-url="https://cantripmtg.com/pages/mtg">
+      <a class="ct-nav-direct" href="https://cantripmtg.com/pages/mtg">MTG TOP</a></div></li>
+<li class="ct-nav-item"><div class="ct-menu-entry" data-menu-title="ワンピース TOP" data-menu-url="https://cantripmtg.com/pages/onepiece">
+      <a class="ct-nav-direct" href="https://cantripmtg.com/pages/onepiece">ワンピース TOP</a></div></li>
+<li class="ct-nav-item"><div class="ct-menu-entry" data-menu-title="ポケカ TOP" data-menu-url="https://cantripmtg.com/pages/pokemon">
+      <a class="ct-nav-direct" href="https://cantripmtg.com/pages/pokemon">ポケカ TOP</a></div></li>
+<li class="ct-nav-item"><div class="ct-menu-entry" data-menu-title="ホロライブ TOP" data-menu-url="https://cantripmtg.com/pages/hololive">
+      <a class="ct-nav-direct" href="https://cantripmtg.com/pages/hololive">ホロライブ TOP</a></div></li>
+<li class="ct-nav-item"><div class="ct-menu-entry" data-menu-title="GRAND ARCHIVE TOP" data-menu-url="https://cantripmtg.com/pages/grandarchivetop">
+      <a class="ct-nav-direct" href="https://cantripmtg.com/pages/grandarchivetop">GRAND ARCHIVE TOP</a></div></li>
+<li class="ct-nav-item"><div class="ct-menu-entry" data-menu-title="FAB TOP" data-menu-url="https://cantripmtg.com/pages/fab">
+      <a class="ct-nav-direct" href="https://cantripmtg.com/pages/fab">FAB TOP</a></div></li>
+<li class="ct-nav-item"><div class="ct-menu-entry" data-menu-title="XrossStars TOP" data-menu-url="https://cantripmtg.com/pages/xrosstop">
+      <a class="ct-nav-direct" href="https://cantripmtg.com/pages/xrosstop">XrossStars TOP</a></div></li>
+<li class="ct-nav-item"><div class="ct-menu-entry" data-menu-title="サプライ" data-menu-url="https://cantripmtg.com/collections/supply">
+      <a class="ct-nav-direct" href="https://cantripmtg.com/collections/supply">サプライ</a></div></li>
+<li class="ct-nav-item"><div class="ct-menu-entry" data-menu-title="店舗案内・大会情報" data-menu-url="https://cantripmtg.com/pages/hachiojistore">
+      <a class="ct-nav-direct" href="https://cantripmtg.com/pages/hachiojistore">店舗案内・大会情報</a></div></li>
+<li class="ct-nav-item"><div class="ct-menu-entry" data-menu-title="買取TOP" data-menu-url="https://cantripbuy.com/pages/buy">
+      <a class="ct-nav-direct" href="https://cantripbuy.com/pages/buy">買取TOP</a></div></li>
+</ul><script type="application/json" class="ct-menu-config">{"profile":null,"rules":[]}</script><script type="application/json" class="ct-menu-managed">{"version":3,"revision":"initial-20261009","defaultPattern":"4f53cda18c2baa0c","patterns":{"4f53cda18c2baa0c":[]},"sets":{"\/pages\/mtg":{"title":"MTG TOP","mode":"none","pattern":"","image":""},"\/pages\/onepiece":{"title":"ワンピース TOP","mode":"none","pattern":"","image":""},"\/pages\/pokemon":{"title":"ポケカ TOP","mode":"none","pattern":"","image":""},"\/pages\/hololive":{"title":"ホロライブ TOP","mode":"none","pattern":"","image":""},"\/pages\/grandarchivetop":{"title":"GRAND ARCHIVE TOP","mode":"none","pattern":"","image":""},"\/pages\/fab":{"title":"FAB TOP","mode":"none","pattern":"","image":""},"\/pages\/xrosstop":{"title":"XrossStars TOP","mode":"none","pattern":"","image":""},"\/collections\/supply":{"title":"共通サプライ","mode":"none","pattern":"","image":""},"\/pages\/hachiojistore":{"title":"店舗案内・大会情報","mode":"none","pattern":"","image":""},"\/pages\/buy":{"title":"買取TOP","mode":"none","pattern":"","image":""}}}</script></nav>
+  </div>
+
+</section>
+<!-- END sections: cantrip-navigation-group -->
+        
+      </aside>
+      <main id="MainContent" class="content-for-layout focus-none" role="main" tabindex="-1">
+        <section id="shopify-section-template--27894803988662__main" class="shopify-section section"><link href="//cantripmtg.com/cdn/shop/t/34/assets/section-main-page.css?v=848677459125201531791442834" rel="stylesheet" type="text/css" media="all" />
+<style data-shopify>.section-template--27894803988662__main-padding {
+    padding-top: 21px;
+    padding-bottom: 21px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-template--27894803988662__main-padding {
+      padding-top: 28px;
+      padding-bottom: 28px;
+    }
+  }</style><div class="page-width page-width--narrow section-template--27894803988662__main-padding">
+  <h1 class="main-page-title page-title h0 scroll-trigger animate--fade-in">
+    TCG専門店CANTRIP八王子店　大会情報・アクセス
+  </h1>
+  <div class="rte scroll-trigger animate--slide-in">
+    <div style="text-align: center;"><img src="https://cdn.shopify.com/s/files/1/0613/9595/9990/files/2026_-_Google__page-0001_4_e77d9e49-5770-4bc8-9ecd-fc00b9007cf3.jpg?v=1790798843" alt=""></div>
+<div style="text-align: center;"><br></div>
+<h2>
+<span style="color: #ff2a00;"><strong>大会予約</strong></span><strong>は<span style="color: #2b00ff;"><a href="https://twipla.jp/users/MTG_CANTRIP" style="color: #2b00ff;" target="_blank">こちら</a></span></strong>
+</h2>
+<p> </p>
+<p>店舗情報</p>
+<p><img src="https://cdn.shopify.com/s/files/1/0613/9595/9990/files/1500x500_1024x1024.jpg?v=1698469921" alt=""></p>
+<p><strong>営業時間</strong></p>
+<p><strong>平日：15:00~23:00</strong></p>
+<p><strong>土曜日：13:00~23:00</strong></p>
+<p><strong>日曜日：13:00~21:00</strong></p>
+<p> </p>
+<p><strong>所在地</strong></p>
+<p><strong>東京都八王子市三崎町4-11トーネンビル4F</strong></p>
+<p>JR中央線八王子駅北口　徒歩3分</p>
+<p><img src="https://cdn.shopify.com/s/files/1/0613/9595/9990/files/6e16635e09ec511d412f472ea9d4b8db_480x480.png?v=1698315471" alt=""></p>
+<p> </p>
+  </div>
+</div>
+
+
+</section>
+      </main>
+    </div>
+    
+    <!-- BEGIN sections: footer-group -->
+<div id="shopify-section-sections--27894798647478__footer" class="shopify-section shopify-section-group-footer-group">
+<link href="//cantripmtg.com/cdn/shop/t/34/assets/section-footer.css?v=61390616271034004541791442834" rel="stylesheet" type="text/css" media="all" />
+<link href="//cantripmtg.com/cdn/shop/t/34/assets/component-newsletter.css?v=4727253280200485261791442834" rel="stylesheet" type="text/css" media="all" />
+<link href="//cantripmtg.com/cdn/shop/t/34/assets/component-list-menu.css?v=151968516119678728991791442834" rel="stylesheet" type="text/css" media="all" />
+<link href="//cantripmtg.com/cdn/shop/t/34/assets/component-list-payment.css?v=69253961410771838501791442834" rel="stylesheet" type="text/css" media="all" />
+<link href="//cantripmtg.com/cdn/shop/t/34/assets/component-list-social.css?v=35792976012981934991791442834" rel="stylesheet" type="text/css" media="all" />
+<style data-shopify>.footer {
+    margin-top: 9px;
+  }
+
+  .section-sections--27894798647478__footer-padding {
+    padding-top: 27px;
+    padding-bottom: 27px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .footer {
+      margin-top: 12px;
+    }
+
+    .section-sections--27894798647478__footer-padding {
+      padding-top: 36px;
+      padding-bottom: 36px;
+    }
+  }</style><footer class="footer color-scheme-4 gradient section-sections--27894798647478__footer-padding"><div class="footer__content-top page-width"><div
+            class="footer__blocks-wrapper grid grid--1-col grid--2-col grid--4-col-tablet  scroll-trigger animate--slide-in"
+            
+              data-cascade
+            
+          ><div
+                class="footer-block grid__item footer-block--menu scroll-trigger animate--slide-in"
+                
+                
+                  data-cascade
+                  style="--animation-order: 1;"
+                
+              ><ul class="footer-block__details-content list-unstyled"><li>
+                            <a
+                              href="/"
+                              class="link link--text list-menu__item list-menu__item--link"
+                            >
+                              HOME
+                            </a>
+                          </li><li>
+                            <a
+                              href="/search"
+                              class="link link--text list-menu__item list-menu__item--link"
+                            >
+                              検索
+                            </a>
+                          </li><li>
+                            <a
+                              href="/policies/shipping-policy"
+                              class="link link--text list-menu__item list-menu__item--link"
+                            >
+                              送料について
+                            </a>
+                          </li><li>
+                            <a
+                              href="https://cantripmtg.com/pages/condition"
+                              class="link link--text list-menu__item list-menu__item--link"
+                            >
+                              状態表記について
+                            </a>
+                          </li><li>
+                            <a
+                              href="/policies/legal-notice"
+                              class="link link--text list-menu__item list-menu__item--link"
+                            >
+                              Legal Notice
+                            </a>
+                          </li><li>
+                            <a
+                              href="/policies/privacy-policy"
+                              class="link link--text list-menu__item list-menu__item--link"
+                            >
+                              Privacy Policy
+                            </a>
+                          </li><li>
+                            <a
+                              href="/policies/refund-policy"
+                              class="link link--text list-menu__item list-menu__item--link"
+                            >
+                              返金ポリシー
+                            </a>
+                          </li><li>
+                            <a
+                              href="/policies/terms-of-service"
+                              class="link link--text list-menu__item list-menu__item--link"
+                            >
+                              利用規約
+                            </a>
+                          </li><li>
+                            <a
+                              href="/pages/contact"
+                              class="link link--text list-menu__item list-menu__item--link"
+                            >
+                              お問い合わせ
+                            </a>
+                          </li></ul></div><div
+                class="footer-block grid__item footer-block--menu scroll-trigger animate--slide-in"
+                
+                
+                  data-cascade
+                  style="--animation-order: 2;"
+                
+              ></div></div><div
+          class="footer-block--newsletter scroll-trigger animate--slide-in"
+          
+            data-cascade
+          
+        ><div class="footer-block__newsletter"><h2 class="footer-block__heading inline-richtext">メールでのお問い合わせはこちら</h2><form method="post" action="/contact#ContactFooter" id="ContactFooter" accept-charset="UTF-8" class="footer__newsletter newsletter-form"><input type="hidden" name="form_type" value="customer" /><input type="hidden" name="utf8" value="✓" /><input type="hidden" name="contact[tags]" value="newsletter">
+                <div class="newsletter-form__field-wrapper">
+                  <div class="field">
+                    <input
+                      id="NewsletterForm--sections--27894798647478__footer"
+                      type="email"
+                      name="contact[email]"
+                      class="field__input"
+                      value=""
+                      aria-required="true"
+                      autocorrect="off"
+                      autocapitalize="off"
+                      autocomplete="email"
+                      
+                      placeholder="メール"
+                      required
+                    >
+                    <label class="field__label" for="NewsletterForm--sections--27894798647478__footer">
+                      メール
+                    </label>
+                    <button
+                      type="submit"
+                      class="newsletter-form__button field__button"
+                      name="commit"
+                      id="Subscribe"
+                      aria-label="登録"
+                    >
+                      <svg
+  viewBox="0 0 14 10"
+  fill="none"
+  aria-hidden="true"
+  focusable="false"
+  class="icon icon-arrow"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M8.537.808a.5.5 0 01.817-.162l4 4a.5.5 0 010 .708l-4 4a.5.5 0 11-.708-.708L11.793 5.5H1a.5.5 0 010-1h10.793L8.646 1.354a.5.5 0 01-.109-.546z" fill="currentColor">
+</svg>
+
+                    </button>
+                  </div></div></form></div>
+
+<ul class="list-unstyled list-social footer__list-social" role="list"><li class="list-social__item">
+      <a href="https://www.youtube.com/channel/UCkl_qS6KXZbv18CKafK--Ug" class="link list-social__link"><svg aria-hidden="true" focusable="false" class="icon icon-youtube" viewBox="0 0 20 20">
+  <path fill="currentColor" d="M18.16 5.87c.34 1.309.34 4.08.34 4.08s0 2.771-.34 4.08a2.125 2.125 0 0 1-1.53 1.53c-1.309.34-6.63.34-6.63.34s-5.321 0-6.63-.34a2.125 2.125 0 0 1-1.53-1.53c-.34-1.309-.34-4.08-.34-4.08s0-2.771.34-4.08a2.173 2.173 0 0 1 1.53-1.53C4.679 4 10 4 10 4s5.321 0 6.63.34a2.173 2.173 0 0 1 1.53 1.53ZM8.3 12.5l4.42-2.55L8.3 7.4v5.1Z"/>
+</svg>
+<span class="visually-hidden">YouTube</span>
+      </a>
+    </li><li class="list-social__item">
+      <a href="https://twitter.com/MTG_CANTRIP?s=20&t=XwiA9McmPB4g4FPEiKXOxw" class="link list-social__link"><svg aria-hidden="true" focusable="false" class="icon icon-twitter" viewBox="0 0 20 20">
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M7.27274 2.8L10.8009 7.82176L15.2183 2.8H16.986L11.5861 8.93887L17.3849 17.1928H12.7272L8.99645 11.8828L4.32555 17.1928H2.55769L8.21157 10.7657L2.61506 2.8H7.27274ZM13.5151 15.9248L5.06895 4.10931H6.4743L14.9204 15.9248H13.5151Z" fill="currentColor"/>
+</svg>
+<span class="visually-hidden">X (Twitter)</span>
+      </a>
+    </li></ul>
+</div>
+      </div><div
+    class="footer__content-bottom scroll-trigger animate--slide-in"
+    
+      data-cascade
+    
+  >
+    <div class="footer__content-bottom-wrapper page-width">
+      <div class="footer__column footer__localization isolate"></div>
+      <div class="footer__column footer__column--info"><div class="footer__payment">
+            <span class="visually-hidden">決済方法</span>
+            <ul class="list list-payment" role="list"><li class="list-payment__item">
+                  <svg class="icon icon--full-color" version="1.1" xmlns="http://www.w3.org/2000/svg" role="img" x="0" y="0" width="38" height="24" viewBox="0 0 165.521 105.965" xml:space="preserve" aria-labelledby="pi-apple_pay"><title id="pi-apple_pay">Apple Pay</title><path fill="#000" d="M150.698 0H14.823c-.566 0-1.133 0-1.698.003-.477.004-.953.009-1.43.022-1.039.028-2.087.09-3.113.274a10.51 10.51 0 0 0-2.958.975 9.932 9.932 0 0 0-4.35 4.35 10.463 10.463 0 0 0-.975 2.96C.113 9.611.052 10.658.024 11.696a70.22 70.22 0 0 0-.022 1.43C0 13.69 0 14.256 0 14.823v76.318c0 .567 0 1.132.002 1.699.003.476.009.953.022 1.43.028 1.036.09 2.084.275 3.11a10.46 10.46 0 0 0 .974 2.96 9.897 9.897 0 0 0 1.83 2.52 9.874 9.874 0 0 0 2.52 1.83c.947.483 1.917.79 2.96.977 1.025.183 2.073.245 3.112.273.477.011.953.017 1.43.02.565.004 1.132.004 1.698.004h135.875c.565 0 1.132 0 1.697-.004.476-.002.952-.009 1.431-.02 1.037-.028 2.085-.09 3.113-.273a10.478 10.478 0 0 0 2.958-.977 9.955 9.955 0 0 0 4.35-4.35c.483-.947.789-1.917.974-2.96.186-1.026.246-2.074.274-3.11.013-.477.02-.954.022-1.43.004-.567.004-1.132.004-1.699V14.824c0-.567 0-1.133-.004-1.699a63.067 63.067 0 0 0-.022-1.429c-.028-1.038-.088-2.085-.274-3.112a10.4 10.4 0 0 0-.974-2.96 9.94 9.94 0 0 0-4.35-4.35A10.52 10.52 0 0 0 156.939.3c-1.028-.185-2.076-.246-3.113-.274a71.417 71.417 0 0 0-1.431-.022C151.83 0 151.263 0 150.698 0z" /><path fill="#FFF" d="M150.698 3.532l1.672.003c.452.003.905.008 1.36.02.793.022 1.719.065 2.583.22.75.135 1.38.34 1.984.648a6.392 6.392 0 0 1 2.804 2.807c.306.6.51 1.226.645 1.983.154.854.197 1.783.218 2.58.013.45.019.9.02 1.36.005.557.005 1.113.005 1.671v76.318c0 .558 0 1.114-.004 1.682-.002.45-.008.9-.02 1.35-.022.796-.065 1.725-.221 2.589a6.855 6.855 0 0 1-.645 1.975 6.397 6.397 0 0 1-2.808 2.807c-.6.306-1.228.511-1.971.645-.881.157-1.847.2-2.574.22-.457.01-.912.017-1.379.019-.555.004-1.113.004-1.669.004H14.801c-.55 0-1.1 0-1.66-.004a74.993 74.993 0 0 1-1.35-.018c-.744-.02-1.71-.064-2.584-.22a6.938 6.938 0 0 1-1.986-.65 6.337 6.337 0 0 1-1.622-1.18 6.355 6.355 0 0 1-1.178-1.623 6.935 6.935 0 0 1-.646-1.985c-.156-.863-.2-1.788-.22-2.578a66.088 66.088 0 0 1-.02-1.355l-.003-1.327V14.474l.002-1.325a66.7 66.7 0 0 1 .02-1.357c.022-.792.065-1.717.222-2.587a6.924 6.924 0 0 1 .646-1.981c.304-.598.7-1.144 1.18-1.623a6.386 6.386 0 0 1 1.624-1.18 6.96 6.96 0 0 1 1.98-.646c.865-.155 1.792-.198 2.586-.22.452-.012.905-.017 1.354-.02l1.677-.003h135.875" /><g><g><path fill="#000" d="M43.508 35.77c1.404-1.755 2.356-4.112 2.105-6.52-2.054.102-4.56 1.355-6.012 3.112-1.303 1.504-2.456 3.959-2.156 6.266 2.306.2 4.61-1.152 6.063-2.858" /><path fill="#000" d="M45.587 39.079c-3.35-.2-6.196 1.9-7.795 1.9-1.6 0-4.049-1.8-6.698-1.751-3.447.05-6.645 2-8.395 5.1-3.598 6.2-.95 15.4 2.55 20.45 1.699 2.5 3.747 5.25 6.445 5.151 2.55-.1 3.549-1.65 6.647-1.65 3.097 0 3.997 1.65 6.696 1.6 2.798-.05 4.548-2.5 6.247-5 1.95-2.85 2.747-5.6 2.797-5.75-.05-.05-5.396-2.101-5.446-8.251-.05-5.15 4.198-7.6 4.398-7.751-2.399-3.548-6.147-3.948-7.447-4.048" /></g><g><path fill="#000" d="M78.973 32.11c7.278 0 12.347 5.017 12.347 12.321 0 7.33-5.173 12.373-12.529 12.373h-8.058V69.62h-5.822V32.11h14.062zm-8.24 19.807h6.68c5.07 0 7.954-2.729 7.954-7.46 0-4.73-2.885-7.434-7.928-7.434h-6.706v14.894z" /><path fill="#000" d="M92.764 61.847c0-4.809 3.665-7.564 10.423-7.98l7.252-.442v-2.08c0-3.04-2.001-4.704-5.562-4.704-2.938 0-5.07 1.507-5.51 3.82h-5.252c.157-4.86 4.731-8.395 10.918-8.395 6.654 0 10.995 3.483 10.995 8.89v18.663h-5.38v-4.497h-.13c-1.534 2.937-4.914 4.782-8.579 4.782-5.406 0-9.175-3.222-9.175-8.057zm17.675-2.417v-2.106l-6.472.416c-3.64.234-5.536 1.585-5.536 3.95 0 2.288 1.975 3.77 5.068 3.77 3.95 0 6.94-2.522 6.94-6.03z" /><path fill="#000" d="M120.975 79.652v-4.496c.364.051 1.247.103 1.715.103 2.573 0 4.029-1.09 4.913-3.899l.52-1.663-9.852-27.293h6.082l6.863 22.146h.13l6.862-22.146h5.927l-10.216 28.67c-2.34 6.577-5.017 8.735-10.683 8.735-.442 0-1.872-.052-2.261-.157z" /></g></g></svg>
+
+                </li><li class="list-payment__item">
+                  <svg class="icon icon--full-color" xmlns="http://www.w3.org/2000/svg" role="img" viewBox="0 0 38 24" width="38" height="24" aria-labelledby="pi-google_pay"><title id="pi-google_pay">Google Pay</title><path d="M35 0H3C1.3 0 0 1.3 0 3v18c0 1.7 1.4 3 3 3h32c1.7 0 3-1.3 3-3V3c0-1.7-1.4-3-3-3z" fill="#000" opacity=".07"/><path d="M35 1c1.1 0 2 .9 2 2v18c0 1.1-.9 2-2 2H3c-1.1 0-2-.9-2-2V3c0-1.1.9-2 2-2h32" fill="#FFF"/><path d="M18.093 11.976v3.2h-1.018v-7.9h2.691a2.447 2.447 0 0 1 1.747.692 2.28 2.28 0 0 1 .11 3.224l-.11.116c-.47.447-1.098.69-1.747.674l-1.673-.006zm0-3.732v2.788h1.698c.377.012.741-.135 1.005-.404a1.391 1.391 0 0 0-1.005-2.354l-1.698-.03zm6.484 1.348c.65-.03 1.286.188 1.778.613.445.43.682 1.03.65 1.649v3.334h-.969v-.766h-.049a1.93 1.93 0 0 1-1.673.931 2.17 2.17 0 0 1-1.496-.533 1.667 1.667 0 0 1-.613-1.324 1.606 1.606 0 0 1 .613-1.336 2.746 2.746 0 0 1 1.698-.515c.517-.02 1.03.093 1.49.331v-.208a1.134 1.134 0 0 0-.417-.901 1.416 1.416 0 0 0-.98-.368 1.545 1.545 0 0 0-1.319.717l-.895-.564a2.488 2.488 0 0 1 2.182-1.06zM23.29 13.52a.79.79 0 0 0 .337.662c.223.176.5.269.785.263.429-.001.84-.17 1.146-.472.305-.286.478-.685.478-1.103a2.047 2.047 0 0 0-1.324-.374 1.716 1.716 0 0 0-1.03.294.883.883 0 0 0-.392.73zm9.286-3.75l-3.39 7.79h-1.048l1.281-2.728-2.224-5.062h1.103l1.612 3.885 1.569-3.885h1.097z" fill="#5F6368"/><path d="M13.986 11.284c0-.308-.024-.616-.073-.92h-4.29v1.747h2.451a2.096 2.096 0 0 1-.9 1.373v1.134h1.464a4.433 4.433 0 0 0 1.348-3.334z" fill="#4285F4"/><path d="M9.629 15.721a4.352 4.352 0 0 0 3.01-1.097l-1.466-1.14a2.752 2.752 0 0 1-4.094-1.44H5.577v1.17a4.53 4.53 0 0 0 4.052 2.507z" fill="#34A853"/><path d="M7.079 12.05a2.709 2.709 0 0 1 0-1.735v-1.17H5.577a4.505 4.505 0 0 0 0 4.075l1.502-1.17z" fill="#FBBC04"/><path d="M9.629 8.44a2.452 2.452 0 0 1 1.74.68l1.3-1.293a4.37 4.37 0 0 0-3.065-1.183 4.53 4.53 0 0 0-4.027 2.5l1.502 1.171a2.715 2.715 0 0 1 2.55-1.875z" fill="#EA4335"/></svg>
+
+                </li><li class="list-payment__item">
+                  <svg class="icon icon--full-color" width="38" height="24" role="img" aria-labelledby="pi-jcb" viewBox="0 0 38 24" xmlns="http://www.w3.org/2000/svg"><title id="pi-jcb">JCB</title><g fill="none" fill-rule="evenodd"><g fill-rule="nonzero"><path d="M35 0H3C1.3 0 0 1.3 0 3v18c0 1.7 1.4 3 3 3h32c1.7 0 3-1.3 3-3V3c0-1.7-1.4-3-3-3z" fill="#000" opacity=".07"/><path d="M35 1c1.1 0 2 .9 2 2v18c0 1.1-.9 2-2 2H3c-1.1 0-2-.9-2-2V3c0-1.1.9-2 2-2h32" fill="#FFF"/></g><path d="M11.5 5H15v11.5a2.5 2.5 0 0 1-2.5 2.5H9V7.5A2.5 2.5 0 0 1 11.5 5z" fill="#006EBC"/><path d="M18.5 5H22v11.5a2.5 2.5 0 0 1-2.5 2.5H16V7.5A2.5 2.5 0 0 1 18.5 5z" fill="#F00036"/><path d="M25.5 5H29v11.5a2.5 2.5 0 0 1-2.5 2.5H23V7.5A2.5 2.5 0 0 1 25.5 5z" fill="#2AB419"/><path d="M10.755 14.5c-1.06 0-2.122-.304-2.656-.987l.78-.676c.068 1.133 3.545 1.24 3.545-.19V9.5h1.802v3.147c0 .728-.574 1.322-1.573 1.632-.466.144-1.365.221-1.898.221zm8.116 0c-.674 0-1.388-.107-1.965-.366-.948-.425-1.312-1.206-1.3-2.199.012-1.014.436-1.782 1.468-2.165 1.319-.49 3.343-.261 3.926.27v.972c-.572-.521-1.958-.898-2.919-.46-.494.226-.737.917-.744 1.448-.006.56.245 1.252.744 1.497.953.467 2.39.04 2.919-.441v1.01c-.358.255-1.253.434-2.129.434zm8.679-2.587c.37-.235.582-.567.582-1.005 0-.438-.116-.687-.348-.939-.206-.207-.58-.469-1.238-.469H23v5h3.546c.696 0 1.097-.23 1.315-.415.283-.25.426-.53.426-.96 0-.431-.155-.908-.737-1.212zm-1.906-.281h-1.428v-1.444h1.495c.956 0 .944 1.444-.067 1.444zm.288 2.157h-1.716v-1.513h1.716c.986 0 1.083 1.513 0 1.513z" fill="#FFF" fill-rule="nonzero"/></g></svg>
+                </li><li class="list-payment__item">
+                  <svg class="icon icon--full-color" xmlns="http://www.w3.org/2000/svg" role="img" viewBox="0 0 38 24" width="38" height="24" fill="none" aria-labelledby="pi-master"><title id="pi-master">Mastercard</title><rect x=".5" y=".5" width="37" height="23" rx="2.5" stroke="#000" stroke-opacity=".07" fill="none"/><path d="M35 0H3C1.3 0 0 1.3 0 3V21C0 22.7 1.4 24 3 24H35C36.7 24 38 22.7 38 21V3C38 1.3 36.6 0 35 0Z" fill="#1C1C1C" style="fill:#1C1C1C;fill:color(display-p3 0.1098 0.1098 0.1098);fill-opacity:1;"/><path d="M35 1C36.1 1 37 1.9 37 3V21C37 22.1 36.1 23 35 23H3C1.9 23 1 22.1 1 21V3C1 1.9 1.9 1 3 1H35Z" fill="#232323" style="fill:#232323;fill:color(display-p3 0.1373 0.1373 0.1373);fill-opacity:1;"/><path d="M14.6364 19.2727C18.8538 19.2727 22.2727 15.8538 22.2727 11.6364C22.2727 7.41892 18.8538 4 14.6364 4C10.4189 4 7 7.41892 7 11.6364C7 15.8538 10.4189 19.2727 14.6364 19.2727Z" fill="#EB001B" style="fill:#EB001B;fill:color(display-p3 0.9216 0.0000 0.1059);fill-opacity:1;"/><path d="M23.3637 19.2727C27.5811 19.2727 31 15.8538 31 11.6364C31 7.41892 27.5811 4 23.3637 4C19.1462 4 15.7273 7.41892 15.7273 11.6364C15.7273 15.8538 19.1462 19.2727 23.3637 19.2727Z" fill="#F79E1B" style="fill:#F79E1B;fill:color(display-p3 0.9686 0.6196 0.1059);fill-opacity:1;"/><path d="M22.2727 11.6362C22.2727 9.01797 20.9637 6.72706 19 5.41797C17.0364 6.83615 15.7273 9.12706 15.7273 11.6362C15.7273 14.1452 17.0364 16.5452 19 17.8543C20.9637 16.5452 22.2727 14.2543 22.2727 11.6362Z" fill="#FF5F00" style="fill:#FF5F00;fill:color(display-p3 1.0000 0.3725 0.0000);fill-opacity:1;"/></svg>
+
+                </li><li class="list-payment__item">
+                  <svg class="icon icon--full-color" viewBox="0 0 38 24" xmlns="http://www.w3.org/2000/svg" width="38" height="24" role="img" aria-labelledby="pi-paypal"><title id="pi-paypal">PayPal</title><path opacity=".07" d="M35 0H3C1.3 0 0 1.3 0 3v18c0 1.7 1.4 3 3 3h32c1.7 0 3-1.3 3-3V3c0-1.7-1.4-3-3-3z"/><path fill="#fff" d="M35 1c1.1 0 2 .9 2 2v18c0 1.1-.9 2-2 2H3c-1.1 0-2-.9-2-2V3c0-1.1.9-2 2-2h32"/><path fill="#003087" d="M23.9 8.3c.2-1 0-1.7-.6-2.3-.6-.7-1.7-1-3.1-1h-4.1c-.3 0-.5.2-.6.5L14 15.6c0 .2.1.4.3.4H17l.4-3.4 1.8-2.2 4.7-2.1z"/><path fill="#3086C8" d="M23.9 8.3l-.2.2c-.5 2.8-2.2 3.8-4.6 3.8H18c-.3 0-.5.2-.6.5l-.6 3.9-.2 1c0 .2.1.4.3.4H19c.3 0 .5-.2.5-.4v-.1l.4-2.4v-.1c0-.2.3-.4.5-.4h.3c2.1 0 3.7-.8 4.1-3.2.2-1 .1-1.8-.4-2.4-.1-.5-.3-.7-.5-.8z"/><path fill="#012169" d="M23.3 8.1c-.1-.1-.2-.1-.3-.1-.1 0-.2 0-.3-.1-.3-.1-.7-.1-1.1-.1h-3c-.1 0-.2 0-.2.1-.2.1-.3.2-.3.4l-.7 4.4v.1c0-.3.3-.5.6-.5h1.3c2.5 0 4.1-1 4.6-3.8v-.2c-.1-.1-.3-.2-.5-.2h-.1z"/></svg>
+                </li><li class="list-payment__item">
+                  <svg class="icon icon--full-color" xmlns="http://www.w3.org/2000/svg" role="img" viewBox="0 0 38 24" width="38" height="24" fill="none" aria-labelledby="pi-visa"><title id="pi-visa">Visa</title><rect x=".5" y=".5" width="37" height="23" rx="2.5" stroke="#000" stroke-opacity=".07" fill="none"/><path d="M35 0H3C1.3 0 0 1.3 0 3V21C0 22.7 1.4 24 3 24H35C36.7 24 38 22.7 38 21V3C38 1.3 36.6 0 35 0Z" fill="#142FBD" style="fill:#142FBD;fill:color(display-p3 0.0784 0.1843 0.7412);fill-opacity:1;"/><path d="M35 1C36.1 1 37 1.9 37 3V21C37 22.1 36.1 23 35 23H3C1.9 23 1 22.1 1 21V3C1 1.9 1.9 1 3 1H35Z" fill="#1532CB" style="fill:#1532CB;fill:color(display-p3 0.0824 0.1961 0.7961);fill-opacity:1;"/><path d="M29.5944 10.2167H29.2778C28.8556 11.2722 28.5389 11.8 28.2222 13.3833H30.2278C29.9111 11.8 29.9111 11.0611 29.5944 10.2167V10.2167ZM32.6556 16.4444H30.8611C30.7556 16.4444 30.7556 16.4444 30.65 16.3389L30.4389 15.3889L30.3333 15.1778H27.8C27.6944 15.1778 27.5889 15.1778 27.5889 15.3889L27.2722 16.3389C27.2722 16.4444 27.1667 16.4444 27.1667 16.4444H24.95L25.1611 15.9167L28.2222 8.73889C28.2222 8.21111 28.5389 8 29.0667 8H30.65C30.7556 8 30.8611 8 30.8611 8.21111L32.3389 15.0722C32.4444 15.4944 32.55 15.8111 32.55 16.2333C32.6556 16.3389 32.6556 16.3389 32.6556 16.4444V16.4444ZM18.5111 16.1278L18.9333 14.2278C19.0389 14.2278 19.1444 14.3333 19.1444 14.3333C19.8833 14.65 20.6222 14.8611 21.3611 14.7556C21.5722 14.7556 21.8889 14.65 22.1 14.5444C22.6278 14.3333 22.6278 13.8056 22.2056 13.3833C21.9944 13.1722 21.6778 13.0667 21.3611 12.8556C20.9389 12.6444 20.5167 12.4333 20.2 12.1167C18.9333 11.0611 19.3556 9.58333 20.0944 8.84444C20.7278 8.42222 21.0444 8 21.8889 8C23.1556 8 24.5278 8 25.1611 8.21111H25.2667C25.1611 8.84444 25.0556 9.37222 24.8444 10.0056C24.3167 9.79444 23.7889 9.58333 23.2611 9.58333C22.9444 9.58333 22.6278 9.58333 22.3111 9.68889C22.1 9.68889 21.9944 9.79444 21.8889 9.9C21.6778 10.1111 21.6778 10.4278 21.8889 10.6389L22.4167 11.0611C22.8389 11.2722 23.2611 11.4833 23.5778 11.6944C24.1056 12.0111 24.6333 12.5389 24.7389 13.1722C24.95 14.1222 24.6333 14.9667 23.7889 15.6C23.2611 16.0222 23.05 16.2333 22.3111 16.2333C20.8333 16.2333 19.6722 16.3389 18.7222 16.0222C18.6167 16.2333 18.6167 16.2333 18.5111 16.1278V16.1278ZM14.8167 16.4444C14.9222 15.7056 14.9222 15.7056 15.0278 15.3889C15.5556 13.0667 16.0833 10.6389 16.5056 8.31667C16.6111 8.10556 16.6111 8 16.8222 8H18.7222C18.5111 9.26667 18.3 10.2167 17.9833 11.3778C17.6667 12.9611 17.35 14.5444 16.9278 16.1278C16.9278 16.3389 16.8222 16.3389 16.6111 16.3389L14.8167 16.4444ZM5 8.21111C5 8.10556 5.21111 8 5.31667 8H8.90556C9.43333 8 9.85556 8.31667 9.96111 8.84444L10.9111 13.4889C10.9111 13.5944 10.9111 13.5944 11.0167 13.7C11.0167 13.5944 11.1222 13.5944 11.1222 13.5944L13.3389 8.21111C13.2333 8.10556 13.3389 8 13.4444 8H15.6611C15.6611 8.10556 15.6611 8.10556 15.5556 8.21111L12.2833 15.9167C12.1778 16.1278 12.1778 16.2333 12.0722 16.3389C11.9667 16.4444 11.7556 16.3389 11.5444 16.3389H9.96111C9.85556 16.3389 9.75 16.3389 9.75 16.1278L8.06111 9.58333C7.85 9.37222 7.53333 9.05556 7.11111 8.95C6.47778 8.63333 5.31667 8.42222 5.10556 8.42222L5 8.21111Z" fill="white" style="fill:white;fill-opacity:1;"/></svg>
+
+                </li></ul>
+          </div></div>
+    </div>
+    <div class="footer__content-bottom-wrapper page-width footer__content-bottom-wrapper--center">
+      <div class="footer__copyright caption">
+        <small class="copyright__content"
+          >&copy; 2026, <a href="/" title="">TCG専門店 CANTRIP</a></small>
+        <small class="copyright__content">Powered by Shopify</small><ul class="policies list-unstyled"><li>
+                  <small class="copyright__content"
+                    ><a href="/policies/refund-policy">返金ポリシー</a></small
+                  >
+                </li><li>
+                  <small class="copyright__content"
+                    ><a href="/policies/privacy-policy">プライバシーポリシー</a></small
+                  >
+                </li><li>
+                  <small class="copyright__content"
+                    ><a href="/policies/terms-of-service">利用規約</a></small
+                  >
+                </li><li>
+                  <small class="copyright__content"
+                    ><a href="/policies/shipping-policy">配送ポリシー</a></small
+                  >
+                </li><li>
+                  <small class="copyright__content"
+                    ><a href="/policies/legal-notice">特定商取引法に基づく表記</a></small
+                  >
+                </li></ul></div>
+    </div>
+  </div>
+</footer>
+
+
+</div>
+<!-- END sections: footer-group -->
+
+    <ul hidden>
+      <li id="a11y-refresh-page-message">選択結果を選ぶと、ページが全面的に更新されます。</li>
+      <li id="a11y-new-window-message">新しいウィンドウで開きます。</li>
+    </ul>
+
+    <script>
+      window.shopUrl = 'https://cantripmtg.com';
+      window.routes = {
+        cart_add_url: '/cart/add',
+        cart_change_url: '/cart/change',
+        cart_update_url: '/cart/update',
+        cart_url: '/cart',
+        predictive_search_url: '/search/suggest',
+      };
+
+      window.cartStrings = {
+        error: `カートをアップデートするときにエラーが発生しました。もう一度お試しください。`,
+        quantityError: `このアイテムは[quantity]個しかカートに追加することができません。`,
+      };
+
+      window.variantStrings = {
+        addToCart: `カートに追加する`,
+        soldOut: `売り切れ`,
+        unavailable: `利用できません`,
+        unavailable_with_option: `[value]は利用できません`,
+      };
+
+      window.quickOrderListStrings = {
+        itemsAdded: `[quantity]個のアイテムが追加されました`,
+        itemAdded: `[quantity]個のアイテムが追加されました`,
+        itemsRemoved: `[quantity]個のアイテムが削除されました`,
+        itemRemoved: `[quantity]個のアイテムが削除されました`,
+        viewCart: `カートを見る`,
+        each: `[money]/ユニット`,
+        min_error: `このアイテムの最小値は[min]です`,
+        max_error: `このアイテムの最大値は[max]です`,
+        step_error: `このアイテムは、[step]の増分でのみ追加できます`,
+      };
+
+      window.accessibilityStrings = {
+        imageAvailable: `ギャラリービューで画像 ([index]) が利用できるようになりました`,
+        shareSuccess: `リンクがクリップボードにコピーされました`,
+        pauseSlideshow: `スライドショーを一時停止する`,
+        playSlideshow: `スライドショーを再生する`,
+        recipientFormExpanded: `ギフトカードカードの受取人フォームを展開しました`,
+        recipientFormCollapsed: `ギフトカードカードの受取人フォームを折りたたみました`,
+        countrySelectorSearchCount: `[count]の国/地域が見つかりました`,
+      };
+    </script><script src="//cantripmtg.com/cdn/shop/t/34/assets/predictive-search.js?v=57209189334897115771791442834" defer="defer"></script><script src="https://cdn.jsdelivr.net/npm/luminous-lightbox@2.4.0/dist/luminous.min.js"></script>
+    <script>
+      // new LuminousGallery(document.querySelectorAll('.luminous'));
+      document.querySelectorAll(".luminous").forEach(elem => {
+        new Luminous(elem);
+      });
+      document.querySelectorAll('.card__inner').forEach(elem => {
+        elem.addEventListener("click", e => {
+          e.currentTarget.querySelector("a")?.click();
+        });
+      });
+      
+      const productGrid = document.getElementById('ProductGridContainer');
+if(productGrid){
+    const observer = new MutationObserver(records => {
+      document.querySelectorAll(".luminous").forEach(elem => {
+        new Luminous(elem);
+      });
+      document.querySelectorAll('.card__inner').forEach(elem => {
+        elem.addEventListener("click", e => {
+          e.currentTarget.querySelector("a")?.click();
+        });
+      });
+    });
+    observer.observe(productGrid, {
+        childList: true,
+        subtree: true,
+    });
+}
+    </script>
+  <style>  </style>
+<script src="https://cdn.shopify.com/storefront/standard-actions.js" type="module" data-source-attribution="shopify.standard_actions"></script>
+</body>
+</html>
