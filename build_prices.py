@@ -917,8 +917,10 @@ RARITY_ORDER = {"common": 0, "uncommon": 1, "rare": 2, "mythic": 3}
 def note_cheapest(cheap, card):
     """Keeps, for each card name, the lowest non-foil price of any paper printing
     (TCGplayer USD and Cardmarket EUR, in cents; a foil price only when a card
-    has no non-foil price at all) and the card's MTG Arena rarity (c/u/r/m, the
-    lowest among its Arena printings). Deck pages add these up."""
+    has no non-foil price at all), the card's MTG Arena rarity (c/u/r/m, the
+    lowest among its Arena printings) and its lowest MTGO price (Scryfall's
+    `tix`, from Cardhoarder, in hundredths of a ticket; any MTGO printing,
+    MTGO-only ones too). Deck pages add these up."""
     if card.get("layout") in EXCLUDED_LAYOUTS or card.get("type_line", "").startswith("Token"):
         return
     name = card.get("name")
@@ -926,11 +928,15 @@ def note_cheapest(cheap, card):
         return
     row = cheap.get(name)
     if row is None:
-        row = cheap[name] = [None, None, "", None, None]   # usd, eur, arena; foil-only usd, eur
+        row = cheap[name] = [None, None, "", None, None, None]   # usd, eur, arena; foil-only usd, eur; tix
     if "arena" in (card.get("games") or []) and card.get("rarity") in RARITY_ORDER:
         r = card["rarity"][0]
         if not row[2] or RARITY_ORDER[card["rarity"]] < "curm".index(row[2]):
             row[2] = r
+    if "mtgo" in (card.get("games") or []):
+        tix = cents((card.get("prices") or {}).get("tix"))
+        if tix is not None and tix > 0:
+            row[5] = tix if row[5] is None else min(row[5], tix)
     if excluded(card):
         return
     p = card.get("prices") or {}
@@ -950,7 +956,8 @@ def finish_cheapest(cheap):
             row[0] = row[3]
         if row[1] is None:
             row[1] = row[4]
-        del row[3:]
+        row[3] = row[5]   # tix
+        del row[4:]
 
 
 def cents(value):
@@ -1048,7 +1055,7 @@ def build(args):
     print("Reading", source)
     info = {}
     products = {}   # Scryfall id -> ([TCGplayer product, etched product], Cardmarket product)
-    cheap = {}      # card name -> [cheapest USD, cheapest EUR, MTG Arena rarity] (for deck prices)
+    cheap = {}      # card name -> [cheapest USD, cheapest EUR, MTG Arena rarity, cheapest MTGO tix] (for deck prices)
     by_number, by_name = {}, {}   # for matching ENNDAL GAMES' products: (set, number) and (set, name) -> printing
     seen = priced = 0
     for card in iter_cards(source):
@@ -1132,8 +1139,8 @@ def build(args):
                                    for d in ("up", "down")} for m in MARKETS} for w, blk in mover_data.items()}
     write_output(args.out, today, dates, shards, mover_data, sources, tried, quote_data, ids, ids_date, offers)
     finish_cheapest(cheap)
-    cheap_rows = {n: v for n, v in cheap.items() if v[0] is not None or v[1] is not None or v[2]}
-    size = write_gz(os.path.join(args.out, "cheap.json.gz"), {"version": 1, "date": today, "fields": ["usd", "eur", "arena"], "cards": cheap_rows})
+    cheap_rows = {n: v for n, v in cheap.items() if v[0] is not None or v[1] is not None or v[2] or v[3] is not None}
+    size = write_gz(os.path.join(args.out, "cheap.json.gz"), {"version": 1, "date": today, "fields": ["usd", "eur", "arena", "tix"], "cards": cheap_rows})
     check["cheapest"] = {"cards": len(cheap_rows), "bytes": size,
                          "sample": {n: cheap_rows.get(n) for n in ("Lightning Bolt", "Island", "Sleight of Hand", "Steam Vents")}}
     print(f"Wrote the cheapest printing's price of {len(cheap_rows)} cards ({size / 1e3:.0f} kB)")

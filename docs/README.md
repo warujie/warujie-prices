@@ -87,8 +87,8 @@ the token anywhere else.
    for cards worth at least `MIN_PRICE_CENTS` that moved at least `MIN_CHANGE_CENTS`, ignoring
    one-day spikes and prices MTGJSON disagrees with.
 7. A self-check of the sources (`source_check()`), then `write_output()`.
-8. Each card's cheapest printing for deck prices (`note_cheapest()` during the read, written as
-   `cheap.json.gz`; see [data-formats.md](data-formats.md)).
+8. Each card's cheapest printing for deck prices, plus its lowest MTGO price in tix
+   (`note_cheapest()` during the read, written as `cheap.json.gz`; see [data-formats.md](data-formats.md)).
 
 Daily values are kept for 120 days (`DAILY_DAYS`); older history keeps one value a week (Mondays),
 so the files stay small for years.
