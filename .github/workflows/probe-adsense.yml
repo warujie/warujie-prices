@@ -8,7 +8,7 @@ jobs:
       - uses: actions/checkout@v4
       - run: |
           sleep 5
-          ( for h in warujie.warujie-mtg.workers.dev warujie.jp; do
+          ( for h in warujie.warujie-mtg.workers.dev staging-warujie.warujie-mtg.workers.dev; do
               echo "== $h ads.txt"; curl -sS -o body.txt -w "status %{http_code} %{content_type}\n" -A "Mozilla/5.0 (warujie.jp probe)" https://$h/ads.txt; head -c 300 body.txt; echo
               echo "== $h meta"; curl -sS --compressed -o page.html -w "status %{http_code}\n" -A "Mozilla/5.0 (warujie.jp probe)" https://$h/; grep -o '<meta name="google-adsense-account"[^>]*>' page.html | head -1; grep -c apple-mobile-web-app-title page.html
             done ) > probe_out.txt 2>&1 || true
