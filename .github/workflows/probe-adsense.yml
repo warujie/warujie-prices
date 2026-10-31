@@ -7,10 +7,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: |
-          sleep 150
+          sleep 5
           ( for h in warujie.warujie-mtg.workers.dev warujie.jp; do
-              echo "== $h ads.txt"; curl -sS -A "Mozilla/5.0 (warujie.jp probe)" https://$h/ads.txt | head -3
-              echo "== $h meta"; curl -sS --compressed -A "Mozilla/5.0 (warujie.jp probe)" https://$h/ | grep -o '<meta name="google-adsense-account"[^>]*>' | head -1
+              echo "== $h ads.txt"; curl -sS -o body.txt -w "status %{http_code} %{content_type}\n" -A "Mozilla/5.0 (warujie.jp probe)" https://$h/ads.txt; head -c 300 body.txt; echo
+              echo "== $h meta"; curl -sS --compressed -o page.html -w "status %{http_code}\n" -A "Mozilla/5.0 (warujie.jp probe)" https://$h/; grep -o '<meta name="google-adsense-account"[^>]*>' page.html | head -1; grep -c apple-mobile-web-app-title page.html
             done ) > probe_out.txt 2>&1 || true
           git config user.name probe; git config user.email probe@users.noreply.github.com
           git add probe_out.txt; git commit -m "probe output"; git push

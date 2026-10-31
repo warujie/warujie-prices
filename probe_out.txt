@@ -1,4 +1,0 @@
-== warujie.warujie-mtg.workers.dev ads.txt
-== warujie.warujie-mtg.workers.dev meta
-== warujie.jp ads.txt
-== warujie.jp meta
