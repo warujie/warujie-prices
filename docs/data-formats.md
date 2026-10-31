@@ -11,7 +11,7 @@ one small file instead of everything.
 | `index.json` | `build_prices.py` | `loadPriceIndex()` |
 | `h/<xx>.json.gz` | `build_prices.py` | `loadPriceShard()`, `drawPriceHistory()` |
 | `q/<xx>.json.gz` | `build_prices.py` | `loadQuoteShard()`, `loadCardQuotes()` |
-| `movers.json` | `build_prices.py` | `loadMovers()`, `renderHomeMovers()` |
+| `movers.json` | `build_prices.py` | `loadMovers()`, `renderMovers()` |
 | `cheap.json.gz` | `build_prices.py` | `loadCheapest()`, `deckCost()` (deck prices and Arena wildcards on the metagame tab and deck pages) |
 | `ids.json.gz` | `build_prices.py` | nobody (the builder's own cache: MTGJSON ids → Scryfall ids, kept a week) |
 | `c/index.json`, `c/<xx>.json.gz` | `build_combos.py` | `loadComboIndex()`, `loadComboShard()` |
