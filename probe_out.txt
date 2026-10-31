@@ -1,0 +1,16 @@
+== warujie.warujie-mtg.workers.dev ads.txt
+status 200 text/plain
+google.com, pub-8881671674219544, DIRECT, f08c47fec0942fa0
+
+== warujie.warujie-mtg.workers.dev meta
+status 200
+<meta name="google-adsense-account" content="ca-pub-8881671674219544">
+1
+== staging-warujie.warujie-mtg.workers.dev ads.txt
+status 200 text/plain
+google.com, pub-8881671674219544, DIRECT, f08c47fec0942fa0
+
+== staging-warujie.warujie-mtg.workers.dev meta
+status 200
+<meta name="google-adsense-account" content="ca-pub-8881671674219544">
+1
