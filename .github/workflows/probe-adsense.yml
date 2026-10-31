@@ -1,0 +1,16 @@
+name: probe adsense live
+on: { push: { branches: [probe-adsense-live] } }
+permissions: { contents: write }
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          sleep 150
+          ( for h in warujie.warujie-mtg.workers.dev warujie.jp; do
+              echo "== $h ads.txt"; curl -sS -A "Mozilla/5.0 (warujie.jp probe)" https://$h/ads.txt | head -3
+              echo "== $h meta"; curl -sS --compressed -A "Mozilla/5.0 (warujie.jp probe)" https://$h/ | grep -o '<meta name="google-adsense-account"[^>]*>' | head -1
+            done ) > probe_out.txt 2>&1 || true
+          git config user.name probe; git config user.email probe@users.noreply.github.com
+          git add probe_out.txt; git commit -m "probe output"; git push
