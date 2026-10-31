@@ -1,0 +1,12 @@
+== warujie.warujie-mtg.workers.dev ads.txt
+status 404 
+
+== warujie.warujie-mtg.workers.dev meta
+status 200
+1
+== warujie.jp ads.txt
+status 404 
+
+== warujie.jp meta
+status 403
+0
