@@ -1,0 +1,16 @@
+name: Probe image CORS
+on: push
+permissions: { contents: write }
+jobs:
+  probe:
+    if: github.ref == 'refs/heads/probe-cors'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          mkdir -p probe_out
+          ( for u in "https://cards.scryfall.io/normal/front/e/3/e3285e6b-3e79-4d7c-bf96-d920f973b122.jpg" "https://cards.scryfall.io/large/front/e/3/e3285e6b-3e79-4d7c-bf96-d920f973b122.jpg" "https://svgs.scryfall.io/card-symbols/R.svg"; do
+              echo "== $u"; curl -sS -D - -o /dev/null -A "warujie.jp probe (+https://warujie.jp)" -H "Origin: https://warujie.jp" "$u"; sleep 1; done ) > probe_out/cors.txt 2>&1 || true
+          cat probe_out/cors.txt
+          git config user.name probe; git config user.email probe@users.noreply.github.com
+          git add probe_out && git commit -m "probe result [skip ci]" && git push
