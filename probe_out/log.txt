@@ -1,0 +1,11 @@
+build there after 4
+pick note: マナ総量 2 のカード 10枚だけを表示中
+✕ 全部表示
+desktop 4-peek-price-formats-desktop この版 | ¥500 |  | いちばん安い版 | ¥381 |  | St | Pi | Mo | Lg | Vt | Pa | Cm
+desktop builder ok
+desktop errors: []
+desktop-en 4b-peek-price-formats-english-desktop This printing | ¥54 |  | Cheapest printing | ¥25 |  | St | Pi | Mo | Lg | Vt | Pa | Cm
+desktop-en en ok
+desktop-en errors: []
+phone hold ok
+phone errors: []
