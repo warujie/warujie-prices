@@ -149,16 +149,19 @@ one printing per card (its biggest move). Each entry:
 ## `cheap.json.gz`: each card's cheapest printing
 
 ```json
-{"version": 1, "date": "2026-10-15", "fields": ["usd", "eur", "arena"],
- "cards": {"Lightning Bolt": [74, 110, "c"], "Island": [5, 4, "c"], …}}
+{"version": 1, "date": "2026-10-15", "fields": ["usd", "eur", "arena", "tix"],
+ "cards": {"Lightning Bolt": [74, 110, "c", 2], "Island": [5, 4, "c", 1], …}}
 ```
 
 One row per card name (two-part cards under their full Scryfall name). `usd` is the lowest
 TCGplayer non-foil price of any paper printing and `eur` the lowest Cardmarket one, in cents;
 a card with no non-foil price at all falls back to its lowest foil price (`note_cheapest()`,
 `finish_cheapest()`). `arena` is the lowest MTG Arena rarity among its Arena printings
-(`c`, `u`, `r`, `m`), or `""` when it isn't on Arena. Excluded printings (the same rules as
-the rest of the build) don't count.
+(`c`, `u`, `r`, `m`), or `""` when it isn't on Arena. `tix` is the lowest MTGO price of any
+MTGO printing (Scryfall's `prices.tix`, Cardhoarder's price, in hundredths of a ticket; MTGO-only
+printings count here), or `null` when no MTGO printing has a price; added 2026-10-31 for the
+site's MTGO（tix）switch, so files from before have three fields. Excluded printings (the same rules as
+the rest of the build) don't count for `usd` and `eur`.
 
 ## `c/`: Commander combos
 
