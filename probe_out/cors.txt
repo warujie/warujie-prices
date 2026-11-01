@@ -1,0 +1,59 @@
+== https://cards.scryfall.io/normal/front/e/3/e3285e6b-3e79-4d7c-bf96-d920f973b122.jpg
+HTTP/2 200 
+date: Sun, 02 Aug 2026 03:52:52 GMT
+content-type: image/jpeg
+content-length: 97231
+content-disposition: inline; filename="a25-141-lightning-bolt.jpg"
+etag: "6611abbcfe00f30ac7962c2155ced434"
+last-modified: Mon, 29 Jun 2026 19:45:33 GMT
+accept-ranges: bytes
+cache-control: public, max-age=31556952
+server: ScryfallEdgeCDN (scryfall.io)
+strict-transport-security: max-age=15552000; includeSubDomains; preload
+x-content-type-options: nosniff
+age: 7870469
+scyfall-cache-status: hit-fresh
+scyfall-node: us-west
+access-control-allow-origin: *
+access-control-allow-methods: GET, OPTIONS
+access-control-allow-headers: Accept, Accept-Charset, Accept-Language, Cache-Control, Content-Language, Content-Type, DNT, Host, If-Modified-Since, Keep-Alive, Origin, Referer, User-Agent, X-Requested-With
+
+== https://cards.scryfall.io/large/front/e/3/e3285e6b-3e79-4d7c-bf96-d920f973b122.jpg
+HTTP/2 200 
+date: Sun, 02 Aug 2026 23:45:24 GMT
+content-type: image/jpeg
+content-length: 154178
+content-disposition: inline; filename="a25-141-lightning-bolt.jpg"
+etag: "71c568b5a41cb7068115d15e31816a37"
+last-modified: Mon, 29 Jun 2026 19:45:33 GMT
+accept-ranges: bytes
+cache-control: public, max-age=31556952
+server: ScryfallEdgeCDN (scryfall.io)
+strict-transport-security: max-age=15552000; includeSubDomains; preload
+x-content-type-options: nosniff
+age: 7798918
+scyfall-cache-status: hit-fresh
+scyfall-node: us-west
+access-control-allow-origin: *
+access-control-allow-methods: GET, OPTIONS
+access-control-allow-headers: Accept, Accept-Charset, Accept-Language, Cache-Control, Content-Language, Content-Type, DNT, Host, If-Modified-Since, Keep-Alive, Origin, Referer, User-Agent, X-Requested-With
+
+== https://svgs.scryfall.io/card-symbols/R.svg
+HTTP/2 200 
+date: Sun, 01 Nov 2026 06:07:24 GMT
+content-type: image/svg+xml
+content-length: 2651
+etag: "0b843b2d412d3eff30eaa5619150f5de"
+last-modified: Tue, 21 Feb 2023 04:24:04 GMT
+vary: Origin
+accept-ranges: bytes
+access-control-allow-origin: *
+nel: {"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}
+server: cloudflare
+cache-control: max-age=31536000
+cf-cache-status: MISS
+strict-transport-security: max-age=15552000; includeSubDomains; preload
+x-content-type-options: nosniff
+report-to: {"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=AtEcTUZMm54gT5JhuzO1%2BALYq%2FqII7LR0APVJTT6SAqewo1xzo%2BBtQKiIfNIlP0vl3jkL8GNB0KQ6lgSZLGYu7qsADprAHkmWPalVgHTVAZ3LOz54K6enp5wpDYgk%2FzVbc8%3D"}]}
+cf-ray: a538b80fdeaea31e-LAX
+
