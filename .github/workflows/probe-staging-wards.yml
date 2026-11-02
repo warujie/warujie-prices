@@ -9,7 +9,8 @@ jobs:
       - uses: actions/checkout@v4
       - run: |
           mkdir -p probe_out
-          ( for u in "https://staging-warujie.warujie-mtg.workers.dev/?view=events" "https://staging-warujie.warujie-mtg.workers.dev/index.html"; do
+          for i in $(seq 1 40); do curl -sS --compressed -o page.html "https://warujie.warujie-mtg.workers.dev/?view=events"; grep -q -F ev-pl-stn page.html && break; sleep 15; done
+          ( for u in "https://warujie.warujie-mtg.workers.dev/?view=events"; do
               echo "== $u"; curl -sS --compressed -A "WarujieProbe/1.0 (+https://warujie.jp)" -D - -o page.html "$u" | head -20
               echo "bytes: $(wc -c < page.html)"; sha256sum page.html
               for m in "ev-pl-stn" "ev-pl-cols { display: grid" "eventStoreWards" "TOKYO_WARDS" "ev-pl-area"; do echo "$m: $(grep -c -F "$m" page.html)"; done
