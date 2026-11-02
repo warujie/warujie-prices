@@ -1,4 +1,4 @@
-name: Probe staging (wards menu)
+name: Probe live calendar (wards)
 on: push
 permissions: { contents: write }
 jobs:
@@ -7,14 +7,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12' }
       - run: |
           mkdir -p probe_out
-          for i in $(seq 1 40); do curl -sS --compressed -o page.html "https://warujie.warujie-mtg.workers.dev/?view=events"; grep -q -F ev-pl-stn page.html && break; sleep 15; done
-          ( for u in "https://warujie.warujie-mtg.workers.dev/?view=events"; do
-              echo "== $u"; curl -sS --compressed -A "WarujieProbe/1.0 (+https://warujie.jp)" -D - -o page.html "$u" | head -20
-              echo "bytes: $(wc -c < page.html)"; sha256sum page.html
-              for m in "ev-pl-stn" "ev-pl-cols { display: grid" "eventStoreWards" "TOKYO_WARDS" "ev-pl-area"; do echo "$m: $(grep -c -F "$m" page.html)"; done
-            done ) > probe_out/log.txt 2>&1 || true
+          ( pip install -q playwright==1.56.0 && python -m playwright install --with-deps chromium >/dev/null && python probe_live.py ) > probe_out/log.txt 2>&1 || true
           cat probe_out/log.txt
           git config user.name probe; git config user.email probe@users.noreply.github.com
           git add probe_out && git commit -m "probe result [skip ci]" && git push
