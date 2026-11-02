@@ -1,0 +1,42 @@
+== https://staging-warujie.warujie-mtg.workers.dev/?view=events
+HTTP/2 200 
+date: Mon, 02 Nov 2026 14:15:41 GMT
+content-type: text/html
+cf-cache-status: MISS
+cache-control: public, max-age=0, must-revalidate, no-transform
+content-encoding: gzip
+etag: W/"25e1bb9978d23d0004be393949a47ae8"
+vary: Accept-Encoding
+x-robots-tag: noindex
+report-to: {"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=C9ZkvB%2Fyrqzh5po4R%2BSmE4ekLyX7gQf859StVNS5bRZ5BJIguy2GfelRkb09y5JguWooDX%2BEPqCvtMCwgBPa23XgDKa8AbCjmgqbDgEtH%2FOsKnszMjiNZgCNa%2BWYEKt6%2FNcuPvOyVeO6WDp9xT7B820EchktWTSlhSw%3D"}]}
+nel: {"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}
+server: cloudflare
+cf-ray: a543c0b3ecf639c9-YYZ
+alt-svc: h3=":443"; ma=86400
+
+bytes: 1430559
+c68fef7d27f5ba233d24bad286e8d77424492e3eedc2dd506978d21abd821ee7  page.html
+ev-pl-stn: 4
+ev-pl-cols { display: grid: 0
+eventStoreWards: 3
+TOKYO_WARDS: 4
+ev-pl-area: 2
+== https://staging-warujie.warujie-mtg.workers.dev/index.html
+HTTP/2 307 
+date: Mon, 02 Nov 2026 14:15:42 GMT
+content-length: 0
+location: /
+x-robots-tag: noindex
+report-to: {"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=wCFX0%2B6NiQLqWdDtVpk6kiZWHno0nfOwXdSBmicBRDVpLRG6nH40zMIxX3K1lYQiz8mKbg7BfPwKmEePvGabKePOJtzGjiBSJFfxPnt83f1CseiqSHKN3vP9baPpgjz1p484uDd213UxepSJCRpCaBaUK43sJQjiU10%3D"}]}
+nel: {"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}
+server: cloudflare
+cf-ray: a543c0b7baa836a2-YYZ
+alt-svc: h3=":443"; ma=86400
+
+bytes: 0
+e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  page.html
+ev-pl-stn: 0
+ev-pl-cols { display: grid: 0
+eventStoreWards: 0
+TOKYO_WARDS: 0
+ev-pl-area: 0
