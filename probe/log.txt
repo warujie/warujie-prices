@@ -1,5 +1,0 @@
-page with the form:
-1
-answer:
-{"ok":true}
-HTTP 200

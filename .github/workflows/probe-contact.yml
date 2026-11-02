@@ -13,12 +13,12 @@ jobs:
         run: |
           mkdir -p probe
           (
-            H=https://staging-warujie.warujie-mtg.workers.dev
+            H=https://warujie.warujie-mtg.workers.dev
             echo "page with the form:"; curl -s "$H/?view=contact" | grep -c 'id="contactForm"'
             echo "answer:"
             curl -s -w '\nHTTP %{http_code}\n' -X POST "$H/contact" \
               -H 'Content-Type: application/json' -H "Origin: $H" \
-              --data '{"kind":"other","name":"Claude（テスト送信）","email":"","message":"お問い合わせフォームのテスト送信です。このメールが届いていれば、フォームからの送信は正しく動いています。返信は不要です。","website":"","ms":10000,"lang":"ja"}'
+              --data '{"kind":"other","name":"Claude（テスト送信）","email":"","message":"公開後のお問い合わせフォームのテスト送信です。このメールが届いていれば、フォームからの送信は正しく動いています。返信は不要です。","website":"","ms":10000,"lang":"ja"}'
           ) > probe/log.txt 2>&1 || true
           cat probe/log.txt
       - name: commit the log
