@@ -1,0 +1,14 @@
+#!/bin/bash
+B=https://staging-warujie.warujie-mtg.workers.dev
+GB='Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)'
+AD='Mediapartners-Google'
+get() { curl -s -A "$2" "$B$1"; }
+echo "== home GB"; get "/" "$GB" | grep -o 'id="homeGuideLists">.\{0,600\}' | head -c 700; echo
+echo "== home person"; get "/" "Mozilla/5.0" | grep -o 'id="homeGuideLists">.\{0,40\}'; echo
+echo "== card AD"; get "/?card=0b2ee2c9-1f8b-4d48-a1d4-8f0fd6b8a1bd" "$AD" | grep -o '<article class="crawler-card">.\{0,300\}'; echo
+echo "== sets GB"; get "/?view=sets" "$GB" | grep -o '<h1>MTGのセット一覧.\{0,500\}'; echo
+echo "== meta GB"; get "/?view=meta&format=modern" "$GB" | grep -o 'モダンのメタゲーム.\{0,500\}'; echo
+D=$(get "/?view=meta&format=modern" "$GB" | grep -o 'href="/?view=deck[^"]*"' | head -1 | sed 's/href="//;s/"//;s/&amp;/\&/g'); echo "deck url: $D"
+echo "== deck GB"; get "$D" "$GB" | grep -o '<article class="crawler-deck">.\{0,900\}'; echo
+echo "== about AD"; get "/?view=about" "$AD" | grep -o '<div id="aboutView"[^>]*>'; echo
+echo "== seo files"; curl -s "$B/seo/home.json" | head -c 300; echo; curl -s "$B/seo/sets.json" | head -c 300; echo
