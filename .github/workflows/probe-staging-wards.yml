@@ -1,18 +1,15 @@
-name: Probe live calendar
+name: Probe live page
 on: push
 permissions: { contents: write }
 jobs:
   probe:
     if: github.ref == 'refs/heads/probe-staging-wards'
     runs-on: ubuntu-latest
-    timeout-minutes: 50
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with: { python-version: '3.12' }
       - run: |
           mkdir -p probe_out
-          ( pip install -q playwright==1.56.0 && python -m playwright install --with-deps chromium >/dev/null && python probe_live.py ) > probe_out/log.txt 2>&1 || true
+          curl -sS --compressed -o page.html "https://warujie.warujie-mtg.workers.dev/?view=events"
+          ( for m in "ev-pl-rest" "多摩・島しょすべて" "'ev.tama'"; do echo "$m: $(grep -c -F "$m" page.html)"; done ) > probe_out/log.txt 2>&1
           git config user.name probe; git config user.email probe@users.noreply.github.com
-          git pull -q --rebase || true
           git add probe_out && git commit -m "probe result [skip ci]" && git push
