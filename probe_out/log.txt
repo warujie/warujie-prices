@@ -1,4 +1,7 @@
 
+[notice] A new release of pip is available: 26.2.2 -> 26.3
+[notice] To update, run: pip install --upgrade pip
+
 Running kernel seems to be up-to-date.
 
 No services need to be restarted.
@@ -8,41 +11,93 @@ No containers need to be restarted.
 No user sessions are running outdated binaries.
 
 No VM guests are running outdated hypervisor (qemu) binaries on this host.
-summary: None
-ROW 関東すべて （4544）
-ROW 茨城県 （192）
-ROW 水戸市 （192）
-ROW 栃木県 （271）
-ROW 宇都宮市 （270）
-ROW 小山市城山町 （1）
-ROW 群馬県 （242）
-ROW 高崎市 （241）
-ROW 高崎 （240）
-ROW 江木町 （1）
-ROW 伊勢崎市宮子町 （1）
-ROW 埼玉県 （487）
-ROW さいたま市大宮 （479）
-ROW 川越市 （8）
-ROW 千葉県 （350）
-ROW 千葉市 （305）
-ROW 柏市 （44）
-ROW 松戸市本町 （1）
-ROW 東京都 （2288）
-ROW 23区すべて （1477）
-ROW 千代田区秋葉原 （498）
-ROW 中央区日本橋 （29）
-ROW 新宿区 （531）
-ROW 高田馬場 （501）
-ROW 新宿 （30）
-ROW 渋谷区 （387）
-ROW 豊島区池袋 （32）
-ROW 多摩・島しょすべて （811）
-ROW 武蔵野市吉祥寺 （514）
-ROW 町田市 （274）
-ROW 立川市 （21）
-ROW 八王子市 （2）
-ROW 神奈川県 （714）
-ROW 横浜市 （397）
-ROW 川崎市 （316）
-ROW 厚木市中町 （1）
-高田馬場 in page: 1  トーナメントセンター: 31
+events: 10282
+AREA [1, "札幌市", "札幌", "hareruya", "札幌店", 299]
+AREA [1, "札幌市", "札幌", "yellowsub", "札幌GAMESHOP", 8]
+AREA [1, "札幌市", "札幌", "amenity", "札幌店", 12]
+AREA [10, "伊勢崎市", "宮子町", "tonamel", "コミかる伊勢崎", 1]
+AREA [10, "高崎市", "江木町", "tonamel", "コミかる高崎", 1]
+AREA [10, "高崎市", "高崎", "hareruya", "高崎店", 240]
+AREA [11, "さいたま市", "大宮", "hareruya", "大宮店", 526]
+AREA [11, "さいたま市", "大宮", "yellowsub", "プレイソフト", 8]
+AREA [11, "さいたま市", "大宮", "amenity", "大宮店", 9]
+AREA [11, "川越市", "川越", "yellowsub", "川越カードショップ", 8]
+AREA [12, "千葉市", "千葉", "hareruya", "千葉店", 300]
+AREA [12, "千葉市", "千葉", "yellowsub", "千葉ゲームショップ", 12]
+AREA [12, "松戸市", "本町", "tonamel", "ホビーステーション松戸店", 1]
+AREA [12, "柏市", "柏", "yellowsub", "柏マルイ店", 44]
+AREA [13, "中央区", "日本橋", "mint", "GAMES MTG店", 29]
+AREA [13, "八王子市", "八王子", "cardwings", "八王子駅前店", 2]
+AREA [13, "千代田区", "", "x", "東京MTG", 74]
+AREA [13, "千代田区", "秋葉原", "hareruya", "秋葉原店", 407]
+AREA [13, "千代田区", "秋葉原", "amenity", "秋葉原店", 7]
+AREA [13, "千代田区", "秋葉原", "yellowsub", "秋葉原本店★ミント", 5]
+AREA [13, "千代田区", "秋葉原", "cardwings", "秋葉原駅前店", 4]
+AREA [13, "千代田区", "秋葉原", "tonamel", "BIG MAGIC 秋葉原店", 1]
+AREA [13, "新宿区", "新宿", "yellowsub", "新宿店", 35]
+AREA [13, "新宿区", "高田馬場", "hareruya", "トーナメントセンター東京", 504]
+AREA [13, "武蔵野市", "吉祥寺", "hareruya", "吉祥寺店", 519]
+AREA [13, "渋谷区", "渋谷", "hareruya", "渋谷店", 393]
+AREA [13, "町田市", "町田", "hareruya", "町田店", 258]
+AREA [13, "町田市", "町田", "amenity", "町田店", 16]
+AREA [13, "立川市", "立川", "yellowsub", "立川店", 15]
+AREA [13, "立川市", "立川", "amenity", "立川店", 6]
+AREA [13, "豊島区", "", "mint", "GAMES 池袋店", 4]
+AREA [13, "豊島区", "池袋", "yellowsub", "池袋ゲームショップ", 19]
+AREA [13, "豊島区", "池袋", "amenity", "池袋パワー9店", 8]
+AREA [13, "豊島区", "池袋", "tonamel", "BIGMAGIC池袋店", 1]
+AREA [14, "厚木市", "中町", "tonamel", "ホビーステーション本厚木店", 1]
+AREA [14, "川崎市", "川崎", "hareruya", "川崎店", 316]
+AREA [14, "横浜市", "", "mint", "横浜店", 2]
+AREA [14, "横浜市", "横浜", "hareruya", "横浜店", 394]
+AREA [14, "横浜市", "横浜", "yellowsub", "横浜店", 7]
+AREA [15, "新潟市", "新潟", "hareruya", "新潟店", 258]
+AREA [17, "金沢市", "金沢", "hareruya", "金沢店", 174]
+AREA [19, "甲府市", "甲府", "hareruya", "甲府店", 210]
+AREA [20, "塩尻市", "広丘原新田", "tonamel", "TCG SHOP Suzunone(すずのね）", 1]
+AREA [20, "長野市", "長野", "hareruya", "長野店", 295]
+AREA [22, "浜松市", "常盤町", "tonamel", "マスターズギルド", 1]
+AREA [22, "浜松市", "貴布祢", "tonamel", "マスターズギルドなゆた", 1]
+AREA [22, "静岡市", "静岡", "hareruya", "静岡店", 228]
+AREA [23, "半田市", "一本木町", "tonamel", "アップキープ MTG用", 10]
+AREA [23, "名古屋市", "名古屋", "hareruya", "名古屋店", 498]
+AREA [23, "名古屋市", "名古屋", "yellowsub", "名古屋GAMESHOP", 8]
+AREA [23, "名古屋市", "大須", "hareruya", "大須店", 336]
+AREA [23, "名古屋市", "栄", "tonamel", "Misteria", 1]
+AREA [23, "名古屋市", "椿町", "tonamel", "竜星の嵐名古屋店", 1]
+AREA [23, "名古屋市", "港町", "tonamel", "パピー弥富店", 4]
+AREA [23, "弥富市", "鯏浦町南前新田", "tonamel", "トレカっち", 1]
+AREA [23, "江南市", "東野町神田", "tonamel", "尾張堂", 2]
+AREA [23, "稲沢市", "小池", "tonamel", "紙屋敷", 2]
+AREA [24, "四日市市", "四日市", "hareruya", "四日市店", 162]
+AREA [25, "草津市", "西草津", "tonamel", "カードショップLight", 1]
+AREA [26, "京都市", "京都", "hareruya", "京都店", 261]
+AREA [26, "京都市", "京都", "yellowsub", "京都店", 29]
+AREA [26, "京都市", "京都", "amenity", "京都店", 6]
+AREA [27, "堺市", "三国ヶ丘御幸通", "tonamel", "カードショップ黄鶏屋", 1]
+AREA [27, "大阪市", "なんば", "yellowsub", "なんば店", 71]
+AREA [27, "大阪市", "なんば", "tonamel", "ドラゴンスターオタロード中央店MTGフロア", 4]
+AREA [27, "大阪市", "日本橋", "hareruya", "日本橋店", 379]
+AREA [27, "大阪市", "梅田", "hareruya", "トーナメントセンター大阪", 426]
+AREA [28, "姫路市", "姫路", "yellowsub", "姫路店", 17]
+AREA [28, "神戸市", "三宮", "hareruya", "三宮店", 227]
+AREA [28, "神戸市", "三宮", "yellowsub", "三宮店", 29]
+AREA [33, "岡山市", "大供", "tonamel", "カードショップ若院", 1]
+AREA [33, "岡山市", "岡山", "hareruya", "岡山店", 182]
+AREA [34, "広島市", "広島", "hareruya", "広島店", 279]
+AREA [37, "高松市", "高松", "hareruya", "高松店", 329]
+AREA [4, "仙台市", "仙台", "hareruya", "仙台店", 246]
+AREA [40, "福岡市", "大名", "mint", "福岡店", 1]
+AREA [40, "福岡市", "天神", "yellowsub", "マジッカーズ福岡店", 28]
+AREA [40, "福岡市", "福岡", "hareruya", "福岡店", 302]
+AREA [42, "長崎市", "大橋町", "tonamel", "CozyGameSpace TiM", 2]
+AREA [46, "出水市", "上鯖淵", "tonamel", "いずマジ！", 2]
+AREA [46, "鹿児島市", "上之園町", "tonamel", "BOOKBOX", 2]
+AREA [47, "中城村", "", "x", "ABSOLUTE ZERO", 19]
+AREA [47, "中城村", "南上原", "tonamel", "ABSOLUTE ZERO", 2]
+AREA [47, "沖縄市", "", "x", "マンガ倉庫 泡瀬店", 5]
+AREA [7, "郡山市", "郡山", "hareruya", "郡山店", 244]
+AREA [8, "水戸市", "水戸", "hareruya", "水戸店", 227]
+AREA [9, "宇都宮市", "宇都宮", "hareruya", "宇都宮店", 264]
+AREA [9, "宇都宮市", "宇都宮", "yellowsub", "宇都宮店", 6]
+AREA [9, "小山市", "城山町", "tonamel", "ホウネンエソ", 1]
