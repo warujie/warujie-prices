@@ -1,0 +1,46 @@
+== https://warujie.jp/ads.txt [Mozilla/5.0 (warujie.jp probe)]
+status 200 text/plain final https://warujie.jp/ads.txt
+google.com, pub-8881671674219544, DIRECT, f08c47fec0942fa0
+
+== https://warujie.jp/ads.txt [Mediapartners-Google]
+status 200 text/plain final https://warujie.jp/ads.txt
+google.com, pub-8881671674219544, DIRECT, f08c47fec0942fa0
+
+== https://www.warujie.jp/ads.txt [Mozilla/5.0 (warujie.jp probe)]
+status 200 text/plain final https://www.warujie.jp/ads.txt
+google.com, pub-8881671674219544, DIRECT, f08c47fec0942fa0
+
+== https://www.warujie.jp/ads.txt [Mediapartners-Google]
+status 200 text/plain final https://www.warujie.jp/ads.txt
+google.com, pub-8881671674219544, DIRECT, f08c47fec0942fa0
+
+== http://warujie.jp/ads.txt [Mozilla/5.0 (warujie.jp probe)]
+status 200 text/plain final https://warujie.jp/ads.txt
+google.com, pub-8881671674219544, DIRECT, f08c47fec0942fa0
+
+== http://warujie.jp/ads.txt [Mediapartners-Google]
+status 200 text/plain final https://warujie.jp/ads.txt
+google.com, pub-8881671674219544, DIRECT, f08c47fec0942fa0
+
+== https://warujie.warujie-mtg.workers.dev/ads.txt [Mozilla/5.0 (warujie.jp probe)]
+status 200 text/plain final https://warujie.warujie-mtg.workers.dev/ads.txt
+google.com, pub-8881671674219544, DIRECT, f08c47fec0942fa0
+
+== https://warujie.warujie-mtg.workers.dev/ads.txt [Mediapartners-Google]
+status 200 text/plain final https://warujie.warujie-mtg.workers.dev/ads.txt
+google.com, pub-8881671674219544, DIRECT, f08c47fec0942fa0
+
+== headers
+HTTP/2 200 
+date: Tue, 03 Nov 2026 15:31:55 GMT
+content-type: text/plain
+cf-cache-status: HIT
+cache-control: public, max-age=0, must-revalidate
+etag: "354ebf06f1b58d0ce75830a9248ea580"
+speculation-rules: "/cdn-cgi/speculation"
+report-to: {"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=lrT%2BJ8YUoF%2Bn9pvUY%2Bxq8HEss%2F1QYKThsLMQgIjJwSvLPpdO0evscq68Pl807IL%2FUOw%2BlNy2XpLy9lh5aYHELEOiy92mFtyi9xU%2FedW0nhRJlOe2f1KIBlMIJxe%2B"}]}
+nel: {"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}
+server: cloudflare
+cf-ray: a54c6dbddf681bca-MEM
+alt-svc: h3=":443"; ma=86400
+
