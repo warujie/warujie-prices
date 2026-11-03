@@ -5,12 +5,13 @@ id="homeGuideLists"><div class="hg-col"><h3>人気のデッキ</h3><ul><li><span
 id="homeGuideLists"></div>
 
 == card AD
+<article class="crawler-card">
 
 == sets GB
 <h1>MTGのセット一覧（新しい順）</h1><ul class="crawler-list"><li><a href="/?set=mdc">Darkhold Destiny Commander</a> MDC <time datetime="2027-04-09">2027-04</time></li><li><a href="/?set=mdd">Marvel: Darkhold Destiny</a> MDD <time datetime="2027-04-09">2027-04</time></li><li><a href="/?set=pf27">MagicFest 2027</a> PF27 <time datetime="2027-01-01">2027-01</time></li><li><a href="/?set=pw27">Wizards Play Network 2027</a> PW27 <time datetime="2027-01-01">2027-01</time></li><li><a href="/?set=sds">Stardates</a> SDS <time dat
 
 == meta GB
-モダンのメタゲーム（直近30日）</h2>
+モダンのメタゲーム（直近30日）</h2><p>MTGの大会結果（90大会・7571デッキ）から集計した、デッキごとの使用率と勝率。</p><table class="crawler-table"><thead><tr><th>デッキ</th><th>使用率</th><th>デッキ数</th><th>勝率</th></tr></thead><tbody><tr><td><a href="/?view=deck&amp;format=modern&amp;deck=Broodscale">Broodscale</a></td><td>14.6%</td><td>1108</td><td>55.3%</td></tr><tr><td><a href="/?view=deck&amp;format=modern&amp;deck=Prowess">Prowess</a></td><td>9.4%</td><td>713</td><td>47.3%</td></tr><tr><td><a href="/?view=deck&amp;format=modern&amp;deck=Azorius+Control">
 
 grep: write error: Broken pipe
 deck url: /?view=deck&format=modern&deck=Broodscale
