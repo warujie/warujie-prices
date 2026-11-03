@@ -1,0 +1,25 @@
+== home GB
+id="homeGuideLists"><div class="hg-col"><h3>人気のデッキ</h3><ul><li><span class="hg-fmt">スタンダード</span><a href="/?view=deck&amp;format=standard&amp;deck=Mono+Green+Landfall">Mono Green Landfall</a><span class="hg-num">10.5%</span><span class="hg-sep">・</span><a href="/?view=deck&amp;format=standard&amp;deck=Dimir+Midrange">Dimir Midrange</a><span class="hg-num">8.8%</span></li><li><span class="hg-fmt">パイオニア</span><a href="/?view=deck&amp;format=pioneer&amp;deck=Mono+Red+Aggro">Mono Red Aggro</a><span class="hg-num">13.3%</span><span class="hg-sep">・</span><a href="/?view=deck&amp;format=pioneer&amp;deck=Golgari+Midrang
+
+== home person
+id="homeGuideLists"></div>
+
+== card AD
+
+== sets GB
+<h1>MTGのセット一覧（新しい順）</h1><ul class="crawler-list"><li><a href="/?set=mdc">Darkhold Destiny Commander</a> MDC <time datetime="2027-04-09">2027-04</time></li><li><a href="/?set=mdd">Marvel: Darkhold Destiny</a> MDD <time datetime="2027-04-09">2027-04</time></li><li><a href="/?set=pf27">MagicFest 2027</a> PF27 <time datetime="2027-01-01">2027-01</time></li><li><a href="/?set=pw27">Wizards Play Network 2027</a> PW27 <time datetime="2027-01-01">2027-01</time></li><li><a href="/?set=sds">Stardates</a> SDS <time dat
+
+== meta GB
+モダンのメタゲーム（直近30日）</h2>
+
+grep: write error: Broken pipe
+deck url: /?view=deck&format=modern&deck=Broodscale
+== deck GB
+<article class="crawler-deck"><h1>Broodscale（モダン）のデッキリスト</h1>
+
+== about AD
+<div id="aboutView" class="wrap">
+
+== seo files
+{"decks":{"standard":[["Mono Green Landfall",10.46],["Dimir Midrange",8.81]],"pioneer":[["Mono Red Aggro",13.3],["Golgari Midrange",12.23]],"modern":[["Broodscale",14.63],["Prowess",9.42]],"legacy":[["Energy",7.18],["Dimir Tempo",6.48]],"vintage":[["Jewel Shops",16.37],["Initiative",11.09]],"pauper"
+[["mdc","","Darkhold Destiny Commander","2027-04-09"],["mdd","","Marvel: Darkhold Destiny","2027-04-09"],["pf27","","MagicFest 2027","2027-01-01"],["pw27","","Wizards Play Network 2027","2027-01-01"],["sds","","Stardates","2026-11-13"],["trc","","Star Trek Commander","2026-11-13"],["trk","スター�
