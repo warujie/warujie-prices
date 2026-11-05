@@ -1,5 +1,4 @@
-# Screenshots of the metagame tab's sample lists, deck search by card and the card page's decks box on the
-# staging test site (a throwaway probe for the site thread "Improve deck browsing in metagame tab"; never merge)
+# Screenshots of the deck page's matchups, rising cards and 比べる box on the staging test site (a throwaway probe for the site thread "Improve deck browsing in metagame tab"; never merge)
 import os, time, urllib.request
 from playwright.sync_api import sync_playwright
 SITE = os.environ.get("SITE", "https://staging-warujie.warujie-mtg.workers.dev/")
@@ -12,7 +11,7 @@ def wait_for_build():
     for i in range(40):
         try:
             req = urllib.request.Request(SITE + "?probe=" + str(time.time()), headers={"User-Agent": "warujie.jp probe"})
-            if b"align-items: stretch; gap: 1px; overflow: hidden" in urllib.request.urlopen(req, timeout=30).read(): say("build there after", i); return
+            if b"deck-cmp-btn" in urllib.request.urlopen(req, timeout=30).read(): say("build there after", i); return
         except Exception as e: say("wait", repr(e)[:120])
         time.sleep(30)
     say("build NOT seen")
@@ -31,43 +30,29 @@ def run(p):
             try: fn(); say(tag, name, "ok")
             except Exception as e: say(tag, name, "FAILED", repr(e)[:400])
         def shot(name): page.screenshot(path=f"{OUT}{name}-{tag}.png")
-        def meta():
-            page.goto(SITE + "?view=meta&format=modern&days=30")
-            page.wait_for_selector("#metaBody .meta-row", timeout=90000); page.wait_for_timeout(4000)
-        def lists():
-            meta()
-            row = page.locator("#metaBody .meta-row").nth(1)
-            if phone: row.click(); page.wait_for_timeout(400)
-            row.locator(".meta-lists-btn").click(); page.wait_for_selector("#metaBody .mlp .mlp-cols", timeout=60000); page.wait_for_timeout(2500)
-            page.evaluate("(() => { const r = document.querySelectorAll('#metaBody .meta-row')[1]; window.scrollTo(0, r.getBoundingClientRect().top + scrollY - (%d)); })()" % (130 if phone else 90))
-            page.wait_for_timeout(1500); shot("1-meta-lists")
-            if phone:
-                page.evaluate("document.querySelector('#metaBody .mlp').scrollIntoView({ block: 'start' }); scrollBy(0, -130)"); page.wait_for_timeout(1200); shot("1b-meta-lists")
-        step("lists", lists)
-        def find():
-            meta()
-            page.click("#metaFind"); page.locator("#metaFind").type("ボルト", delay=80); page.wait_for_selector("#metaFindList .mfind-card", timeout=30000); page.wait_for_timeout(1500)
-            shot("2-meta-search-card")
-            page.keyboard.press("Enter"); page.wait_for_timeout(3000)
-            if phone: page.evaluate("document.activeElement.blur()")
-            shot("2b-meta-decks-with-card")
-            page.click("#metaFind"); page.locator("#metaFind").type("ボロス", delay=80); page.wait_for_selector("#metaFindList .suggest-item", timeout=30000); page.wait_for_timeout(1500)
-            shot("2c-meta-search-deck-and-cards")
-        step("find", find)
         def deck():
-            page.goto(SITE + "?view=deck&format=modern&days=30&deck=Boros%20Energy&list=3")
-            page.wait_for_selector("#deckBody .dlp-tile", timeout=90000); page.wait_for_timeout(6000)
-            shot("3-deck-lists")
-            page.click('.dlp-nav[data-dlstep="1"]'); page.wait_for_timeout(3000); shot("3b-deck-next-list")
-        step("deck", deck)
-        def card():
-            page.goto(SITE + "?card=" + BOLT)
-            page.wait_for_selector("#cardViewCard .cp-name", timeout=90000); page.wait_for_timeout(2000)
-            page.evaluate("document.getElementById('cardDecksWatch').scrollIntoView()")
-            page.wait_for_selector("#cardDecksBox:not([hidden]) .cdk-row", timeout=60000); page.wait_for_timeout(2000)
-            page.evaluate("document.getElementById('cardDecksBox').scrollIntoView({ block: 'start' }); scrollBy(0, -%d)" % (140 if phone else 250))
-            page.wait_for_timeout(1500); shot("4-card-page-decks")
-        step("card", card)
+            page.goto(SITE + "?view=deck&format=modern&days=30&deck=Boros%20Energy")
+            page.wait_for_selector("#deckBody .dlp-tile", timeout=90000); page.wait_for_timeout(7000)
+        def to(sel, gap):
+            page.evaluate("(s => { const e = document.querySelector(s); window.scrollTo(0, e.getBoundingClientRect().top + scrollY - %d); })('%s')" % (gap, sel))
+            page.wait_for_timeout(1500)
+        def mu():
+            deck(); to("#deckBody .deck-mu", 140 if phone else 150); shot("5-deck-matchups")
+        step("matchups", mu)
+        def mv():
+            to("#deckBody .deck-mv", 140 if phone else 150); shot("6-deck-rising-cards")
+        step("moves", mv)
+        def cmp_lists():
+            deck(); page.click("#deckCmpBtn"); page.wait_for_selector("#deckBody .deck-cmp .cmp-t", timeout=30000); page.wait_for_timeout(1500)
+            to("#deckBody .deck-cmp", 140 if phone else 150); shot("7-compare-lists")
+        step("compare lists", cmp_lists)
+        def cmp_mine():
+            page.evaluate("""() => { const c = deckState.current; const l = c.choices.find(x => x.id === 'avg');
+              const keep = l.main.filter((x, i) => i % 3 !== 0);
+              deckNew('About\\nName 自分のボロス\\n\\n' + keep.map(x => x[0] + ' ' + x[1]).join('\\n'), 'modern'); drawDeck(); }""")
+            page.select_option("#deckCmpSel", "d:" + page.evaluate("decks.decks[0].id")); page.wait_for_timeout(2000)
+            to("#deckBody .deck-cmp", 140 if phone else 150); shot("8-compare-my-deck")
+        step("compare my deck", cmp_mine)
         say(tag, "errors:", errs)
         ctx.close()
     b.close()
