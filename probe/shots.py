@@ -12,7 +12,7 @@ def wait_for_build():
     for i in range(40):
         try:
             req = urllib.request.Request(SITE + "?probe=" + str(time.time()), headers={"User-Agent": "warujie.jp probe"})
-            if b"dlpBtn" in urllib.request.urlopen(req, timeout=30).read(): say("build there after", i); return
+            if b"dls-1 { width: 100%" in urllib.request.urlopen(req, timeout=30).read(): say("build there after", i); return
         except Exception as e: say("wait", repr(e)[:120])
         time.sleep(30)
     say("build NOT seen")
