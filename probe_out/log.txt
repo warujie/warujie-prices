@@ -1,11 +1,11 @@
-build there after 1
-desktop lists ok
-desktop find ok
-desktop deck ok
-desktop card ok
+build there after 3
+desktop matchups ok
+desktop moves ok
+desktop compare lists ok
+desktop compare my deck ok
 desktop errors: []
-phone lists ok
-phone find ok
-phone deck ok
-phone card ok
+phone matchups ok
+phone moves ok
+phone compare lists ok
+phone compare my deck ok
 phone errors: []
