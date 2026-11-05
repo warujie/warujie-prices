@@ -12,7 +12,7 @@ def wait_for_build():
     for i in range(40):
         try:
             req = urllib.request.Request(SITE + "?probe=" + str(time.time()), headers={"User-Agent": "warujie.jp probe"})
-            if b"warujie-deck-extra" in urllib.request.urlopen(req, timeout=30).read(): say("build there after", i); return
+            if b"<html" in urllib.request.urlopen(req, timeout=30).read(): say("build there after", i); return
         except Exception as e: say("wait", repr(e)[:120])
         time.sleep(30)
     say("build NOT seen")
@@ -52,18 +52,16 @@ def run(p):
         page.evaluate("(() => { const e = document.querySelector('#deckBody .deck-group'); window.scrollTo(0, e.getBoundingClientRect().top + scrollY - 130); })()")
         page.wait_for_timeout(2500)
     def shot(name): page.screenshot(path=f"{OUT}{name}.png")
-    def strip():
-        load(); page.evaluate("window.scrollTo(0, 260)"); page.wait_for_timeout(2500); shot("q1-strip")
-    step("strip", strip)
-    def dx_closed():
-        page.evaluate("(() => { const e = document.querySelector('#deckBody .deck-dx'); window.scrollTo(0, e.getBoundingClientRect().top + scrollY - 300); })()")
-        page.wait_for_timeout(2000); shot("q2-details-closed")
-    step("closed", dx_closed)
-    def dx_open():
-        page.click("#deckDxBtn"); page.wait_for_timeout(1500)
-        page.evaluate("(() => { const e = document.querySelector('#deckBody .deck-dx'); window.scrollTo(0, e.getBoundingClientRect().top + scrollY - 140); })()")
-        page.wait_for_timeout(1500); shot("q3-details-open")
-    step("open", dx_open)
+    MOCK = open("probe/mocks.js").read()
+    def mock(kind, name, scroll=260):
+        load(); page.add_script_tag(content=MOCK); page.evaluate(f"window.__mock('{kind}')")
+        page.evaluate(f"window.scrollTo(0, {scroll})"); page.wait_for_timeout(2000); shot(name)
+    step("now", lambda: (load(), page.evaluate("window.scrollTo(0, 260)"), page.wait_for_timeout(2000), shot("r0-now")))
+    step("A", lambda: mock("A", "r1-chips"))
+    step("B", lambda: mock("B", "r2-stepper"))
+    step("C", lambda: mock("C", "r3-picker"))
+    step("C2", lambda: mock("C2", "r3b-picker-open"))
+    step("T", lambda: mock("T", "r4-tabs", 0))
     say("errors:", errs)
     b.close()
 
