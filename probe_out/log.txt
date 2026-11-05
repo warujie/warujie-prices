@@ -1,11 +1,7 @@
-build there after 4
-desktop matchups ok
-desktop moves ok
-desktop compare lists ok
-desktop compare my deck ok
-desktop errors: []
-phone matchups ok
-phone moves ok
-phone compare lists ok
-phone compare my deck ok
-phone errors: []
+build there after 3
+now ok
+A ok
+B ok
+C ok
+pyp ok
+errors: []
