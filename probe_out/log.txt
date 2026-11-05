@@ -1,5 +1,8 @@
-build there after 2
-strip ok
-closed ok
-open ok
+build there after 0
+now ok
+A ok
+B ok
+C ok
+C2 ok
+T ok
 errors: []
