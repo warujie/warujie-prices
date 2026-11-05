@@ -1,4 +1,5 @@
-build there after 3
-now ok
-pyp ok
+build there after 2
+strip ok
+closed ok
+open ok
 errors: []
