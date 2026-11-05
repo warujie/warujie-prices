@@ -1,4 +1,5 @@
-# Screenshots of the deck page's matchups, rising cards and 比べる box on the staging test site (a throwaway probe for the site thread "Improve deck browsing in metagame tab"; never merge)
+# Phone layout options for the deck page's card pictures, on the staging test site
+# (a throwaway probe for the site thread "Improve deck browsing in metagame tab"; never merge)
 import os, time, urllib.request
 from playwright.sync_api import sync_playwright
 SITE = os.environ.get("SITE", "https://staging-warujie.warujie-mtg.workers.dev/")
@@ -11,50 +12,63 @@ def wait_for_build():
     for i in range(40):
         try:
             req = urllib.request.Request(SITE + "?probe=" + str(time.time()), headers={"User-Agent": "warujie.jp probe"})
-            if b"cmp-acts .adv-btn { background: var(--field)" in urllib.request.urlopen(req, timeout=30).read(): say("build there after", i); return
+            if b"playtest or joke card" in urllib.request.urlopen(req, timeout=30).read(): say("build there after", i); return
         except Exception as e: say("wait", repr(e)[:120])
         time.sleep(30)
     say("build NOT seen")
 
-BOLT = "b68be6a7-0515-42e0-abe9-b3f14b118c19"
+A = """
+.deck-grid, .deck-flow .deck-grid { gap: 10px 8px !important; }
+.deck-card { display: grid !important; grid-template-columns: minmax(0, 1fr) auto; gap: 1px 4px !important; }
+.deck-card .dc-pic, .deck-card .dc-name { grid-column: 1 / -1; }
+.deck-card .dc-pic { margin-bottom: 3px; }
+.dc-name { font-size: 11px !important; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; line-height: 1.35 !important; }
+.dc-rate, .dc-yen { font-size: 10.5px !important; line-height: 1.3; }
+.dc-yen { text-align: right; }
+"""
+B = """
+.deck-grid, .deck-flow .deck-grid { grid-template-columns: repeat(4, minmax(0, 1fr)) !important; gap: 8px 5px !important; }
+.deck-card { display: grid !important; grid-template-columns: minmax(0, 1fr) auto; gap: 0 2px !important; }
+.deck-card .dc-pic { grid-column: 1 / -1; margin-bottom: 2px; }
+.dc-name { display: none !important; }
+.dc-count { min-width: 22px !important; padding: 0 5px !important; font-size: 11px !important; }
+.dc-rate, .dc-yen { font-size: 10px !important; line-height: 1.3; }
+.dc-yen { text-align: right; }
+"""
+DECK = "?view=deck&format=standard&days=30&deck=Mono%20Green%20Landfall"
 def run(p):
     b = p.chromium.launch()
-    for tag, w, h in (("desktop", 1280, 900), ("phone", 390, 844)):
-        phone = tag == "phone"
-        ctx = b.new_context(viewport={"width": w, "height": h}, device_scale_factor=2, is_mobile=phone, has_touch=phone, locale="ja-JP")
-        ctx.add_init_script("try { localStorage.setItem('akuchie-lang', 'ja'); } catch (e) {}")
-        page = ctx.new_page(); page.set_default_navigation_timeout(120000)
-        errs = []
-        page.on("pageerror", lambda e: errs.append(str(e)))
-        def step(name, fn):
-            try: fn(); say(tag, name, "ok")
-            except Exception as e: say(tag, name, "FAILED", repr(e)[:400])
-        def shot(name): page.screenshot(path=f"{OUT}{name}-{tag}.png")
-        def deck():
-            page.goto(SITE + "?view=deck&format=modern&days=30&deck=Boros%20Energy")
-            page.wait_for_selector("#deckBody .dlp-tile", timeout=90000); page.wait_for_timeout(7000)
-        def to(sel, gap):
-            page.evaluate("(s => { const e = document.querySelector(s); window.scrollTo(0, e.getBoundingClientRect().top + scrollY - %d); })('%s')" % (gap, sel))
-            page.wait_for_timeout(1500)
-        def mu():
-            deck(); to("#deckBody .deck-mu", 140 if phone else 150); shot("5-deck-matchups")
-        step("matchups", mu)
-        def mv():
-            to("#deckBody .deck-mv", 140 if phone else 150); shot("6-deck-rising-cards")
-        step("moves", mv)
-        def cmp_lists():
-            deck(); page.click("#deckCmpBtn"); page.wait_for_selector("#deckBody .deck-cmp .cmp-t", timeout=30000); page.wait_for_timeout(1500)
-            to("#deckBody .deck-cmp", 140 if phone else 150); shot("7-compare-lists")
-        step("compare lists", cmp_lists)
-        def cmp_mine():
-            page.evaluate("""() => { const c = deckState.current; const l = c.choices.find(x => x.id === 'avg');
-              const keep = l.main.filter((x, i) => i % 3 !== 0);
-              deckNew('About\\nName 自分のボロス\\n\\n' + keep.map(x => x[0] + ' ' + x[1]).join('\\n'), 'modern'); drawDeck(); }""")
-            page.select_option("#deckCmpSel", "d:" + page.evaluate("decks.decks[0].id")); page.wait_for_timeout(2000)
-            to("#deckBody .deck-cmp", 140 if phone else 150); shot("8-compare-my-deck")
-        step("compare my deck", cmp_mine)
-        say(tag, "errors:", errs)
-        ctx.close()
+    ctx = b.new_context(viewport={"width": 390, "height": 844}, device_scale_factor=2, is_mobile=True, has_touch=True, locale="ja-JP", color_scheme="dark")
+    ctx.add_init_script("try { localStorage.setItem('akuchie-lang', 'ja'); localStorage.setItem('akuchie-deck-view', 'image'); } catch (e) {}")
+    page = ctx.new_page(); page.set_default_navigation_timeout(120000)
+    errs = []
+    page.on("pageerror", lambda e: errs.append(str(e)))
+    def step(name, fn):
+        try: fn(); say(name, "ok")
+        except Exception as e: say(name, "FAILED", repr(e)[:400])
+    def load():
+        page.goto(SITE + DECK); page.wait_for_selector("#deckBody .deck-card img", timeout=90000); page.wait_for_timeout(8000)
+    def to_main():
+        page.evaluate("(() => { const e = document.querySelector('#deckBody .deck-group'); window.scrollTo(0, e.getBoundingClientRect().top + scrollY - 130); })()")
+        page.wait_for_timeout(2500)
+    def shot(name): page.screenshot(path=f"{OUT}{name}.png")
+    def now(): load(); to_main(); shot("p0-now")
+    step("now", now)
+    def a(): page.add_style_tag(content=A); page.wait_for_timeout(800); to_main(); shot("pA-compact")
+    step("A", a)
+    def bb():
+        load(); page.add_style_tag(content=B)
+        page.evaluate("document.querySelectorAll('.dc-rate').forEach(e => e.textContent = e.textContent.replace('採用率 ', ''))")
+        page.wait_for_timeout(800); to_main(); shot("pB-four")
+    step("B", bb)
+    def c():
+        load(); page.click('[data-dview="list"]'); page.wait_for_timeout(2500); to_main(); shot("pC-list")
+    step("C", c)
+    def pyp():
+        load(); page.evaluate("(() => { const e = [...document.querySelectorAll('.dc-name')].find(x => /Pick Your Poison|毒/.test(x.textContent) || x.closest('a') && /Pick Your Poison/.test(x.closest('a').title)); if (e) e.scrollIntoView({ block: 'center' }); })()")
+        page.wait_for_timeout(2500); shot("p1-pick-your-poison")
+    step("pyp", pyp)
+    say("errors:", errs)
     b.close()
 
 if __name__ == "__main__":
