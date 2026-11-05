@@ -12,7 +12,7 @@ def wait_for_build():
     for i in range(40):
         try:
             req = urllib.request.Request(SITE + "?probe=" + str(time.time()), headers={"User-Agent": "warujie.jp probe"})
-            if b"playtest or joke card" in urllib.request.urlopen(req, timeout=30).read(): say("build there after", i); return
+            if b"option A): the name on one line" in urllib.request.urlopen(req, timeout=30).read(): say("build there after", i); return
         except Exception as e: say("wait", repr(e)[:120])
         time.sleep(30)
     say("build NOT seen")
@@ -52,18 +52,15 @@ def run(p):
         page.evaluate("(() => { const e = document.querySelector('#deckBody .deck-group'); window.scrollTo(0, e.getBoundingClientRect().top + scrollY - 130); })()")
         page.wait_for_timeout(2500)
     def shot(name): page.screenshot(path=f"{OUT}{name}.png")
-    def now(): load(); to_main(); shot("p0-now")
+    def now(): load(); to_main(); shot("pA-live-on-test-site")
     step("now", now)
     def a(): page.add_style_tag(content=A); page.wait_for_timeout(800); to_main(); shot("pA-compact")
-    step("A", a)
     def bb():
         load(); page.add_style_tag(content=B)
         page.evaluate("document.querySelectorAll('.dc-rate').forEach(e => e.textContent = e.textContent.replace('採用率 ', ''))")
         page.wait_for_timeout(800); to_main(); shot("pB-four")
-    step("B", bb)
     def c():
         load(); page.click('[data-dview="list"]'); page.wait_for_timeout(2500); to_main(); shot("pC-list")
-    step("C", c)
     def pyp():
         load(); page.evaluate("(() => { const e = [...document.querySelectorAll('.dc-name')].find(x => /Pick Your Poison|毒/.test(x.textContent) || x.closest('a') && /Pick Your Poison/.test(x.closest('a').title)); if (e) e.scrollIntoView({ block: 'center' }); })()")
         page.wait_for_timeout(2500); shot("p1-pick-your-poison")
