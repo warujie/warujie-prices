@@ -12,7 +12,7 @@ def wait_for_build():
     for i in range(40):
         try:
             req = urllib.request.Request(SITE + "?probe=" + str(time.time()), headers={"User-Agent": "warujie.jp probe"})
-            if b"<html" in urllib.request.urlopen(req, timeout=30).read(): say("build there after", i); return
+            if b"dlpBtn" in urllib.request.urlopen(req, timeout=30).read(): say("build there after", i); return
         except Exception as e: say("wait", repr(e)[:120])
         time.sleep(30)
     say("build NOT seen")
@@ -56,12 +56,14 @@ def run(p):
     def mock(kind, name, scroll=260):
         load(); page.add_script_tag(content=MOCK); page.evaluate(f"window.__mock('{kind}')")
         page.evaluate(f"window.scrollTo(0, {scroll})"); page.wait_for_timeout(2000); shot(name)
-    step("now", lambda: (load(), page.evaluate("window.scrollTo(0, 260)"), page.wait_for_timeout(2000), shot("r0-now")))
-    step("A", lambda: mock("A", "r1-chips"))
-    step("B", lambda: mock("B", "r2-stepper"))
-    step("C", lambda: mock("C", "r3-picker"))
-    step("C2", lambda: mock("C2", "r3b-picker-open"))
-    step("T", lambda: mock("T", "r4-tabs", 0))
+    def opened():
+        load(); page.evaluate("window.scrollTo(0, 260)"); page.wait_for_timeout(1500)
+        page.click("#dlpBtn"); page.wait_for_timeout(1500); shot("s2-sheet")
+    step("button", lambda: (load(), page.evaluate("window.scrollTo(0, 260)"), page.wait_for_timeout(2000), shot("s1-button")))
+    step("sheet", opened)
+    def picked():
+        page.click('#dlpBox .dls-row[data-dlsheet="3"]'); page.wait_for_timeout(2500); to_main(); shot("s3-picked")
+    step("picked", picked)
     say("errors:", errs)
     b.close()
 
