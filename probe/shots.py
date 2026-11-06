@@ -12,7 +12,7 @@ def wait_for_build():
     for i in range(40):
         try:
             req = urllib.request.Request(SITE + "?probe=" + str(time.time()), headers={"User-Agent": "warujie.jp probe"})
-            if b"dls-1 { width: 100%" in urllib.request.urlopen(req, timeout=30).read(): say("build there after", i); return
+            if b"deckTabsHtml" in urllib.request.urlopen(req, timeout=30).read(): say("build there after", i); return
         except Exception as e: say("wait", repr(e)[:120])
         time.sleep(30)
     say("build NOT seen")
@@ -56,14 +56,19 @@ def run(p):
     def mock(kind, name, scroll=260):
         load(); page.add_script_tag(content=MOCK); page.evaluate(f"window.__mock('{kind}')")
         page.evaluate(f"window.scrollTo(0, {scroll})"); page.wait_for_timeout(2000); shot(name)
-    def opened():
-        load(); page.evaluate("window.scrollTo(0, 260)"); page.wait_for_timeout(1500)
-        page.click("#dlpBtn"); page.wait_for_timeout(1500); shot("s2-sheet")
-    step("button", lambda: (load(), page.evaluate("window.scrollTo(0, 260)"), page.wait_for_timeout(2000), shot("s1-button")))
-    step("sheet", opened)
-    def picked():
-        page.click('#dlpBox .dls-row[data-dlsheet="3"]'); page.wait_for_timeout(2500); to_main(); shot("s3-picked")
-    step("picked", picked)
+    def tabshot(tab, name, scroll=0):
+        page.goto(SITE + DECK + ("&tab=" + tab if tab else "")); page.wait_for_selector("#deckBody .deck-tabs", timeout=90000); page.wait_for_timeout(6000)
+        page.evaluate(f"window.scrollTo(0, {scroll})"); page.wait_for_timeout(1500); shot(name)
+    step("list", lambda: tabshot("", "t1-list"))
+    step("mu", lambda: tabshot("mu", "t2-matchups"))
+    step("mv", lambda: tabshot("mv", "t3-cards"))
+    step("trend", lambda: tabshot("trend", "t4-trend"))
+    def wide():
+        c2 = b.new_context(viewport={"width": 1280, "height": 900}, device_scale_factor=1, locale="ja-JP", color_scheme="dark")
+        c2.add_init_script("try { localStorage.setItem('akuchie-lang', 'ja'); localStorage.setItem('akuchie-deck-view', 'image'); } catch (e) {}")
+        pg = c2.new_page(); pg.goto(SITE + DECK + "&tab=mu"); pg.wait_for_selector("#deckBody .deck-tabs", timeout=90000); pg.wait_for_timeout(6000)
+        pg.screenshot(path=f"{OUT}t5-computer-matchups.png")
+    step("wide", wide)
     say("errors:", errs)
     b.close()
 
