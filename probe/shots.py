@@ -12,7 +12,7 @@ def wait_for_build():
     for i in range(40):
         try:
             req = urllib.request.Request(SITE + "?probe=" + str(time.time()), headers={"User-Agent": "warujie.jp probe"})
-            if b"deckTabsHtml" in urllib.request.urlopen(req, timeout=30).read(): say("build there after", i); return
+            if b"<html" in urllib.request.urlopen(req, timeout=30).read(): say("build there after", i); return
         except Exception as e: say("wait", repr(e)[:120])
         time.sleep(30)
     say("build NOT seen")
@@ -56,19 +56,20 @@ def run(p):
     def mock(kind, name, scroll=260):
         load(); page.add_script_tag(content=MOCK); page.evaluate(f"window.__mock('{kind}')")
         page.evaluate(f"window.scrollTo(0, {scroll})"); page.wait_for_timeout(2000); shot(name)
-    def tabshot(tab, name, scroll=0):
-        page.goto(SITE + DECK + ("&tab=" + tab if tab else "")); page.wait_for_selector("#deckBody .deck-tabs", timeout=90000); page.wait_for_timeout(6000)
-        page.evaluate(f"window.scrollTo(0, {scroll})"); page.wait_for_timeout(1500); shot(name)
-    step("list", lambda: tabshot("", "t1-list"))
-    step("mu", lambda: tabshot("mu", "t2-matchups"))
-    step("mv", lambda: tabshot("mv", "t3-cards"))
-    step("trend", lambda: tabshot("trend", "t4-trend"))
-    def wide():
-        c2 = b.new_context(viewport={"width": 1280, "height": 900}, device_scale_factor=1, locale="ja-JP", color_scheme="dark")
-        c2.add_init_script("try { localStorage.setItem('akuchie-lang', 'ja'); localStorage.setItem('akuchie-deck-view', 'image'); } catch (e) {}")
-        pg = c2.new_page(); pg.goto(SITE + DECK + "&tab=mu"); pg.wait_for_selector("#deckBody .deck-tabs", timeout=90000); pg.wait_for_timeout(6000)
-        pg.screenshot(path=f"{OUT}t5-computer-matchups.png")
-    step("wide", wide)
+    MOCK2 = open("probe/mocks2.js").read()
+    c2 = b.new_context(viewport={"width": 1280, "height": 900}, device_scale_factor=1, locale="ja-JP", color_scheme="dark")
+    c2.add_init_script("try { localStorage.setItem('akuchie-lang', 'ja'); localStorage.setItem('akuchie-deck-view', 'image'); } catch (e) {}")
+    pg = c2.new_page(); pg.set_default_navigation_timeout(120000)
+    pg.on("pageerror", lambda e: errs.append(str(e)))
+    def m2(kind, side, name):
+        pg.goto(SITE + DECK); pg.wait_for_selector("#deckBody .deck-card img", timeout=90000); pg.wait_for_timeout(7000)
+        if kind:
+            pg.add_script_tag(content=MOCK2); pg.evaluate(f"window.__mock2('{kind}', '{side}')"); pg.wait_for_timeout(2500)
+        pg.screenshot(path=f"{OUT}{name}.png")
+    step("now", lambda: m2("", "", "d0-now"))
+    step("A list", lambda: m2("A", "list", "d1-A-lists-left"))
+    step("A mu", lambda: m2("A", "mu", "d2-A-matchups-left"))
+    step("B", lambda: m2("B", "", "d3-B-stats-left"))
     say("errors:", errs)
     b.close()
 
