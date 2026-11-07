@@ -1,6 +1,6 @@
-build there after 0
-now ok
-A list ok
-A mu ok
-B ok
+build there after 1
+w list ok
+w pick ok
+w mu ok
+w mv scrolled ok
 errors: []
