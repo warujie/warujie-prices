@@ -1,0 +1,6 @@
+fail https://svgs.scryfall.io/sets/mdc.svg HTTP Error 404: Not Found
+fail https://svgs.scryfall.io/sets/mbc.svg HTTP Error 404: Not Found
+fail https://svgs.scryfall.io/sets/frc.svg HTTP Error 404: Not Found
+icons 339
+339
+80
