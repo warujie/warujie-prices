@@ -12,7 +12,7 @@ def wait_for_build():
     for i in range(40):
         try:
             req = urllib.request.Request(SITE + "?probe=" + str(time.time()), headers={"User-Agent": "warujie.jp probe"})
-            if b"deck.tab.mv.s" in urllib.request.urlopen(req, timeout=30).read(): say("build there after", i); return
+            if b"deckStatsPaneHtml" in urllib.request.urlopen(req, timeout=30).read(): say("build there after", i); return
         except Exception as e: say("wait", repr(e)[:120])
         time.sleep(30)
     say("build NOT seen")
@@ -65,10 +65,14 @@ def run(p):
         if click: pg.click(click); pg.wait_for_timeout(2500)
         if scroll: pg.evaluate(f"window.scrollTo(0, {scroll})"); pg.wait_for_timeout(1500)
         pg.screenshot(path=f"{OUT}{name}.png")
-    step("w list", lambda: w("", "w1-lists"))
-    step("w pick", lambda: w("", "w2-picked-4th", 0, '.dls-row[data-dlpick="4"]'))
-    step("w mu", lambda: w("mu", "w3-matchups"))
-    step("w mv scrolled", lambda: w("mv", "w4-cards-scrolled", 900))
+    step("w stats", lambda: w("stats", "x1-stats-computer"))
+    def hand():
+        w("stats", "x0"); pg.click("#deckHandBtn"); pg.wait_for_timeout(4000); pg.screenshot(path=f"{OUT}x2-hand-computer.png")
+    step("w hand", hand)
+    def phone_stats():
+        page.goto(SITE + DECK + "&tab=stats"); page.wait_for_selector("#deckBody .deck-st", timeout=90000); page.wait_for_timeout(6000)
+        page.evaluate("window.scrollTo(0, 560)"); page.wait_for_timeout(1500); shot("x3-stats-phone")
+    step("phone stats", phone_stats)
     say("errors:", errs)
     b.close()
 
