@@ -1,0 +1,8 @@
+total 3616
+drwxr-xr-x 2 runner runner    4096 Nov  8 12:47 .
+drwxr-xr-x 5 runner runner    4096 Nov  8 12:46 ..
+-rw-r--r-- 1 runner runner       0 Nov  8 12:46 log.txt
+-rw-r--r-- 1 runner runner 1024398 Nov  8 12:47 search_dsk.json
+-rw-r--r-- 1 runner runner 1006010 Nov  8 12:47 search_fdn.json
+-rw-r--r-- 1 runner runner 1020926 Nov  8 12:47 search_mh3.json
+-rw-r--r-- 1 runner runner  632831 Nov  8 12:46 sets.json
