@@ -1,5 +1,5 @@
-build there after 3
-w stats ok
-w hand ok
-phone stats ok
+build there after 1
+w trend ok
+w tabs ok
+phone trend ok
 errors: []
