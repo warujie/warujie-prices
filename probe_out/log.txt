@@ -1,6 +1,5 @@
 build there after 1
-w list ok
-w pick ok
-w mu ok
-w mv scrolled ok
+w stats ok
+w hand ok
+phone stats ok
 errors: []
