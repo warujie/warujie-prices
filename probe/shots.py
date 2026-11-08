@@ -2,7 +2,7 @@
 # (a throwaway probe for the site thread "Improve deck browsing in metagame tab"; never merge)
 import os, time, urllib.request
 from playwright.sync_api import sync_playwright
-SITE = os.environ.get("SITE", "https://staging-warujie.warujie-mtg.workers.dev/")
+SITE = os.environ.get("SITE", "https://warujie.warujie-mtg.workers.dev/")
 OUT = "probe_out/"
 os.makedirs(OUT, exist_ok=True)
 log = open(OUT + "log.txt", "w")
@@ -81,4 +81,8 @@ def run(p):
 
 if __name__ == "__main__":
     wait_for_build()
+    try:
+        r = urllib.request.urlopen(urllib.request.Request(SITE + "meta_insights/30-standard.json", headers={"User-Agent": "warujie.jp probe"}), timeout=30)
+        say("meta_insights", r.status, len(r.read()))
+    except Exception as e: say("meta_insights FAILED", repr(e)[:200])
     with sync_playwright() as p: run(p)
