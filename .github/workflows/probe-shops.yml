@@ -1,0 +1,19 @@
+name: Probe shop links (one-off)
+on: push
+permissions: { contents: write }
+jobs:
+  probe:
+    if: github.ref == 'refs/heads/claude/project-thread-9uy020'
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12' }
+      - run: |
+          mkdir -p probe_out
+          ( pip install playwright && python -m playwright install --with-deps chromium && python probe_shops.py ) > probe_out/log.txt 2>&1 || true
+          tail -50 probe_out/log.txt
+          git config user.name probe; git config user.email probe@users.noreply.github.com
+          git pull --rebase origin claude/project-thread-9uy020 || true
+          git add probe_out && git commit -m "probe result [skip ci]" && git push origin HEAD:claude/project-thread-9uy020
