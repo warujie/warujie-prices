@@ -101,7 +101,9 @@ warujie.jp and our contact address. **Keep it that way: never read pages in para
 daytime, and stop at once if they ask.** A 403, 429 or 503 stops the night.
 
 `nightly()` reads the set menu (`MENU_URL`, leaving out `SKIP_WORDS` such as supplies and
-Flesh and Blood), then each set's in-stock list pages (`list_url()`, 100 products a page), the
+Flesh and Blood; when the shop doesn't answer at all, it waits `MENU_RETRY_MINUTES` (15) and tries once
+more, since a short outage made two nights' runs fail, and reads 15 minutes less so it still stops on time;
+a refusal is not retried), then each set's in-stock list pages (`list_url()`, 100 products a page), the
 sets read longest ago first, for at most `NIGHT_MINUTES`. A set not read tonight keeps its
 products for up to `KEEP_DAYS`. `parse_list()` reads each product's code
 (`SET-<rarity><colour>-<number>-<lang>-<condition>-<finish>`) and its price table.

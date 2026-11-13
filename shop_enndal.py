@@ -45,6 +45,7 @@ MENU_URL = BASE + "/products/list.php?mode=search&name=%E7%A8%B2%E5%A6%BB"   # a
 SKIP_WORDS = ("特集", "Flesh and Blood", "サプライ", "書籍", "大会受付", "Dummy", "未開封", "セール", "ギフト",
               "予約", "コンプリートセット", "スペシャルアイテム", "オリジナルトークン", "他言語", "Sealed")
 NIGHT_MINUTES = 200     # the most one night may read (the workflow also stops it before 6am Japan time)
+MENU_RETRY_MINUTES = 15  # the shop not answering at all (its server down a while): wait this long, then try the menu once more
 KEEP_DAYS = 7           # a set not read again within this long is dropped from the data
 FORMAT = 1
 FINISHES = {"normal": 0, "foil": 1, "etched": 1}
@@ -182,7 +183,16 @@ def nightly(previous, minutes, get=fetch, sleep=time.sleep, log=print, now=None)
     finish, path, [[lang, cond, yen, copies], ...]], ...]}}}."""
     now = now or datetime.now(timezone.utc)
     old = (previous or {}).get("cats") or {}
-    cats = [(cid, name) for cid, name, _n in parse_categories(get(MENU_URL)) if not any(w in name for w in SKIP_WORDS)]
+    try:
+        menu = get(MENU_URL)
+    except urllib.error.HTTPError:   # the shop answered and refused (403/429/503) or the page is gone: not tonight
+        raise
+    except OSError as err:   # no answer at all (timed out twice on 2026-10-27 and 11-01): one more try a little later
+        log(f"  ENNDAL: no answer ({err}); trying again in {MENU_RETRY_MINUTES} minutes")
+        sleep(MENU_RETRY_MINUTES * 60)
+        minutes = max(0, minutes - MENU_RETRY_MINUTES)   # still done by the stop time we promised (5:45 in Japan)
+        menu = get(MENU_URL)
+    cats = [(cid, name) for cid, name, _n in parse_categories(menu) if not any(w in name for w in SKIP_WORDS)]
     if not cats:
         raise ValueError("no sets in ENNDAL's menu")
     names = dict(cats)
