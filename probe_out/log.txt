@@ -1,0 +1,11 @@
++ pip install pillow
+Collecting pillow
+  Downloading pillow-13.0.0-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (9.1 kB)
+Downloading pillow-13.0.0-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (7.1 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 7.1/7.1 MB 29.8 MB/s  0:00:00
+Installing collected packages: pillow
+Successfully installed pillow-13.0.0
++ '[' -f probe/step.sh ']'
++ bash probe/step.sh
+https://data.scryfall.io/all-cards/all-cards-20261113102214.jsonl.gz
+ja printings 64043
