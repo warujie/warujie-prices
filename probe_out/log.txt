@@ -2,10 +2,60 @@
 Collecting pillow
   Downloading pillow-13.0.0-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (9.1 kB)
 Downloading pillow-13.0.0-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (7.1 MB)
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 7.1/7.1 MB 29.8 MB/s  0:00:00
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 7.1/7.1 MB 72.3 MB/s  0:00:00
 Installing collected packages: pillow
 Successfully installed pillow-13.0.0
 + '[' -f probe/step.sh ']'
 + bash probe/step.sh
-https://data.scryfall.io/all-cards/all-cards-20261113102214.jsonl.gz
-ja printings 64043
+10e 373
+2xm 337
+4bb 378
+4ed 378
+5dn 165
+5ed 449
+6ed 350
+7ed 350
+8ed 357
+9ed 350
+apc 148
+bchr 122
+bfz 250
+blc 358
+bok 160
+bro 380
+c17 309
+c21 408
+chk 296
+cmm 1068
+dst 165
+exo 143
+inv 355
+jud 143
+lgn 145
+m3c 383
+mid 340
+mir 350
+mmq 350
+mrd 288
+ncc 450
+nem 143
+ody 350
+ons 350
+p02 165
+pcy 142
+pls 146
+por 215
+ptk 180
+scg 143
+shm 302
+snc 399
+sth 143
+stx 381
+tmp 350
+tor 143
+tsb 122
+uds 143
+ulg 143
+usg 350
+vis 167
+wth 167
