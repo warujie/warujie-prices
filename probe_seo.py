@@ -1,8 +1,8 @@
-# Checks the test site (staging) for the 2026-11-13 Search Console fixes: what a crawler gets.
+# Checks the live Worker (its workers.dev address) after the 2026-11-13 publish: what a crawler gets.
 # The User-Agent says what it is (our own checker); worker.js treats any agent with "bot" as a crawler.
 import json, re, time, urllib.request, urllib.error
 
-SITE = "https://staging-warujie.warujie-mtg.workers.dev/"
+SITE = "https://warujie.warujie-mtg.workers.dev/"
 UA = "WarujieSeoCheck-bot/1.0 (+https://warujie.jp)"
 
 def get(url, ua=UA):
