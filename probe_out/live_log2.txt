@@ -1,0 +1,15 @@
+deployed: robots.txt has the new lines
+Lightning Bolt printings: 71
+main page (canonical is itself): ce711943-c1a1-43a0-8b89-8d169cfb8e06
+another printing d573ef03-4730-45aa-93dd-e45ac1dbaf4a status 200 canonical https://warujie.jp/?card=d573ef03-4730-45aa-93dd-e45ac1dbaf4a has card text False
+another printing b5d3dcab-2260-479d-9ef6-dfb92d4f6061 status 200 canonical https://warujie.jp/?card=b5d3dcab-2260-479d-9ef6-dfb92d4f6061 has card text False
+another printing ff1b8fc5-604a-4449-a73d-861e53642a70 status 200 canonical https://warujie.jp/?card=ff1b8fc5-604a-4449-a73d-861e53642a70 has card text False
+a person, another printing: status 200 canonical https://warujie.jp/?card=d573ef03-4730-45aa-93dd-e45ac1dbaf4a crawler text False
+unknown card, crawler: status 200
+unknown card, person: status 200
+unknown set, crawler: status 200
+real set, crawler: status 200
+unknown deck, crawler: status 404
+events page: status 200 heading 関東のMTG大会（これから30日・200件） list items 211
+prices page: status 200 heading 値上がりしたMTGのカード（米国・直近7日、2026-11-12まで） first ['<a href="/?card=a7758cc6-4e18-48a5-8720-5f42b5cd9d31">Sacred Foundry</a>（Star Trek）$2.01 → $7.42（+269%）']
+/contact GET: 405
