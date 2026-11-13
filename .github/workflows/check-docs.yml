@@ -1,0 +1,27 @@
+# Checks that the developer guide (docs/) still matches the code: every function, constant
+# and file the docs name must still exist (dev/check_docs.py). A red check means a doc mentions
+# something that was renamed or removed; update the doc. The docs also mention the site's
+# code, so the site repository is checked out next to this one when it can be read. It is
+# private, so usually it can't: the names only the site has are then left unchecked here
+# (--partial), and the site's own "Docs match the code" check runs this check in full on
+# every push to its staging and main.
+# This only reads files; it never builds or publishes the price data.
+name: Docs match the code
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v6
+        with: { path: warujie-prices }
+      - uses: actions/checkout@v6
+        continue-on-error: true    # the site repository is private
+        with: { repository: warujie/Warujie, ref: staging, path: Warujie }
+      - run: python3 warujie-prices/dev/check_docs.py --partial
