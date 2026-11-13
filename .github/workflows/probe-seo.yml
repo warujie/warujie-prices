@@ -12,7 +12,7 @@ jobs:
         with: { python-version: '3.12' }
       - run: |
           mkdir -p probe_out
-          ( python3 probe_seo.py ) > probe_out/live_log.txt 2>&1 || true
-          cat probe_out/live_log.txt
+          ( python3 probe_seo.py ) > probe_out/live_log2.txt 2>&1 || true
+          cat probe_out/live_log2.txt
           git config user.name probe; git config user.email probe@users.noreply.github.com
           git add probe_out && git commit -m "probe result [skip ci]" && git push
