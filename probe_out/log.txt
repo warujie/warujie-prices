@@ -1,0 +1,4 @@
+bulk types ['oracle_cards', 'unique_artwork', 'default_cards', 'all_cards', 'rulings', 'art_tags', 'oracle_tags']
+rulings 79706
+cards with rulings 20080 unique texts 34142 chars all 16114232 chars unique 6634101
+sources Counter({'wotc': 79637, 'scryfall': 69})
