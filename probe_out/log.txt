@@ -11,26 +11,7 @@ No containers need to be restarted.
 No user sessions are running outdated binaries.
 
 No VM guests are running outdated hypervisor (qemu) binaries on this host.
-Traceback (most recent call last):
-  File "/home/runner/work/warujie-prices/warujie-prices/probe_news.py", line 8, in <module>
-    pg.goto(U, wait_until="networkidle", timeout=60000); pg.wait_for_timeout(4000)
-    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/playwright/sync_api/_generated.py", line 9903, in goto
-    self._sync(
-  File "/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/playwright/_impl/_sync_base.py", line 115, in _sync
-    return task.result()
-           ^^^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/playwright/_impl/_page.py", line 562, in goto
-    return await self._main_frame.goto(**locals_to_params(locals()))
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/playwright/_impl/_frame.py", line 157, in goto
-    await self._channel.send(
-  File "/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/playwright/_impl/_connection.py", line 76, in send
-    return await self._connection.wrap_api_call(
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/playwright/_impl/_connection.py", line 632, in wrap_api_call
-    raise rewrite_error(error, f"{parsed_st['apiName']}: {error}") from None
-playwright._impl._errors.TimeoutError: Page.goto: Timeout 60000ms exceeded.
-Call log:
-  - navigating to "https://staging-warujie.warujie-mtg.workers.dev/?view=news", waiting until "networkidle"
-
+desktop errors []
+{'items': 93, 'status': 'ready', 'posts': 5, 'big': 8, 'ev': 'ready', 'bigJp': 92, 'shops': ['東京MTG', '東京MTG', '東京MTG', 'マンガ倉庫 泡瀬店', 'ABSOLUTE ZERO'], 'text': 0}
+phone errors []
+{'items': 93, 'status': 'ready', 'posts': 5, 'big': 8, 'ev': 'ready', 'bigJp': 92, 'shops': ['東京MTG', '東京MTG', '東京MTG', 'マンガ倉庫 泡瀬店', 'ABSOLUTE ZERO'], 'text': 0}
