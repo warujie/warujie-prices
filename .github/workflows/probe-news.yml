@@ -12,6 +12,6 @@ jobs:
         with: { python-version: '3.12' }
       - run: |
           mkdir -p probe_out
-          ( pip install -q playwright==1.56.0 && python3 -m playwright install --with-deps chromium >/dev/null && python3 probe_news.py ) > probe_out/log.txt 2>&1 || true
+          ( pip install -q playwright==1.63.0 && (python3 -m playwright install --with-deps chromium || python3 -m playwright install chromium) >/dev/null && python3 probe_news.py ) > probe_out/log.txt 2>&1 || true
           git config user.name "github-actions[bot]"; git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
           git add probe_out && git commit -qm "probe result [skip ci]" && git push
