@@ -1,17 +1,20 @@
-
-Running kernel seems to be up-to-date.
-
-Restarting services...
-
-Service restarts being deferred:
- systemctl restart hosted-compute-agent.service
-
-No containers need to be restarted.
-
-No user sessions are running outdated binaries.
-
-No VM guests are running outdated hypervisor (qemu) binaries on this host.
-desktop errors []
-{'items': 93, 'status': 'ready', 'posts': 5, 'big': 8, 'ev': 'ready', 'bigJp': 92, 'shops': ['東京MTG', '東京MTG', '東京MTG', 'マンガ倉庫 泡瀬店', 'ABSOLUTE ZERO'], 'text': 0}
-phone errors []
-{'items': 93, 'status': 'ready', 'posts': 5, 'big': 8, 'ev': 'ready', 'bigJp': 92, 'shops': ['東京MTG', '東京MTG', '東京MTG', 'マンガ倉庫 泡瀬店', 'ABSOLUTE ZERO'], 'text': 0}
+@MTGJapan UC7Z_SvRUcFzKy7AgDDAWEkA T N
+@MagicTheGatheringJP HTTPError HTTP Error 404: Not Found
+@mtg_jp HTTPError HTTP Error 404: Not Found
+@MTGjpOfficial HTTPError HTTP Error 404: Not Found
+@magicjp UCOPmiw4U-ZZwJgg3Vh18_uQ magicjp
+@MTGArenaJP HTTPError HTTP Error 404: Not Found
+@mtgjapanofficial HTTPError HTTP Error 404: Not Found
+@MagicJapan UCJ6yc6KcQrnky3TRpUUtylA magicjapan
+@playmtg UCKe6aQ2HCgiTI67Fvy7BCNQ Sam PlayMTG
+@MTGArena UC2lJogHackxCqDXfc7dV2YQ MTGArena
+@magicthegathering HTTPError HTTP Error 404: Not Found
+@MagicTheGatheringOfficial HTTPError HTTP Error 404: Not Found
+@StarCityGames UC8zICvPIzVvKWrVJ62BSYRw Star City Games
+@hareruyamtg HTTPError HTTP Error 404: Not Found
+@BIGMAGIC UC_awtZFkwnfYF6EKUT-RpOQ BIG Magic
+@bigmagic_mtg HTTPError HTTP Error 404: Not Found
+https://yutura.net/channel/4806/ HTTPError HTTP Error 403: Forbidden
+https://articles.starcitygames.com/feed/ 10 items ['Star City Games', 'Netflix Reveals Sneak Peek For Magic: The Gathering Animated Series', 'MagicCon: Atlanta Preview Panel Shows First Nauctis Cards, Upcoming Books, And More']
+https://www.hareruyamtg.com/robots.txt Sitemap: https://www.hareruyamtg.com/sitemap.xml |  | User-agent: * | Allow: / | Disallow: /news/ | Disallow: /jp/k/ | Disallow: /index.php/ | Disallow: /a/* | Disallow: /ja/forward/ | Disallow: /en/forward/ | Disallow: /ja/purchase/forward/ | Disallow: /en/purchase/forward/ | Disallow: /ja/events/*/*/ | Disallow: /purchase/g/* | Disallow: /*.csv$ | Disallow: /en/deck/download/* | Disallow: /ja/deck/download/* | Disallow: /ja/deck/bulk/* | Disallow: /en/deck/bulk/* | Disallow: /ja/deck/result?* | Disallow: /en/deck/result?* | Disallow: /ja/events/list?*page=* | Disallow: /en/events/list?*page=* | Disallow: /ja/produ
+https://www.bigmagic.net/robots.txt HTTPError HTTP Error 403: Forbidden
