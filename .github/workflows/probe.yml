@@ -10,6 +10,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: |
+          mkdir -p probe
           ( for host in warujie.warujie-mtg.workers.dev warujie.jp; do
               for i in 1 2 3 4 5 6; do
                 code=$(curl -s -o /tmp/b1.json -w '%{http_code}' -A 'warujie.jp probe (site owner check)' "https://$host/rulings/b1.json?t=$(date +%s)")
