@@ -1,0 +1,24 @@
+name: Probe live rulings
+on:
+  push:
+    branches: [probe-rulings-live]
+permissions:
+  contents: write
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          ( for host in warujie.warujie-mtg.workers.dev warujie.jp; do
+              for i in 1 2 3 4 5 6; do
+                code=$(curl -s -o /tmp/b1.json -w '%{http_code}' -A 'warujie.jp probe (site owner check)' "https://$host/rulings/b1.json?t=$(date +%s)")
+                n=$(grep -o '白金の天使' /tmp/b1.json | wc -l)
+                echo "$(date -u +%H:%M:%S) $host HTTP $code bytes=$(wc -c </tmp/b1.json) platinum_angel_ja=$n"
+                [ "$n" -gt 0 ] && break
+                sleep 60
+              done
+            done ) > probe/log.txt 2>&1 || true
+          cat probe/log.txt
+          git config user.name probe; git config user.email probe@users.noreply.github.com
+          git add probe/log.txt && git commit -m "probe log [skip ci]" && git push
