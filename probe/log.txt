@@ -1,0 +1,2 @@
+00:20:13 warujie.warujie-mtg.workers.dev HTTP 200 bytes=118782 platinum_angel_ja=5
+00:20:13 warujie.jp HTTP 200 bytes=118782 platinum_angel_ja=5
