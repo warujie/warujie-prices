@@ -1,2 +1,3 @@
-00:20:13 warujie.warujie-mtg.workers.dev HTTP 200 bytes=118782 platinum_angel_ja=5
-00:20:13 warujie.jp HTTP 200 bytes=118782 platinum_angel_ja=5
+04:23:43 warujie.warujie-mtg.workers.dev HTTP 200 bytes=27138038 translation=0 type_word=0 scan_punk=0
+04:24:45 warujie.warujie-mtg.workers.dev HTTP 200 bytes=27209675 translation=2 type_word=1 scan_punk=20
+04:24:46 warujie.jp HTTP 200 bytes=27209675 translation=2 type_word=1 scan_punk=20
