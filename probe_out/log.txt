@@ -1,9 +1,0 @@
-== config (staging)
-{"providers":[]}
-== start line (staging): status and where it goes (query keys only)
-400 
-== start google (staging): status and where it goes (query keys only)
-400 
-== data with a made-up key (staging): 401 means the database answers
-{"ok":false,"reason":"not-configured"}
-503
